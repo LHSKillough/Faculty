@@ -193,10 +193,8 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 }
 .setup .ico{width:62px;height:62px;border-radius:16px;background:#f3eceb;color:var(--maroon);display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px}
 .setup .ico svg{width:30px;height:30px}
-.setup h3{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:22px;color:var(--maroon);margin:0 0 8px}
-.setup p{max-width:540px;margin:0 auto 6px;color:var(--gray-d);font-size:14px}
-.setup code{background:#f1edec;border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:12.5px;color:var(--maroon-deep)}
-.setup .hint{margin-top:18px;font-size:12.5px;color:var(--gray-m)}
+.setup h3{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:22px;color:var(--maroon);margin:0 0 6px}
+.setup .note{margin:0;color:var(--gray-m);font-size:13px;letter-spacing:.02em}
 
 /* ---- data hub ---- */
 .databtns{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:6px}
@@ -300,8 +298,8 @@ const SITE = {
   formsEmbed: "",        // e.g. a published Drive folder / Form embed link
   // The two buttons under "Data":
   data: {
-    teacher: { title: "Teacher Reports", embed: "", desc: "Class rosters, attendance & grade summaries." },
-    admin:   { title: "Admin Reports",   embed: "", desc: "Campus-wide data. Access control added later.", locked: true }
+    teacher: { title: "Teacher Reports", embed: "", desc: "Class rosters & grade summaries" },
+    admin:   { title: "Admin Reports",   embed: "", desc: "Campus-wide reports", locked: true }
   }
 };
 
@@ -318,34 +316,33 @@ const ITEMS = [
   { id:"field-trips",label:"Field Trips",          group:"Teaching & Learning", icon:"map",        daily:false, kind:"embed", embed:"",                            desc:"Request & approval forms" },
 
   /* ----- DAILY OPERATIONS ----- */
-  { id:"bell",       label:"Bell Schedule",        group:"Daily Operations",    icon:"bell",       daily:true,  kind:"embed", embed:"",                            desc:"Regular & special schedules" },
+  { id:"bell",       label:"Bell Schedule & Lunches",group:"Daily Operations",  icon:"bell",       daily:true,  kind:"embed", embed:"",                            desc:"Daily schedules & lunch periods" },
   { id:"calendar",   label:"School Calendar",      group:"Daily Operations",    icon:"calendar",   daily:true,  kind:"embed", embed:"",                            desc:"Campus & district dates" },
   { id:"announce",   label:"Announcements",        group:"Daily Operations",    icon:"megaphone",  daily:true,  kind:"embed", embed:"",                            desc:"View & submit announcements" },
+  { id:"smore",      label:"Weekly Smore",         group:"Daily Operations",    icon:"news",       daily:true,  kind:"embed", embed:"",                            desc:"This week's campus newsletter" },
   { id:"frontline",  label:"Absences / Sub",       group:"Daily Operations",    icon:"clock",      daily:true,  kind:"link",  url:"https://app.frontlineeducation.com", desc:"Report absences & request a sub" },
-  { id:"hallpass",   label:"LISD Hall Pass",       group:"Daily Operations",    icon:"navigate",   daily:true,  kind:"link",  url:"",                              desc:"Digital hall pass system" },
+  { id:"student-links",label:"Student Links",      group:"Daily Operations",    icon:"navigate",   daily:true,  kind:"embed", embed:"",                            desc:"Frequently used student sites" },
+  { id:"drive",      label:"Google Drive",         group:"Daily Operations",    icon:"folder",     daily:true,  kind:"link",  url:"https://drive.google.com",      desc:"Shared campus files" },
+  { id:"outlook",    label:"Outlook",              group:"Daily Operations",    icon:"mail",       daily:true,  kind:"link",  url:"https://outlook.office.com/mail/", desc:"District email" },
   { id:"ataglance",  label:"At-A-Glance",          group:"Daily Operations",    icon:"calendar",   daily:false, kind:"embed", embed:"",                            desc:"Week at a glance" },
   { id:"copiers",    label:"Copiers",              group:"Daily Operations",    icon:"printer",    daily:false, kind:"embed", embed:"",                            desc:"Codes & support" },
-  { id:"fax",        label:"Fax",                  group:"Daily Operations",    icon:"printer",    daily:false, kind:"embed", embed:"",                            desc:"How to send a fax" },
   { id:"keyless",    label:"Keyless Entry",        group:"Daily Operations",    icon:"key",        daily:false, kind:"embed", embed:"",                            desc:"Door access requests" },
-  { id:"reset-pw",   label:"Reset Student Password",group:"Daily Operations",   icon:"refresh",    daily:false, kind:"embed", embed:"",                            desc:"Step-by-step reset guide" },
+  { id:"reset-pw",   label:"Reset Student Password",group:"Daily Operations",   icon:"refresh",    daily:false, kind:"embed", embed:"",                            desc:"Password reset steps" },
 
   /* ----- STAFF & DIRECTORY ----- */
+  { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"embed", embed:"",                            desc:"Campus policies & procedures" },
+  { id:"duty-sched", label:"Duty Schedule",        group:"Staff & Directory",   icon:"clipboard",  daily:false, kind:"embed", embed:"",                            desc:"Staff & admin duty assignments" },
   { id:"admin-info", label:"Admin Contact Info",   group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Who to contact for what" },
   { id:"phone-list", label:"LISD Phone List",      group:"Staff & Directory",   icon:"phone",      daily:false, kind:"embed", embed:"",                            desc:"District extensions" },
   { id:"directory",  label:"Staff Directory",      group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Find a colleague" },
-  { id:"alpha",      label:"Alpha Split",          group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Student alpha assignments" },
-  { id:"duties",     label:"Duties & Lunches",     group:"Staff & Directory",   icon:"utensils",   daily:false, kind:"embed", embed:"",                            desc:"Duty & lunch schedules" },
-  { id:"admin-duty", label:"Admin Duties",         group:"Staff & Directory",   icon:"clipboard",  daily:false, kind:"embed", embed:"",                            desc:"Administrator assignments" },
 
   /* ----- STUDENT SUPPORT ----- */
   { id:"nurse",      label:"Health Clinic",        group:"Student Support",     icon:"heart",      daily:false, kind:"embed", embed:"",                            desc:"Clinic appointments & forms" },
   { id:"lunch-app",  label:"Free & Reduced Lunch", group:"Student Support",     icon:"utensils",   daily:false, kind:"embed", embed:"",                            desc:"Meal application form" },
   { id:"safe-civil", label:"Safe & Civil",         group:"Student Support",     icon:"shield",     daily:false, kind:"embed", embed:"",                            desc:"Campus behavior framework" },
-  { id:"pharr",      label:"P.H.A.R.R.",           group:"Student Support",     icon:"shield",     daily:false, kind:"embed", embed:"",                            desc:"Campus expectations" },
   { id:"safety",     label:"Safety & Security",    group:"Student Support",     icon:"shield",     daily:false, kind:"embed", embed:"",                            desc:"Emergency procedures" },
 
   /* ----- COMMUNITY ----- */
-  { id:"email",      label:"Email / Gmail",        group:"Community",           icon:"mail",       daily:true,  kind:"link",  url:"https://mail.google.com",       desc:"LISD Gmail" },
   { id:"ptsa",       label:"PTSA",                 group:"Community",           icon:"heart",      daily:false, kind:"embed", embed:"",                            desc:"Parent-Teacher-Student Assoc." },
   { id:"booster",    label:"Booster Club",         group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Athletic & activity boosters" },
   { id:"favorites",  label:"Farmer Favorites",     group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Staff perks & discounts" },
@@ -386,7 +383,8 @@ const ICONS = {
   lock:`<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
   ext:`<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>`,
   back:`<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>`,
-  folder:`<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`
+  folder:`<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
+  news:`<path d="M4 22a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3"/><path d="M18 22H6a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1h-3"/><path d="M8 7h6M8 11h6M8 15h4"/>`
 };
 const icon = (name) => I(ICONS[name] || ICONS.star);
 
@@ -473,15 +471,11 @@ function embedView(title, url, openUrl){
   return viewerShell(title, setupCard(title, "embed"));
 }
 function setupCard(title, mode){
-  const how = mode==="embed"
-    ? `Publish a Google Sheet, Slides, PDF or Calendar to the web, copy its embed link, and paste it into the <code>embed</code> field for <code>${esc(title)}</code> in the config.`
-    : `Add the system's web address to the <code>url</code> field for <code>${esc(title)}</code> in the config and it will open in a new tab.`;
+  const note = mode==="embed" ? "Embed not added yet" : "Link not added yet";
   return `<div class="setup">
     <span class="ico">${icon(mode==="embed"?"layers":"ext")}</span>
     <h3>${esc(title)}</h3>
-    <p>This page is ready — it just needs a link.</p>
-    <p>${how}</p>
-    <div class="hint">Until then, this friendly placeholder shows instead of a broken page.</div>
+    <p class="note">${note}</p>
   </div>`;
 }
 
@@ -511,7 +505,6 @@ function renderData(sub){
   const t = SITE.data.teacher, a = SITE.data.admin;
   app.innerHTML = `
     <div class="section" style="margin-top:30px">${head("Data")}
-      <p style="color:var(--gray-d);margin:-6px 0 22px;font-size:14px;max-width:640px">Choose a report set. Teacher and Admin views will be access-controlled later — for now both open their embedded report.</p>
       <div class="databtns">
         <a class="databtn" href="#/data/teacher" data-anim>
           <span class="ico">${icon("bars")}</span>
