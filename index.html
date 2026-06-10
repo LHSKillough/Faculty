@@ -186,6 +186,49 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 .frame{width:100%;height:78vh;min-height:520px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
 .frame iframe{width:100%;height:100%;border:0;display:block}
 
+/* ---- handbook reader ---- */
+.reader-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:80px 20px;color:var(--gray-m)}
+.reader-loading svg{width:42px;height:42px;color:var(--silver);animation:pulse 1.3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.openbtn.ghost{background:#fff;color:var(--maroon);border:1px solid var(--line)}
+.openbtn.ghost:hover{background:var(--bg)}
+.reader{display:grid;grid-template-columns:248px 1fr;gap:28px;align-items:start;margin-top:6px}
+.reader-toc{position:sticky;top:calc(var(--nav-h) + 16px);max-height:calc(100vh - var(--nav-h) - 40px);overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px;box-shadow:var(--shadow)}
+.toc-toggle{display:none}
+.toc-list{display:flex;flex-direction:column}
+.toc-link{font-family:"Oswald";font-size:13.5px;font-weight:500;letter-spacing:.02em;color:var(--ink);padding:8px 10px;border-radius:8px;border-left:3px solid transparent;line-height:1.3}
+.toc-link.sub{padding-left:22px;font-weight:400;font-size:13px;color:var(--gray-d)}
+.toc-link:hover{background:var(--bg)}
+.toc-link.active{color:var(--maroon);border-left-color:var(--gold);background:var(--bg)}
+.toc-link.dim{opacity:.32}
+.reader-main{min-width:0}
+.reader-search{position:sticky;top:calc(var(--nav-h) + 16px);z-index:5;display:flex;align-items:center;gap:8px;background:var(--bg);padding:6px 0 12px}
+.reader-search .rs-ico{display:flex;color:var(--gray-m)}
+.reader-search .rs-ico svg{width:18px;height:18px}
+.reader-search input{flex:1;min-width:0;font-family:Arial;font-size:15px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none}
+.reader-search input:focus{border-color:var(--maroon)}
+.rs-count{font-family:"Oswald";font-size:12px;letter-spacing:.04em;color:var(--gray-d);white-space:nowrap;min-width:62px;text-align:right}
+.rs-nav{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line);background:#fff;border-radius:8px;color:var(--maroon);cursor:pointer;flex:none}
+.rs-nav:hover{background:var(--bg)}
+.rs-nav svg{width:15px;height:15px}
+.rs-nav.rs-next svg{transform:rotate(180deg)}
+.reader-doc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px 40px;box-shadow:var(--shadow);max-width:74ch}
+.reader-doc .rsec{scroll-margin-top:calc(var(--nav-h) + 70px)}
+.reader-doc .rsec + .rsec{margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
+.reader-doc .rsec-h{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:21px;color:var(--maroon);margin:0 0 12px}
+.reader-doc .rh{font-family:"Oswald";font-weight:600;color:var(--ink);margin:20px 0 8px;font-size:16px}
+.reader-doc p{margin:0 0 12px;font-size:15.5px;line-height:1.7;color:#2c2424}
+.reader-doc ul,.reader-doc ol{margin:0 0 14px;padding-left:22px}
+.reader-doc li{font-size:15.5px;line-height:1.7;margin:3px 0;color:#2c2424}
+.reader-doc a{color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
+.rtable{overflow-x:auto;margin:0 0 16px}
+.rtable table{border-collapse:collapse;width:100%;font-size:14px}
+.rtable th,.rtable td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+.rtable th{background:var(--bg);font-family:"Oswald";font-weight:600;letter-spacing:.02em}
+.reader-doc mark{background:#ffe7a8;color:inherit;border-radius:2px;padding:0 1px}
+.reader-doc mark.on{background:var(--gold);box-shadow:0 0 0 2px rgba(227,178,60,.45)}
+.reader-meta{margin:16px 2px 0;font-size:12px;color:var(--gray-m);font-family:"Oswald";letter-spacing:.04em}
+
 /* ---- setup / empty state ---- */
 .setup{
   border:1px dashed var(--silver);border-radius:16px;background:#fff;padding:44px 30px;text-align:center;
@@ -235,6 +278,14 @@ footer .right{margin-left:auto;font-family:"Oswald";font-size:11px;letter-spacin
   .menu-toggle{display:inline-flex}
   .frame{height:70vh;min-height:420px}
   .hero{padding:40px 18px 38px}
+  .reader{grid-template-columns:1fr;gap:14px}
+  .reader-toc{position:static;max-height:none;top:auto}
+  .toc-toggle{display:flex;align-items:center;gap:8px;width:100%;font-family:"Oswald";font-weight:500;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--maroon);background:none;border:0;cursor:pointer;padding:6px}
+  .toc-toggle svg{width:16px;height:16px}
+  .reader-toc .toc-list{display:none;margin-top:6px}
+  .reader-toc.open .toc-list{display:flex}
+  .reader-doc{padding:22px 18px}
+  .reader-search{top:var(--nav-h)}
 }
 @media (max-width:480px){
   .grid{grid-template-columns:1fr 1fr;gap:12px}
@@ -324,7 +375,7 @@ const ITEMS = [
   { id:"tech",       label:"Technology Support",   group:"Daily Operations",    icon:"support",    daily:false, kind:"embed", embed:"",                            desc:"Help desk, password resets & guides" },
 
   /* ----- STAFF & DIRECTORY ----- */
-  { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"embed", embed:"",                            desc:"Campus policies & procedures" },
+  { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"reader", src:"", url:"https://docs.google.com/document/d/1syVPHdn-bAAw0wMn8HnXeRpTqfhTL0No/edit", desc:"Campus policies & procedures" },
   { id:"duty-sched", label:"Duty Schedule",        group:"Staff & Directory",   icon:"clipboard",  daily:false, kind:"embed", embed:"",                            desc:"Staff & admin duty assignments" },
   { id:"directory",  label:"Staff Directory / Phone List", group:"Staff & Directory", icon:"users", daily:false, kind:"embed", embed:"",                            desc:"Find a colleague & extensions" },
   { id:"admin-info", label:"Admin Contact Info",   group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Who to contact for what" },
@@ -339,7 +390,7 @@ const ITEMS = [
   /* ----- COMMUNITY ----- */
   { id:"ptsa",       label:"PTSA",                 group:"Community",           icon:"heart",      daily:false, kind:"embed", embed:"",                            desc:"Parent-Teacher-Student Assoc." },
   { id:"booster",    label:"Booster Club",         group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Athletic & activity boosters" },
-  { id:"favorites",  label:"Farmer Favorites",     group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Staff Favorites" },
+  { id:"favorites",  label:"Farmer Favorites",     group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Staff perks & discounts" },
   { id:"history",    label:"LHS History & More",   group:"Community",           icon:"book",       daily:false, kind:"embed", embed:"",                            desc:"Our story since 1897" }
 ];
 
@@ -466,9 +517,11 @@ function embedView(title, url, openUrl){
   return viewerShell(title, setupCard(title, "embed"));
 }
 function setupCard(title, mode){
-  const note = mode==="embed" ? "Embed not added yet" : "Link not added yet";
+  const note = mode==="embed" ? "Embed not added yet"
+             : mode==="reader" ? "Add the Apps Script Web App URL (the handbook \u201csrc\u201d) in the config"
+             : "Link not added yet";
   return `<div class="setup">
-    <span class="ico">${icon(mode==="embed"?"layers":"ext")}</span>
+    <span class="ico">${icon(mode==="reader"?"book":(mode==="embed"?"layers":"ext"))}</span>
     <h3>${esc(title)}</h3>
     <p class="note">${note}</p>
   </div>`;
@@ -477,6 +530,7 @@ function setupCard(title, mode){
 function renderView(id){
   const it = byId(id);
   if(!it){ renderHome(); return; }
+  if(it.kind === "reader"){ renderReader(it); return; }
   const d = dest(it);
   if(it.kind === "link"){
     if(d){ window.open(d, "_blank"); history.back(); return; }
@@ -484,6 +538,160 @@ function renderView(id){
   } else {
     app.innerHTML = embedView(it.label, d, d);
   }
+}
+
+/* ---------- Handbook reader: live Google Doc via Apps Script JSON ---------- */
+let READER_CACHE = {};   // src -> parsed data, cached for the session
+
+function renderReader(it){
+  if(!it.src){ app.innerHTML = viewerShell(it.label, setupCard(it.label, "reader")); return; }
+  app.innerHTML = `<div class="viewbar">
+      <a class="back" href="javascript:history.back()">${icon("back")} Back</a>
+      <h1 class="vtitle">${esc(it.label)}</h1>
+      <span class="spacer"></span>
+    </div>
+    <div class="reader-loading">${icon("book")}<p>Loading the handbook…</p></div>`;
+  const data = READER_CACHE[it.src];
+  if(data){ paintReader(it, data); return; }
+  fetch(it.src, {method:"GET"})
+    .then(r => r.json())
+    .then(data => {
+      if(data && data.error) throw new Error(data.error);
+      READER_CACHE[it.src] = data;
+      paintReader(it, data);
+    })
+    .catch(err => {
+      app.querySelector(".reader-loading").innerHTML =
+        `<h3>Couldn't load the handbook</h3>
+         <p class="note">${esc(String(err.message||err))}</p>
+         ${it.url ? `<a class="openbtn" href="${esc(it.url)}" target="_blank">${icon("ext")} Open in Google Docs</a>` : ""}`;
+    });
+}
+
+function paintReader(it, data){
+  const secs = (data.sections||[]).filter(s => s.title || (s.blocks&&s.blocks.length));
+  const toc = secs.map(s =>
+    `<a class="toc-link${s.level===2?" sub":""}" href="#__noop" data-go="${s.anchor}">${esc(s.title)}</a>`).join("");
+  const blocksHTML = b => {
+    if(b.type==="p")  return `<p>${b.html}</p>`;
+    if(b.type==="h")  return `<h${b.level===3?3:4} class="rh">${b.html}</h${b.level===3?3:4}>`;
+    if(b.type==="ul") return `<ul>${b.items.map(i=>`<li>${i}</li>`).join("")}</ul>`;
+    if(b.type==="ol") return `<ol>${b.items.map(i=>`<li>${i}</li>`).join("")}</ol>`;
+    if(b.type==="table") return `<div class="rtable"><table>${b.rows.map((row,ri)=>
+        `<tr>${row.map(c=>`<${ri===0?"th":"td"}>${esc(c)}</${ri===0?"th":"td"}>`).join("")}</tr>`).join("")}</table></div>`;
+    return "";
+  };
+  const body = secs.map(s =>
+    `<section class="rsec" id="${s.anchor}" data-title="${esc(s.title)}">
+       <h2 class="rsec-h">${esc(s.title)}</h2>
+       ${(s.blocks||[]).map(blocksHTML).join("")}
+     </section>`).join("");
+
+  app.innerHTML = `
+    <div class="viewbar">
+      <a class="back" href="javascript:history.back()">${icon("back")} Back</a>
+      <h1 class="vtitle">${esc(it.label)}</h1>
+      <span class="spacer"></span>
+      ${it.url ? `<button class="openbtn ghost" onclick="window.open('${esc(it.url)}','_blank')">${icon("ext")} Google Docs</button>`:""}
+      <button class="openbtn" id="hbRefresh">${icon("refresh")} Refresh</button>
+    </div>
+    <div class="reader">
+      <aside class="reader-toc">
+        <button class="toc-toggle" id="tocToggle">${icon("layers")} Contents</button>
+        <div class="toc-list" id="tocList">${toc}</div>
+      </aside>
+      <div class="reader-main">
+        <div class="reader-search">
+          <span class="rs-ico">${icon("search")}</span>
+          <input id="hbSearch" type="search" placeholder="Search the handbook…" autocomplete="off">
+          <span class="rs-count" id="hbCount"></span>
+          <button class="rs-nav" id="hbPrev" title="Previous">${icon("back")}</button>
+          <button class="rs-nav rs-next" id="hbNext" title="Next">${icon("back")}</button>
+        </div>
+        <div class="reader-doc" id="hbDoc">${body}</div>
+        <p class="reader-meta">Updated from the live document${data.fetched?` · ${esc(new Date(data.fetched).toLocaleString())}`:""}</p>
+      </div>
+    </div>`;
+
+  wireReader(it);
+}
+
+function wireReader(it){
+  const docEl = document.getElementById("hbDoc");
+  const tocList = document.getElementById("tocList");
+  const input = document.getElementById("hbSearch");
+  const countEl = document.getElementById("hbCount");
+  let marks = [], pos = -1;
+
+  // TOC click -> smooth scroll
+  tocList.addEventListener("click", e=>{
+    const a = e.target.closest("[data-go]"); if(!a) return;
+    e.preventDefault();
+    const t = document.getElementById(a.dataset.go);
+    if(t) t.scrollIntoView({behavior:"smooth", block:"start"});
+    document.querySelector(".reader-toc").classList.remove("open");
+  });
+  // mobile contents toggle
+  document.getElementById("tocToggle").addEventListener("click", ()=>{
+    document.querySelector(".reader-toc").classList.toggle("open");
+  });
+  // refresh = clear cache + reload
+  document.getElementById("hbRefresh").addEventListener("click", ()=>{
+    delete READER_CACHE[it.src]; renderReader(it);
+  });
+
+  // scrollspy: highlight active TOC entry
+  const links = [...tocList.querySelectorAll("[data-go]")];
+  const map = {}; links.forEach(l=>map[l.dataset.go]=l);
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){
+      links.forEach(l=>l.classList.remove("active"));
+      const l = map[en.target.id]; if(l) l.classList.add("active");
+    }});
+  }, {rootMargin:"-10% 0px -80% 0px"});
+  docEl.querySelectorAll(".rsec").forEach(s=>obs.observe(s));
+
+  // search
+  function clearMarks(){
+    marks.forEach(m=>{ const t=document.createTextNode(m.textContent); m.replaceWith(t); });
+    docEl.normalize(); marks=[]; pos=-1;
+  }
+  function applyMarks(term){
+    clearMarks();
+    if(term.length<2){ countEl.textContent=""; links.forEach(l=>l.classList.remove("dim")); return; }
+    const low = term.toLowerCase();
+    const hitSecs = new Set();
+    const walker = document.createTreeWalker(docEl, NodeFilter.SHOW_TEXT, {
+      acceptNode: nd => nd.nodeValue.toLowerCase().includes(low) && nd.parentNode.nodeName!=="MARK"
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+    });
+    const targets=[]; while(walker.nextNode()) targets.push(walker.currentNode);
+    targets.forEach(node=>{
+      const txt = node.nodeValue; const frag = document.createDocumentFragment();
+      let i=0, lc=txt.toLowerCase(), idx;
+      while((idx=lc.indexOf(low,i))!==-1){
+        if(idx>i) frag.appendChild(document.createTextNode(txt.slice(i,idx)));
+        const mk = document.createElement("mark"); mk.textContent = txt.slice(idx, idx+term.length);
+        frag.appendChild(mk); marks.push(mk);
+        const sec = node.parentNode.closest(".rsec"); if(sec) hitSecs.add(sec.id);
+        i = idx+term.length;
+      }
+      if(i<txt.length) frag.appendChild(document.createTextNode(txt.slice(i)));
+      node.replaceWith(frag);
+    });
+    links.forEach(l=>l.classList.toggle("dim", !hitSecs.has(l.dataset.go)));
+    countEl.textContent = marks.length ? `${marks.length} match${marks.length>1?"es":""}` : "No matches";
+    if(marks.length){ pos=0; focusMark(); }
+  }
+  function focusMark(){
+    marks.forEach((m,i)=>m.classList.toggle("on", i===pos));
+    if(marks[pos]) marks[pos].scrollIntoView({behavior:"smooth", block:"center"});
+  }
+  let deb;
+  input.addEventListener("input", ()=>{ clearTimeout(deb); deb=setTimeout(()=>applyMarks(input.value.trim()), 180); });
+  document.getElementById("hbNext").addEventListener("click", ()=>{ if(marks.length){ pos=(pos+1)%marks.length; focusMark(); }});
+  document.getElementById("hbPrev").addEventListener("click", ()=>{ if(marks.length){ pos=(pos-1+marks.length)%marks.length; focusMark(); }});
+  input.addEventListener("keydown", e=>{ if(e.key==="Enter" && marks.length){ e.preventDefault(); pos=(pos+(e.shiftKey?-1:1)+marks.length)%marks.length; focusMark(); }});
 }
 
 function renderForms(){
