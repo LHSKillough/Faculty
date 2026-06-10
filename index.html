@@ -553,19 +553,36 @@ function renderReader(it){
     <div class="reader-loading">${icon("book")}<p>Loading the handbook…</p></div>`;
   const data = READER_CACHE[it.src];
   if(data){ paintReader(it, data); return; }
-  fetch(it.src, {method:"GET"})
-    .then(r => r.json())
-    .then(data => {
-      if(data && data.error) throw new Error(data.error);
-      READER_CACHE[it.src] = data;
-      paintReader(it, data);
-    })
-    .catch(err => {
-      app.querySelector(".reader-loading").innerHTML =
-        `<h3>Couldn't load the handbook</h3>
-         <p class="note">${esc(String(err.message||err))}</p>
-         ${it.url ? `<a class="openbtn" href="${esc(it.url)}" target="_blank">${icon("ext")} Open in Google Docs</a>` : ""}`;
-    });
+  loadJsonp(it.src, (err, data) => {
+    if(err || !data || data.error){
+      const msg = (data && data.error) ? data.error
+                : (err && err.message === "timeout") ? "The handbook service didn't respond."
+                : "Couldn't reach the handbook service.";
+      const box = app.querySelector(".reader-loading");
+      if(box) box.innerHTML =
+        `<h3 style="font-family:Oswald;color:var(--maroon);margin:0 0 8px">Couldn't load the handbook</h3>
+         <p class="note">${esc(String(msg))}</p>
+         <p class="note">Make sure you're signed in to your LISD Google account, then Refresh.</p>
+         ${it.url ? `<a class="openbtn" href="${esc(it.url)}" target="_blank" style="margin-top:14px;text-decoration:none">${icon("ext")} Open in Google Docs</a>` : ""}`;
+      return;
+    }
+    READER_CACHE[it.src] = data;
+    paintReader(it, data);
+  });
+}
+
+/* JSONP loader: loads the Apps Script web app via a <script> tag so it works
+   across domains (and with domain-restricted deployments) without CORS. */
+function loadJsonp(url, cb){
+  const name = "__hb_" + Math.random().toString(36).slice(2);
+  let done = false;
+  const s = document.createElement("script");
+  const cleanup = () => { try{ delete window[name]; }catch(e){ window[name]=undefined; } if(s.parentNode) s.parentNode.removeChild(s); clearTimeout(timer); };
+  window[name] = (data) => { if(done) return; done = true; cleanup(); cb(null, data); };
+  const timer = setTimeout(() => { if(done) return; done = true; cleanup(); cb(new Error("timeout")); }, 15000);
+  s.onerror = () => { if(done) return; done = true; cleanup(); cb(new Error("network")); };
+  s.src = url + (url.indexOf("?") === -1 ? "?" : "&") + "callback=" + name;
+  document.body.appendChild(s);
 }
 
 function paintReader(it, data){
