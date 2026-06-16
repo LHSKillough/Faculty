@@ -165,6 +165,19 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 .tile h3{font-family:"Oswald";font-weight:600;font-size:17px;letter-spacing:.01em;margin:0;color:var(--ink)}
 .tile p{margin:0;font-size:13px;color:var(--gray-d);line-height:1.45}
 .tile .ext{position:absolute;top:15px;right:15px;color:var(--gray-m)}
+.tile.folder .chev{position:absolute;top:50%;right:14px;transform:translateY(-50%);color:var(--silver)}
+.tile.folder .chev svg{width:18px;height:18px}
+.tile.folder:hover .chev{color:var(--maroon)}
+.tile.folder{padding-right:40px}
+.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:24px 2px 4px;font-family:"Oswald";font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.crumbs a{color:var(--gray-d)}
+.crumbs a:hover{color:var(--maroon)}
+.crumbs .sep{color:var(--silver);display:inline-flex}
+.crumbs .sep svg{width:13px;height:13px}
+.crumbs .here{color:var(--maroon);font-weight:600}
+.browse{display:inline-flex;align-items:center;gap:8px;font-family:"Oswald";font-weight:500;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--maroon);background:#fff;border:1px solid var(--line);border-radius:9px;padding:11px 16px}
+.browse:hover{background:var(--bg);border-color:var(--silver)}
+.browse svg{width:16px;height:16px}
 .tile .ext svg{width:16px;height:16px}
 .tile.locked .ico{background:#efeceb;color:var(--gray-m)}
 .tile .lockbadge{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;gap:5px;font-family:"Oswald";font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-d);background:#f1edec;border:1px solid var(--line);padding:3px 8px;border-radius:20px}
@@ -384,7 +397,8 @@ const ICONS = {
   back:`<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>`,
   folder:`<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
   news:`<path d="M4 22a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3"/><path d="M18 22H6a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1h-3"/><path d="M8 7h6M8 11h6M8 15h4"/>`,
-  support:`<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M14.9 9.1 19 5M4.9 19.1l4.2-4.2"/>`
+  support:`<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M14.9 9.1 19 5M4.9 19.1l4.2-4.2"/>`,
+  chev:`<path d="m9 18 6-6-6-6"/>`
 };
 const icon = (name) => I(ICONS[name] || ICONS.star);
 
@@ -414,6 +428,86 @@ function head(title){
   return `<div class="section-head"><h2>${esc(title)}</h2><span class="star">${icon("star")}</span><span class="rule"></span></div>`;
 }
 
+/* ----- drill-down navigation ----- */
+function gslug(s){ return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+function groupById(id){ return GROUP_ORDER.find(g=>gslug(g)===id) || ITEMS.map(x=>x.group).find(g=>gslug(g)===id); }
+function subsOf(group){ const out=[]; ITEMS.forEach(x=>{ if(x.group===group && x.subgroup && out.indexOf(x.subgroup)===-1) out.push(x.subgroup); }); return out; }
+function countLabel(n){ return n + (n===1?" item":" items"); }
+function folderTile(label, desc, href, count){
+  return `<a class="tile folder" href="${href}" data-anim>
+    <span class="ico">${icon("folder")}</span>
+    <h3>${esc(label)}</h3>
+    <p>${esc(desc||countLabel(count))}</p>
+    <span class="chev">${icon("chev")}</span>
+  </a>`;
+}
+function crumbs(parts){
+  return `<nav class="crumbs">${parts.map(p=>
+    p.href ? `<a href="${p.href}">${esc(p.label)}</a><span class="sep">${icon("chev")}</span>` : `<span class="here">${esc(p.label)}</span>`
+  ).join("")}</nav>`;
+}
+function homeBody(){
+  const pinned = ITEMS.filter(x=>x.daily);
+  if(!pinned.length){
+    return `<div class="section">${head("Welcome")}<p style="color:var(--gray-d);font-size:14px;margin:0 2px">Pin tiles to this page with the "Show on Home page" option in the builder, or use the Resources menu to browse.</p></div>`;
+  }
+  let html = "";
+  GROUP_ORDER.forEach(g=>{
+    const items = pinned.filter(x=>x.group===g);
+    if(items.length) html += `<div class="section">${head(g)}<div class="grid">${items.map(tileHTML).join("")}</div></div>`;
+  });
+  const extra = pinned.filter(x=>GROUP_ORDER.indexOf(x.group)===-1);
+  if(extra.length) html += `<div class="section">${head("More")}<div class="grid">${extra.map(tileHTML).join("")}</div></div>`;
+  html += `<div class="section" style="margin-top:26px"><a class="browse" href="#/resources">${icon("folder")} Browse all resources ${icon("chev")}</a></div>`;
+  return html;
+}
+function renderResourcesIndex(){
+  let html = `<div class="section" style="margin-top:30px">${head("Resources")}<div class="grid">`;
+  GROUP_ORDER.forEach(g=>{
+    const items = ITEMS.filter(x=>x.group===g);
+    if(items.length) html += folderTile(g, "", "#/g/"+gslug(g), items.length);
+  });
+  app.innerHTML = html + `</div></div>`;
+  stagger();
+}
+function renderGroupPage(gid){
+  const g = groupById(gid);
+  if(!g){ renderResourcesIndex(); return; }
+  const items = ITEMS.filter(x=>x.group===g);
+  const subs = subsOf(g);
+  let inner;
+  if(subs.length){
+    const loose = items.filter(x=>!x.subgroup);
+    inner = `<div class="grid">` +
+      subs.map(sn=>folderTile(sn, "", "#/g/"+gid+"/"+gslug(sn), items.filter(x=>x.subgroup===sn).length)).join("") +
+      loose.map(tileHTML).join("") + `</div>`;
+  } else {
+    inner = `<div class="grid">${items.map(tileHTML).join("")}</div>`;
+  }
+  app.innerHTML = `${crumbs([{label:"Home",href:"#/"},{label:"Resources",href:"#/resources"},{label:g}])}
+    <div class="section">${head(g)}${inner}</div>`;
+  stagger();
+}
+function renderSubgroupPage(gid, sid){
+  const g = groupById(gid);
+  if(!g){ renderResourcesIndex(); return; }
+  const items = ITEMS.filter(x=>x.group===g);
+  const sn = subsOf(g).find(s=>gslug(s)===sid);
+  if(!sn){ renderGroupPage(gid); return; }
+  app.innerHTML = `${crumbs([{label:"Home",href:"#/"},{label:"Resources",href:"#/resources"},{label:g,href:"#/g/"+gid},{label:sn}])}
+    <div class="section">${head(sn)}<div class="grid">${items.filter(x=>x.subgroup===sn).map(tileHTML).join("")}</div></div>`;
+  stagger();
+}
+function applyNav(){
+  const nav = SITE.nav || {};
+  const rb = document.getElementById("resbtn");
+  if(rb && nav.resources && nav.resources.label){ rb.childNodes[0].nodeValue = nav.resources.label + " "; }
+  const f = document.querySelector('nav.top a[data-route="forms"]');
+  const d = document.querySelector('nav.top a[data-route="data"]');
+  if(f && nav.forms){ if(nav.forms.show===false) f.style.display="none"; else if(nav.forms.label) f.textContent=nav.forms.label; }
+  if(d && nav.data){ if(nav.data.show===false) d.style.display="none"; else if(nav.data.label) d.textContent=nav.data.label; }
+}
+
 function renderHome(){
   const daily = ITEMS.filter(x=>x.daily);
   app.innerHTML = `
@@ -423,18 +517,7 @@ function renderHome(){
       <div class="sub">${esc(SITE.campus)} · Faculty Hub</div>
       <div class="est"><span class="dot"></span> Fighting Farmers <span class="dot"></span> Est. 1897 <span class="dot"></span></div>
     </div></section>
-    <div class="section">
-      ${head("Quick Links")}
-      <div class="grid">${daily.map(tileHTML).join("")}</div>
-    </div>
-    <div class="section">
-      ${head("More Resources")}
-      <div class="grid">
-        <a class="tile" href="#/resources" data-anim><span class="ico">${icon("folder")}</span><h3>All Resources</h3><p>Everything, grouped by topic</p></a>
-        <a class="tile" href="#/forms" data-anim><span class="ico">${icon("clipboard")}</span><h3>Forms &amp; Docs</h3><p>Campus forms and documents</p></a>
-        <a class="tile" href="#/data" data-anim><span class="ico">${icon("bars")}</span><h3>Data</h3><p>Teacher &amp; admin reports</p></a>
-      </div>
-    </div>`;
+    ${homeBody()}`;
   stagger();
 }
 
@@ -727,7 +810,8 @@ function router(){
   window.scrollTo(0,0);
   if(parts.length === 0){ setActive("home"); return renderHome(); }
   switch(parts[0]){
-    case "resources": setActive(""); return renderResources(parts[1] ? decodeURIComponent(parts[1]) : null);
+    case "resources": setActive(""); return renderResourcesIndex();
+    case "g":         setActive(""); return parts[2] ? renderSubgroupPage(parts[1], parts[2]) : renderGroupPage(parts[1]);
     case "forms":     setActive("forms"); return renderForms();
     case "data":      setActive("data"); return renderData(parts[1]);
     case "view":      setActive(""); return renderView(parts[1]);
@@ -741,7 +825,7 @@ window.addEventListener("hashchange", router);
 (function buildDropdown(){
   const panel = document.getElementById("respanel");
   panel.innerHTML = `<a href="#/resources">${icon("folder")} All Resources</a>` +
-    GROUP_ORDER.map(g=>`<a href="#/resources/${encodeURIComponent(g)}">${icon("star")} ${esc(g)}</a>`).join("");
+    GROUP_ORDER.map(g=>`<a href="#/g/${gslug(g)}">${icon("star")} ${esc(g)}</a>`).join("");
 })();
 
 /* ---- menus / search UI ---- */
@@ -759,6 +843,7 @@ sinput.addEventListener("input", ()=>{ location.hash = "#/search/" + encodeURICo
 sinput.addEventListener("keydown", e=>{ if(e.key==="Escape"){ swrap.classList.remove("open"); } });
 
 /* boot */
+applyNav();
 router();
 </script>
 </body>

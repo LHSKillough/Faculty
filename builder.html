@@ -97,6 +97,11 @@ input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
 .pv h3.sec .star{color:var(--gold);font-size:9px}
 .pv .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .pv .pvsub{font-family:"Oswald";font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-d);margin:10px 2px 6px;padding-left:8px;border-left:2px solid var(--gold)}
+.pv .pvtab{font-family:"Oswald";font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#fff;background:var(--maroon-lift);display:inline-block;padding:3px 9px;border-radius:20px;margin:14px 0 8px}
+.pv .pvtab:first-child{margin-top:0}
+.pv .tile.folder{padding-right:26px}
+.pv .tile.folder .cnt{color:var(--gray-m);font-size:10.5px}
+.pv .tile.folder .fchev{position:absolute;top:50%;right:10px;transform:translateY(-50%);color:var(--silver,#c5c6c7);font-size:18px;line-height:1}
 .pv .tile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;position:relative}
 .pv .tile .ic{width:34px;height:34px;border-radius:9px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
 .pv .tile .ic svg{width:18px;height:18px}
@@ -153,7 +158,21 @@ code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1
     </div>
 
     <div class="panel">
-      <h2><span class="star">★</span> Menu groups <span style="flex:1"></span></h2>
+      <h2><span class="star">★</span> Top menu buttons</h2>
+      <p class="note" style="margin-top:-6px">Rename or hide the buttons in the top bar. Home and Search always stay.</p>
+      <label class="f"><span>Resources menu label</span><input type="text" data-site="site.nav.resources.label" placeholder="Resources"></label>
+      <div class="row">
+        <label class="f"><span>Forms button label</span><input type="text" data-site="site.nav.forms.label" placeholder="Forms"></label>
+        <label class="chk" style="align-self:end;padding-bottom:14px"><input type="checkbox" data-site="site.nav.forms.show"> Show Forms</label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Data button label</span><input type="text" data-site="site.nav.data.label" placeholder="Data"></label>
+        <label class="chk" style="align-self:end;padding-bottom:14px"><input type="checkbox" data-site="site.nav.data.show"> Show Data</label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="star">★</span> Menu groups</h2>
       <p class="note" style="margin-top:-6px">The Resources sections, in order. Renaming one here updates the dropdown; assign tiles to them below.</p>
       <div class="glist" id="groups"></div>
       <button class="addbtn" id="addGroup">+ Add group</button>
@@ -242,14 +261,16 @@ function fillSite(){
   document.querySelectorAll("[data-site]").forEach(inp=>{
     const path = inp.dataset.site.split(".");
     let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
-    inp.value = o[path[path.length-1]] ?? "";
+    const v = o[path[path.length-1]];
+    if(inp.type==="checkbox") inp.checked = (v!==false);   // default shown
+    else inp.value = v ?? "";
   });
 }
 document.addEventListener("input", e=>{
   const inp = e.target.closest("[data-site]"); if(!inp) return;
   const path = inp.dataset.site.split(".");
   let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
-  o[path[path.length-1]] = inp.value;
+  o[path[path.length-1]] = inp.type==="checkbox" ? inp.checked : inp.value;
   renderPreview();
 });
 
@@ -375,26 +396,29 @@ document.getElementById("addItem").addEventListener("click", ()=>{
 });
 
 /* ---------- live preview ---------- */
-function tilePV(it){
+function tilePV(it, folder){
+  if(folder) return `<div class="tile folder"><div class="ic">${svg("folder")}</div><h4>${esc(it)}</h4><p class="cnt">${folder} item${folder>1?"s":""}</p><span class="fchev">›</span></div>`;
   const ext = it.kind==="link" && it.url ? `<span class="ext">${svg("ext")}</span>` : "";
   return `<div class="tile"><div class="ic">${svg(it.icon)}</div><h4>${esc(it.label)}</h4><p>${esc(it.desc)}</p>${ext}</div>`;
 }
 function renderPreview(){
-  document.getElementById("pvCampus").textContent = (cfg.site.campus||"") + " · Faculty Hub";
-  const daily = cfg.items.filter(x=>x.daily);
-  let html = `<h3 class="sec"><span class="star">★</span> Quick Links</h3><div class="grid">${daily.map(tilePV).join("")||'<p class="note">No Home tiles yet.</p>'}</div>`;
+  document.getElementById("pvCampus").textContent = "Home · " + (cfg.site.campus||"") ;
+  const pinned = cfg.items.filter(x=>x.daily);
+  let html = `<div class="pvtab">Home page</div>`;
+  if(!pinned.length){
+    html += `<p class="note">No tiles pinned to Home yet — check "Show on Home page" on the tiles you want here.</p>`;
+  } else {
+    cfg.groupOrder.forEach(g=>{
+      const items = pinned.filter(x=>x.group===g);
+      if(items.length) html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3><div class="grid">${items.map(it=>tilePV(it)).join("")}</div>`;
+    });
+  }
+  html += `<div class="pvtab">Resources (drill-down)</div><div class="grid">`;
   cfg.groupOrder.forEach(g=>{
     const items = cfg.items.filter(x=>x.group===g);
-    if(!items.length) return;
-    html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3>`;
-    const noSub = items.filter(x=>!x.subgroup);
-    if(noSub.length) html += `<div class="grid">${noSub.map(tilePV).join("")}</div>`;
-    const subs = [];
-    items.forEach(x=>{ if(x.subgroup && subs.indexOf(x.subgroup)===-1) subs.push(x.subgroup); });
-    subs.forEach(sn=>{
-      html += `<div class="pvsub">${esc(sn)}</div><div class="grid">${items.filter(x=>x.subgroup===sn).map(tilePV).join("")}</div>`;
-    });
+    if(items.length) html += tilePV(g, items.length);
   });
+  html += `</div>`;
   document.getElementById("preview").innerHTML = html;
 }
 
