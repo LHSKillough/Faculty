@@ -69,6 +69,23 @@ input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
 .iconrow{display:flex;align-items:center;gap:8px}
 .iconrow .swatch{width:34px;height:34px;border-radius:8px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;flex:none}
 .iconrow .swatch svg{width:18px;height:18px}
+.iconpick{display:flex;align-items:center;gap:8px;width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer;font-family:Arial;font-size:13px;color:var(--ink)}
+.iconpick:hover{border-color:var(--maroon)}
+.iconpick .swatch.sm{width:28px;height:28px;border-radius:7px;flex:none}
+.iconpick .swatch.sm svg{width:16px;height:16px}
+.iconpick .iconname{flex:1;text-align:left}
+.iconpick .chev{color:var(--gray-m)}
+.modal{position:fixed;inset:0;background:rgba(36,16,16,.45);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+.modal.open{display:flex}
+.modal .box{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:80vh;overflow:auto;padding:18px;box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
+.modal .box h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--maroon);margin-bottom:10px}
+.modal .igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:12px}
+.modal .iopt{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.modal .iopt:hover{border-color:var(--maroon);background:var(--bg)}
+.modal .iopt.cur{border-color:var(--gold);background:#fffaf0}
+.modal .iopt .sw{width:26px;height:26px;color:var(--maroon)}
+.modal .iopt .sw svg{width:26px;height:26px}
+.modal .iopt span{font-size:10.5px;color:var(--gray-d);text-align:center;line-height:1.2}
 
 /* preview */
 .preview-col{position:sticky;top:78px;align-self:start}
@@ -79,6 +96,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
 .pv h3.sec{font-family:"Oswald";font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--maroon);margin:14px 2px 8px;display:flex;align-items:center;gap:6px}
 .pv h3.sec .star{color:var(--gold);font-size:9px}
 .pv .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pv .pvsub{font-family:"Oswald";font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-d);margin:10px 2px 6px;padding-left:8px;border-left:2px solid var(--gold)}
 .pv .tile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;position:relative}
 .pv .tile .ic{width:34px;height:34px;border-radius:9px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
 .pv .tile .ic svg{width:18px;height:18px}
@@ -104,7 +122,7 @@ code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1
 <div class="wrap">
   <div class="editor-col">
 
-    <details class="panel" id="ghPanel">
+    <details class="panel" id="ghPanel" open>
       <summary>Publish settings (GitHub)</summary>
       <p class="note">One-time setup. Your token stays in this browser tab only and is never saved.</p>
       <div class="row">
@@ -155,6 +173,14 @@ code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1
       <div class="pvbody" id="preview"></div>
     </div>
     <p class="note">Live preview — approximate. The real site styles it fully.</p>
+  </div>
+</div>
+
+<div class="modal" id="iconModal">
+  <div class="box">
+    <h3>Choose an icon</h3>
+    <input type="text" id="iconSearch" placeholder="Filter icons…" autocomplete="off">
+    <div class="igrid" id="iconGrid"></div>
   </div>
 </div>
 
@@ -267,6 +293,9 @@ function kindFields(it,i){
 function renderItems(){
   const box = document.getElementById("items");
   const groupOpts = cfg.groupOrder.map(g=>`<option value="${esc(g)}">`).join("");
+  const subSet = [];
+  cfg.items.forEach(x=>{ if(x.subgroup && subSet.indexOf(x.subgroup)===-1) subSet.push(x.subgroup); });
+  const subOpts = subSet.map(s=>`<option value="${esc(s)}">`).join("");
   box.innerHTML = cfg.items.map((it,i)=>`
     <div class="item">
       <div class="ihead">
@@ -277,9 +306,12 @@ function renderItems(){
         <button class="btn sm" data-down="${i}" title="Down">↓</button>
         <button class="btn sm danger" data-del="${i}" title="Delete">✕</button>
       </div>
-      <div class="row3">
+      <div class="row">
         <label class="f"><span>Group</span><input type="text" list="groupList" data-idx="${i}" data-key="group" value="${esc(it.group)}"></label>
-        <label class="f"><span>Icon</span><select data-idx="${i}" data-key="icon">${ICON_NAMES.map(n=>`<option ${n===it.icon?"selected":""}>${n}</option>`).join("")}</select></label>
+        <label class="f"><span>Subgroup <em style="text-transform:none;letter-spacing:0;color:var(--gray-m)">(optional)</em></span><input type="text" list="subList" data-idx="${i}" data-key="subgroup" value="${esc(it.subgroup||"")}" placeholder="e.g. Forms"></label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Icon</span><button type="button" class="iconpick" data-pick="${i}"><span class="swatch sm">${svg(it.icon)}</span><span class="iconname">${esc(it.icon)}</span><span class="chev">▾</span></button></label>
         <label class="f"><span>Type</span><select data-idx="${i}" data-key="kind">
           <option value="link" ${it.kind==="link"?"selected":""}>Link (new tab)</option>
           <option value="embed" ${it.kind==="embed"?"selected":""}>Embed (in page)</option>
@@ -290,7 +322,7 @@ function renderItems(){
       <label class="f"><span>Short description</span><input type="text" data-idx="${i}" data-key="desc" value="${esc(it.desc)}"></label>
       <label class="chk"><input type="checkbox" data-idx="${i}" data-key="daily" ${it.daily?"checked":""}> Show on Home page</label>
       <p class="tiny">id: <code>${esc(it.id||slug(it.label))}</code></p>
-    </div>`).join("") + `<datalist id="groupList">${groupOpts}</datalist>`;
+    </div>`).join("") + `<datalist id="groupList">${groupOpts}</datalist><datalist id="subList">${subOpts}</datalist>`;
 }
 document.getElementById("items").addEventListener("input", e=>{
   const el = e.target.closest("[data-idx]"); if(!el) return;
@@ -302,11 +334,40 @@ document.getElementById("items").addEventListener("input", e=>{
   renderPreview();
 });
 document.getElementById("items").addEventListener("click", e=>{
-  const up=e.target.closest("[data-up]"), dn=e.target.closest("[data-down]"), del=e.target.closest("[data-del]");
+  const up=e.target.closest("[data-up]"), dn=e.target.closest("[data-down]"), del=e.target.closest("[data-del]"), pick=e.target.closest("[data-pick]");
+  if(pick){ openIconPicker(+pick.dataset.pick); return; }
   if(up){ const i=+up.dataset.up; if(i>0){ [cfg.items[i-1],cfg.items[i]]=[cfg.items[i],cfg.items[i-1]]; renderItems(); renderPreview(); } }
   if(dn){ const i=+dn.dataset.down; if(i<cfg.items.length-1){ [cfg.items[i+1],cfg.items[i]]=[cfg.items[i],cfg.items[i+1]]; renderItems(); renderPreview(); } }
   if(del){ const i=+del.dataset.del; if(confirm("Delete tile \""+cfg.items[i].label+"\"?")){ cfg.items.splice(i,1); renderItems(); renderPreview(); } }
 });
+
+/* ---------- icon picker modal ---------- */
+let iconTarget = -1;
+const iconModal = document.getElementById("iconModal");
+function renderIconGrid(filter){
+  const f = (filter||"").toLowerCase();
+  const cur = iconTarget>=0 ? cfg.items[iconTarget].icon : "";
+  document.getElementById("iconGrid").innerHTML = ICON_NAMES
+    .filter(n=>n.includes(f))
+    .map(n=>`<button type="button" class="iopt ${n===cur?"cur":""}" data-icon="${n}"><span class="sw">${svg(n)}</span><span>${n}</span></button>`).join("")
+    || `<p class="note">No icons match "${esc(filter)}".</p>`;
+}
+function openIconPicker(i){
+  iconTarget = i;
+  document.getElementById("iconSearch").value = "";
+  renderIconGrid("");
+  iconModal.classList.add("open");
+  setTimeout(()=>document.getElementById("iconSearch").focus(), 30);
+}
+function closeIconPicker(){ iconModal.classList.remove("open"); iconTarget = -1; }
+document.getElementById("iconSearch").addEventListener("input", e=>renderIconGrid(e.target.value));
+document.getElementById("iconGrid").addEventListener("click", e=>{
+  const opt = e.target.closest("[data-icon]"); if(!opt || iconTarget<0) return;
+  cfg.items[iconTarget].icon = opt.dataset.icon;
+  closeIconPicker(); renderItems(); renderPreview();
+});
+iconModal.addEventListener("click", e=>{ if(e.target===iconModal) closeIconPicker(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && iconModal.classList.contains("open")) closeIconPicker(); });
 document.getElementById("addItem").addEventListener("click", ()=>{
   cfg.items.push({ id:"", _autoId:true, label:"New Tile", group:cfg.groupOrder[0]||"", icon:"star", daily:false, kind:"link", url:"", embed:"", src:"", desc:"" });
   renderItems(); renderPreview();
@@ -325,14 +386,23 @@ function renderPreview(){
   cfg.groupOrder.forEach(g=>{
     const items = cfg.items.filter(x=>x.group===g);
     if(!items.length) return;
-    html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3><div class="grid">${items.map(tilePV).join("")}</div>`;
+    html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3>`;
+    const noSub = items.filter(x=>!x.subgroup);
+    if(noSub.length) html += `<div class="grid">${noSub.map(tilePV).join("")}</div>`;
+    const subs = [];
+    items.forEach(x=>{ if(x.subgroup && subs.indexOf(x.subgroup)===-1) subs.push(x.subgroup); });
+    subs.forEach(sn=>{
+      html += `<div class="pvsub">${esc(sn)}</div><div class="grid">${items.filter(x=>x.subgroup===sn).map(tilePV).join("")}</div>`;
+    });
   });
   document.getElementById("preview").innerHTML = html;
 }
 
 /* ---------- export ---------- */
 function pruneItem(it){
-  const o = { id: it.id || slug(it.label), label: it.label, group: it.group, icon: it.icon, daily: !!it.daily, kind: it.kind };
+  const o = { id: it.id || slug(it.label), label: it.label, group: it.group };
+  if(it.subgroup) o.subgroup = it.subgroup;
+  o.icon = it.icon; o.daily = !!it.daily; o.kind = it.kind;
   if(it.kind==="link"){ o.url = it.url||""; }
   else if(it.kind==="embed"){ o.embed = it.embed||""; }
   else if(it.kind==="reader"){ o.src = it.src||""; o.url = it.url||""; }

@@ -172,6 +172,7 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 
 /* ---- resource group ---- */
 .rgroup{margin-top:40px}
+.subgroup-head{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:14px;color:var(--gray-d);margin:22px 2px 12px;padding-left:11px;border-left:3px solid var(--gold)}
 
 /* ---- viewer (embed / setup / data) ---- */
 .viewbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:26px 0 14px}
@@ -443,8 +444,17 @@ function renderResources(groupFilter){
   groups.forEach(g=>{
     const items = ITEMS.filter(x=>x.group===g);
     if(!items.length) return;
+    const noSub = items.filter(x=>!x.subgroup);
+    const subNames = [];
+    items.forEach(x=>{ if(x.subgroup && subNames.indexOf(x.subgroup)===-1) subNames.push(x.subgroup); });
+    let inner = "";
+    if(noSub.length) inner += `<div class="grid">${noSub.map(tileHTML).join("")}</div>`;
+    subNames.forEach(sn=>{
+      const subItems = items.filter(x=>x.subgroup===sn);
+      inner += `<h3 class="subgroup-head">${esc(sn)}</h3><div class="grid">${subItems.map(tileHTML).join("")}</div>`;
+    });
     html += `<div class="rgroup">${groupFilter?"":`<div class="section-head"><h2>${esc(g)}</h2><span class="star">${icon("star")}</span><span class="rule"></span></div>`}
-      <div class="grid">${items.map(tileHTML).join("")}</div></div>`;
+      ${inner}</div>`;
   });
   app.innerHTML = html;
   stagger();
@@ -695,7 +705,7 @@ function renderData(sub){
 function renderSearch(q){
   const term = (q||"").trim().toLowerCase();
   const hits = !term ? [] : ITEMS.filter(x =>
-    (x.label+" "+x.desc+" "+x.group).toLowerCase().includes(term));
+    (x.label+" "+x.desc+" "+x.group+" "+(x.subgroup||"")).toLowerCase().includes(term));
   let inner;
   if(!term){ inner = `<p style="color:var(--gray-m);font-size:14px">Start typing to search.</p>`; }
   else if(!hits.length){ inner = `<p style="color:var(--gray-m);font-size:14px">No matches for "${esc(q)}".</p>`; }
