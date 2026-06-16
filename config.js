@@ -15,6 +15,13 @@ window.SITE_CONFIG = {
         "desc": "Campus-wide reports",
         "locked": true
       }
+    },
+    "nav": {
+      "resources": {},
+      "forms": {},
+      "data": {
+        "show": true
+      }
     }
   },
   "groupOrder": [
