@@ -195,12 +195,13 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 .reader{display:grid;grid-template-columns:248px 1fr;gap:28px;align-items:start;margin-top:6px}
 .reader-toc{position:sticky;top:calc(var(--nav-h) + 16px);max-height:calc(100vh - var(--nav-h) - 40px);overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px;box-shadow:var(--shadow)}
 .toc-toggle{display:none}
-.toc-list{display:flex;flex-direction:column}
-.toc-link{font-family:"Oswald";font-size:13.5px;font-weight:500;letter-spacing:.02em;color:var(--ink);padding:8px 10px;border-radius:8px;border-left:3px solid transparent;line-height:1.3}
-.toc-link.sub{padding-left:22px;font-weight:400;font-size:13px;color:var(--gray-d)}
+.toc-list{display:flex;flex-direction:column;gap:1px}
+.toc-link{font-family:"Oswald";font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--ink);padding:9px 12px;border-radius:8px;border-left:3px solid transparent;line-height:1.32}
+.toc-link.sub{margin-left:12px;padding-left:14px;font-weight:400;font-size:12.5px;color:var(--gray-d);border-left:2px solid var(--line)}
 .toc-link:hover{background:var(--bg)}
-.toc-link.active{color:var(--maroon);border-left-color:var(--gold);background:var(--bg)}
-.toc-link.dim{opacity:.32}
+.toc-link.active{color:var(--maroon);border-left-color:var(--gold);background:var(--bg);font-weight:600}
+.toc-link.sub.active{border-left-color:var(--gold)}
+.toc-link.dim{opacity:.34}
 .reader-main{min-width:0}
 .reader-search{position:sticky;top:calc(var(--nav-h) + 16px);z-index:5;display:flex;align-items:center;gap:8px;background:var(--bg);padding:6px 0 12px}
 .reader-search .rs-ico{display:flex;color:var(--gray-m)}
@@ -217,9 +218,9 @@ main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
 .reader-doc .rsec + .rsec{margin-top:30px;padding-top:28px;border-top:1px solid var(--line)}
 .reader-doc .rsec-h{font-family:"Oswald";font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:21px;color:var(--maroon);margin:0 0 12px}
 .reader-doc .rh{font-family:"Oswald";font-weight:600;color:var(--ink);margin:20px 0 8px;font-size:16px}
-.reader-doc p{margin:0 0 12px;font-size:15.5px;line-height:1.7;color:#2c2424}
-.reader-doc ul,.reader-doc ol{margin:0 0 14px;padding-left:22px}
-.reader-doc li{font-size:15.5px;line-height:1.7;margin:3px 0;color:#2c2424}
+.reader-doc p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:#2c2424}
+.reader-doc ul,.reader-doc ol{margin:0 0 12px;padding-left:22px}
+.reader-doc li{font-size:15.5px;line-height:1.55;margin:2px 0;color:#2c2424}
 .reader-doc a{color:var(--maroon);text-decoration:underline;text-underline-offset:2px}
 .rtable{overflow-x:auto;margin:0 0 16px}
 .rtable table{border-collapse:collapse;width:100%;font-size:14px}
@@ -338,64 +339,16 @@ footer .right{margin-left:auto;font-family:"Oswald";font-size:11px;letter-spacin
   </div>
 </footer>
 
+<script src="config.js"></script>
 <script>
 /* ==========================================================================
-   1) CONFIG  —  EDIT BELOW.  Everything above is plumbing you can ignore.
+   1) CONTENT comes from config.js (window.SITE_CONFIG). Edit it there, or use builder.html.
    ========================================================================== */
 
-const SITE = {
-  campus: "Killough Campus",
-  // Page that the "Forms" nav button opens (a Google Drive folder or Form):
-  formsEmbed: "",        // e.g. a published Drive folder / Form embed link
-  // The two buttons under "Data":
-  data: {
-    teacher: { title: "Teacher Reports", embed: "", desc: "Class rosters & grade summaries" },
-    admin:   { title: "Admin Reports",   embed: "", desc: "Campus-wide reports", locked: true }
-  }
-};
-
-/* icon — the name maps to a built-in SVG (see ICONS). Pick the closest. */
-const ITEMS = [
-  /* ----- TEACHING & LEARNING ----- */
-  { id:"gradebook",  label:"Gradebook",            group:"Teaching & Learning", icon:"book",       daily:true,  kind:"link",  url:"",                              desc:"Enter grades & attendance" },
-  { id:"canvas",     label:"Canvas",               group:"Teaching & Learning", icon:"monitor",    daily:true,  kind:"link",  url:"https://lisd.instructure.com",  desc:"LISD learning management system" },
-  { id:"eduphoria",  label:"Eduphoria / Strive",   group:"Teaching & Learning", icon:"clipboard",  daily:false, kind:"link",  url:"",                              desc:"PD, LEAD & Assessment" },
-  { id:"field-trips",label:"Field Trips",          group:"Teaching & Learning", icon:"map",        daily:false, kind:"embed", embed:"",                            desc:"Request & approval forms" },
-
-  /* ----- DAILY OPERATIONS ----- */
-  { id:"bell",       label:"Bell Schedule & Lunches",group:"Daily Operations",  icon:"bell",       daily:true,  kind:"embed", embed:"",                            desc:"Daily schedules & lunch periods" },
-  { id:"calendar",   label:"School Calendar",      group:"Daily Operations",    icon:"calendar",   daily:true,  kind:"embed", embed:"",                            desc:"Campus & district dates" },
-  { id:"announce",   label:"Announcements",        group:"Daily Operations",    icon:"megaphone",  daily:true,  kind:"embed", embed:"",                            desc:"View & submit announcements" },
-  { id:"smore",      label:"Weekly Smore",         group:"Daily Operations",    icon:"news",       daily:true,  kind:"embed", embed:"",                            desc:"This week's campus newsletter" },
-  { id:"frontline",  label:"Absences / Sub",       group:"Daily Operations",    icon:"clock",      daily:true,  kind:"link",  url:"https://app.frontlineeducation.com", desc:"Report absences & request a sub" },
-  { id:"student-links",label:"Student Links",      group:"Daily Operations",    icon:"navigate",   daily:true,  kind:"embed", embed:"",                            desc:"Frequently used student sites" },
-  { id:"drive",      label:"Google Drive",         group:"Daily Operations",    icon:"folder",     daily:true,  kind:"link",  url:"https://drive.google.com",      desc:"Shared campus files" },
-  { id:"outlook",    label:"Outlook",              group:"Daily Operations",    icon:"mail",       daily:true,  kind:"link",  url:"https://outlook.office.com/mail/", desc:"District email" },
-  { id:"copiers",    label:"Copiers",              group:"Daily Operations",    icon:"printer",    daily:false, kind:"embed", embed:"",                            desc:"Codes & support" },
-  { id:"tech",       label:"Technology Support",   group:"Daily Operations",    icon:"support",    daily:false, kind:"embed", embed:"",                            desc:"Help desk, password resets & guides" },
-
-  /* ----- STAFF & DIRECTORY ----- */
-  { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"reader", src:"https://script.google.com/a/macros/staff.lisd.net/s/AKfycbwlCxQo67Ht4q9rVLXXapwNh9ebmLrDsPeL4DlHRVVxpc_ECfw_VeKm9p8ljSHwqd-EQg/exec", url:"https://docs.google.com/document/d/1IKdGKVVD3P54cPyKFlecS_HAEtHKIuti8AP8RK_m-_A/edit", desc:"Campus policies & procedures" },
-  { id:"duty-sched", label:"Duty Schedule",        group:"Staff & Directory",   icon:"clipboard",  daily:false, kind:"embed", embed:"",                            desc:"Staff & admin duty assignments" },
-  { id:"directory",  label:"Staff Directory / Phone List", group:"Staff & Directory", icon:"users", daily:false, kind:"embed", embed:"",                            desc:"Find a colleague & extensions" },
-  { id:"admin-info", label:"Admin Contact Info",   group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Who to contact for what" },
-  { id:"committees", label:"Campus Committees",    group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Committee rosters & sign-ups" },
-
-  /* ----- STUDENT SUPPORT ----- */
-  { id:"mtss",       label:"MTSS",                 group:"Student Support",     icon:"layers",     daily:false, kind:"embed", embed:"",                            desc:"Multi-tiered support process" },
-  { id:"cis",        label:"CIS",                  group:"Student Support",     icon:"compass",    daily:false, kind:"embed", embed:"",                            desc:"Communities In Schools" },
-  { id:"nurse",      label:"Health Clinic",        group:"Student Support",     icon:"heart",      daily:false, kind:"embed", embed:"",                            desc:"Clinic appointments & forms" },
-  { id:"lunch-app",  label:"Free & Reduced Lunch", group:"Student Support",     icon:"utensils",   daily:false, kind:"embed", embed:"",                            desc:"Meal application form" },
-
-  /* ----- COMMUNITY ----- */
-  { id:"ptsa",       label:"PTSA",                 group:"Community",           icon:"heart",      daily:false, kind:"embed", embed:"",                            desc:"Parent-Teacher-Student Assoc." },
-  { id:"booster",    label:"Booster Club",         group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Athletic & activity boosters" },
-  { id:"favorites",  label:"Farmer Favorites",     group:"Community",           icon:"star",       daily:false, kind:"embed", embed:"",                            desc:"Staff perks & discounts" },
-  { id:"history",    label:"LHS History & More",   group:"Community",           icon:"book",       daily:false, kind:"embed", embed:"",                            desc:"Our story since 1897" }
-];
-
-/* order the Resources sections appear in */
-const GROUP_ORDER = ["Teaching & Learning","Daily Operations","Staff & Directory","Student Support","Community"];
+const CFG = window.SITE_CONFIG || {};
+const SITE = CFG.site || { campus:"Killough Campus", formsEmbed:"", data:{ teacher:{title:"Teacher Reports",embed:"",desc:""}, admin:{title:"Admin Reports",embed:"",desc:"",locked:true} } };
+const ITEMS = CFG.items || [];
+const GROUP_ORDER = CFG.groupOrder || ["Teaching & Learning","Daily Operations","Staff & Directory","Student Support","Community"];
 
 /* ==========================================================================
    2)  ICONS  (inline SVG, no editing needed)

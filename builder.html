@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faculty Hub — Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Loads your current content so the builder starts from what's live -->
+<script src="config.js"></script>
+<style>
+:root{
+  --maroon:#500000; --maroon-deep:#3a0000; --maroon-lift:#6b1414; --gold:#E3B23C;
+  --ink:#241b1b; --gray-d:#555; --gray-m:#9ea1a2; --line:#e7e3e1; --bg:#f6f4f2; --card:#fff;
+  --ok:#1f8a4c; --err:#b3261e;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+.display{font-family:"Oswald",sans-serif}
+h1,h2,h3{font-family:"Oswald",sans-serif;margin:0}
+a{color:var(--maroon)}
+
+header.bar{position:sticky;top:0;z-index:30;background:var(--maroon);color:#fff;border-bottom:3px solid var(--gold);
+  display:flex;align-items:center;gap:14px;padding:12px 20px;flex-wrap:wrap}
+header.bar h1{font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+header.bar .sp{flex:1}
+.btn{font-family:"Oswald";font-weight:500;text-transform:uppercase;letter-spacing:.05em;font-size:13px;
+  border:0;border-radius:8px;padding:10px 15px;cursor:pointer;background:#fff;color:var(--maroon)}
+.btn:hover{background:#f1ece9}
+.btn.solid{background:var(--gold);color:#3a2a00}
+.btn.solid:hover{filter:brightness(1.05)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+.btn.sm{padding:6px 9px;font-size:12px}
+.btn.danger{color:var(--err)}
+.status{font-family:"Oswald";font-size:13px;letter-spacing:.03em;padding:2px 0}
+.status.ok{color:#ffe9b8}
+.status.err{color:#ffd0cc}
+
+.wrap{display:grid;grid-template-columns:1fr 460px;gap:22px;max-width:1400px;margin:0 auto;padding:20px}
+@media (max-width:1000px){ .wrap{grid-template-columns:1fr} .preview-col{position:static!important;order:-1} }
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;box-shadow:0 1px 2px rgba(36,16,16,.05)}
+.panel > h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--maroon);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.panel > h2 .star{color:var(--gold)}
+details.panel > summary{font-family:"Oswald";font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--maroon);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+details.panel > summary::-webkit-details-marker{display:none}
+details.panel[open] > summary{margin-bottom:12px}
+
+label.f{display:block;margin:0 0 10px}
+label.f > span{display:block;font-family:"Oswald";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-d);margin-bottom:4px}
+input[type=text],input[type=password],textarea,select{
+  width:100%;font-family:Arial;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.chk{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);font-family:"Oswald";letter-spacing:.02em;text-transform:uppercase}
+.chk input{width:auto}
+
+.glist .grow,.item{border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px;background:#fcfbfa}
+.glist .grow{display:flex;align-items:center;gap:8px;padding:8px 10px}
+.glist .grow input{flex:1}
+.item .ihead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.item .ihead .lbl{flex:1}
+.item .ihead .badge{font-family:"Oswald";font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-d);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 8px}
+.tiny{font-size:11.5px;color:var(--gray-m);margin:4px 0 0}
+.addbtn{width:100%;border:1px dashed var(--silver,#c5c6c7);background:#fff;color:var(--maroon);border-radius:10px;padding:11px;font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-size:13px;cursor:pointer}
+.addbtn:hover{background:#faf6f2}
+.iconrow{display:flex;align-items:center;gap:8px}
+.iconrow .swatch{width:34px;height:34px;border-radius:8px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;flex:none}
+.iconrow .swatch svg{width:18px;height:18px}
+
+/* preview */
+.preview-col{position:sticky;top:78px;align-self:start}
+.pv{background:var(--maroon);border-radius:14px;overflow:hidden;border:1px solid var(--maroon-deep)}
+.pv .pvhead{padding:14px 16px;color:#fff;border-bottom:3px solid var(--gold)}
+.pv .pvhead b{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-size:14px}
+.pv .pvbody{background:var(--bg);padding:14px;max-height:74vh;overflow:auto}
+.pv h3.sec{font-family:"Oswald";font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--maroon);margin:14px 2px 8px;display:flex;align-items:center;gap:6px}
+.pv h3.sec .star{color:var(--gold);font-size:9px}
+.pv .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pv .tile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;position:relative}
+.pv .tile .ic{width:34px;height:34px;border-radius:9px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.pv .tile .ic svg{width:18px;height:18px}
+.pv .tile h4{font-family:"Oswald";font-weight:600;font-size:13.5px;margin:0 0 2px}
+.pv .tile p{margin:0;font-size:11px;color:var(--gray-d);line-height:1.35}
+.pv .tile .ext{position:absolute;top:9px;right:9px;color:var(--gray-m)}
+.pv .tile .ext svg{width:13px;height:13px}
+.note{font-size:12px;color:var(--gray-m);margin:6px 2px 0}
+code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12px}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <h1>Faculty Hub · Builder</h1>
+  <span class="sp"></span>
+  <span class="status" id="status"></span>
+  <button class="btn ghost" id="btnCopy">Copy</button>
+  <button class="btn ghost" id="btnDownload">Download</button>
+  <button class="btn solid" id="btnPublish">Publish to GitHub</button>
+</header>
+
+<div class="wrap">
+  <div class="editor-col">
+
+    <details class="panel" id="ghPanel">
+      <summary>Publish settings (GitHub)</summary>
+      <p class="note">One-time setup. Your token stays in this browser tab only and is never saved.</p>
+      <div class="row">
+        <label class="f"><span>Owner (user or org)</span><input type="text" id="gh_owner" placeholder="e.g. lisd-killough"></label>
+        <label class="f"><span>Repository</span><input type="text" id="gh_repo" placeholder="e.g. faculty-hub"></label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Branch</span><input type="text" id="gh_branch" placeholder="main"></label>
+        <label class="f"><span>File path</span><input type="text" id="gh_path" placeholder="config.js"></label>
+      </div>
+      <label class="f"><span>Personal access token (fine-grained · Contents: Read &amp; write)</span><input type="password" id="gh_token" placeholder="github_pat_..."></label>
+      <label class="f"><span>Commit message</span><input type="text" id="gh_msg" placeholder="Update site content"></label>
+      <p class="note">Make a token at GitHub ▸ Settings ▸ Developer settings ▸ Fine-grained tokens, scoped to this one repo with <code>Contents: Read and write</code>.</p>
+    </details>
+
+    <div class="panel">
+      <h2><span class="star">★</span> Site settings</h2>
+      <label class="f"><span>Campus label</span><input type="text" data-site="site.campus"></label>
+      <label class="f"><span>Forms page — embed link</span><input type="text" data-site="site.formsEmbed" placeholder="published Drive folder / Form embed"></label>
+      <div class="row">
+        <label class="f"><span>Data ▸ Teacher title</span><input type="text" data-site="site.data.teacher.title"></label>
+        <label class="f"><span>Teacher report — embed</span><input type="text" data-site="site.data.teacher.embed"></label>
+      </div>
+      <div class="row">
+        <label class="f"><span>Data ▸ Admin title</span><input type="text" data-site="site.data.admin.title"></label>
+        <label class="f"><span>Admin report — embed</span><input type="text" data-site="site.data.admin.embed"></label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="star">★</span> Menu groups <span style="flex:1"></span></h2>
+      <p class="note" style="margin-top:-6px">The Resources sections, in order. Renaming one here updates the dropdown; assign tiles to them below.</p>
+      <div class="glist" id="groups"></div>
+      <button class="addbtn" id="addGroup">+ Add group</button>
+    </div>
+
+    <div class="panel">
+      <h2><span class="star">★</span> Tiles</h2>
+      <div id="items"></div>
+      <button class="addbtn" id="addItem">+ Add tile</button>
+    </div>
+
+  </div>
+
+  <div class="preview-col">
+    <div class="pv">
+      <div class="pvhead"><b id="pvCampus">Killough Campus · Faculty Hub</b></div>
+      <div class="pvbody" id="preview"></div>
+    </div>
+    <p class="note">Live preview — approximate. The real site styles it fully.</p>
+  </div>
+</div>
+
+<script>
+/* ---------- icons (match the site) ---------- */
+const ICONS = {
+  book:`<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
+  monitor:`<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
+  clipboard:`<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>`,
+  grad:`<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>`,
+  layers:`<path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>`,
+  compass:`<circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.4-6.3 2.1 2.1-6.4Z"/>`,
+  star:`<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 18l-6.2 3.2L7 14.2l-5-4.9 6.9-1Z"/>`,
+  map:`<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/>`,
+  bell:`<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>`,
+  calendar:`<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>`,
+  megaphone:`<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>`,
+  clock:`<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
+  navigate:`<path d="M3 11 22 2l-9 19-2-8-8-2z"/>`,
+  printer:`<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/>`,
+  key:`<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3"/>`,
+  refresh:`<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>`,
+  users:`<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>`,
+  phone:`<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>`,
+  utensils:`<path d="M3 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7"/>`,
+  heart:`<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5C2 10.8 3.5 12.5 5 14l7 7Z"/>`,
+  shield:`<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>`,
+  mail:`<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a2 2 0 0 1-2.06 0L2 7"/>`,
+  bars:`<path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/>`,
+  lock:`<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
+  ext:`<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>`,
+  folder:`<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
+  news:`<path d="M4 22a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3"/><path d="M18 22H6a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1h-3"/><path d="M8 7h6M8 11h6M8 15h4"/>`,
+  support:`<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M14.9 9.1 19 5M4.9 19.1l4.2-4.2"/>`
+};
+const ICON_NAMES = Object.keys(ICONS);
+const svg = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]||ICONS.star}</svg>`;
+const esc = s => (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const slug = s => (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40);
+
+/* ---------- state ---------- */
+const FALLBACK = { site:{campus:"Killough Campus",formsEmbed:"",data:{teacher:{title:"Teacher Reports",embed:"",desc:"Class rosters & grade summaries"},admin:{title:"Admin Reports",embed:"",desc:"Campus-wide reports",locked:true}}},
+  groupOrder:["Teaching & Learning","Daily Operations","Staff & Directory","Student Support","Community"],
+  items:[{id:"example",label:"Example Tile",group:"Daily Operations",icon:"star",daily:true,kind:"link",url:"https://example.com",desc:"A sample tile"}] };
+const cfg = JSON.parse(JSON.stringify(window.SITE_CONFIG || FALLBACK));
+cfg.site = cfg.site || FALLBACK.site;
+cfg.site.data = cfg.site.data || FALLBACK.site.data;
+cfg.groupOrder = cfg.groupOrder || [];
+cfg.items = cfg.items || [];
+
+/* ---------- safe localStorage (non-sensitive settings only) ---------- */
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+};
+
+/* ---------- render: site fields ---------- */
+function fillSite(){
+  document.querySelectorAll("[data-site]").forEach(inp=>{
+    const path = inp.dataset.site.split(".");
+    let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
+    inp.value = o[path[path.length-1]] ?? "";
+  });
+}
+document.addEventListener("input", e=>{
+  const inp = e.target.closest("[data-site]"); if(!inp) return;
+  const path = inp.dataset.site.split(".");
+  let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
+  o[path[path.length-1]] = inp.value;
+  renderPreview();
+});
+
+/* ---------- render: groups ---------- */
+function renderGroups(){
+  const box = document.getElementById("groups");
+  box.innerHTML = cfg.groupOrder.map((g,i)=>`
+    <div class="grow">
+      <input type="text" value="${esc(g)}" data-gidx="${i}">
+      <button class="btn sm" data-gup="${i}" title="Up">↑</button>
+      <button class="btn sm" data-gdown="${i}" title="Down">↓</button>
+      <button class="btn sm danger" data-gdel="${i}" title="Remove">✕</button>
+    </div>`).join("");
+}
+document.getElementById("groups").addEventListener("input", e=>{
+  const inp = e.target.closest("[data-gidx]"); if(!inp) return;
+  const i = +inp.dataset.gidx; const old = cfg.groupOrder[i]; const val = inp.value;
+  cfg.groupOrder[i] = val;
+  cfg.items.forEach(it=>{ if(it.group===old) it.group=val; });  // keep tiles attached
+  renderItems(); renderPreview();
+});
+document.getElementById("groups").addEventListener("click", e=>{
+  const up=e.target.closest("[data-gup]"), dn=e.target.closest("[data-gdown]"), del=e.target.closest("[data-gdel]");
+  if(up){ const i=+up.dataset.gup; if(i>0){ [cfg.groupOrder[i-1],cfg.groupOrder[i]]=[cfg.groupOrder[i],cfg.groupOrder[i-1]]; redrawAll(); } }
+  if(dn){ const i=+dn.dataset.gdown; if(i<cfg.groupOrder.length-1){ [cfg.groupOrder[i+1],cfg.groupOrder[i]]=[cfg.groupOrder[i],cfg.groupOrder[i+1]]; redrawAll(); } }
+  if(del){ const i=+del.dataset.gdel; if(confirm("Remove group \""+cfg.groupOrder[i]+"\"? Tiles in it stay but will be ungrouped.")){ cfg.groupOrder.splice(i,1); redrawAll(); } }
+});
+document.getElementById("addGroup").addEventListener("click", ()=>{ cfg.groupOrder.push("New Group"); renderGroups(); });
+
+/* ---------- render: items ---------- */
+function kindFields(it,i){
+  if(it.kind==="link")
+    return `<label class="f"><span>Link URL (opens in new tab)</span><input type="text" data-idx="${i}" data-key="url" value="${esc(it.url)}" placeholder="https://..."></label>`;
+  if(it.kind==="embed")
+    return `<label class="f"><span>Embed link (Sheet / Slides / PDF / Calendar)</span><input type="text" data-idx="${i}" data-key="embed" value="${esc(it.embed)}" placeholder="published embed link"></label>`;
+  if(it.kind==="reader")
+    return `<div class="row"><label class="f"><span>Apps Script URL (live reader)</span><input type="text" data-idx="${i}" data-key="src" value="${esc(it.src)}" placeholder=".../exec"></label>
+            <label class="f"><span>Doc link (Open-in-Docs button)</span><input type="text" data-idx="${i}" data-key="url" value="${esc(it.url)}" placeholder="https://docs.google.com/..."></label></div>`;
+  return "";
+}
+function renderItems(){
+  const box = document.getElementById("items");
+  const groupOpts = cfg.groupOrder.map(g=>`<option value="${esc(g)}">`).join("");
+  box.innerHTML = cfg.items.map((it,i)=>`
+    <div class="item">
+      <div class="ihead">
+        <span class="iconrow"><span class="swatch">${svg(it.icon)}</span></span>
+        <input class="lbl" type="text" data-idx="${i}" data-key="label" value="${esc(it.label)}" placeholder="Tile name">
+        ${it.daily?'<span class="badge">home</span>':''}
+        <button class="btn sm" data-up="${i}" title="Up">↑</button>
+        <button class="btn sm" data-down="${i}" title="Down">↓</button>
+        <button class="btn sm danger" data-del="${i}" title="Delete">✕</button>
+      </div>
+      <div class="row3">
+        <label class="f"><span>Group</span><input type="text" list="groupList" data-idx="${i}" data-key="group" value="${esc(it.group)}"></label>
+        <label class="f"><span>Icon</span><select data-idx="${i}" data-key="icon">${ICON_NAMES.map(n=>`<option ${n===it.icon?"selected":""}>${n}</option>`).join("")}</select></label>
+        <label class="f"><span>Type</span><select data-idx="${i}" data-key="kind">
+          <option value="link" ${it.kind==="link"?"selected":""}>Link (new tab)</option>
+          <option value="embed" ${it.kind==="embed"?"selected":""}>Embed (in page)</option>
+          <option value="reader" ${it.kind==="reader"?"selected":""}>Handbook reader</option>
+        </select></label>
+      </div>
+      ${kindFields(it,i)}
+      <label class="f"><span>Short description</span><input type="text" data-idx="${i}" data-key="desc" value="${esc(it.desc)}"></label>
+      <label class="chk"><input type="checkbox" data-idx="${i}" data-key="daily" ${it.daily?"checked":""}> Show on Home page</label>
+      <p class="tiny">id: <code>${esc(it.id||slug(it.label))}</code></p>
+    </div>`).join("") + `<datalist id="groupList">${groupOpts}</datalist>`;
+}
+document.getElementById("items").addEventListener("input", e=>{
+  const el = e.target.closest("[data-idx]"); if(!el) return;
+  const i=+el.dataset.idx, key=el.dataset.key, it=cfg.items[i];
+  if(key==="daily"){ it.daily = el.checked; renderItems(); renderPreview(); return; }
+  it[key] = el.value;
+  if(key==="label" && (!it.id || it._autoId)){ it.id = slug(el.value); it._autoId = true; }
+  if(key==="kind"){ renderItems(); }
+  renderPreview();
+});
+document.getElementById("items").addEventListener("click", e=>{
+  const up=e.target.closest("[data-up]"), dn=e.target.closest("[data-down]"), del=e.target.closest("[data-del]");
+  if(up){ const i=+up.dataset.up; if(i>0){ [cfg.items[i-1],cfg.items[i]]=[cfg.items[i],cfg.items[i-1]]; renderItems(); renderPreview(); } }
+  if(dn){ const i=+dn.dataset.down; if(i<cfg.items.length-1){ [cfg.items[i+1],cfg.items[i]]=[cfg.items[i],cfg.items[i+1]]; renderItems(); renderPreview(); } }
+  if(del){ const i=+del.dataset.del; if(confirm("Delete tile \""+cfg.items[i].label+"\"?")){ cfg.items.splice(i,1); renderItems(); renderPreview(); } }
+});
+document.getElementById("addItem").addEventListener("click", ()=>{
+  cfg.items.push({ id:"", _autoId:true, label:"New Tile", group:cfg.groupOrder[0]||"", icon:"star", daily:false, kind:"link", url:"", embed:"", src:"", desc:"" });
+  renderItems(); renderPreview();
+  document.getElementById("items").lastElementChild.scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+/* ---------- live preview ---------- */
+function tilePV(it){
+  const ext = it.kind==="link" && it.url ? `<span class="ext">${svg("ext")}</span>` : "";
+  return `<div class="tile"><div class="ic">${svg(it.icon)}</div><h4>${esc(it.label)}</h4><p>${esc(it.desc)}</p>${ext}</div>`;
+}
+function renderPreview(){
+  document.getElementById("pvCampus").textContent = (cfg.site.campus||"") + " · Faculty Hub";
+  const daily = cfg.items.filter(x=>x.daily);
+  let html = `<h3 class="sec"><span class="star">★</span> Quick Links</h3><div class="grid">${daily.map(tilePV).join("")||'<p class="note">No Home tiles yet.</p>'}</div>`;
+  cfg.groupOrder.forEach(g=>{
+    const items = cfg.items.filter(x=>x.group===g);
+    if(!items.length) return;
+    html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3><div class="grid">${items.map(tilePV).join("")}</div>`;
+  });
+  document.getElementById("preview").innerHTML = html;
+}
+
+/* ---------- export ---------- */
+function pruneItem(it){
+  const o = { id: it.id || slug(it.label), label: it.label, group: it.group, icon: it.icon, daily: !!it.daily, kind: it.kind };
+  if(it.kind==="link"){ o.url = it.url||""; }
+  else if(it.kind==="embed"){ o.embed = it.embed||""; }
+  else if(it.kind==="reader"){ o.src = it.src||""; o.url = it.url||""; }
+  o.desc = it.desc||"";
+  return o;
+}
+function buildConfigText(){
+  const clean = { site: cfg.site, groupOrder: cfg.groupOrder, items: cfg.items.map(pruneItem) };
+  const header = "/* LHS Killough — Faculty Hub site content. Generated by builder.html. */\n";
+  return header + "window.SITE_CONFIG = " + JSON.stringify(clean, null, 2) + ";\n";
+}
+function b64utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+function setStatus(msg, cls){ const s=document.getElementById("status"); s.textContent=msg; s.className="status "+(cls||""); }
+
+document.getElementById("btnCopy").addEventListener("click", async ()=>{
+  try{ await navigator.clipboard.writeText(buildConfigText()); setStatus("Copied config.js to clipboard","ok"); }
+  catch(e){ setStatus("Copy failed — use Download","err"); }
+});
+document.getElementById("btnDownload").addEventListener("click", ()=>{
+  const blob = new Blob([buildConfigText()], {type:"text/javascript"});
+  const a = document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="config.js"; a.click();
+  setStatus("Downloaded config.js — upload it to your repo","ok");
+});
+
+/* ---------- publish to GitHub ---------- */
+async function publish(){
+  const owner=val("gh_owner").trim(), repo=val("gh_repo").trim(), branch=(val("gh_branch").trim()||"main"),
+        path=(val("gh_path").trim()||"config.js"), token=val("gh_token").trim(),
+        msg=(val("gh_msg").trim()||"Update site content via builder");
+  if(!owner||!repo||!token){ document.getElementById("ghPanel").open=true; setStatus("Fill in owner, repo and token first","err"); return; }
+  store.set("gh_owner",owner); store.set("gh_repo",repo); store.set("gh_branch",branch); store.set("gh_path",path);
+  setStatus("Publishing…","");
+  const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path.split("/").map(encodeURIComponent).join("/")}`;
+  const h = { "Authorization":"Bearer "+token, "Accept":"application/vnd.github+json" };
+  let sha = null;
+  try{
+    const r = await fetch(api+"?ref="+encodeURIComponent(branch), {headers:h});
+    if(r.ok){ sha = (await r.json()).sha; }
+    else if(r.status!==404){ const e=await r.json(); throw new Error(e.message||("HTTP "+r.status)); }
+  }catch(e){ setStatus("Couldn't reach repo: "+e.message,"err"); return; }
+  const body = { message: msg, content: b64utf8(buildConfigText()), branch };
+  if(sha) body.sha = sha;
+  try{
+    const put = await fetch(api, {method:"PUT", headers:{...h,"Content-Type":"application/json"}, body:JSON.stringify(body)});
+    if(put.ok){ setStatus("Published. Site updates in ~1 min.","ok"); }
+    else { const e=await put.json(); setStatus("Publish failed: "+(e.message||put.status),"err"); }
+  }catch(e){ setStatus("Publish failed: "+e.message,"err"); }
+}
+function val(id){ return document.getElementById(id).value; }
+document.getElementById("btnPublish").addEventListener("click", publish);
+
+/* ---------- boot ---------- */
+function redrawAll(){ renderGroups(); renderItems(); renderPreview(); }
+["gh_owner","gh_repo","gh_branch","gh_path"].forEach(id=>{ const v=store.get(id); if(v) document.getElementById(id).value=v; });
+if(!document.getElementById("gh_branch").value) document.getElementById("gh_branch").value="main";
+if(!document.getElementById("gh_path").value) document.getElementById("gh_path").value="config.js";
+fillSite(); redrawAll();
+</script>
+</body>
+</html>
