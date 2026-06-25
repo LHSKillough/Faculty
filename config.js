@@ -181,8 +181,8 @@ window.SITE_CONFIG = {
       "icon": "book",
       "daily": true,
       "kind": "reader",
-      "src": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycbwoPRbrN2bxqPoaTOZwqDBXF52UU3xuCSOJr1l93NB9-6Mthy4asrRhfVZYh3VrgJARFw/exec",
-      "url": "https://docs.google.com/document/d/1IKdGKVVD3P54cPyKFlecS_HAEtHKIuti8AP8RK_m-_A/edit",
+      "src": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycby-ehv4bBD3pz2E_28D0gsMELPUHcpGTMyigZs8LNh_qBGpPD8xrxMvvqKuJP2cLfLgJg/exec",
+      "url": "https://docs.google.com/document/d/1fnKuPxT181zkM4QeFy8t6fukkDZt9fzx/edit",
       "desc": "Campus policies & procedures"
     },
     {
