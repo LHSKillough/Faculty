@@ -45,7 +45,7 @@ window.SITE_CONFIG = {
     { id:"tech",       label:"Technology Support",   group:"Daily Operations",    icon:"support",    daily:false, kind:"embed", embed:"",                            desc:"Help desk, password resets & guides" },
 
     /* ----- STAFF & DIRECTORY ----- */
-    { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"reader", src:"handbook.json", url:"https://docs.google.com/document/d/1IKdGKVVD3P54cPyKFlecS_HAEtHKIuti8AP8RK_m-_A/edit", desc:"Campus policies & procedures" },
+    { id:"handbook",   label:"Faculty Handbook",     group:"Staff & Directory",   icon:"book",       daily:true,  kind:"reader", src:"handbook.json", url:"https://docs.google.com/document/d/17GXxVF1uWDWxZH5hjcN8eBGDcNodXC0OzqHR0dr9G5U/edit?usp=sharing", desc:"Campus policies & procedures" },
     { id:"duty-sched", label:"Duty Schedule",        group:"Staff & Directory",   icon:"clipboard",  daily:false, kind:"embed", embed:"",                            desc:"Staff & admin duty assignments" },
     { id:"directory",  label:"Staff Directory / Phone List", group:"Staff & Directory", icon:"users", daily:false, kind:"embed", embed:"",                            desc:"Find a colleague & extensions" },
     { id:"admin-info", label:"Admin Contact Info",   group:"Staff & Directory",   icon:"users",      daily:false, kind:"embed", embed:"",                            desc:"Who to contact for what" },
