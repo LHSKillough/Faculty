@@ -1,6 +1,6 @@
 {
   "title": "Faculty Handbook",
-  "fetched": "2026-06-25T16:20:00.403Z",
+  "fetched": "2026-06-25T16:24:24.625Z",
   "sections": [
     {
       "level": 0,
@@ -34,11 +34,14 @@
         {
           "type": "p",
           "html": "5.  All regulations, guidelines, and standards lawfully adopted under the above statutes by the United States Department of Education."
-        },
-        {
-          "type": "p",
-          "html": "History"
-        },
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "History",
+      "anchor": "sec-1-history",
+      "blocks": [
         {
           "type": "p",
           "html": "Lewisville High School is the oldest of five high schools in the <a href=\"https://en.wikipedia.org/wiki/Lewisville_Independent_School_District\" target=\"_blank\" rel=\"noopener\">Lewisville Independent School District</a>. It was opened in 1897. Killough Campus (9/10) was opened in 2005."
@@ -46,23 +49,38 @@
         {
           "type": "p",
           "html": "The school's colors are maroon and white and its mascot is \"Big John,” the Fighting Farmer (a reference to Lewisville's early days as a rural community)."
-        },
-        {
-          "type": "p",
-          "html": "Administration"
-        },
-        {
-          "type": "p",
-          "html": "Stephanie Gore, Principal"
-        },
-        {
-          "type": "p",
-          "html": "Melanie Lowery, Assistant Principal"
-        },
-        {
-          "type": "p",
-          "html": "Ashlyn Straw, Assistant Principal                                                                Clinton Marion, Assistant Principal"
-        },
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Administration",
+      "anchor": "sec-2-administration",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Stephanie Gore, Principal",
+      "anchor": "sec-3-stephanie-gore-principal",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Melanie Lowery, Assistant Principal",
+      "anchor": "sec-4-melanie-lowery-assistant-principal",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Ashlyn Straw, Assistant Principal",
+      "anchor": "sec-5-ashlyn-straw-assistant-principal",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Clinton Marion, Assistant Principal",
+      "anchor": "sec-6-clinton-marion-assistant-principal",
+      "blocks": [
         {
           "type": "p",
           "html": "Counselors"
@@ -1450,7 +1468,7 @@
     {
       "level": 2,
       "title": "TEACHER SELF-CARE TIPS",
-      "anchor": "sec-1-teacher-self-care-tips",
+      "anchor": "sec-7-teacher-self-care-tips",
       "blocks": [
         {
           "type": "p",
@@ -1677,7 +1695,7 @@
     {
       "level": 1,
       "title": "DISCIPLINE PROCEDURES",
-      "anchor": "sec-2-discipline-procedures",
+      "anchor": "sec-8-discipline-procedures",
       "blocks": [
         {
           "type": "p",
