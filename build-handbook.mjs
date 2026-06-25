@@ -11,9 +11,9 @@
 import * as cheerio from "cheerio";
 import { writeFileSync } from "node:fs";
 
-const DOC_ID = "1IKdGKVVD3P54cPyKFlecS_HAEtHKIuti8AP8RK_m-_A";
+const DOC_ID = "17GXxVF1uWDWxZH5hjcN8eBGDcNodXC0OzqHR0dr9G5U";
 const OUT    = "handbook.json";
-const EXPORT = `https://docs.google.com/document/d/${DOC_ID}/export?format=html`;
+const EXPORT = `https://docs.google.com/document/d/17GXxVF1uWDWxZH5hjcN8eBGDcNodXC0OzqHR0dr9G5U/edit?usp=sharing`;
 
 const escHtml = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const escAttr = s => escHtml(s).replace(/"/g,"&quot;");
