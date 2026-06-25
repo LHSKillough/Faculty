@@ -599,22 +599,27 @@ function renderReader(it){
     <div class="reader-loading">${icon("book")}<p>Loading the handbook…</p></div>`;
   const data = READER_CACHE[it.src];
   if(data){ paintReader(it, data); return; }
-  loadJsonp(it.src, (err, data) => {
+  const onResult = (err, data) => {
     if(err || !data || data.error){
       const msg = (data && data.error) ? data.error
-                : (err && err.message === "timeout") ? "The handbook service didn't respond."
-                : "Couldn't reach the handbook service.";
+                : (err && err.message === "timeout") ? "The handbook didn't load in time."
+                : "Couldn't load the handbook.";
       const box = app.querySelector(".reader-loading");
       if(box) box.innerHTML =
         `<h3 style="font-family:Oswald;color:var(--maroon);margin:0 0 8px">Couldn't load the handbook</h3>
          <p class="note">${esc(String(msg))}</p>
-         <p class="note">Make sure you're signed in to your LISD Google account, then Refresh.</p>
          ${it.url ? `<a class="openbtn" href="${esc(it.url)}" target="_blank" style="margin-top:14px;text-decoration:none">${icon("ext")} Open in Google Docs</a>` : ""}`;
       return;
     }
     READER_CACHE[it.src] = data;
     paintReader(it, data);
-  });
+  };
+  // Apps Script web app -> JSONP (cross-origin). A local/static JSON file -> fetch.
+  if(/script\.google\./.test(it.src)){
+    loadJsonp(it.src, onResult);
+  } else {
+    fetch(it.src, {cache:"no-store"}).then(r=>r.json()).then(d=>onResult(null,d)).catch(e=>onResult(e));
+  }
 }
 
 /* JSONP loader: loads the Apps Script web app via a <script> tag so it works

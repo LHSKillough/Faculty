@@ -1,0 +1,45 @@
+name: Update Handbook
+
+# Pulls the live Google Doc and commits handbook.json so the site loads it
+# as a static file (no Apps Script). Runs hourly, plus a manual "Run workflow"
+# button on the Actions tab for an instant refresh after you edit the doc.
+
+on:
+  schedule:
+    - cron: "0 * * * *"      # top of every hour (UTC). Change to taste.
+  workflow_dispatch: {}        # manual run button
+
+permissions:
+  contents: write              # lets the action commit handbook.json
+
+concurrency:
+  group: update-handbook
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install parser dependency
+        run: npm install cheerio --no-save
+
+      - name: Pull handbook from Google Doc
+        run: node scripts/build-handbook.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain handbook.json)" ]; then
+            git config user.name "handbook-bot"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add handbook.json
+            git commit -m "Update handbook from Google Doc"
+            git push
+          else
+            echo "Handbook unchanged — nothing to commit."
+          fi
