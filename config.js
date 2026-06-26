@@ -114,10 +114,11 @@ window.SITE_CONFIG = {
       "id": "frontline",
       "label": "Absences / Sub",
       "group": "Daily Operations",
+      "subgroup": "Via the Web",
       "icon": "clock",
       "daily": true,
-      "kind": "link",
-      "url": "https://app.frontlineeducation.com",
+      "kind": "embed",
+      "embed": "",
       "desc": "Report absences & request a sub"
     },
     {
