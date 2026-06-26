@@ -179,7 +179,7 @@ window.SITE_CONFIG = {
       "daily": true,
       "kind": "reader",
       "src": "handbook.json",
-      "url": "https://docs.google.com/document/d/17GXxVF1uWDWxZH5hjcN8eBGDcNodXC0OzqHR0dr9G5U/edit?usp=sharing",
+      "url": "https://docs.google.com/document/d/1fnKuPxT181zkM4QeFy8t6fukkDZt9fzx/edit?usp=sharing&ouid=117506782495422317132&rtpof=true&sd=true",
       "desc": "Campus policies & procedures"
     },
     {
