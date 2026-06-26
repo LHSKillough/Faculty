@@ -1,6 +1,6 @@
 {
   "title": "Faculty Handbook",
-  "fetched": "2026-06-26T16:03:52.746Z",
+  "fetched": "2026-06-26T17:25:26.495Z",
   "sections": [
     {
       "level": 0,
@@ -76,8 +76,14 @@
     },
     {
       "level": 1,
+      "title": "Office Staff",
+      "anchor": "sec-4-office-staff",
+      "blocks": []
+    },
+    {
+      "level": 2,
       "title": "Administration",
-      "anchor": "sec-4-administration",
+      "anchor": "sec-5-administration",
       "blocks": [
         {
           "type": "p",
@@ -100,7 +106,7 @@
     {
       "level": 2,
       "title": "Counselors",
-      "anchor": "sec-5-counselors",
+      "anchor": "sec-6-counselors",
       "blocks": [
         {
           "type": "p",
@@ -108,7 +114,11 @@
         },
         {
           "type": "p",
-          "html": "Daydrion Taylor                                                                                Miguel Perez                                                                                        "
+          "html": "Daydrion Taylor"
+        },
+        {
+          "type": "p",
+          "html": "Miguel Perez                                                                                        "
         },
         {
           "type": "p",
@@ -119,7 +129,7 @@
     {
       "level": 2,
       "title": "Attendance / Sub Coordinator",
-      "anchor": "sec-6-attendance-sub-coordinator",
+      "anchor": "sec-7-attendance-sub-coordinator",
       "blocks": [
         {
           "type": "p",
@@ -127,23 +137,26 @@
         },
         {
           "type": "p",
-          "html": "Kelly Bohon, Sub Coordinator                                                "
+          "html": "Kelly Bohon, Sub Coordinator"
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Work Hours",
+      "anchor": "sec-8-work-hours",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "Classroom teachers will have planning periods for instructional preparation, parent teacher conferences, evaluation of student work, and planning. The schedule of planning periods is set at the campus level but must provide at least 450 minutes within each two-week period in blocks not less than 45 minutes within the instructional day. Teachers and librarians are entitled to a duty-free lunch period of at least 30 minutes. "
         }
       ]
     },
     {
       "level": 2,
-      "title": "WORK HOURS",
-      "anchor": "sec-7-work-hours",
+      "title": "High School Professional Hours",
+      "anchor": "sec-9-high-school-professional-hours",
       "blocks": [
-        {
-          "type": "p",
-          "html": "Classroom teachers will have planning periods for instructional preparation, parent teacher conferences, evaluation of student work, and planning. The schedule of planning periods is set at the campus level but must provide at least 450 minutes within each two-week period in blocks not less than 45 minutes within the instructional day. Teachers and librarians are entitled to a duty-free lunch period of at least 30 minutes. "
-        },
-        {
-          "type": "p",
-          "html": "High School Professional Hours"
-        },
         {
           "type": "p",
           "html": "8:00 a.m. to 4:30 p.m."
@@ -156,8 +169,8 @@
     },
     {
       "level": 2,
-      "title": "BUILDING MAINTENANCE",
-      "anchor": "sec-8-building-maintenance",
+      "title": "Building Maintenance",
+      "anchor": "sec-10-building-maintenance",
       "blocks": [
         {
           "type": "p",
@@ -178,12 +191,12 @@
     },
     {
       "level": 2,
-      "title": "CUSTODIAL SERVICES",
-      "anchor": "sec-9-custodial-services",
+      "title": "Custodial Services",
+      "anchor": "sec-11-custodial-services",
       "blocks": [
         {
           "type": "p",
-          "html": "Custodial Services in LISD are contracted with ABM. Zulma Amaya  is our lead custodian. All custodial requests and or issues need to be emailed to Megan Livingston. "
+          "html": "Custodial Services in LISD are contracted with ABM. Zulma Amaya is our lead Custodian. All custodial requests and or issues need to be emailed to Megan Livingston. "
         },
         {
           "type": "p",
@@ -197,74 +210,234 @@
             "Classroom light bulbs being replaced",
             "Event set up- (Note: Your organization is responsible for assisting with setup and breakdown of your events.)"
           ]
-        },
-        {
-          "type": "p",
-          "html": "WE WILL REPLACE THIS WITH LINKS TO OUR PHONE QUICK REFERENCE AND PHONE EXTENSION SHEET"
-        },
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Phone List",
+      "anchor": "sec-12-phone-list",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Main Office",
+      "anchor": "sec-13-main-office",
+      "blocks": [
         {
           "type": "table",
           "rows": [
             [
-              "ALPHA",
-              "SUITE",
-              "ADMINISTRATOR",
-              "ASSISTANT",
-              "COUNSELOR"
-            ],
-            [
-              "A-G",
               "",
-              "Clinton Marion",
-              "Melanie Dunn",
-              "Daydrion Taylor"
-            ],
-            [
-              "H- O",
-              "",
-              "Melanie Lowery",
-              "Melanie Dunn",
-              "Tara Pierce"
-            ],
-            [
-              "P- Z",
-              "",
-              "Ashlyn Straw",
-              "Melanie Dunn",
-              "Miguel Perez"
-            ],
-            [
-              "Principal",
-              "",
-              "Stephanie Gore",
-              "Megan Livingston",
+              "LHS Killough -",
+              "972-350-xxxx",
               ""
             ],
             [
-              "",
-              "",
-              "",
-              "",
-              "EMERGENCY………………..……"
-            ]
-          ]
-        },
-        {
-          "type": "table",
-          "rows": [
-            [
-              "FRONT OFFICE"
+              "Stephanie GorePrincipal - 4510Cell: 214.850.2640",
+              "Megan LivingstonSecretary - 4509"
             ],
             [
-              "ReceptionistTina Werestak………………….……………………………3100",
-              "Nurse | Yuleana Rodriguez.........................3135"
+              ""
             ],
             [
-              "SubstitutesKelly Bohon ………………………………………………3102",
-              "Resource OfficerStormie Brown........................................3148"
+              "ALPHA",
+              "AP",
+              "COUNSELOR",
+              "TRANSLATORS"
+            ],
+            [
+              "A - G",
+              "Clinton Marion4508Cell: 940.765.1860",
+              "Daydrion Taylor4512",
+              "Maria CastroWebEx: 972-350-4576Spanish"
+            ],
+            [
+              "H - O",
+              "Melanie Lowery4507Cell: 469.968.4528",
+              "Tara Pierce4590",
+              "Albertina Martinez WebEx: 972-350-4578Spanish"
+            ],
+            [
+              "P - Z",
+              "Ashlyn Straw4591Cell: 214.636.5090",
+              "Miguel Perez4514",
+              "Julissa Sanchez-GilWebEx: 972-350-4582Spanish"
+            ],
+            [
+              "SRO Officer Brown - 4504 - Next door to library",
+              ""
+            ],
+            [
+              ""
+            ],
+            [
+              "MAIN OFFICE",
+              "NAME",
+              "EXT",
+              "ROOM"
+            ],
+            [
+              "Attendance",
+              "Kelly Casarez",
+              "4503",
+              "Office"
+            ],
+            [
+              "BASE",
+              "Alex Sanchez / Karen Gates",
+              "4557",
+              "131"
+            ],
+            [
+              "Bookkeeper/Subs",
+              "Kelly Bohon",
+              "4513",
+              "Office"
+            ],
+            [
+              "Computer Clerk",
+              "Melanie Dunn",
+              "4505",
+              "Office"
+            ],
+            [
+              "Student Affairs",
+              "Lindsey Farra",
+              "4527",
+              "Office"
+            ],
+            [
+              "ESL Liaison",
+              "Jennie Murphy (A-L)Valarie Haislet (M-Z)",
+              "4563",
+              "226"
+            ],
+            [
+              "Nurse",
+              "Yuleana Rodriguez",
+              "4515",
+              "Office"
+            ],
+            [
+              "Registrar",
+              "Cristina Jimenez",
+              "4502",
+              "Office"
+            ],
+            [
+              "Receptionist",
+              "Tina Werstak",
+              "4500",
+              "Office"
+            ],
+            [
+              "Testing",
+              "Stephanie CastroCarolyn Woelke",
+              "4519/4569",
+              "Office"
+            ],
+            [
+              "Tech",
+              "Mustafa Kucuk",
+              "HELP TICKET ONLY",
+              "Library"
+            ],
+            [
+              "MTSS Specialists",
+              "Diana Gafford",
+              "4613",
+              "219"
+            ],
+            [
+              "Sandra Gipson",
+              "",
+              "102"
+            ],
+            [
+              "CIS",
+              "Julie Redus",
+              "",
+              "119"
+            ],
+            [
+              "Lecture Hall",
+              "Lecture Hall",
+              "4543",
+              "112"
+            ],
+            [
+              "Librarian",
+              "Kristin Davis",
+              "4522",
+              "Library"
+            ],
+            [
+              "PASS (ISS)",
+              "Kristina Hutson",
+              "4588",
+              "114"
+            ],
+            [
+              "Cafeteria Mngr.",
+              "Idayat Abai",
+              "4573",
+              "Cafeteria"
+            ],
+            [
+              "SAC Counselor",
+              "Sara Moore (M/W/F)",
+              "",
+              "Office"
+            ],
+            [
+              "Head Custodian",
+              "Zulma Anaya",
+              "4526 or Radio",
+              "Past Cafeteria"
+            ],
+            [
+              "SPECIAL EDUCATION OFFICE"
+            ],
+            [
+              "Sped Clerk",
+              "Holly Mackillop",
+              "4530",
+              "104A"
+            ],
+            [
+              "Sped Counselor",
+              "Javana Moss (W/TH/F)",
+              "4529",
+              "104A"
+            ],
+            [
+              "Diagnostician",
+              "Dezra Edwards",
+              "4531",
+              "104A"
+            ],
+            [
+              "School Psych",
+              "Jennifer Weidenbach",
+              "Email",
+              "Email"
+            ],
+            [
+              "Speech Therapist",
+              "",
+              "4528",
+              "104A"
             ]
           ]
-        },
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Others Who Can Help",
+      "anchor": "sec-14-others-who-can-help",
+      "blocks": [
         {
           "type": "table",
           "rows": [
@@ -330,7 +503,7 @@
     {
       "level": 1,
       "title": "Campus Operations",
-      "anchor": "sec-10-campus-operations",
+      "anchor": "sec-15-campus-operations",
       "blocks": [
         {
           "type": "p",
@@ -340,8 +513,8 @@
     },
     {
       "level": 2,
-      "title": "COMMUNICATIONS",
-      "anchor": "sec-11-communications",
+      "title": "Communications",
+      "anchor": "sec-16-communications",
       "blocks": [
         {
           "type": "p",
@@ -351,23 +524,23 @@
     },
     {
       "level": 2,
-      "title": "COVERING CLASSES",
-      "anchor": "sec-12-covering-classes",
+      "title": "Covering Classes",
+      "anchor": "sec-17-covering-classes",
       "blocks": [
         {
           "type": "p",
-          "html": "  It will be necessary from time to time for teachers to cover classes during their planning periods.  Teachers will be compensated for covering classes during their conference period.  If covering a class means that you will miss duty, then please notify admin as soon as possible.  "
+          "html": "It will be necessary from time to time for teachers to cover classes during their planning periods.  Teachers will be compensated for covering classes during their conference period. If covering a class means that you will miss duty, then please notify admin as soon as possible.  "
         }
       ]
     },
     {
       "level": 2,
-      "title": "DEPARTMENTAL MEETINGS - SUBJECT AREA MEETINGS",
-      "anchor": "sec-13-departmental-meetings-subject-area-meeti",
+      "title": "Departmental Meetings - Subject Area Meetings",
+      "anchor": "sec-18-departmental-meetings-subject-area-meeti",
       "blocks": [
         {
           "type": "p",
-          "html": "Department chairpersons and subject area lead teachers may schedule meetings as often as they deem necessary.  Monthly meetings are required."
+          "html": "Department chairpersons and subject area lead teachers may schedule meetings as often as they deem necessary. Monthly meetings are required."
         },
         {
           "type": "p",
@@ -377,8 +550,8 @@
     },
     {
       "level": 2,
-      "title": "DISMISSING CLASSES",
-      "anchor": "sec-14-dismissing-classes",
+      "title": "Dismissing Classes",
+      "anchor": "sec-19-dismissing-classes",
       "blocks": [
         {
           "type": "p",
@@ -388,8 +561,8 @@
     },
     {
       "level": 2,
-      "title": "DUTIES",
-      "anchor": "sec-15-duties",
+      "title": "Duties",
+      "anchor": "sec-20-duties",
       "blocks": [
         {
           "type": "p",
@@ -399,12 +572,12 @@
     },
     {
       "level": 2,
-      "title": "STAFF EVALUATION",
-      "anchor": "sec-16-staff-evaluation",
+      "title": "Staff Evaluation",
+      "anchor": "sec-21-staff-evaluation",
       "blocks": [
         {
           "type": "p",
-          "html": " Please click the links below to access the LEAD handbook and Strive in Eduphoria."
+          "html": "Please click the links below to access the LEAD handbook and Strive in Eduphoria."
         },
         {
           "type": "p",
@@ -418,8 +591,8 @@
     },
     {
       "level": 2,
-      "title": "FACULTY CENTER (MAIL ROOM-WORK ROOM)",
-      "anchor": "sec-17-faculty-center-mail-room-work-room",
+      "title": "Faculty Center (Mail Room-Work Room)",
+      "anchor": "sec-22-faculty-center-mail-room-work-room",
       "blocks": [
         {
           "type": "p",
@@ -429,8 +602,8 @@
     },
     {
       "level": 2,
-      "title": "FACULTY MEETINGS",
-      "anchor": "sec-18-faculty-meetings",
+      "title": "Faculty Meetings",
+      "anchor": "sec-23-faculty-meetings",
       "blocks": [
         {
           "type": "p",
@@ -440,8 +613,8 @@
     },
     {
       "level": 2,
-      "title": "FACULTY PARKING",
-      "anchor": "sec-19-faculty-parking",
+      "title": "Faculty Parking",
+      "anchor": "sec-24-faculty-parking",
       "blocks": [
         {
           "type": "p",
@@ -451,41 +624,41 @@
     },
     {
       "level": 2,
-      "title": "FACULTY RESTROOMS",
-      "anchor": "sec-20-faculty-restrooms",
+      "title": "Faculty Restrooms",
+      "anchor": "sec-25-faculty-restrooms",
       "blocks": [
         {
           "type": "p",
-          "html": " The designated restrooms on the first and second floors are reserved for faculty use only during the school day. Restrooms are located in the main office, the Fine Arts hallway, the downstairs workrooms, and the second-floor hallways."
+          "html": "The designated restrooms on the first and second floors are reserved for faculty use only during the school day. Restrooms are located in the main office, the Fine Arts hallway, the downstairs workrooms, and the second-floor hallways."
         }
       ]
     },
     {
       "level": 2,
-      "title": "KEYS",
-      "anchor": "sec-21-keys",
+      "title": "Keys",
+      "anchor": "sec-26-keys",
       "blocks": [
         {
           "type": "p",
-          "html": "  All keys are the responsibility of Mrs. Straw.  We will continue to issue keys as we have in previous years.  Should you need additional keys or have special requests, you must see Mrs. Straw.  Please do not give your keys to students.  Please do not trade keys amongst staff members. "
+          "html": "All keys are the responsibility of Mrs. Straw.  We will continue to issue keys as we have in previous years.  Should you need additional keys or have special requests, you must see Mrs. Straw.  Please do not give your keys to students.  Please do not trade keys amongst staff members. "
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Personnel Policies",
+      "anchor": "sec-27-personnel-policies",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "<a href=\"https://drive.google.com/file/d/1-iRSmTPUcwONW_IvQwgTbbe2_j0z92Bb/view\" target=\"_blank\" rel=\"noopener\">LISD EMPLOYEE HANDBOOK</a>"
         }
       ]
     },
     {
       "level": 2,
-      "title": "LISD PERSONNEL POLICIES",
-      "anchor": "sec-22-lisd-personnel-policies",
-      "blocks": [
-        {
-          "type": "p",
-          "html": "<a href=\"https://drive.google.com/file/d/1-iRSmTPUcwONW_IvQwgTbbe2_j0z92Bb/view\" target=\"_blank\" rel=\"noopener\"> LISD EMPLOYEE HANDBOOK</a>"
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "LUNCH",
-      "anchor": "sec-23-lunch",
+      "title": "Lunch",
+      "anchor": "sec-28-lunch",
       "blocks": [
         {
           "type": "p",
@@ -495,19 +668,19 @@
     },
     {
       "level": 2,
-      "title": "MAIL",
-      "anchor": "sec-24-mail",
+      "title": "Mail",
+      "anchor": "sec-29-mail",
       "blocks": [
         {
           "type": "p",
-          "html": "All communications to teachers will be placed in your mailboxes in the Faculty Center or e-mailed to you.  These boxes should be checked frequently."
+          "html": "All communications to teachers will be placed in your mailboxes in the Faculty Center or e-mailed to you. These boxes should be checked frequently."
         }
       ]
     },
     {
       "level": 2,
-      "title": "PASSING PERIODS",
-      "anchor": "sec-25-passing-periods",
+      "title": "Passing Periods",
+      "anchor": "sec-30-passing-periods",
       "blocks": [
         {
           "type": "p",
@@ -517,8 +690,8 @@
     },
     {
       "level": 2,
-      "title": "ROOM CHANGES",
-      "anchor": "sec-26-room-changes",
+      "title": "Room Changes",
+      "anchor": "sec-31-room-changes",
       "blocks": [
         {
           "type": "p",
@@ -528,47 +701,39 @@
     },
     {
       "level": 2,
-      "title": "SCHOOL DAY ACTIVITIES",
-      "anchor": "sec-27-school-day-activities",
+      "title": "School Day Activities",
+      "anchor": "sec-32-school-day-activities",
       "blocks": [
         {
           "type": "p",
           "html": "All teachers are expected to attend and help supervise all extra-curricular activities which take place during the course of the normal day, such as pep rallies, special assemblies, etc."
-        },
-        {
-          "type": "p",
-          "html": "<a href=\"https://drive.google.com/file/d/1-iRSmTPUcwONW_IvQwgTbbe2_j0z92Bb/view\" target=\"_blank\" rel=\"noopener\">STAFF DRESS CODE</a>: Professional Appearance -The faculty and staff at LHS-K should dress"
-        },
-        {
-          "type": "p",
-          "html": "professionally, in such a way as to distinguish our staff from our students. Inappropriate"
-        },
-        {
-          "type": "p",
-          "html": "or questionable clothing will be addressed by administration. Staff members who do not meet professional dress expectations may be asked to change clothing. Photo ID Badges are a daily requirement of faculty dress code and are to be worn at all times."
         }
       ]
     },
     {
       "level": 2,
-      "title": "STAFF ABSENCES",
-      "anchor": "sec-28-staff-absences",
+      "title": "Staff Dress Code",
+      "anchor": "sec-33-staff-dress-code",
       "blocks": [
         {
           "type": "p",
-          "html": "Non Discretionary – Leave that is taken for personal or family illness, an emergency, or a"
+          "html": "The faculty and staff at LHS-K should dress professionally, in such a way as to distinguish our staff from our students. Inappropriate or questionable clothing will be addressed by administration. Staff members who do not meet professional dress expectations may be asked to change clothing. Photo ID Badges are a daily requirement of faculty dress code and are to be worn at all times."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Staff Absences",
+      "anchor": "sec-34-staff-absences",
+      "blocks": [
+        {
+          "type": "h",
+          "level": 3,
+          "html": "Non Discretionary"
         },
         {
           "type": "p",
-          "html": "death in the family is considered non-discretionary leave. This type of leave allows very"
-        },
-        {
-          "type": "p",
-          "html": "little or no advance planning and will be granted to employees in the same manner as"
-        },
-        {
-          "type": "p",
-          "html": "sick leave."
+          "html": "Leave that is taken for personal or family illness, an emergency, or a death in the family is considered non-discretionary leave. This type of leave allows very little or no advance planning and will be granted to employees in the same manner as sick leave."
         },
         {
           "type": "p",
@@ -576,45 +741,59 @@
         },
         {
           "type": "p",
-          "html": "1.        Put your absence in Frontline Management. "
+          "html": "1.        Put your absence in <a href=\"https://login.frontlineeducation.com/sso/lewisvilleisd_tx\" target=\"_blank\" rel=\"noopener\">Frontline Management</a>. "
         },
         {
           "type": "p",
-          "html": "2.        Provide lesson plans, and detailed instructions for the substitute teacher.  These must be delivered to the school office (Kelly Bohon)."
+          "html": "2.        Provide lesson plans, and detailed instructions for the substitute teacher. These must be delivered to Kelly Bohon in the school office."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "Discretionary"
         },
         {
           "type": "p",
-          "html": "Discretionary – Leave that is taken at an employee’s discretion and that can be scheduled in advance is considered discretionary leave. An employee wishing to take discretionary personal leave must submit  notice of the request in advance of the anticipated absence from his or her principal. Discretionary personal leave will be granted on a first-come, first-served basis. The effect of the employee’s absence"
+          "html": "Leave that is taken at an employee’s discretion and that can be scheduled in advance is considered discretionary leave. An employee wishing to take discretionary personal leave must submit notice of the request in advance of the anticipated absence from his or her principal."
         },
         {
           "type": "p",
-          "html": "on the educational program or department operations, as well as the availability of substitutes, will be considered by the principal or supervisor. No more than three (3) personal leave days may be taken consecutively without the prior written approval of the building principal.Per district policy, planned absences must receive pre-approval. See Mrs. Gore for approval. Any teacher or staff member who knows about an absence in advance should fill out a Notice of Planned Absence form and submit it to the Principal. These notices should be turned in at least 10 days in advance, if possible, to assure availability of a substitute teacher.  A <a href=\"https://docunavweb.lisd.net/LFDSSTS/Login?originalPathAndQuery=%2FLFDSSTS%2F%3Fwa%3Dwsignin1.0%26wtrealm%3Dhttps%253a%252f%252fdocunavweb.lisd.net%252fForms%252f%26wc\" target=\"_blank\" rel=\"noopener\">Notice of Planned Absence</a> must be submitted and approved whether or not a substitute will be required. . Pre-arrangements by the teacher need to be made with Kelly Bohon prior to absence being submitted in the frontline."
+          "html": "Discretionary personal leave will be granted on a first-come, first-served basis. The effect of the employee’s absence on the educational program or department operations, as well as the availability of substitutes, will be considered by the principal or supervisor. "
         },
         {
           "type": "p",
-          "html": "School Business Absence- A Request for Planned Absence Form will need to be completed and have"
+          "html": "No more than three (3) personal leave days may be taken consecutively without the prior written approval of the building principal.Per district policy, planned absences must receive pre-approval from Mrs. Gore. "
         },
         {
           "type": "p",
-          "html": "Mrs. Gore’s  approval. Please submit no later than 10 days prior to absence. Email Kelly Bohon and the absence will be entered into the system for you after approval. Mrs. Bohon will follow up once approved and in the system. "
+          "html": "Any teacher or staff member who knows about an absence in advance should fill out a <a href=\"https://docunavweb.lisd.net/LFDSSTS/Login?originalPathAndQuery=%2FLFDSSTS%2F%3Fwa%3Dwsignin1.0%26wtrealm%3Dhttps%253a%252f%252fdocunavweb.lisd.net%252fForms%252f%26wc\" target=\"_blank\" rel=\"noopener\">Notice of Planned Absence Form</a> and submit it to the Principal. These notices should be turned in at least 10 days in advance, if possible, to assure availability of a substitute teacher.  A Notice of Planned Absence must be submitted and approved whether or not a substitute will be required. Pre-arrangements by the teacher need to be made with Kelly Bohon prior to absence being submitted in the frontline."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "School Business Absence"
+        },
+        {
+          "type": "p",
+          "html": "A Request for Planned Absence Form will need to be completed and have Mrs. Gore’s approval. Please submit no later than 10 days prior to absence. Email Kelly Bohon and the absence will be entered into the system for you after approval. Mrs. Bohon will follow up once approved and in the system. "
         }
       ]
     },
     {
       "level": 2,
-      "title": "LESSON PLANS",
-      "anchor": "sec-29-lesson-plans",
+      "title": "Lesson Plans",
+      "anchor": "sec-35-lesson-plans",
       "blocks": [
         {
           "type": "p",
-          "html": "Detailed lesson plans are an imperative part of the teaching process.  Teachers should never go into the classroom unprepared. There must be goals, objectives, time lines, testing procedures, and teaching techniques to be used and incorporated into a lesson plan.  Use of the lesson plan template is required.  Weekly lesson plans are required of all teachers and must be submitted by Monday at 8:20 am.    "
+          "html": "Detailed lesson plans are an imperative part of the teaching process. Teachers should never go into the classroom unprepared. There must be goals, objectives, time lines, testing procedures, and teaching techniques to be used and incorporated into a lesson plan. Use of the lesson plan template is required.  Weekly lesson plans are required of all teachers and must be submitted by Monday at 8:20 am."
         }
       ]
     },
     {
       "level": 2,
-      "title": "CONFERENCE PERIODS",
-      "anchor": "sec-30-conference-periods",
+      "title": "Conference Periods",
+      "anchor": "sec-36-conference-periods",
       "blocks": [
         {
           "type": "p",
@@ -623,18 +802,8 @@
         {
           "type": "ul",
           "items": [
-            "Weekly PLC time - All core subject teams are expected to meet at least once a week for a minimum of 45 minutes. Non-core subject departments will need to establish a consistent schedule for PLC opportunities before or after school and submit the schedule to the presiding administrator. Administrators must be included on calendar invites for PLC meetings."
-          ]
-        },
-        {
-          "type": "ul",
-          "items": [
-            "Weekly lesson planning - Lesson planning occurs weekly with course subject teams at least once a week for a minimum of 45 minutes. This time is separate from PLC meetings and should be utilized for preparation and team collaboration on lessons. "
-          ]
-        },
-        {
-          "type": "ul",
-          "items": [
+            "Weekly PLC time - All core subject teams are expected to meet at least once a week for a minimum of 45 minutes. Non-core subject departments will need to establish a consistent schedule for PLC opportunities before or after school and submit the schedule to the presiding administrator. Administrators must be included on calendar invites for PLC meetings.",
+            "Weekly lesson planning - Lesson planning occurs weekly with course subject teams at least once a week for a minimum of 45 minutes. This time is separate from PLC meetings and should be utilized for preparation and team collaboration on lessons. ",
             "Flex Days - In an effort to minimize before and after school faculty meetings, there will be occasional flex day meetings that occur on designated Wednesdays throughout the school year. These meetings will typically require 30 minutes maximum of your 90-min conference period on those Wednesdays. "
           ]
         }
@@ -642,8 +811,8 @@
     },
     {
       "level": 2,
-      "title": "STAFF SIGN-IN/OUT PROCEDURES",
-      "anchor": "sec-31-staff-sign-in-out-procedures",
+      "title": "Staff Sign-In/Out Procedures",
+      "anchor": "sec-37-staff-sign-in-out-procedures",
       "blocks": [
         {
           "type": "p",
@@ -659,31 +828,11 @@
         },
         {
           "type": "p",
-          "html": "● The teacher will have available on his/her desk a Substitute Folder with pertinent"
+          "html": "● The teacher will have available on his/her desk a Substitute Folder with pertinent information for the substitute. It is important that the substitute be able to locate this folder immediately so please have it on your desk with a note with clear instructions for the day."
         },
         {
           "type": "p",
-          "html": "information for the substitute. It is important that the substitute be able to locate"
-        },
-        {
-          "type": "p",
-          "html": "this folder immediately so please have it on your desk with a note with clear"
-        },
-        {
-          "type": "p",
-          "html": "instructions for the day."
-        },
-        {
-          "type": "p",
-          "html": "● Please make sure that co-teacher and/or Department chairs are aware of"
-        },
-        {
-          "type": "p",
-          "html": "your plans in case of questions."
-        },
-        {
-          "type": "p",
-          "html": "26"
+          "html": "● Please make sure that co-teacher and/or Department chairs are aware of your plans in case of questions."
         },
         {
           "type": "p",
@@ -691,11 +840,7 @@
         },
         {
           "type": "p",
-          "html": "✔Current Class Roster attendance sheets (multiple copies left in sub folder,"
-        },
-        {
-          "type": "p",
-          "html": "must have student name and id, one class section per page)"
+          "html": "✔Current Class Roster attendance sheets (multiple copies left in sub folder, must have student name and id, one class section per page)"
         },
         {
           "type": "p",
@@ -711,19 +856,11 @@
         },
         {
           "type": "p",
-          "html": "✔ Emergency procedures including evacuation route (yellow folder must be"
+          "html": "✔ Emergency procedures including evacuation route (yellow folder must be hanging next to exit door with copy of current roster)"
         },
         {
           "type": "p",
-          "html": "hanging next to exit door with copy of current roster)"
-        },
-        {
-          "type": "p",
-          "html": "✔ Instructions regarding medication and grading (check every 9 weeks to keep"
-        },
-        {
-          "type": "p",
-          "html": "current)"
+          "html": "✔ Instructions regarding medication and grading (check every 9 weeks to keep current)"
         },
         {
           "type": "p",
@@ -735,61 +872,51 @@
         },
         {
           "type": "p",
-          "html": "✔ List of supervisory responsibilities such as duty schedule including map"
-        },
-        {
-          "type": "p",
-          "html": "highlighting duty area"
+          "html": "✔ List of supervisory responsibilities such as duty schedule including map highlighting duty area"
         }
       ]
     },
     {
       "level": 2,
-      "title": "STAFF CANVAS SITES",
-      "anchor": "sec-32-staff-canvas-sites",
+      "title": "Staff Canvas Sites",
+      "anchor": "sec-38-staff-canvas-sites",
       "blocks": [
         {
           "type": "p",
-          "html": "Canvas sites are vital tools to engage students, enhance collaboration,"
+          "html": "Canvas sites are vital tools to engage students, enhance collaboration, encourage parental involvement, and extend learning beyond the classroom."
         },
         {
           "type": "p",
-          "html": "encourage parental involvement, and extend learning beyond the classroom."
-        },
-        {
-          "type": "ul",
-          "items": [
-            "ALL TEACHERS NEED TO ESTABLISH A CANVAS SITE FOR THEIR CLASSES/SUBJECTS. Do not require passwords or enrollment keys for students/parents. Each site needs a format/opportunity for students and parents to have two-way communication with the teacher through the website."
-          ]
+          "html": "ALL TEACHERS NEED TO ESTABLISH A CANVAS SITE FOR THEIR CLASSES/SUBJECTS. Do not require passwords or enrollment keys for students/parents. Each site needs a format/opportunity for students and parents to have two-way communication with the teacher through the website."
         }
       ]
     },
     {
       "level": 2,
-      "title": "TEXTBOOK RESPONSIBILITIES",
-      "anchor": "sec-33-textbook-responsibilities",
+      "title": "Textbook Responsibilities",
+      "anchor": "sec-39-textbook-responsibilities",
       "blocks": [
         {
           "type": "p",
-          "html": "Assistant Principal, Clinton Marion, is in charge of textbooks.  Teachers are responsible for the accounting of all textbooks issued to them.  Periodic textbook checks are recommended.  See handout on textbook procedures."
+          "html": "Assistant Principal, Clinton Marion, is in charge of textbooks.  Teachers are responsible for the accounting of all textbooks issued to them. Periodic textbook checks are recommended. See handout on textbook procedures."
         }
       ]
     },
     {
       "level": 2,
-      "title": "WORKDAY SCHEDULE",
-      "anchor": "sec-34-workday-schedule",
+      "title": "Workday Schedule",
+      "anchor": "sec-40-workday-schedule",
       "blocks": [
         {
           "type": "p",
-          "html": "Staff are required to be at school by 8:00 a.m. and in their classrooms by 8:45 a.m.  They must remain on campus until 4:30 p.m.  Any exceptions to these times must be cleared with the building principal."
+          "html": "Staff are required to be at school by 8:00 a.m. and in their classrooms by 8:45 a.m. They must remain on campus until 4:30 p.m. Any exceptions to these times must be cleared with the building principal."
         }
       ]
     },
     {
       "level": 2,
-      "title": "TOBACCO/E-CIG POLICY",
-      "anchor": "sec-35-tobacco-e-cig-policy",
+      "title": "Tobacco/E-Cig Policy",
+      "anchor": "sec-41-tobacco-e-cig-policy",
       "blocks": [
         {
           "type": "p",
@@ -799,22 +926,31 @@
     },
     {
       "level": 2,
-      "title": "TUTORING",
-      "anchor": "sec-36-tutoring",
+      "title": "Tutoring",
+      "anchor": "sec-42-tutoring",
       "blocks": [
         {
-          "type": "p",
-          "html": "Teachers are required to provide 90 minutes of tutorials every week. Tutorial times"
+          "type": "h",
+          "level": 3,
+          "html": "Weekly Tutoring"
         },
         {
           "type": "p",
-          "html": "should be offered in the morning AND the afternoon. Teachers will publicly post their tutoring dates/times. Teachers should have any student attending tutoring sign the campus tutoring log via QR code for documentation purposes."
+          "html": "Teachers are required to provide 90 minutes of tutorials every week. Tutorial times should be offered in the morning AND the afternoon. Teachers will publicly post their tutoring dates/times. Teachers should have any student attending tutoring sign the campus tutoring log via QR code for documentation purposes."
         },
         {
-          "type": "ul",
-          "items": [
-            "MANDATORY TUTORING: Teachers should assign mandatory tutoring to all students who are failing at the end of the 3rd, 6th, and 8th weeks of each grading period. Triplicate Mandatory Tutoring forms are available in the Faculty Center."
-          ]
+          "type": "h",
+          "level": 3,
+          "html": ""
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "Mandatory Tutoring"
+        },
+        {
+          "type": "p",
+          "html": "Teachers should assign mandatory tutoring to all students who are failing at the end of the 3rd, 6th, and 8th weeks of each grading period. Triplicate Mandatory Tutoring forms are available in the Faculty Center."
         },
         {
           "type": "p",
@@ -824,53 +960,48 @@
     },
     {
       "level": 1,
-      "title": "Policies & Procedures",
-      "anchor": "sec-37-policies-procedures",
+      "title": "Other Procedures",
+      "anchor": "sec-43-other-procedures",
       "blocks": []
     },
     {
       "level": 2,
-      "title": "ANNOUNCEMENTS",
-      "anchor": "sec-38-announcements",
+      "title": "Announcements",
+      "anchor": "sec-44-announcements",
       "blocks": [
         {
           "type": "p",
-          "html": "Daily announcements are made during ADVISORY. Please submit all"
-        },
-        {
-          "type": "p",
-          "html": "announcements through the Google Form announcement request with Clinton Marion/Megan Livingston."
-        },
-        {
-          "type": "p",
-          "html": "no later than 8:30am the day before. ANNOUNCEMENT FORM"
+          "html": "Daily announcements are made during ADVISORY. Please submit all announcements through the Google Form announcement request with Clinton Marion/Megan Livingston no later than 8:30 am the day before. ANNOUNCEMENT FORM"
         }
       ]
     },
     {
       "level": 2,
-      "title": "BUILDING LEADERSHIP TEAM",
-      "anchor": "sec-39-building-leadership-team",
+      "title": "Building Leadership Team",
+      "anchor": "sec-45-building-leadership-team",
       "blocks": [
         {
           "type": "p",
-          "html": "  The BLT is mandated by state law to serve in an advisory capacity to the administrators.  Members will include faculty members (departmental representation), parents and community members. All departments are required to have 1 representative serve on the BLT. "
+          "html": "The BLT is mandated by state law to serve in an advisory capacity to the administrators. Members will include faculty members (departmental representation), parents and community members. All departments are required to have 1 representative serve on the BLT. "
         }
       ]
     },
     {
       "level": 2,
-      "title": "BUILDING MAINTENANCE",
-      "anchor": "sec-40-building-maintenance",
+      "title": "Building Maintenance",
+      "anchor": "sec-46-building-maintenance",
       "blocks": [
         {
           "type": "p",
           "html": "Mrs. Straw, assistant principal, is responsible for the maintenance of all school facilities.  If you have the need for maintenance or repair services, please complete a work order request by emailing Megan Livingston.  Mrs. Straw and Mrs. Livingston will determine whether the maintenance staff on our campus can complete the work or if the request will need to be referred to the central maintenance department.  The goal of the maintenance staff is to provide a quality response to all of your requests with the safety of our students and staff as our highest priority. "
-        },
-        {
-          "type": "p",
-          "html": "BULLYING AND HARASSMENT "
-        },
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Bullying And Harassment",
+      "anchor": "sec-47-bullying-and-harassment",
+      "blocks": [
         {
           "type": "p",
           "html": "All staff members are required by law to promptly report suspected bullying or harassment. Reports may be made to any campus administrator or other personnel as indicated in LISD Board Policy FFI(LOCAL).pdf and FFH(LOCAL).pdf."
@@ -879,8 +1010,8 @@
     },
     {
       "level": 2,
-      "title": "CALENDAR (School Activities)",
-      "anchor": "sec-41-calendar-school-activities",
+      "title": "Calendar (School Activities)",
+      "anchor": "sec-48-calendar-school-activities",
       "blocks": [
         {
           "type": "p",
@@ -890,8 +1021,8 @@
     },
     {
       "level": 2,
-      "title": "CHILD ABUSE",
-      "anchor": "sec-42-child-abuse",
+      "title": "Child Abuse",
+      "anchor": "sec-49-child-abuse",
       "blocks": [
         {
           "type": "p",
@@ -900,17 +1031,24 @@
       ]
     },
     {
-      "level": 2,
-      "title": "CLASSROOM APPEARANCE",
-      "anchor": "sec-43-classroom-appearance",
+      "level": 1,
+      "title": "Classroom Policies",
+      "anchor": "sec-50-classroom-policies",
       "blocks": [
         {
           "type": "p",
-          "html": "The atmosphere a teacher establishes in the classroom is very important in developing a good teaching-learning environment.  Take pride in your classroom.  Use decor related to your subject area.  Maintain proper lighting, etc. No personal furniture, coffee pots, fridges, microwaves, etc. may be used in the classroom setting.  Let students know what their responsibilities are in helping you maintain a clean and orderly classroom.  "
-        },
+          "html": "The atmosphere a teacher establishes in the classroom is very important in developing a good teaching-learning environment. Take pride in your classroom.  Use decor related to your subject area. Maintain proper lighting, etc. No personal furniture, coffee pots, fridges, microwaves, etc. may be used in the classroom setting. Let students know what their responsibilities are in helping you maintain a clean and orderly classroom.  "
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Classroom Maintenance",
+      "anchor": "sec-51-classroom-maintenance",
+      "blocks": [
         {
           "type": "p",
-          "html": "CLASSROOM MAINTENANCE: Teachers are responsible for their classrooms and for all furniture and equipment contained within them. Classroom keys issued by the office should remain in the teacher’s possession at all times. In maintaining proper care of classrooms, teachers have the following responsibilities:"
+          "html": "Teachers are responsible for their classrooms and for all furniture and equipment contained within them. Classroom keys issued by the office should remain in the teacher’s possession at all times. In maintaining proper care of classrooms, teachers have the following responsibilities:"
         },
         {
           "type": "ul",
@@ -923,30 +1061,22 @@
             "For energy efficiency, turn off lights whenever the room is not in use.",
             "Window coverings on classroom doors must remain open at all times unless otherwise directed by administration or during a LOCKDOWN."
           ]
-        },
-        {
-          "type": "p",
-          "html": "7"
         }
       ]
     },
     {
       "level": 2,
-      "title": "CLASSROOM SUPERVISION",
-      "anchor": "sec-44-classroom-supervision",
+      "title": "Classroom Supervision",
+      "anchor": "sec-52-classroom-supervision",
       "blocks": [
         {
           "type": "p",
-          "html": "A staff member must be in the classroom supervising the students at all times. Only in case of an emergency should a teacher be late to class or leave a class"
-        },
-        {
-          "type": "p",
-          "html": "unattended. If such an emergency should occur, teachers must do the following:"
+          "html": "A staff member must be in the classroom supervising the students at all times. Only in case of an emergency should a teacher be late to class or leave a class unattended. If such an emergency should occur, teachers must do the following:"
         },
         {
           "type": "ul",
           "items": [
-            " Make reasonable efforts to see that the students are supervised:",
+            " Make reasonable efforts to see that the students are supervised.",
             " Contact a teacher next door and ask him/her to check on your students.",
             " Send word to the office that you must be out of the classroom.",
             " Give specific instructions to your students.",
@@ -964,14 +1094,28 @@
         {
           "type": "p",
           "html": "be documented and could affect the teacher’s annual appraisal."
-        },
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Closed Campus-LISD Policy Fdf",
+      "anchor": "sec-53-closed-campus-lisd-policy-fdf",
+      "blocks": [
         {
           "type": "p",
-          "html": "CLOSED CAMPUS-LISD POLICY FDF:  By board policy, Lewisville High School Killough is a closed campus.  This means that students are not permitted to leave campus at any time between 8:50 a.m. and 4:15 p.m. without permission from a school administrator and a parent or guardian.  Teachers must never send students off campus for any reason without going through the building principal first."
-        },
+          "html": "By board policy, Lewisville High School Killough is a closed campus. This means that students are not permitted to leave campus at any time between 8:50 a.m. and 4:15 p.m. without permission from a school administrator and a parent or guardian. Teachers must never send students off campus for any reason without going through the building principal first."
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Clubs And Organizations",
+      "anchor": "sec-54-clubs-and-organizations",
+      "blocks": [
         {
           "type": "p",
-          "html": "CLUBS AND ORGANIZATIONS: All club and organization activities must be held before school, after school, or in the evening. Mrs. Lowery oversees all student-related school activities. All scheduled activities must be submitted to Megan Livingston and included on the school calendar. Student groups (clubs) offered on campus must be student-initiated and student-led, with a staff “monitor” present at all meetings. All students under the age of 18 who participate in these groups must have a signed parent permission form on file."
+          "html": "All club and organization activities must be held before school, after school, or in the evening. Mrs. Lowery oversees all student-related school activities. All scheduled activities must be submitted to Megan Livingston and included on the school calendar. Student groups (clubs) offered on campus must be student-initiated and student-led, with a staff “monitor” present at all meetings. All students under the age of 18 who participate in these groups must have a signed parent permission form on file."
         },
         {
           "type": "p",
@@ -988,8 +1132,8 @@
     },
     {
       "level": 2,
-      "title": "COMPLAINTS & GRIEVANCES",
-      "anchor": "sec-45-complaints-grievances",
+      "title": "Complaints & Grievances",
+      "anchor": "sec-55-complaints-grievances",
       "blocks": [
         {
           "type": "p",
@@ -999,23 +1143,19 @@
     },
     {
       "level": 2,
-      "title": "CONFIDENTIALITY (VERBAL & WRITTEN)",
-      "anchor": "sec-46-confidentiality-verbal-written",
+      "title": "Confidentiality (Verbal & Written)",
+      "anchor": "sec-56-confidentiality-verbal-written",
       "blocks": [
         {
           "type": "p",
-          "html": "Please remember to keep your conversations professional and respectful of student privacy both on and off campus. We are never off duty as representatives of Lewisville"
-        },
-        {
-          "type": "p",
-          "html": "High School."
+          "html": "Please remember to keep your conversations professional and respectful of student privacy both on and off campus. We are never off duty as representatives of Lewisville High School."
         }
       ]
     },
     {
       "level": 2,
-      "title": "COPYRIGHTED MATERIALS AND INTELLECTUAL PROPERTY",
-      "anchor": "sec-47-copyrighted-materials-and-intellectual-p",
+      "title": "Copyrighted Materials And Intellectual Property",
+      "anchor": "sec-57-copyrighted-materials-and-intellectual-p",
       "blocks": [
         {
           "type": "p",
@@ -1033,23 +1173,36 @@
     },
     {
       "level": 2,
-      "title": "CUSTODIAL SERVICES",
-      "anchor": "sec-48-custodial-services",
+      "title": "Custodial Services",
+      "anchor": "sec-58-custodial-services",
       "blocks": [
         {
           "type": "p",
-          "html": "  Assistant Principal, Ashlyn Straw is in charge of custodial needs. In most cases, simple janitorial requests can be routed to Zulma.  If, however, you discover that your needs are not being met, please notify Mrs. Straw at once."
-        },
+          "html": "Assistant Principal, Ashlyn Straw is in charge of custodial needs. In most cases, simple janitorial requests can be routed to Zulma.  If, however, you discover that your needs are not being met, please notify Mrs. Straw at once."
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Cash Handling Procedures",
+      "anchor": "sec-59-cash-handling-procedures",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Deposits Of Money",
+      "anchor": "sec-60-deposits-of-money",
+      "blocks": [
         {
           "type": "p",
-          "html": "DEPOSITS OF MONEY:  Deposits of any money you collect must be given to Kelly Bohon daily to  deposit…MORE INFO NEEDED HERE ABOUT HOW AND WHEN AND RECEIPTS, ETC."
+          "html": "Deposits of any money you collect must be given to Kelly Bohon daily to  deposit…MORE INFO NEEDED HERE ABOUT HOW AND WHEN AND RECEIPTS, ETC."
         }
       ]
     },
     {
       "level": 2,
-      "title": "FUNDRAISING ACTIVITIES",
-      "anchor": "sec-49-fundraising-activities",
+      "title": "Fundraising Activities",
+      "anchor": "sec-61-fundraising-activities",
       "blocks": [
         {
           "type": "p",
@@ -1058,82 +1211,64 @@
       ]
     },
     {
+      "level": 1,
+      "title": "Movies In The Classroom",
+      "anchor": "sec-62-movies-in-the-classroom",
+      "blocks": []
+    },
+    {
       "level": 2,
-      "title": "MOVIES IN THE CLASSROOM",
-      "anchor": "sec-50-movies-in-the-classroom",
+      "title": "Movie Policies",
+      "anchor": "sec-63-movie-policies",
       "blocks": [
         {
           "type": "p",
-          "html": " Teachers shall preview all movies, clips or videos including short clips or segments in venues such as You-Tube or PBS before using them in a classroom. Teachers must then obtain approval of all films and videos from a campus principal or designee, such as an assistant principal or"
+          "html": "Teachers shall preview all movies, clips or videos including short clips or segments in venues such as You-Tube or PBS before using them in a classroom. Teachers must then obtain approval of all films and videos from a campus principal or designee, such as an assistant principal or department chair. The District expects that only clips or segments will be used to emphasize or illustrate subject content; however, in the rare instance when a movie might need to be shown in its entirety, regardless of rating or grade level, the campus principal must approve."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "R-Rated Movies Or Clips"
         },
         {
           "type": "p",
-          "html": "department chair. The District expects that only clips or segments will be used to emphasize or"
+          "html": "Under no circumstances at elementary, middle or high school should a film that is R-rated be shown. For high schools only, the campus principal may approve segmented clips if pre-viewed and proposed by a teacher; otherwise, R-rated movies will not be shown. At the high school level, a film or video that is rated “PG-13” and that is related to the instructional program may be shown only with prior written permission from the parents."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "Pg-13 Rated Movies Or Clips"
         },
         {
           "type": "p",
-          "html": "illustrate subject content; however, in the rare instance when a movie might need to be shown in"
+          "html": "For middle school, if related to the instruction, a film or video that is rated “PG-13” may be shown only with prior written permission from the parents."
         },
         {
           "type": "p",
-          "html": "its entirety, regardless of rating or grade level, the campus principal must approve."
+          "html": "At the elementary school level, a film or video that is rated “PG” and that is related to the instructional program may be shown in its entirety only with prior written permission from the parents as well as the building principal. Short clips or segments of “PG” films used for instructional purposes do not have to be pre-approved."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "G Rated Movies or Clips"
         },
         {
           "type": "p",
-          "html": "● R-rated movies or clips: Under no circumstances at elementary, middle or high"
-        },
-        {
-          "type": "p",
-          "html": "school should a film that is R-rated be shown. For high schools only, the campus"
-        },
-        {
-          "type": "p",
-          "html": "principal may approve segmented clips if pre-viewed and proposed by a teacher;"
-        },
-        {
-          "type": "p",
-          "html": "otherwise, R-rated movies will not be shown. At the high school level, a film or video"
-        },
-        {
-          "type": "p",
-          "html": "that is rated “PG-13” and that is related to the instructional program may be shown only"
-        },
-        {
-          "type": "p",
-          "html": "with prior written permission from the parents."
-        },
-        {
-          "type": "p",
-          "html": "● Pg-13 movies or clips: For middle school if related to the instruction, a film or video that"
-        },
-        {
-          "type": "p",
-          "html": "is rated “PG-13” may be shown only with prior written permission from the parents."
-        },
-        {
-          "type": "p",
-          "html": "● At the elementary school level, a film or video that is rated “PG” and that is related to"
-        },
-        {
-          "type": "p",
-          "html": "the instructional program may be shown in its entirety only with prior written permission"
-        },
-        {
-          "type": "p",
-          "html": "from the parents as well as the building principal. Short clips or segments of “PG” films"
-        },
-        {
-          "type": "p",
-          "html": "used for instructional purposes do not have to be pre-approved."
-        },
-        {
-          "type": "p",
-          "html": "● G films will only need principal approval if planning to show the entire movie."
-        },
-        {
-          "type": "p",
-          "html": "PE FITNESS GRAM"
-        },
+          "html": " A G rated movie or clip will only need principal approval if planning to show the entire movie."
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "title": "Other",
+      "anchor": "sec-64-other",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Pe Fitness Gram",
+      "anchor": "sec-65-pe-fitness-gram",
+      "blocks": [
         {
           "type": "p",
           "html": "The State of Texas requires all students to be tested on their levels of physical fitness."
@@ -1150,8 +1285,8 @@
     },
     {
       "level": 2,
-      "title": "PROFESSIONAL CONDUCT",
-      "anchor": "sec-51-professional-conduct",
+      "title": "Professional Conduct",
+      "anchor": "sec-66-professional-conduct",
       "blocks": [
         {
           "type": "p",
@@ -1159,11 +1294,7 @@
         },
         {
           "type": "p",
-          "html": "Each teacher has a duty to exemplify the respect we have for education, our students,"
-        },
-        {
-          "type": "p",
-          "html": "each other and our campus. To support this expectation, staff are asked to ensure that their personal appearance, conduct, and classroom environment reflect professionalism."
+          "html": "Each teacher has a duty to exemplify the respect we have for education, our students, each other and our campus. To support this expectation, staff are asked to ensure that their personal appearance, conduct, and classroom environment reflect professionalism."
         },
         {
           "type": "p",
@@ -1172,10 +1303,21 @@
         {
           "type": "p",
           "html": "administrator or parent is included in the communication.***"
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Professional Conventions, Conferences, Etc.",
+      "anchor": "sec-67-professional-conventions-conferences-etc",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "Teachers planning to attend conventions, conferences, etc., should talk with their department head and LEAD appraiser prior to making plans. Final approval will need to come from the principal. "
         },
         {
           "type": "p",
-          "html": "PROFESSIONAL CONVENTIONS, CONFERENCES, ETC.:  Teachers planning to attend conventions, conferences, etc., should talk with their department head and LEAD appraiser prior to making plans. Final approval will need to come from the principal. "
+          "html": "Gradebook Policies"
         },
         {
           "type": "p",
@@ -1189,23 +1331,30 @@
     },
     {
       "level": 2,
-      "title": "PUBLIC ADDRESS (PA) SYSTEM",
-      "anchor": "sec-52-public-address-pa-system",
+      "title": "Public Address (Pa) System",
+      "anchor": "sec-68-public-address-pa-system",
       "blocks": [
         {
           "type": "p",
           "html": "The public address system will be used for announcements at designated times so as not to conflict on a regular basis with instructional time. Unless there is a need, classes will not be interrupted by the public address system or telephones."
-        },
-        {
-          "type": "p",
-          "html": "PURCHASING MATERIALS, SUPPLIES, ETC.:  All purchases for instructional supplies, materials, etc., must be done through the department head.  Do not purchase anything without a P.O. and approval per Kelly Bohon."
         }
       ]
     },
     {
       "level": 2,
-      "title": "SPONSORSHIPS",
-      "anchor": "sec-53-sponsorships",
+      "title": "Purchasing Materials, Supplies, Etc.",
+      "anchor": "sec-69-purchasing-materials-supplies-etc",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "All purchases for instructional supplies, materials, etc., must be done through the department head. Do not purchase anything without a P.O. and approval per Kelly Bohon."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Sponsorships",
+      "anchor": "sec-70-sponsorships",
       "blocks": [
         {
           "type": "p",
@@ -1215,27 +1364,25 @@
     },
     {
       "level": 2,
-      "title": "SOCIAL MEDIA",
-      "anchor": "sec-54-social-media",
+      "title": "Social Media",
+      "anchor": "sec-71-social-media",
       "blocks": [
         {
           "type": "p",
-          "html": "Teachers and staff are encouraged to utilize social media when appropriate as a means"
-        },
-        {
-          "type": "p",
-          "html": "for celebrating classroom successes and for general information and communication."
-        },
-        {
-          "type": "p",
-          "html": "Please use professionalism and responsibility with social media. SUBMIT SOCIAL MEDIA POSTS TO CLINTON MARION."
+          "html": "Teachers and staff are encouraged to utilize social media when appropriate as a means for celebrating classroom successes and for general information and communication. Please use professionalism and responsibility with social media. SUBMIT SOCIAL MEDIA POSTS TO CLINTON MARION."
         }
       ]
     },
     {
+      "level": 1,
+      "title": "Student Policies",
+      "anchor": "sec-72-student-policies",
+      "blocks": []
+    },
+    {
       "level": 2,
-      "title": "STUDENT DRESS CODE",
-      "anchor": "sec-55-student-dress-code",
+      "title": "Student Dress Code",
+      "anchor": "sec-73-student-dress-code",
       "blocks": [
         {
           "type": "p",
@@ -1245,51 +1392,27 @@
     },
     {
       "level": 2,
-      "title": "STUDENT ID’s",
-      "anchor": "sec-56-student-id-s",
+      "title": "Student Id’s",
+      "anchor": "sec-74-student-id-s",
       "blocks": [
         {
           "type": "p",
-          "html": "Teachers are expected to enforce student ID procedures."
+          "html": "Teachers are expected to enforce student ID procedures. Each student is required to wear his/her ID on a lanyard at all times while in the building. Students who fail to follow this requirement will receive a referral and will be subject to consequences according to the frequency of the offense:"
         },
         {
           "type": "p",
-          "html": "Each student is required to wear his/her ID on a lanyard at all times while in the building."
+          "html": "Students are required to wear their school ID on a lanyard to enter the school and are to keep it on at all times in the building. Students who fail to follow this requirement will be required to get an ID Sticker ($1) and or purchase a new ID for $5."
         },
         {
           "type": "p",
-          "html": "Students who fail to follow this requirement will receive a referral and will be subject to"
-        },
-        {
-          "type": "p",
-          "html": "consequences according to the frequency of the offense:"
-        },
-        {
-          "type": "p",
-          "html": "Students are required to wear their school ID on a lanyard to enter the school and are to keep it"
-        },
-        {
-          "type": "p",
-          "html": "on at all times in the building. Students who fail to follow this requirement will be required to get an ID Sticker ($1) and or purchase a new ID for $5."
-        },
-        {
-          "type": "p",
-          "html": "Students may not wear another student’s ID at any time. Staff members should confiscate"
-        },
-        {
-          "type": "p",
-          "html": "misused ID’s and report the student to the appropriate administrator for disciplinary action."
-        },
-        {
-          "type": "p",
-          "html": "ID infractions do not reset at the semester."
+          "html": "Students may not wear another student’s ID at any time. Staff members should confiscate misused ID’s and report the student to the appropriate administrator for disciplinary action. ID infractions do not reset at the semester."
         }
       ]
     },
     {
       "level": 2,
-      "title": "STUDENT PERSONNEL COMMUNICATION DEVICES",
-      "anchor": "sec-57-student-personnel-communication-devices",
+      "title": "Student Personnel Communication Devices",
+      "anchor": "sec-75-student-personnel-communication-devices",
       "blocks": [
         {
           "type": "p",
@@ -1298,56 +1421,45 @@
       ]
     },
     {
+      "level": 1,
+      "title": "Technology",
+      "anchor": "sec-76-technology",
+      "blocks": []
+    },
+    {
       "level": 2,
-      "title": "TECHNOLOGY",
-      "anchor": "sec-58-technology",
+      "title": "Acceptable Use",
+      "anchor": "sec-77-acceptable-use",
       "blocks": [
         {
-          "type": "ul",
-          "items": [
-            "ACCEPTABLE USE: Access to the District’s electronic communications system is a privilege, not a right.  All users shall be required   to acknowledge receipt and understanding of administrative regulations governing use of the system and shall agree in writing to allow monitoring of their use and compliance with such regulations and guidelines.  Noncompliance may result in suspension of access or termination of privileges and other disciplinary action consistent with District policies."
-          ]
+          "type": "p",
+          "html": "Access to the District’s electronic communications system is a privilege, not a right.  All users shall be required   to acknowledge receipt and understanding of administrative regulations governing use of the system and shall agree in writing to allow monitoring of their use and compliance with such regulations and guidelines.  Noncompliance may result in suspension of access or termination of privileges and other disciplinary action consistent with District policies. Violations of law may result in criminal prosecution as well as disciplinary action by the District."
         },
         {
           "type": "p",
-          "html": "                Violations of law may result in criminal prosecution as well as disciplinary action by the District."
-        },
-        {
-          "type": "p",
-          "html": "                Electronic mail transmissions and other use of the electronic communications system by students                 and employees are not private and may be monitored at any time by designated District staff to                 ensure appropriate use."
-        },
-        {
-          "type": "ul",
-          "items": [
-            "COMPUTER AND SECURITY DEADLINES: Staff must follow ALL LISD Acceptable Use Policy (AUP) guidelines. Two points of emphasis—DO NOT SHARE PASSWORDS WITH OTHERS, and monitor student use of all computers. Various deadlines for completion and return of computer forms will be"
-          ]
-        },
-        {
-          "type": "p",
-          "html": "                announced throughout the year. In order for the computer service to be effective, such"
-        },
-        {
-          "type": "p",
-          "html": "                deadlines must be met by all staff. Under no circumstances should a student be"
-        },
-        {
-          "type": "p",
-          "html": "                using a teacher’s computer."
+          "html": "Electronic mail transmissions and other use of the electronic communications system by students and employees are not private and may be monitored at any time by designated District staff to ensure appropriate use."
         }
       ]
     },
     {
       "level": 2,
-      "title": "COPYRIGHTED MATERIALS AND INTELLECTUAL PROPERTY",
-      "anchor": "sec-59-copyrighted-materials-and-intellectual-p",
+      "title": "Computer And Security Deadlines",
+      "anchor": "sec-78-computer-and-security-deadlines",
       "blocks": [
         {
           "type": "p",
-          "html": "All staff members are responsible for compliance with federal and state law, as well as district policy on the use of intellectual property and copyrighted materials. Please see"
-        },
+          "html": "Staff must follow ALL LISD Acceptable Use Policy (AUP) guidelines. Two points of emphasis—DO NOT SHARE PASSWORDS WITH OTHERS, and monitor student use of all computers. Various deadlines for completion and return of computer forms will be announced throughout the year. In order for the computer service to be effective, such deadlines must be met by all staff. Under no circumstances should a student be using a teacher’s computer."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Copyrighted Materials And Intellectual Property",
+      "anchor": "sec-79-copyrighted-materials-and-intellectual-p",
+      "blocks": [
         {
           "type": "p",
-          "html": "the following LISD Board policies:"
+          "html": "All staff members are responsible for compliance with federal and state law, as well as district policy on the use of intellectual property and copyrighted materials. Please see the following LISD Board policies:"
         },
         {
           "type": "p",
@@ -1360,9 +1472,9 @@
       ]
     },
     {
-      "level": 2,
+      "level": 1,
       "title": "TRIPS",
-      "anchor": "sec-60-trips",
+      "anchor": "sec-80-trips",
       "blocks": [
         {
           "type": "p",
@@ -1372,8 +1484,8 @@
     },
     {
       "level": 2,
-      "title": "VOLUNTEERING",
-      "anchor": "sec-61-volunteering",
+      "title": "Volunteering",
+      "anchor": "sec-81-volunteering",
       "blocks": [
         {
           "type": "p",
@@ -1384,18 +1496,24 @@
     {
       "level": 1,
       "title": "Academics",
-      "anchor": "sec-62-academics",
+      "anchor": "sec-82-academics",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "ELIGIBILITY FOR STUDENTS/STATE LAW FOR UIL",
+      "anchor": "sec-83-eligibility-for-students-state-law-for-u",
       "blocks": [
         {
           "type": "p",
-          "html": "<a href=\"https://www.lisd.net/our-district/athletics/uil\" target=\"_blank\" rel=\"noopener\">ELIGIBILITY FOR STUDENTS/STATE LAW FOR UIL:</a>  (Chapter 33, Senate Bill I)  A student must pass all courses he/she is taking to be eligible to participate in any school related extra-curricular activity and/or co-curricular activity where admission is charged.  This rule is in effect at the beginning of the second six-weeks of a new school year.  Students who fail courses at the end of a six-week grading period will be evaluated again at the three-week period following the end of the six-weeks.  If these students are passing all classes at this time, they become eligible seven days after the evaluation date.  It is most important that teachers remember that once they post six-week grades or a three-week evaluation grade, they cannot change these grades for eligibility purposes.  If there is any doubt about students' final six-weeks or three-week grades, and the students are in activities where eligibility is involved, teachers should give the students incomplete scores.  For eligibility purposes, an \"I\" is an F until it becomes an official grade.  Please refer to the principal's handout for specifics on the new eligibility law.  PLEASE SEE UIL CALENDAR SENT AT THE BEGINNING OF THE YEAR."
+          "html": "Chapter 33, Senate Bill I states that a student must pass all courses he/she is taking to be eligible to participate in any school related extra-curricular activity and/or co-curricular activity where admission is charged.  This rule is in effect at the beginning of the second six-weeks of a new school year.  Students who fail courses at the end of a six-week grading period will be evaluated again at the three-week period following the end of the six-weeks.  If these students are passing all classes at this time, they become eligible seven days after the evaluation date.  It is most important that teachers remember that once they post six-week grades or a three-week evaluation grade, they cannot change these grades for eligibility purposes.  If there is any doubt about students' final six-weeks or three-week grades, and the students are in activities where eligibility is involved, teachers should give the students incomplete scores.  For eligibility purposes, an \"I\" is an F until it becomes an official grade.  Please refer to the principal's handout for specifics on the new eligibility law.  PLEASE SEE UIL CALENDAR SENT AT THE BEGINNING OF THE YEAR."
         }
       ]
     },
     {
       "level": 2,
-      "title": "GRADING GUIDELINES",
-      "anchor": "sec-63-grading-guidelines",
+      "title": "Grading Guidelines",
+      "anchor": "sec-84-grading-guidelines",
       "blocks": [
         {
           "type": "p",
@@ -1405,100 +1523,74 @@
     },
     {
       "level": 2,
-      "title": "GRADES/GRADEBOOK",
-      "anchor": "sec-64-grades-gradebook",
+      "title": "Grades/Gradebook",
+      "anchor": "sec-85-grades-gradebook",
       "blocks": [
         {
           "type": "p",
-          "html": "Follow all instructions that are provided during the school year. For information"
+          "html": "Follow all instructions that are provided during the school year. For information regarding gradebook contact Erika Cowan."
         },
         {
           "type": "p",
-          "html": "regarding gradebook contact Erika Cowan."
+          "html": "● Every assignment in the gradebook system should be dated and identified appropriately so it can be accurately interpreted by others"
         },
         {
           "type": "p",
-          "html": "● Every assignment in the gradebook system should be dated and identified"
+          "html": "● Gradebooks and grade records are considered part of the permanent record system, are the property of the school, and are subject to inspection at any time"
         },
         {
           "type": "p",
-          "html": "appropriately so it can be accurately interpreted by others"
+          "html": "● Only teachers or designated school staff should handle or have access to any form of grading records, including student progress reports"
         },
         {
           "type": "p",
-          "html": "● Gradebooks and grade records are considered part of the permanent record"
+          "html": "● All grade records are confidential, and no student should have access to grade records or the gradebook system at any time."
+        },
+        {
+          "type": "h",
+          "level": 3,
+          "html": "Gradebook Submit Dates"
         },
         {
           "type": "p",
-          "html": "system, are the property of the school, and are subject to inspection at any time"
+          "html": "Remember, only 9 week grades determine eligibility EXCEPT for the 1st 6 weeks of the school year. UIL eligibility may be lost after the 1st 6 weeks and every 9 week grading period thereafter. The exam and semester grades are not used to determine eligibility."
         },
         {
           "type": "p",
-          "html": "● Only teachers or designated school staff should handle or have access to any"
-        },
-        {
-          "type": "p",
-          "html": "form of grading records, including student progress reports"
-        },
-        {
-          "type": "p",
-          "html": "● All grade records are confidential, and no student should have access to grade"
-        },
-        {
-          "type": "p",
-          "html": "records or the gradebook system at any time."
-        },
-        {
-          "type": "p",
-          "html": "● Gradebook Submit Dates"
-        },
-        {
-          "type": "p",
-          "html": "Remember, only 9 week grades determine eligibility EXCEPT for the 1st 6 weeks of the"
-        },
-        {
-          "type": "p",
-          "html": "school year. UIL eligibility may be lost after the 1st 6 weeks and every 9 week grading"
-        },
-        {
-          "type": "p",
-          "html": "period thereafter. The exam and semester grades are not used to determine eligibility."
-        },
-        {
-          "type": "p",
-          "html": "Semester grades determine credit awarded. Students do have the opportunity to regain"
-        },
-        {
-          "type": "p",
-          "html": "eligibility every 3 week progress reporting times."
+          "html": "Semester grades determine credit awarded. Students do have the opportunity to regain eligibility every 3 week progress reporting times."
         }
       ]
     },
     {
-      "level": 1,
-      "title": "Teacher Resources",
-      "anchor": "sec-65-teacher-resources",
-      "blocks": []
-    },
-    {
       "level": 2,
-      "title": "ASSESSMENT",
-      "anchor": "sec-66-assessment",
+      "title": "Assessment",
+      "anchor": "sec-86-assessment",
       "blocks": [
         {
           "type": "p",
           "html": "Stephanie Castro"
         },
         {
+          "type": "h",
+          "level": 3,
+          "html": "Tests given"
+        },
+        {
           "type": "p",
-          "html": "Tests given:        -        EOC/STAAR- English 1. English II,,Biology an AlgebraI PSAT, ACT, AP, SAT, TSI. A testing calendar will be given once it is finalized for the TRAID. "
+          "html": "EOC/STAAR- English 1. English II,Biology an AlgebraI PSAT, ACT, AP, SAT, TSI. A testing calendar will be given once it is finalized for the TRAID. "
         }
       ]
     },
     {
+      "level": 1,
+      "title": "Teacher Resources",
+      "anchor": "sec-87-teacher-resources",
+      "blocks": []
+    },
+    {
       "level": 2,
-      "title": "COPY MACHINES AND SUPPLIES",
-      "anchor": "sec-67-copy-machines-and-supplies",
+      "title": "Copy Machines And Supplies",
+      "anchor": "sec-88-copy-machines-and-supplies",
       "blocks": [
         {
           "type": "p",
@@ -1508,8 +1600,8 @@
     },
     {
       "level": 2,
-      "title": "COUNSELING PROGRAM",
-      "anchor": "sec-68-counseling-program",
+      "title": "Counseling Program",
+      "anchor": "sec-89-counseling-program",
       "blocks": [
         {
           "type": "p",
@@ -1519,8 +1611,8 @@
     },
     {
       "level": 2,
-      "title": "VIDEOS",
-      "anchor": "sec-69-videos",
+      "title": "Videos",
+      "anchor": "sec-90-videos",
       "blocks": [
         {
           "type": "p",
@@ -1879,7 +1971,7 @@
     {
       "level": 2,
       "title": "TEACHER SELF-CARE TIPS",
-      "anchor": "sec-70-teacher-self-care-tips",
+      "anchor": "sec-91-teacher-self-care-tips",
       "blocks": [
         {
           "type": "p",
@@ -1934,32 +2026,56 @@
     {
       "level": 1,
       "title": "Health & Safety",
-      "anchor": "sec-71-health-safety",
+      "anchor": "sec-92-health-safety",
+      "blocks": []
+    },
+    {
+      "level": 2,
+      "title": "Disaster Alerts",
+      "anchor": "sec-93-disaster-alerts",
       "blocks": [
         {
           "type": "p",
-          "html": "DISASTER ALERTS: When possible Admin will use the PA System to alert staff of an Emergency situation. Please listen carefully and adhere to the directions given. "
+          "html": "When possible Admin will use the PA System to alert staff of an Emergency situation. Please listen carefully and adhere to the directions given. "
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Shelter",
+      "anchor": "sec-94-shelter",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "In case of a tornado alert, please lead your students to the designated areas and have them sit on the floor with their knees pulled up to their chests.  They will be grouped by class and must stay together.  A passageway must be left in the middle of the hallway for others who must pass through.  Keep the students sitting closely together from the wall out.  All classroom  doors to the hall should be closed.  Maintain order during the extent of the alert.  Allow no standing, yelling, or disorderly conduct.  Report to the office all incidents of misconduct.  Give orders clearly and calmly and require them to be followed.  Maps for designated areas should be posted in each classroom by the doorway."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Evacuation",
+      "anchor": "sec-95-evacuation",
+      "blocks": [
+        {
+          "type": "p",
+          "html": "The fire signal is an alarm with strobe lights.  Leave all personal belongings and where they are and walk quickly to the exit designated for your classroom.  Each room should have an emergency exit guide posted.  "
         },
         {
-          "type": "ul",
-          "items": [
-            "SHELTER:   In case of a tornado alert, please lead your students to the designated areas and have them sit on the floor with their knees pulled up to their chests.  They will be grouped by class and must stay together.  A passageway must be left in the middle of the hallway for others who must pass through.  Keep the students sitting closely together from the wall out.  All classroom  doors to the hall should be closed.  Maintain order during the extent of the alert.  Allow no standing, yelling, or disorderly conduct.  Report to the office all incidents of misconduct.  Give orders clearly and calmly and require them to be followed.  Maps for designated areas should be posted in each classroom by the doorway."
-          ]
+          "type": "h",
+          "level": 3,
+          "html": "SECURE"
         },
         {
-          "type": "ul",
-          "items": [
-            "EVACUATION:  The fire signal is an alarm with strobe lights.  Leave all personal belongings and where they are and walk quickly to the exit designated for your classroom.  Each room should have an emergency exit guide posted.  ",
-            "SECURE",
-            "LOCKDOWN"
-          ]
+          "type": "h",
+          "level": 3,
+          "html": "LOCKDOWN"
         }
       ]
     },
     {
       "level": 2,
       "title": "NURSE'S OFFICE",
-      "anchor": "sec-72-nurse-s-office",
+      "anchor": "sec-96-nurse-s-office",
       "blocks": [
         {
           "type": "p",
@@ -1970,7 +2086,7 @@
     {
       "level": 2,
       "title": "VISITORS",
-      "anchor": "sec-73-visitors",
+      "anchor": "sec-97-visitors",
       "blocks": [
         {
           "type": "p",
@@ -1985,13 +2101,13 @@
     {
       "level": 1,
       "title": "Attendance",
-      "anchor": "sec-74-attendance",
+      "anchor": "sec-98-attendance",
       "blocks": []
     },
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE",
-      "anchor": "sec-75-student-attendance",
+      "anchor": "sec-99-student-attendance",
       "blocks": [
         {
           "type": "p",
@@ -2006,51 +2122,51 @@
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE - PROCEDURES",
-      "anchor": "sec-76-student-attendance-procedures",
+      "anchor": "sec-100-student-attendance-procedures",
       "blocks": [
         {
           "type": "p",
-          "html": "Policy requires that the reason for a student's absence be stated in writing and signed by a parent or guardian of the student.  The attendance office will accept phone calls from a parent or guardian as being the written statement and will document these calls on student records.  "
+          "html": "Policy requires that the reason for a student's absence be stated in writing and signed by a parent or guardian of the student.  The attendance office will accept phone calls from a parent or guardian as being the written statement and will document these calls on student records.   "
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ABSENCES - CODING ABSENCES",
-      "anchor": "sec-77-student-absences-coding-absences",
+      "anchor": "sec-101-student-absences-coding-absences",
       "blocks": [
         {
           "type": "p",
-          "html": "A uniform coding system is used for marking student attendance.  This coding system is E - Excused Absences, U  - Unexcused Absences, P  – Change to present with documentation, and T  - Tardy.  Codes are automated when a teacher takes attendance. Attendance staff can update codes."
+          "html": "A uniform coding system is used for marking student attendance.  This coding system is E - Excused Absences, U  - Unexcused Absences, P  – Change to present with documentation, and T  - Tardy.  Codes are automated when a teacher takes attendance. Attendance staff can update codes. "
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE - FUNDING PERIOD REPORTING",
-      "anchor": "sec-78-student-attendance-funding-period-report",
+      "anchor": "sec-102-student-attendance-funding-period-report",
       "blocks": [
         {
           "type": "p",
-          "html": "Second? period is the official ADA accounting period. Attendance must be submitted by the teacher within 10 minutes on either side of the designated funding time."
+          "html": "Second? period is the official ADA accounting period. Attendance must be submitted by the teacher within 10 minutes on either side of the designated funding time. "
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE – NON-FUNDING PERIODS",
-      "anchor": "sec-79-student-attendance-non-funding-periods",
+      "anchor": "sec-103-student-attendance-non-funding-periods",
       "blocks": [
         {
           "type": "p",
-          "html": "Attendance must be submitted by the teacher before the end of the period. Ideally, attendance will be submitted before the students who take shuttles to other campuses leave the classroom.<br><br>"
+          "html": "Attendance must be submitted by the teacher before the end of the period. Ideally, attendance will be submitted before the students who take shuttles to other campuses leave the classroom."
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ABSENCES - MAKE UP WORK",
-      "anchor": "sec-80-student-absences-make-up-work",
+      "anchor": "sec-104-student-absences-make-up-work",
       "blocks": [
         {
           "type": "p",
@@ -2058,25 +2174,25 @@
         },
         {
           "type": "p",
-          "html": "STUDENT ATTENDANCE - ABSENCES FOR EXTRA-CURRICULAR ACTIVITIES:  A student can miss no more than ten (10) days a year, five per term course, from a class to participate in extra-curricular activities.  Teacher sponsors of extra-curricular activities requiring students to be absent from classes are responsible for notifying teachers and the principal's office.  An alphabetical listing of students (form found in campus canvas course), including grade level and I.D. number, must be sent to the principal, the attendance office, and to the appropriate teachers no later than three (3) days prior to an event.  All school related activities that require students to miss classes must be approved by the building principal no less than five school days prior to the activity. Failure to obtain approval and failure to notify appropriate school personnel by the specified times will void participation in the activity.  Subject area teachers must keep an accurate record of student absences for extra-curricular activities.  If a student accumulates ten absences due to these activities, the teacher must inform the student, the attendance office, and the building principal. "
+          "html": " STUDENT ATTENDANCE - ABSENCES FOR EXTRA-CURRICULAR ACTIVITIES:  A student can miss no more than ten (10) days a year, five per term course, from a class to participate in extra-curricular activities.  Teacher sponsors of extra-curricular activities requiring students to be absent from classes are responsible for notifying teachers and the principal's office.  An alphabetical listing of students (form found in campus canvas course), including grade level and I.D. number, must be sent to the principal, the attendance office, and to the appropriate teachers no later than three (3) days prior to an event.  All school related activities that require students to miss classes must be approved by the building principal no less than five school days prior to the activity. Failure to obtain approval and failure to notify appropriate school personnel by the specified times will void participation in the activity.  Subject area teachers must keep an accurate record of student absences for extra-curricular activities.  If a student accumulates ten absences due to these activities, the teacher must inform the student, the attendance office, and the building principal.  "
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE - UNEXCUSED ABSENCES",
-      "anchor": "sec-81-student-attendance-unexcused-absences",
+      "anchor": "sec-105-student-attendance-unexcused-absences",
       "blocks": [
         {
           "type": "p",
-          "html": "Students will have three (3) days in which to clear the unexcused absence to an excused one.  If the attendance office has not updated attendance within this three-day period, the absence remains unexcused for the duration of the term in which the absence occurred. Exceptions can be made by admin, at which time the attendance office will make the update."
+          "html": "Students will have three (3) days in which to clear the unexcused absence to an excused one.  If the attendance office has not updated attendance within this three-day period, the absence remains unexcused for the duration of the term in which the absence occurred. Exceptions can be made by admin, at which time the attendance office will make the update. "
         }
       ]
     },
     {
       "level": 2,
       "title": "STUDENT ATTENDANCE – ABSENCE NOTES",
-      "anchor": "sec-82-student-attendance-absence-notes",
+      "anchor": "sec-106-student-attendance-absence-notes",
       "blocks": [
         {
           "type": "p",
@@ -2087,7 +2203,7 @@
     {
       "level": 2,
       "title": "STUDENT TARDIES",
-      "anchor": "sec-83-student-tardies",
+      "anchor": "sec-107-student-tardies",
       "blocks": [
         {
           "type": "p",
@@ -2188,7 +2304,7 @@
     {
       "level": 1,
       "title": "Discipline",
-      "anchor": "sec-84-discipline",
+      "anchor": "sec-108-discipline",
       "blocks": [
         {
           "type": "p",
@@ -2221,7 +2337,7 @@
     {
       "level": 2,
       "title": "DISCIPLINARY ACTIONS TAKEN BY ADMINISTRATION",
-      "anchor": "sec-85-disciplinary-actions-taken-by-administra",
+      "anchor": "sec-109-disciplinary-actions-taken-by-administra",
       "blocks": [
         {
           "type": "p",
@@ -2232,7 +2348,7 @@
     {
       "level": 2,
       "title": "CONFERENCE/COUNSELING",
-      "anchor": "sec-86-conference-counseling",
+      "anchor": "sec-110-conference-counseling",
       "blocks": [
         {
           "type": "p",
@@ -2243,7 +2359,7 @@
     {
       "level": 2,
       "title": "DETENTION",
-      "anchor": "sec-87-detention",
+      "anchor": "sec-111-detention",
       "blocks": [
         {
           "type": "p",
@@ -2254,7 +2370,7 @@
     {
       "level": 2,
       "title": "PLE",
-      "anchor": "sec-88-ple",
+      "anchor": "sec-112-ple",
       "blocks": [
         {
           "type": "p",
@@ -2265,7 +2381,7 @@
     {
       "level": 2,
       "title": "SUSPENSION",
-      "anchor": "sec-89-suspension",
+      "anchor": "sec-113-suspension",
       "blocks": [
         {
           "type": "p",
@@ -2276,7 +2392,7 @@
     {
       "level": 2,
       "title": "DISTRICT ALTERNATIVE EDUCATION PROGRAM",
-      "anchor": "sec-90-district-alternative-education-program",
+      "anchor": "sec-114-district-alternative-education-program",
       "blocks": [
         {
           "type": "p",
@@ -2287,7 +2403,7 @@
     {
       "level": 2,
       "title": "EXPLUSION",
-      "anchor": "sec-91-explusion",
+      "anchor": "sec-115-explusion",
       "blocks": [
         {
           "type": "p",
@@ -2302,7 +2418,7 @@
     {
       "level": 2,
       "title": "Quick links for helpful resources",
-      "anchor": "sec-92-quick-links-for-helpful-resources",
+      "anchor": "sec-116-quick-links-for-helpful-resources",
       "blocks": [
         {
           "type": "p",
