@@ -11,7 +11,7 @@
 import * as cheerio from "cheerio";
 import { writeFileSync } from "node:fs";
 
-const DOC_ID = "17GXxVF1uWDWxZH5hjcN8eBGDcNodXC0OzqHR0dr9G5U";
+const DOC_ID = "1fnKuPxT181zkM4QeFy8t6fukkDZt9fzx";
 const OUT    = "handbook.json";
 const EXPORT = `https://docs.google.com/document/d/${DOC_ID}/export?format=html`;
 
