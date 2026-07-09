@@ -6,7 +6,6 @@
 <title>Faculty Hub — Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Loads your current content so the builder starts from what's live -->
 <script src="config.js"></script>
 <style>
 :root{
@@ -112,6 +111,18 @@ input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
 .note{font-size:12px;color:var(--gray-m);margin:6px 2px 0}
 code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12px}
 </style>
+<style>
+/* tree editor additions */
+.item .iconpick.mini{width:auto;flex:none;padding:4px 6px}
+.children{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.childttl,.subttl{font-family:"Oswald";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-d);margin:0 0 8px;display:block}
+.sub{margin:4px 0 10px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.btnedit{display:grid;grid-template-columns:1fr 1.5fr auto;gap:7px;margin-bottom:7px;align-items:center}
+.tiny-add{padding:7px;font-size:12px;margin-top:2px}
+textarea{resize:vertical;min-height:40px;font-family:Arial;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;width:100%}
+textarea:focus{border-color:var(--maroon);outline:none}
+.helptip{font-size:12px;color:var(--gray-m);margin:-4px 2px 12px;line-height:1.5}
+</style>
 </head>
 <body>
 
@@ -172,14 +183,8 @@ code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1
     </div>
 
     <div class="panel">
-      <h2><span class="star">★</span> Menu groups</h2>
-      <p class="note" style="margin-top:-6px">The Resources sections, in order. Renaming one here updates the dropdown; assign tiles to them below.</p>
-      <div class="glist" id="groups"></div>
-      <button class="addbtn" id="addGroup">+ Add group</button>
-    </div>
-
-    <div class="panel">
-      <h2><span class="star">★</span> Tiles</h2>
+      <h2><span class="star">★</span> Tiles &amp; pages</h2>
+      <p class="helptip">Each tile is a <b>Link</b> (opens a website), a <b>Page</b> (its own screen — add an embed, text, buttons, and more tiles inside it), or the <b>Handbook</b>. Make a Page and add tiles inside it to nest as deep as you want.</p>
       <div id="items"></div>
       <button class="addbtn" id="addItem">+ Add tile</button>
     </div>
@@ -204,7 +209,6 @@ code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1
 </div>
 
 <script>
-/* ---------- icons (match the site) ---------- */
 const ICONS = {
   book:`<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
   monitor:`<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
@@ -241,249 +245,206 @@ const esc = s => (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;
 const slug = s => (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40);
 
 /* ---------- state ---------- */
-const FALLBACK = { site:{campus:"Killough Campus",formsEmbed:"",data:{teacher:{title:"Teacher Reports",embed:"",desc:"Class rosters & grade summaries"},admin:{title:"Admin Reports",embed:"",desc:"Campus-wide reports",locked:true}}},
-  groupOrder:["Teaching & Learning","Daily Operations","Staff & Directory","Student Support","Community"],
-  items:[{id:"example",label:"Example Tile",group:"Daily Operations",icon:"star",daily:true,kind:"link",url:"https://example.com",desc:"A sample tile"}] };
+const FALLBACK = { site:{campus:"Killough Campus",formsEmbed:"",data:{teacher:{title:"Teacher Reports",embed:"",desc:"Class rosters & grade summaries"},admin:{title:"Admin Reports",embed:"",desc:"Campus-wide reports",locked:true}},nav:{resources:{},forms:{},data:{}}},
+  pages:[{id:"example",label:"Example Tile",desc:"A sample tile",icon:"star",kind:"link",url:"https://example.com",home:true}] };
 const cfg = JSON.parse(JSON.stringify(window.SITE_CONFIG || FALLBACK));
 cfg.site = cfg.site || FALLBACK.site;
 cfg.site.data = cfg.site.data || FALLBACK.site.data;
-cfg.groupOrder = cfg.groupOrder || [];
-cfg.items = cfg.items || [];
+cfg.site.nav = cfg.site.nav || {resources:{},forms:{},data:{}};
+cfg.pages = cfg.pages || [];
 
-/* ---------- safe localStorage (non-sensitive settings only) ---------- */
-const store = {
-  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
-  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-};
+let _uid = 0;
+function normalize(list){ (list||[]).forEach(n=>{ n._uid = ++_uid; n.kind = n.kind||"link"; if(!n.id){ n.id = slug(n.label); n._autoId = true; } if(n.kind==="page"){ n.buttons = n.buttons||[]; n.children = n.children||[]; } if(n.children) normalize(n.children); }); }
+normalize(cfg.pages);
 
-/* ---------- render: site fields ---------- */
+const UMAP = new Map();
+function reindex(){ UMAP.clear(); (function w(arr){ arr.forEach((n,i)=>{ UMAP.set(n._uid,{node:n,arr,i}); if(n.children) w(n.children); }); })(cfg.pages); }
+function newNode(){ return { _uid:++_uid, id:"", _autoId:true, label:"New Tile", desc:"", icon:"star", kind:"link", url:"", home:false }; }
+
+/* ---------- safe localStorage ---------- */
+const store = { get(k){ try{return localStorage.getItem(k);}catch(e){return null;} }, set(k,v){ try{localStorage.setItem(k,v);}catch(e){} } };
+
+/* ---------- site fields ---------- */
 function fillSite(){
   document.querySelectorAll("[data-site]").forEach(inp=>{
-    const path = inp.dataset.site.split(".");
-    let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
+    const path = inp.dataset.site.split("."); let o=cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
     const v = o[path[path.length-1]];
-    if(inp.type==="checkbox") inp.checked = (v!==false);   // default shown
-    else inp.value = v ?? "";
+    if(inp.type==="checkbox") inp.checked = (v!==false); else inp.value = v ?? "";
   });
 }
 document.addEventListener("input", e=>{
   const inp = e.target.closest("[data-site]"); if(!inp) return;
-  const path = inp.dataset.site.split(".");
-  let o = cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
-  o[path[path.length-1]] = inp.type==="checkbox" ? inp.checked : inp.value;
+  const path = inp.dataset.site.split("."); let o=cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
+  o[path[path.length-1]] = inp.type==="checkbox" ? inp.checked : inp.value; renderPreview();
+});
+
+/* ---------- tile tree editor ---------- */
+function field(label, uid, key, val, ph){
+  return `<label class="f"><span>${label}</span><input type="text" data-uid="${uid}" data-key="${key}" value="${esc(val||"")}" placeholder="${esc(ph||"")}"></label>`;
+}
+function typeSel(n){
+  return `<select data-uid="${n._uid}" data-key="kind">
+    <option value="link" ${n.kind==="link"?"selected":""}>Link \u2014 opens a website</option>
+    <option value="page" ${n.kind==="page"?"selected":""}>Page \u2014 embed / text / buttons / tiles</option>
+    <option value="reader" ${n.kind==="reader"?"selected":""}>Handbook reader</option>
+  </select>`;
+}
+function fieldsFor(n){
+  if(n.kind==="link") return field("Website URL (opens in a new tab)", n._uid, "url", n.url, "https://...");
+  if(n.kind==="reader") return `<div class="row">${field("Handbook file (src)", n._uid,"src",n.src,"handbook.json")}${field("Open-in-Docs link", n._uid,"url",n.url,"https://docs.google.com/...")}</div>`;
+  let h = field("Embed link \u2014 optional (Sheet / Slides / PDF / Calendar / Form)", n._uid,"embed", n.embed, "published embed link");
+  h += `<label class="f"><span>Text content \u2014 optional</span><textarea rows="2" data-uid="${n._uid}" data-key="body" placeholder="A note shown at the top of this page">${esc(n.body||"")}</textarea></label>`;
+  h += `<div class="sub"><span class="subttl">Buttons</span>`;
+  (n.buttons||[]).forEach((b,bi)=>{
+    h += `<div class="btnedit">
+      <input type="text" data-uid="${n._uid}" data-key="btn:${bi}:label" value="${esc(b.label||"")}" placeholder="Button name">
+      <input type="text" data-uid="${n._uid}" data-key="btn:${bi}:href" value="${esc(b.href||"")}" placeholder="https://\u2026  or  #/p/other-tile-id">
+      <button class="btn sm danger" data-act="delbtn" data-uid="${n._uid}" data-bi="${bi}" title="Remove">\u2715</button>
+    </div>`;
+  });
+  h += `<button class="addbtn tiny-add" data-act="addbtn" data-uid="${n._uid}">+ Add button</button></div>`;
+  return h;
+}
+function nodeCard(n, depth){
+  const isPage = n.kind==="page";
+  const indent = depth ? `margin-left:${Math.min(depth,5)*14}px;border-left:3px solid var(--gold)` : "";
+  let h = `<div class="item" data-uid="${n._uid}" style="${indent}">
+    <div class="ihead">
+      <button type="button" class="iconpick mini" data-act="pick" data-uid="${n._uid}" title="Icon"><span class="swatch sm">${svg(n.icon)}</span></button>
+      <input class="lbl" type="text" data-uid="${n._uid}" data-key="label" value="${esc(n.label)}" placeholder="Tile name">
+      ${n.home?'<span class="badge">home</span>':""}
+      <button class="btn sm" data-act="up" data-uid="${n._uid}" title="Up">\u2191</button>
+      <button class="btn sm" data-act="down" data-uid="${n._uid}" title="Down">\u2193</button>
+      <button class="btn sm danger" data-act="del" data-uid="${n._uid}" title="Delete">\u2715</button>
+    </div>
+    <div class="row">
+      <label class="f"><span>Type</span>${typeSel(n)}</label>
+      <label class="f"><span>Short description</span><input type="text" data-uid="${n._uid}" data-key="desc" value="${esc(n.desc||"")}" placeholder="One line under the title"></label>
+    </div>
+    ${fieldsFor(n)}
+    <label class="chk"><input type="checkbox" data-uid="${n._uid}" data-key="home" ${n.home?"checked":""}> Show on Home</label>
+    <p class="tiny">id: <code data-idfor="${n._uid}">${esc(n.id||slug(n.label))}</code></p>`;
+  if(isPage){
+    h += `<div class="children"><span class="childttl">Tiles inside this page</span>`;
+    (n.children||[]).forEach(c=> h += nodeCard(c, (depth||0)+1));
+    h += `<button class="addbtn" data-act="addchild" data-uid="${n._uid}">+ Add tile inside \u201c${esc(n.label||"this page")}\u201d</button></div>`;
+  }
+  return h + `</div>`;
+}
+function renderItems(){ document.getElementById("items").innerHTML = cfg.pages.map(n=>nodeCard(n,0)).join(""); }
+
+const itemsEl = document.getElementById("items");
+itemsEl.addEventListener("input", e=>{
+  const el = e.target.closest("[data-uid]"); if(!el) return;
+  const rec = UMAP.get(+el.dataset.uid); if(!rec) return; const n = rec.node; const key = el.dataset.key;
+  if(key==="kind"){ n.kind = el.value; if(n.kind==="page"){ n.buttons=n.buttons||[]; n.children=n.children||[]; } redrawAll(); return; }
+  if(key==="home"){ n.home = el.checked; redrawAll(); return; }
+  if(key && key.indexOf("btn:")===0){ const p=key.split(":"); n.buttons[+p[1]][p[2]] = el.value; renderPreview(); return; }
+  n[key] = el.value;
+  if(key==="label" && (!n.id || n._autoId)){ n.id = slug(el.value); n._autoId = true; const idEl = document.querySelector('[data-idfor="'+n._uid+'"]'); if(idEl) idEl.textContent = n.id; }
   renderPreview();
 });
+itemsEl.addEventListener("click", e=>{
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const act = b.dataset.act; const uid = b.dataset.uid ? +b.dataset.uid : null;
+  if(act==="pick"){ openIconPicker(uid); return; }
+  const rec = uid!=null ? UMAP.get(uid) : null; if(!rec) return; const node=rec.node, arr=rec.arr, i=rec.i;
+  if(act==="up" && i>0){ [arr[i-1],arr[i]]=[arr[i],arr[i-1]]; redrawAll(); }
+  else if(act==="down" && i<arr.length-1){ [arr[i+1],arr[i]]=[arr[i],arr[i+1]]; redrawAll(); }
+  else if(act==="del"){ const extra=(node.children&&node.children.length)?" and everything inside it":""; if(confirm('Delete "'+(node.label||"tile")+'"'+extra+"?")){ arr.splice(i,1); redrawAll(); } }
+  else if(act==="addchild"){ node.children=node.children||[]; node.children.push(newNode()); redrawAll(); }
+  else if(act==="addbtn"){ node.buttons=node.buttons||[]; node.buttons.push({label:"",href:""}); redrawAll(); }
+  else if(act==="delbtn"){ node.buttons.splice(+b.dataset.bi,1); redrawAll(); }
+});
+document.getElementById("addItem").addEventListener("click", ()=>{ cfg.pages.push(newNode()); redrawAll(); const items=document.getElementById("items"); if(items.lastElementChild) items.lastElementChild.scrollIntoView({behavior:"smooth",block:"center"}); });
 
-/* ---------- render: groups ---------- */
-function renderGroups(){
-  const box = document.getElementById("groups");
-  box.innerHTML = cfg.groupOrder.map((g,i)=>`
-    <div class="grow">
-      <input type="text" value="${esc(g)}" data-gidx="${i}">
-      <button class="btn sm" data-gup="${i}" title="Up">↑</button>
-      <button class="btn sm" data-gdown="${i}" title="Down">↓</button>
-      <button class="btn sm danger" data-gdel="${i}" title="Remove">✕</button>
-    </div>`).join("");
-}
-document.getElementById("groups").addEventListener("input", e=>{
-  const inp = e.target.closest("[data-gidx]"); if(!inp) return;
-  const i = +inp.dataset.gidx; const old = cfg.groupOrder[i]; const val = inp.value;
-  cfg.groupOrder[i] = val;
-  cfg.items.forEach(it=>{ if(it.group===old) it.group=val; });  // keep tiles attached
-  renderItems(); renderPreview();
-});
-document.getElementById("groups").addEventListener("click", e=>{
-  const up=e.target.closest("[data-gup]"), dn=e.target.closest("[data-gdown]"), del=e.target.closest("[data-gdel]");
-  if(up){ const i=+up.dataset.gup; if(i>0){ [cfg.groupOrder[i-1],cfg.groupOrder[i]]=[cfg.groupOrder[i],cfg.groupOrder[i-1]]; redrawAll(); } }
-  if(dn){ const i=+dn.dataset.gdown; if(i<cfg.groupOrder.length-1){ [cfg.groupOrder[i+1],cfg.groupOrder[i]]=[cfg.groupOrder[i],cfg.groupOrder[i+1]]; redrawAll(); } }
-  if(del){ const i=+del.dataset.gdel; if(confirm("Remove group \""+cfg.groupOrder[i]+"\"? Tiles in it stay but will be ungrouped.")){ cfg.groupOrder.splice(i,1); redrawAll(); } }
-});
-document.getElementById("addGroup").addEventListener("click", ()=>{ cfg.groupOrder.push("New Group"); renderGroups(); });
-
-/* ---------- render: items ---------- */
-function kindFields(it,i){
-  if(it.kind==="link")
-    return `<label class="f"><span>Link URL (opens in new tab)</span><input type="text" data-idx="${i}" data-key="url" value="${esc(it.url)}" placeholder="https://..."></label>`;
-  if(it.kind==="embed")
-    return `<label class="f"><span>Embed link (Sheet / Slides / PDF / Calendar)</span><input type="text" data-idx="${i}" data-key="embed" value="${esc(it.embed)}" placeholder="published embed link"></label>`;
-  if(it.kind==="reader")
-    return `<div class="row"><label class="f"><span>Apps Script URL (live reader)</span><input type="text" data-idx="${i}" data-key="src" value="${esc(it.src)}" placeholder=".../exec"></label>
-            <label class="f"><span>Doc link (Open-in-Docs button)</span><input type="text" data-idx="${i}" data-key="url" value="${esc(it.url)}" placeholder="https://docs.google.com/..."></label></div>`;
-  return "";
-}
-function renderItems(){
-  const box = document.getElementById("items");
-  const groupOpts = cfg.groupOrder.map(g=>`<option value="${esc(g)}">`).join("");
-  const subSet = [];
-  cfg.items.forEach(x=>{ if(x.subgroup && subSet.indexOf(x.subgroup)===-1) subSet.push(x.subgroup); });
-  const subOpts = subSet.map(s=>`<option value="${esc(s)}">`).join("");
-  box.innerHTML = cfg.items.map((it,i)=>`
-    <div class="item">
-      <div class="ihead">
-        <span class="iconrow"><span class="swatch">${svg(it.icon)}</span></span>
-        <input class="lbl" type="text" data-idx="${i}" data-key="label" value="${esc(it.label)}" placeholder="Tile name">
-        ${it.daily?'<span class="badge">home</span>':''}
-        <button class="btn sm" data-up="${i}" title="Up">↑</button>
-        <button class="btn sm" data-down="${i}" title="Down">↓</button>
-        <button class="btn sm danger" data-del="${i}" title="Delete">✕</button>
-      </div>
-      <div class="row">
-        <label class="f"><span>Group</span><input type="text" list="groupList" data-idx="${i}" data-key="group" value="${esc(it.group)}"></label>
-        <label class="f"><span>Subgroup <em style="text-transform:none;letter-spacing:0;color:var(--gray-m)">(optional)</em></span><input type="text" list="subList" data-idx="${i}" data-key="subgroup" value="${esc(it.subgroup||"")}" placeholder="e.g. Forms"></label>
-      </div>
-      <div class="row">
-        <label class="f"><span>Icon</span><button type="button" class="iconpick" data-pick="${i}"><span class="swatch sm">${svg(it.icon)}</span><span class="iconname">${esc(it.icon)}</span><span class="chev">▾</span></button></label>
-        <label class="f"><span>Type</span><select data-idx="${i}" data-key="kind">
-          <option value="link" ${it.kind==="link"?"selected":""}>Link (new tab)</option>
-          <option value="embed" ${it.kind==="embed"?"selected":""}>Embed (in page)</option>
-          <option value="reader" ${it.kind==="reader"?"selected":""}>Handbook reader</option>
-        </select></label>
-      </div>
-      ${kindFields(it,i)}
-      <label class="f"><span>Short description</span><input type="text" data-idx="${i}" data-key="desc" value="${esc(it.desc)}"></label>
-      <label class="chk"><input type="checkbox" data-idx="${i}" data-key="daily" ${it.daily?"checked":""}> Show on Home page</label>
-      <p class="tiny">id: <code>${esc(it.id||slug(it.label))}</code></p>
-    </div>`).join("") + `<datalist id="groupList">${groupOpts}</datalist><datalist id="subList">${subOpts}</datalist>`;
-}
-document.getElementById("items").addEventListener("input", e=>{
-  const el = e.target.closest("[data-idx]"); if(!el) return;
-  const i=+el.dataset.idx, key=el.dataset.key, it=cfg.items[i];
-  if(key==="daily"){ it.daily = el.checked; renderItems(); renderPreview(); return; }
-  it[key] = el.value;
-  if(key==="label" && (!it.id || it._autoId)){ it.id = slug(el.value); it._autoId = true; }
-  if(key==="kind"){ renderItems(); }
-  renderPreview();
-});
-document.getElementById("items").addEventListener("click", e=>{
-  const up=e.target.closest("[data-up]"), dn=e.target.closest("[data-down]"), del=e.target.closest("[data-del]"), pick=e.target.closest("[data-pick]");
-  if(pick){ openIconPicker(+pick.dataset.pick); return; }
-  if(up){ const i=+up.dataset.up; if(i>0){ [cfg.items[i-1],cfg.items[i]]=[cfg.items[i],cfg.items[i-1]]; renderItems(); renderPreview(); } }
-  if(dn){ const i=+dn.dataset.down; if(i<cfg.items.length-1){ [cfg.items[i+1],cfg.items[i]]=[cfg.items[i],cfg.items[i+1]]; renderItems(); renderPreview(); } }
-  if(del){ const i=+del.dataset.del; if(confirm("Delete tile \""+cfg.items[i].label+"\"?")){ cfg.items.splice(i,1); renderItems(); renderPreview(); } }
-});
-
-/* ---------- icon picker modal ---------- */
-let iconTarget = -1;
+/* ---------- icon picker ---------- */
+let iconTarget = null;
 const iconModal = document.getElementById("iconModal");
+function curIcon(){ const r=UMAP.get(iconTarget); return r?r.node.icon:""; }
 function renderIconGrid(filter){
-  const f = (filter||"").toLowerCase();
-  const cur = iconTarget>=0 ? cfg.items[iconTarget].icon : "";
-  document.getElementById("iconGrid").innerHTML = ICON_NAMES
-    .filter(n=>n.includes(f))
+  const f=(filter||"").toLowerCase(); const cur=curIcon();
+  document.getElementById("iconGrid").innerHTML = ICON_NAMES.filter(n=>n.includes(f))
     .map(n=>`<button type="button" class="iopt ${n===cur?"cur":""}" data-icon="${n}"><span class="sw">${svg(n)}</span><span>${n}</span></button>`).join("")
     || `<p class="note">No icons match "${esc(filter)}".</p>`;
 }
-function openIconPicker(i){
-  iconTarget = i;
-  document.getElementById("iconSearch").value = "";
-  renderIconGrid("");
-  iconModal.classList.add("open");
-  setTimeout(()=>document.getElementById("iconSearch").focus(), 30);
-}
-function closeIconPicker(){ iconModal.classList.remove("open"); iconTarget = -1; }
+function openIconPicker(uid){ iconTarget=uid; document.getElementById("iconSearch").value=""; renderIconGrid(""); iconModal.classList.add("open"); setTimeout(()=>document.getElementById("iconSearch").focus(),30); }
+function closeIconPicker(){ iconModal.classList.remove("open"); iconTarget=null; }
 document.getElementById("iconSearch").addEventListener("input", e=>renderIconGrid(e.target.value));
-document.getElementById("iconGrid").addEventListener("click", e=>{
-  const opt = e.target.closest("[data-icon]"); if(!opt || iconTarget<0) return;
-  cfg.items[iconTarget].icon = opt.dataset.icon;
-  closeIconPicker(); renderItems(); renderPreview();
-});
+document.getElementById("iconGrid").addEventListener("click", e=>{ const opt=e.target.closest("[data-icon]"); if(!opt||iconTarget==null) return; const r=UMAP.get(iconTarget); if(r) r.node.icon=opt.dataset.icon; closeIconPicker(); redrawAll(); });
 iconModal.addEventListener("click", e=>{ if(e.target===iconModal) closeIconPicker(); });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && iconModal.classList.contains("open")) closeIconPicker(); });
-document.getElementById("addItem").addEventListener("click", ()=>{
-  cfg.items.push({ id:"", _autoId:true, label:"New Tile", group:cfg.groupOrder[0]||"", icon:"star", daily:false, kind:"link", url:"", embed:"", src:"", desc:"" });
-  renderItems(); renderPreview();
-  document.getElementById("items").lastElementChild.scrollIntoView({behavior:"smooth",block:"center"});
-});
 
 /* ---------- live preview ---------- */
-function tilePV(it, folder){
-  if(folder) return `<div class="tile folder"><div class="ic">${svg("folder")}</div><h4>${esc(it)}</h4><p class="cnt">${folder} item${folder>1?"s":""}</p><span class="fchev">›</span></div>`;
-  const ext = it.kind==="link" && it.url ? `<span class="ext">${svg("ext")}</span>` : "";
-  return `<div class="tile"><div class="ic">${svg(it.icon)}</div><h4>${esc(it.label)}</h4><p>${esc(it.desc)}</p>${ext}</div>`;
+function tilePV(n){
+  const isPage=n.kind==="page";
+  const ext = n.kind==="link" && n.url ? `<span class="ext">${svg("ext")}</span>` : "";
+  const chev = isPage ? `<span class="fchev">\u203a</span>` : "";
+  return `<div class="tile${isPage?" folder":""}"><div class="ic">${svg(n.icon)}</div><h4>${esc(n.label)}</h4><p>${esc(n.desc||"")}</p>${ext}${chev}</div>`;
 }
+function collectHome(){ const out=[]; (function w(a){ a.forEach(n=>{ if(n.home) out.push(n); if(n.children) w(n.children); }); })(cfg.pages); return out; }
 function renderPreview(){
-  document.getElementById("pvCampus").textContent = "Home · " + (cfg.site.campus||"") ;
-  const pinned = cfg.items.filter(x=>x.daily);
+  document.getElementById("pvCampus").textContent = "Home \u00b7 " + (cfg.site.campus||"");
+  const pinned = collectHome();
   let html = `<div class="pvtab">Home page</div>`;
-  if(!pinned.length){
-    html += `<p class="note">No tiles pinned to Home yet — check "Show on Home page" on the tiles you want here.</p>`;
-  } else {
-    cfg.groupOrder.forEach(g=>{
-      const items = pinned.filter(x=>x.group===g);
-      if(items.length) html += `<h3 class="sec"><span class="star">★</span> ${esc(g)}</h3><div class="grid">${items.map(it=>tilePV(it)).join("")}</div>`;
-    });
-  }
-  html += `<div class="pvtab">Resources (drill-down)</div><div class="grid">`;
-  cfg.groupOrder.forEach(g=>{
-    const items = cfg.items.filter(x=>x.group===g);
-    if(items.length) html += tilePV(g, items.length);
-  });
-  html += `</div>`;
+  html += pinned.length ? `<div class="grid">${pinned.map(tilePV).join("")}</div>` : `<p class="note">No tiles pinned to Home yet \u2014 check \u201cShow on Home\u201d.</p>`;
+  const sorted = cfg.pages.slice().sort((a,b)=>(a.label||"").localeCompare(b.label||""));
+  html += `<div class="pvtab">All Resources (A\u2013Z)</div><div class="grid">${sorted.map(tilePV).join("")}</div>`;
   document.getElementById("preview").innerHTML = html;
 }
 
 /* ---------- export ---------- */
-function pruneItem(it){
-  const o = { id: it.id || slug(it.label), label: it.label, group: it.group };
-  if(it.subgroup) o.subgroup = it.subgroup;
-  o.icon = it.icon; o.daily = !!it.daily; o.kind = it.kind;
-  if(it.kind==="link"){ o.url = it.url||""; }
-  else if(it.kind==="embed"){ o.embed = it.embed||""; }
-  else if(it.kind==="reader"){ o.src = it.src||""; o.url = it.url||""; }
-  o.desc = it.desc||"";
-  return o;
+function prune(list){
+  return list.map(n=>{
+    const o = { id: n.id||slug(n.label), label: n.label, desc: n.desc||"", icon: n.icon||"star", kind: n.kind, home: !!n.home };
+    if(n.kind==="link"){ o.url = n.url||""; }
+    else if(n.kind==="reader"){ o.src = n.src||""; o.url = n.url||""; }
+    else if(n.kind==="page"){
+      if(n.embed) o.embed = n.embed;
+      if(n.body) o.body = n.body;
+      const btns = (n.buttons||[]).filter(b=>(b.label||b.href)).map(b=>({label:b.label||"",href:b.href||""}));
+      if(btns.length) o.buttons = btns;
+      if(n.children && n.children.length) o.children = prune(n.children);
+    }
+    return o;
+  });
 }
 function buildConfigText(){
-  const clean = { site: cfg.site, groupOrder: cfg.groupOrder, items: cfg.items.map(pruneItem) };
-  const header = "/* LHS Killough — Faculty Hub site content. Generated by builder.html. */\n";
+  const clean = { site: cfg.site, pages: prune(cfg.pages) };
+  const header = "/* LHS Killough \u2014 Faculty Hub content. Page-tree model. Generated by builder.html. */\n";
   return header + "window.SITE_CONFIG = " + JSON.stringify(clean, null, 2) + ";\n";
 }
 function b64utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
 function setStatus(msg, cls){ const s=document.getElementById("status"); s.textContent=msg; s.className="status "+(cls||""); }
-
-document.getElementById("btnCopy").addEventListener("click", async ()=>{
-  try{ await navigator.clipboard.writeText(buildConfigText()); setStatus("Copied config.js to clipboard","ok"); }
-  catch(e){ setStatus("Copy failed — use Download","err"); }
-});
-document.getElementById("btnDownload").addEventListener("click", ()=>{
-  const blob = new Blob([buildConfigText()], {type:"text/javascript"});
-  const a = document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="config.js"; a.click();
-  setStatus("Downloaded config.js — upload it to your repo","ok");
-});
+document.getElementById("btnCopy").addEventListener("click", async ()=>{ try{ await navigator.clipboard.writeText(buildConfigText()); setStatus("Copied config.js to clipboard","ok"); }catch(e){ setStatus("Copy failed \u2014 use Download","err"); } });
+document.getElementById("btnDownload").addEventListener("click", ()=>{ const blob=new Blob([buildConfigText()],{type:"text/javascript"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="config.js"; a.click(); setStatus("Downloaded config.js \u2014 upload it to your repo","ok"); });
 
 /* ---------- publish to GitHub ---------- */
 async function publish(){
   const owner=val("gh_owner").trim(), repo=val("gh_repo").trim(), branch=(val("gh_branch").trim()||"main"),
-        path=(val("gh_path").trim()||"config.js"), token=val("gh_token").trim(),
-        msg=(val("gh_msg").trim()||"Update site content via builder");
+        path=(val("gh_path").trim()||"config.js"), token=val("gh_token").trim(), msg=(val("gh_msg").trim()||"Update site content via builder");
   if(!owner||!repo||!token){ document.getElementById("ghPanel").open=true; setStatus("Fill in owner, repo and token first","err"); return; }
   store.set("gh_owner",owner); store.set("gh_repo",repo); store.set("gh_branch",branch); store.set("gh_path",path);
-  setStatus("Publishing…","");
+  setStatus("Publishing\u2026","");
   const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path.split("/").map(encodeURIComponent).join("/")}`;
   const h = { "Authorization":"Bearer "+token, "Accept":"application/vnd.github+json" };
-  let sha = null;
-  try{
-    const r = await fetch(api+"?ref="+encodeURIComponent(branch), {headers:h});
-    if(r.ok){ sha = (await r.json()).sha; }
-    else if(r.status!==404){ const e=await r.json(); throw new Error(e.message||("HTTP "+r.status)); }
-  }catch(e){ setStatus("Couldn't reach repo: "+e.message,"err"); return; }
-  const body = { message: msg, content: b64utf8(buildConfigText()), branch };
-  if(sha) body.sha = sha;
-  try{
-    const put = await fetch(api, {method:"PUT", headers:{...h,"Content-Type":"application/json"}, body:JSON.stringify(body)});
-    if(put.ok){ setStatus("Published. Site updates in ~1 min.","ok"); }
-    else { const e=await put.json(); setStatus("Publish failed: "+(e.message||put.status),"err"); }
-  }catch(e){ setStatus("Publish failed: "+e.message,"err"); }
+  let sha=null;
+  try{ const r=await fetch(api+"?ref="+encodeURIComponent(branch),{headers:h}); if(r.ok){ sha=(await r.json()).sha; } else if(r.status!==404){ const e=await r.json(); throw new Error(e.message||("HTTP "+r.status)); } }
+  catch(e){ setStatus("Couldn't reach repo: "+e.message,"err"); return; }
+  const body = { message: msg, content: b64utf8(buildConfigText()), branch }; if(sha) body.sha=sha;
+  try{ const put=await fetch(api,{method:"PUT",headers:{...h,"Content-Type":"application/json"},body:JSON.stringify(body)}); if(put.ok){ setStatus("Published. Site updates in ~1 min.","ok"); } else { const e=await put.json(); setStatus("Publish failed: "+(e.message||put.status),"err"); } }
+  catch(e){ setStatus("Publish failed: "+e.message,"err"); }
 }
 function val(id){ return document.getElementById(id).value; }
 document.getElementById("btnPublish").addEventListener("click", publish);
 
 /* ---------- boot ---------- */
-function redrawAll(){ renderGroups(); renderItems(); renderPreview(); }
+function redrawAll(){ reindex(); renderItems(); renderPreview(); }
 ["gh_owner","gh_repo","gh_branch","gh_path"].forEach(id=>{ const v=store.get(id); if(v) document.getElementById(id).value=v; });
 if(!document.getElementById("gh_branch").value) document.getElementById("gh_branch").value="main";
 if(!document.getElementById("gh_path").value) document.getElementById("gh_path").value="config.js";
 fillSite(); redrawAll();
+
 </script>
 </body>
 </html>
