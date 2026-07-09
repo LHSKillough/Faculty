@@ -375,6 +375,22 @@ function nodeById(id){ let hit=null; walkNodes(PAGES, n=>{ if(n.id===id) hit=n; 
 function homeNodes(){ const out=[]; walkNodes(PAGES, n=>{ if(n.home) out.push(n); }); return out; }
 function topLevelSorted(){ return PAGES.slice().sort((a,b)=>(a.label||"").localeCompare(b.label||"")); }
 function pageHasContent(n){ return !!(n.body || n.embed || (n.buttons&&n.buttons.length) || (n.children&&n.children.length)); }
+const SECTION_ORDER = CFG.sectionOrder || [];
+function sectionsInOrder(tiles){
+  const present=[]; tiles.forEach(t=>{ const s=t.section||""; if(s && present.indexOf(s)<0) present.push(s); });
+  const ordered=SECTION_ORDER.filter(s=>present.indexOf(s)>=0);
+  present.forEach(s=>{ if(ordered.indexOf(s)<0) ordered.push(s); });
+  return ordered;
+}
+function sectionedHTML(tiles){
+  const noSec = tiles.filter(t=>!t.section);
+  let html = noSec.length ? `<div class="section"><div class="grid">${noSec.map(tileHTML).join("")}</div></div>` : "";
+  sectionsInOrder(tiles).forEach(s=>{
+    const ts = tiles.filter(t=>(t.section||"")===s);
+    html += `<div class="section">${head(s)}<div class="grid">${ts.map(tileHTML).join("")}</div></div>`;
+  });
+  return html;
+}
 
 /* ==========================================================================
    2)  ICONS  (inline SVG, no editing needed)
@@ -468,7 +484,7 @@ function homeBody(){
   if(!pinned.length){
     html += `<div class="section">${head("Welcome")}<p style="color:var(--gray-d);font-size:14px;margin:0 2px">Pin tiles here with the “Show on Home” option in the builder, or open Resources to browse everything.</p></div>`;
   } else {
-    html += `<div class="section">${head("Quick Access")}<div class="grid">${pinned.map(tileHTML).join("")}</div></div>`;
+    html += sectionedHTML(pinned);
   }
   html += `<div class="section" style="margin-top:26px"><a class="browse" href="#/resources">${icon("folder")} Browse all resources ${icon("chev")}</a></div>`;
   return html;
@@ -480,6 +496,14 @@ function renderResourcesIndex(){
     ? `<div class="grid">${tiles.map(tileHTML).join("")}</div>`
     : `<p style="color:var(--gray-m);font-size:14px">No resources yet.</p>`;
   app.innerHTML = `<div class="section" style="margin-top:30px">${head(label)}${inner}</div>`;
+  stagger();
+}
+function renderSectionPage(sid){
+  const tiles = PAGES.filter(n=> gslug(n.section||"")===sid);
+  if(!tiles.length){ renderResourcesIndex(); return; }
+  const name = tiles[0].section;
+  app.innerHTML = `${crumbs([{label:"Home",href:"#/"},{label:"Resources",href:"#/resources"},{label:name}])}
+    <div class="section">${head(name)}<div class="grid">${tiles.map(tileHTML).join("")}</div></div>`;
   stagger();
 }
 function buttonsHTML(btns){
@@ -500,7 +524,7 @@ function renderPage(id){
   if(n.body)   inner += `<div class="pagebody">${n.body}</div>`;
   if(n.embed)  inner += `<div class="frame page-frame"><iframe src="${esc(n.embed)}" allowfullscreen loading="lazy"></iframe></div>`;
   if(n.buttons&&n.buttons.length) inner += buttonsHTML(n.buttons);
-  if(n.children&&n.children.length) inner += `<div class="grid" style="margin-top:16px">${n.children.map(tileHTML).join("")}</div>`;
+  if(n.children&&n.children.length) inner += sectionedHTML(n.children);
   if(!inner) inner = `<div class="setup"><span class="ico">${icon("layers")}</span><h3>${esc(n.label)}</h3><p class="note">This page is empty. Add an embed, text, buttons, or tiles in the builder.</p></div>`;
   app.innerHTML = `${crumbs([{label:"Home",href:"#/"},{label:"Resources",href:"#/resources"},{label:n.label}])}
     <div class="section">${head(n.label)}${inner}</div>`;
@@ -849,6 +873,7 @@ function router(){
   switch(parts[0]){
     case "resources": setActive(""); return renderResourcesIndex();
     case "p":         setActive(""); return renderPage(parts[1]);
+    case "s":         setActive(""); return renderSectionPage(parts[1]);
     case "forms":     setActive("forms"); return renderForms();
     case "data":      setActive("data"); return renderData(parts[1]);
     case "view":      setActive(""); return renderView(parts[1]);
@@ -861,12 +886,8 @@ window.addEventListener("hashchange", router);
 /* ---- Resources dropdown contents ---- */
 (function buildDropdown(){
   const panel = document.getElementById("respanel");
-  const links = topLevelSorted().map(n=>{
-    if(n.kind==="link" && n.url) return `<a href="${esc(n.url)}" target="_blank" rel="noopener">${icon(n.icon||"star")} ${esc(n.label)}</a>`;
-    const href = n.kind==="reader" ? "#/view/"+n.id : "#/p/"+n.id;
-    return `<a href="${href}">${icon(n.icon||"star")} ${esc(n.label)}</a>`;
-  }).join("");
-  panel.innerHTML = `<a href="#/resources">${icon("folder")} All Resources</a>` + links;
+  const secLinks = sectionsInOrder(PAGES).map(s=>`<a href="#/s/${gslug(s)}">${icon("star")} ${esc(s)}</a>`).join("");
+  panel.innerHTML = `<a href="#/resources">${icon("folder")} All Resources</a>` + secLinks;
 })();
 
 /* ---- menus / search UI ---- */
