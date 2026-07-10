@@ -89,16 +89,6 @@ window.SITE_CONFIG = {
       "url": "https://myapps.classlink.com/home"
     },
     {
-      "id": "skyward",
-      "label": "Skyward",
-      "desc": "Grade Access",
-      "icon": "clipboard",
-      "kind": "link",
-      "home": false,
-      "section": "Teaching & Learning",
-      "url": "https://skyward.iscorp.com/LewisvilleISDTXStu"
-    },
-    {
       "id": "bell",
       "label": "Bell Schedule & Lunches",
       "desc": "Daily schedules & lunch periods",
