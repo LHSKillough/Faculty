@@ -5,7 +5,20 @@ window.SITE_CONFIG = {
     "hero": {
       "title": "Lewisville High School",
       "subtitle": "Killough Campus · Faculty Hub",
-      "note": "A practical landing page for the systems, forms, calendars, and campus information staff use most."
+      "note": "Fighting Farmers · Est. 1897"
+    },
+    "footer": {
+      "title": "Lewisville High School",
+      "subtitle": "Killough Campus · Fighting Farmers",
+      "right": "Est. 1897 · Faculty Hub",
+      "links": [
+        { "label": "Killough Website", "href": "https://lhskillough.lisd.net" },
+        { "label": "Lewisville ISD", "href": "https://www.lisd.net" }
+      ],
+      "social": [
+        { "label": "Instagram", "type": "instagram", "href": "https://www.instagram.com/lewisvilleisd/" },
+        { "label": "Facebook", "type": "facebook", "href": "https://www.facebook.com/LewisvilleISD" }
+      ]
     },
     "formsEmbed": "",
     "data": {
@@ -25,7 +38,13 @@ window.SITE_CONFIG = {
       "resources": { "label": "Resources" },
       "forms": { "label": "Forms", "show": true },
       "data": { "label": "Data", "show": true }
-    }
+    },
+    "menu": [
+      { "label": "Home", "type": "home" },
+      { "label": "Resources", "type": "resources", "dropdownSections": true },
+      { "label": "Forms", "type": "forms" },
+      { "label": "Data", "type": "data" }
+    ]
   },
   "sectionOrder": [
     "Teaching & Learning",
@@ -83,7 +102,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Teaching & Learning",
-      "body": "Use this page for evaluation, professional learning, and assessment-related links.",
+      "body": "Evaluation, professional learning, and assessment resources.",
       "buttons": [
         { "label": "Eduphoria / Strive", "href": "https://pdas.lisd.net/authdistrict/login" },
         { "label": "PD Information", "href": "https://www.lisd.net/professional-learning/professional-learning/home" }
@@ -97,7 +116,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
-      "body": "Start here for planned absences, Frontline, and substitute-related steps.",
+      "body": "Planned absences, Frontline, and substitute resources.",
       "buttons": [
         { "label": "Frontline", "href": "https://login.frontlineeducation.com/sso/lewisvilleisd_tx" },
         { "label": "Planned Absence Form", "href": "https://docunavweb.lisd.net/Forms/PlannedAbsence" }
@@ -111,7 +130,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
-      "body": "Keep the district staff calendar here, then add your campus-specific calendar or embed later.",
+      "body": "District, staff, and campus calendars.",
       "buttons": [
         { "label": "LISD Staff Calendar PDF", "href": "https://resources.finalsite.net/images/v1768319438/lisdnet/lisdnet/cqdfxa0vi1iym5gmy6y4/2627Calendar_STAFFFINAL.pdf" },
         { "label": "Killough Campus Calendar", "href": "https://lhskillough.lisd.net/calendar" },
@@ -126,7 +145,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
-      "body": "Use this page for staff and student technology help. Add campus-specific device procedures as needed.",
+      "body": "Staff and student technology help, tickets, passwords, and device support.",
       "buttons": [
         { "label": "Create a Support Ticket", "href": "https://www.lisd.net/fs/pages/54648" },
         { "label": "Password Help", "href": "https://www.lisd.net/fs/pages/54645" },
@@ -141,9 +160,9 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
-      "body": "Add your announcement submission form, weekly update, or embedded Smore newsletter here.",
+      "body": "Campus updates, weekly information, and announcement resources.",
       "buttons": [
-        { "label": "Add Announcement Form", "href": "#/forms" }
+        { "label": "Announcement Form", "href": "#/forms" }
       ]
     },
     {
@@ -154,7 +173,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
-      "body": "Add the Teacher Bundle form link here when it is ready.",
+      "body": "Recurring teacher forms and campus tasks.",
       "buttons": []
     },
     {
@@ -176,7 +195,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Staff & Directory",
-      "body": "Add a staff directory embed, phone list, or contact document here."
+      "body": "Staff directory, phone list, and campus contact information."
     },
     {
       "id": "admin-contact",
@@ -186,7 +205,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Staff & Directory",
-      "body": "Use this page for administrator alpha splits, departments, duties, and escalation paths."
+      "body": "Administrator contacts, departments, duties, and support paths."
     },
     {
       "id": "intranet",
@@ -216,7 +235,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Student Support",
-      "body": "A one-stop page for student-facing support links.",
+      "body": "Counseling, nurse, attendance, and student services.",
       "buttons": [
         { "label": "Counseling", "href": "https://lhskillough.lisd.net/our-school/counseling" },
         { "label": "Attendance", "href": "https://lhskillough.lisd.net/our-school/attendance" },
@@ -232,7 +251,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": false,
       "section": "Student Support",
-      "body": "Use this page for links that staff frequently share with students and families.",
+      "body": "Common links for students and families.",
       "buttons": [
         { "label": "Bus Routes", "href": "https://www.infofinderi.com/ifi/?cid=LISD2U5AT3X4" },
         { "label": "Lunch Menus", "href": "https://lisd.nutrislice.com/" },
@@ -248,7 +267,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Community",
-      "body": "Add the PTSA instruction image in the Image URL field, then keep the join link below.",
+      "body": "PTSA membership and campus community information.",
       "buttons": [
         { "label": "Join PTSA", "href": "https://txpta.my.salesforce-sites.com/JoinPTA?_gl=1*sm66y4*_ga*OTI0MDM3MjA0LjE3ODM2OTU5ODk.*_ga_KF2J8CWMTX*czE3ODM2OTU5ODgkbzEkZzAkdDE3ODM2OTU5OTAkajU4JGwwJGgw" }
       ]
@@ -261,7 +280,7 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Community",
-      "body": "Add your photo submission form here, then include official campus social links.",
+      "body": "Campus social media and photo sharing resources.",
       "buttons": [
         { "label": "Killough Website", "href": "https://lhskillough.lisd.net" },
         { "label": "Instagram", "href": "https://www.instagram.com/lewisvilleisd/" },

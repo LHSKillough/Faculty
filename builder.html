@@ -3,469 +3,602 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Faculty Hub — Builder</title>
+<title>Faculty Hub Visual Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="config.js"></script>
 <style>
 :root{
-  --maroon:#500000; --maroon-deep:#3a0000; --maroon-lift:#6b1414; --gold:#E3B23C;
-  --ink:#241b1b; --gray-d:#555; --gray-m:#9ea1a2; --line:#e7e3e1; --bg:#f6f4f2; --card:#fff;
-  --ok:#1f8a4c; --err:#b3261e;
+  --maroon:#500000;--maroon2:#6d1515;--gold:#e3b23c;--ink:#231b1b;--muted:#6f6765;
+  --line:#e4dedb;--paper:#fff;--bg:#f6f3f1;--blue:#2f5f90;--green:#23764c;--red:#b3261e;
+  --shadow:0 18px 45px -32px rgba(34,12,12,.65);
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-.display{font-family:"Oswald",sans-serif}
-h1,h2,h3{font-family:"Oswald",sans-serif;margin:0}
-a{color:var(--maroon)}
-
-header.bar{position:sticky;top:0;z-index:30;background:var(--maroon);color:#fff;border-bottom:3px solid var(--gold);
-  display:flex;align-items:center;gap:14px;padding:12px 20px;flex-wrap:wrap}
-header.bar h1{font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-header.bar .sp{flex:1}
-.btn{font-family:"Oswald";font-weight:500;text-transform:uppercase;letter-spacing:.05em;font-size:13px;
-  border:0;border-radius:8px;padding:10px 15px;cursor:pointer;background:#fff;color:var(--maroon)}
-.btn:hover{background:#f1ece9}
-.btn.solid{background:var(--gold);color:#3a2a00}
-.btn.solid:hover{filter:brightness(1.05)}
-.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
-.btn.ghost:hover{background:rgba(255,255,255,.12)}
-.btn.sm{padding:6px 9px;font-size:12px}
-.btn.danger{color:var(--err)}
-.status{font-family:"Oswald";font-size:13px;letter-spacing:.03em;padding:2px 0}
-.status.ok{color:#ffe9b8}
-.status.err{color:#ffd0cc}
-
-.wrap{display:grid;grid-template-columns:1fr 460px;gap:22px;max-width:1400px;margin:0 auto;padding:20px}
-@media (max-width:1000px){ .wrap{grid-template-columns:1fr} .preview-col{position:static!important;order:-1} }
-
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;box-shadow:0 1px 2px rgba(36,16,16,.05)}
-.panel > h2{font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--maroon);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.panel > h2 .star{color:var(--gold)}
-details.panel > summary{font-family:"Oswald";font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--maroon);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
-details.panel > summary::-webkit-details-marker{display:none}
-details.panel[open] > summary{margin-bottom:12px}
-
-label.f{display:block;margin:0 0 10px}
-label.f > span{display:block;font-family:"Oswald";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-d);margin-bottom:4px}
-input[type=text],input[type=password],textarea,select{
-  width:100%;font-family:Arial;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);outline:none}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.display,h1,h2,h3{font-family:"Oswald",Arial,sans-serif}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--maroon);color:#fff;border-bottom:3px solid var(--gold)}
+.bar h1{margin:0;font-size:18px;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.bar .grow{flex:1}
+.btn{border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--maroon);padding:8px 11px;font-family:"Oswald";font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.btn:hover{filter:brightness(.98)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#352400}
+.btn.dark{background:var(--maroon2);border-color:rgba(255,255,255,.2);color:#fff}
+.btn.soft{background:#f8f4ef}
+.btn.danger{color:var(--red)}
+.btn.small{padding:5px 8px;font-size:11px}
+.status{font-size:13px;color:#ffe8b5;min-height:18px}
+.status.err{color:#ffd2ce}
+.status.ok{color:#d7ffd7}
+.layout{display:grid;grid-template-columns:1fr 390px;min-height:calc(100vh - 57px)}
+.stage{padding:18px;overflow:auto}
+.inspector{position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto;background:#fff;border-left:1px solid var(--line);padding:15px}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.inspector{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}}
+.site{max-width:1180px;margin:0 auto;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+.site-top{display:flex;align-items:center;gap:12px;background:var(--maroon);color:#fff;padding:14px 18px;border-bottom:4px solid var(--gold)}
+.brand{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-size:19px;font-weight:600}
+.menu{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.menu-item{position:relative;border:1px solid rgba(255,255,255,.25);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;padding:8px 10px;min-width:70px;text-align:center}
+.menu-item.selected,.menu-item:hover{outline:3px solid rgba(227,178,60,.45)}
+.menu-item.dragging,.card.dragging,.section.dragging{opacity:.45}
+.hero{position:relative;overflow:hidden;padding:54px 30px 50px;background:radial-gradient(circle at 12% 28%,rgba(0,0,0,.18) 0 1.5px,transparent 2px),radial-gradient(circle at 78% 18%,rgba(0,0,0,.14) 0 1.2px,transparent 2px),radial-gradient(circle at 64% 72%,rgba(0,0,0,.14) 0 1.5px,transparent 2px),linear-gradient(135deg,#650000 0%,#500000 50%,#3a0000 100%);background-size:240px 240px,200px 200px,260px 260px,auto;color:#fff;text-align:center}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.hero-inner{position:relative;z-index:1;max-width:1120px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.hero-seal{display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;background:#fff;margin:0 auto 20px;box-shadow:0 8px 26px -10px rgba(0,0,0,.5);border:5px solid var(--gold);color:var(--maroon);overflow:hidden}
+.hero-seal img{display:block;width:86px;height:auto}
+.hero h2{margin:0;color:#fff;font-size:clamp(34px,7vw,72px);line-height:.98;text-transform:uppercase;letter-spacing:.07em;text-align:center}
+.hero p{margin:14px auto 0;line-height:1.55;color:#f0d9d9;font-size:clamp(12px,1.8vw,16px);max-width:820px;font-family:"Oswald";text-transform:uppercase;letter-spacing:.28em;text-align:center}
+.hero .est{display:inline-flex;align-items:center;justify-content:center;gap:11px;margin-top:18px;font-family:"Oswald";font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#f0d9d9;flex-wrap:wrap}
+.hero .est .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+.hero-img{margin:20px auto 0;max-width:420px;border:1px solid rgba(255,255,255,.25);border-radius:10px;overflow:hidden}
+.hero-img img{display:block;width:100%;max-height:220px;object-fit:cover}
+.hero.selected,.section.selected,.card.selected,.site-footer.selected{outline:3px solid rgba(47,95,144,.45);outline-offset:-3px}
+@media(max-width:760px){.hero{padding:38px 18px}.hero h2{font-size:36px}}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+.hint{font-size:12px;color:var(--muted);margin:0}
+.sections{padding:20px 30px 34px}
+.section{padding:14px 0 22px;border-top:1px solid var(--line)}
+.section:first-child{border-top:0}
+.section-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.handle{width:28px;height:28px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.section h3{margin:0;font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--maroon)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;min-height:134px;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.card:hover{border-color:#cfbeb8}
+.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;margin-bottom:10px;background:#eee}
+.card .icon{width:35px;height:35px;border-radius:8px;background:#f2e9e5;color:var(--maroon);display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+.card h4{margin:0 0 5px;font-family:"Oswald";font-size:17px;color:var(--ink);line-height:1.1}
+.card p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+.badge{position:absolute;right:10px;top:10px;border-radius:999px;background:#f8f3e7;color:#5b3e00;border:1px solid #ead39b;padding:3px 7px;font-family:"Oswald";font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.empty{border:1px dashed #cdbfba;border-radius:8px;padding:18px;color:var(--muted);background:#fbfaf9;text-align:center}
+.panel{border:1px solid var(--line);border-radius:9px;padding:12px;margin-bottom:12px;background:#fff}
+.panel h2{margin:0 0 10px;color:var(--maroon);font-size:15px;text-transform:uppercase;letter-spacing:.06em}
+.field{display:block;margin:0 0 10px}
+.field span{display:block;margin:0 0 4px;color:var(--muted);font-family:"Oswald";font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+input[type=text],input[type=password],textarea,select{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px 9px;background:#fff;color:var(--ink);outline:0}
+textarea{min-height:72px;resize:vertical}
 input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.chk{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink);font-family:"Oswald";letter-spacing:.02em;text-transform:uppercase}
-.chk input{width:auto}
-
-.glist .grow,.item{border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px;background:#fcfbfa}
-.glist .grow{display:flex;align-items:center;gap:8px;padding:8px 10px}
-.glist .grow input{flex:1}
-.item .ihead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.item .ihead .lbl{flex:1}
-.item .ihead .badge{font-family:"Oswald";font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-d);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 8px}
-.tiny{font-size:11.5px;color:var(--gray-m);margin:4px 0 0}
-.addbtn{width:100%;border:1px dashed var(--silver,#c5c6c7);background:#fff;color:var(--maroon);border-radius:10px;padding:11px;font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-size:13px;cursor:pointer}
-.addbtn:hover{background:#faf6f2}
-.iconrow{display:flex;align-items:center;gap:8px}
-.iconrow .swatch{width:34px;height:34px;border-radius:8px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;flex:none}
-.iconrow .swatch svg{width:18px;height:18px}
-.iconpick{display:flex;align-items:center;gap:8px;width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer;font-family:Arial;font-size:13px;color:var(--ink)}
-.iconpick:hover{border-color:var(--maroon)}
-.iconpick .swatch.sm{width:28px;height:28px;border-radius:7px;flex:none}
-.iconpick .swatch.sm svg{width:16px;height:16px}
-.iconpick .iconname{flex:1;text-align:left}
-.iconpick .chev{color:var(--gray-m)}
-.modal{position:fixed;inset:0;background:rgba(36,16,16,.45);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
-.modal.open{display:flex}
-.modal .box{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:80vh;overflow:auto;padding:18px;box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
-.modal .box h3{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--maroon);margin-bottom:10px}
-.modal .igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:12px}
-.modal .iopt{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
-.modal .iopt:hover{border-color:var(--maroon);background:var(--bg)}
-.modal .iopt.cur{border-color:var(--gold);background:#fffaf0}
-.modal .iopt .sw{width:26px;height:26px;color:var(--maroon)}
-.modal .iopt .sw svg{width:26px;height:26px}
-.modal .iopt span{font-size:10.5px;color:var(--gray-d);text-align:center;line-height:1.2}
-
-/* preview */
-.preview-col{position:sticky;top:78px;align-self:start}
-.pv{background:var(--maroon);border-radius:14px;overflow:hidden;border:1px solid var(--maroon-deep)}
-.pv .pvhead{padding:14px 16px;color:#fff;border-bottom:3px solid var(--gold)}
-.pv .pvhead b{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em;font-size:14px}
-.pv .pvbody{background:var(--bg);padding:14px;max-height:74vh;overflow:auto}
-.pv h3.sec{font-family:"Oswald";font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--maroon);margin:14px 2px 8px;display:flex;align-items:center;gap:6px}
-.pv h3.sec .star{color:var(--gold);font-size:9px}
-.pv .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.pv .pvsub{font-family:"Oswald";font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-d);margin:10px 2px 6px;padding-left:8px;border-left:2px solid var(--gold)}
-.pv .pvtab{font-family:"Oswald";font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#fff;background:var(--maroon-lift);display:inline-block;padding:3px 9px;border-radius:20px;margin:14px 0 8px}
-.pv .pvtab:first-child{margin-top:0}
-.pv .tile.folder{padding-right:26px}
-.pv .tile.folder .cnt{color:var(--gray-m);font-size:10.5px}
-.pv .tile.folder .fchev{position:absolute;top:50%;right:10px;transform:translateY(-50%);color:var(--silver,#c5c6c7);font-size:18px;line-height:1}
-.pv .tile{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px;position:relative}
-.pv .tile .ic{width:34px;height:34px;border-radius:9px;background:#f3eceb;color:var(--maroon);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
-.pv .tile .ic svg{width:18px;height:18px}
-.pv .tile h4{font-family:"Oswald";font-weight:600;font-size:13.5px;margin:0 0 2px}
-.pv .tile p{margin:0;font-size:11px;color:var(--gray-d);line-height:1.35}
-.pv .tile .ext{position:absolute;top:9px;right:9px;color:var(--gray-m)}
-.pv .tile .ext svg{width:13px;height:13px}
-.note{font-size:12px;color:var(--gray-m);margin:6px 2px 0}
-code{background:#f1edec;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12px}
-</style>
-<style>
-/* tree editor additions */
-.item .iconpick.mini{width:auto;flex:none;padding:4px 6px}
-.children{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
-.childttl,.subttl{font-family:"Oswald";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-d);margin:0 0 8px;display:block}
-.sub{margin:4px 0 10px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}
-.btnedit{display:grid;grid-template-columns:1fr 1.5fr auto;gap:7px;margin-bottom:7px;align-items:center}
-.tiny-add{padding:7px;font-size:12px;margin-top:2px}
-textarea{resize:vertical;min-height:40px;font-family:Arial;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;width:100%}
-textarea:focus{border-color:var(--maroon);outline:none}
-.helptip{font-size:12px;color:var(--gray-m);margin:-4px 2px 12px;line-height:1.5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.check{display:flex;align-items:center;gap:8px;margin:8px 0;font-family:"Oswald";font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.list{display:grid;gap:8px}
+.pillrow{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:8px;background:#fbfaf9}
+.pillrow input{flex:1}
+.subtle{font-size:12px;color:var(--muted);line-height:1.4;margin:7px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.dropzone{border:1px dashed #c9bcb7;border-radius:8px;padding:12px;text-align:center;background:#fbf8f5;color:var(--muted)}
+.dropzone input{display:none}
+.site-footer{background:#3a0000;color:#e7cfcf;margin-top:0;padding:24px 30px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.site-footer .mark{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);background:#fff;color:var(--maroon);display:flex;align-items:center;justify-content:center}
+.site-footer .fb{font-family:"Oswald";text-transform:uppercase;letter-spacing:.05em}
+.site-footer .fb b{display:block;font-weight:600;font-size:14px;color:#fff}
+.site-footer .fb span{font-size:11px;letter-spacing:.16em;font-weight:300}
+.site-footer .footer-links,.site-footer .social{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.site-footer a{color:#f1dddd;text-decoration:none;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 9px;font-family:"Oswald";font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.site-footer .right{font-family:"Oswald";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c79a9a}
+.blockrow{display:grid;gap:8px;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fbfaf9}
+.blockhead{display:flex;gap:8px;align-items:center}
+.blockhead select,.blockhead input{flex:1}
+.hidden{display:none!important}
+details summary{font-family:"Oswald";color:var(--maroon);text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
+code{background:#f4efed;border:1px solid var(--line);border-radius:4px;padding:1px 4px}
 </style>
 </head>
 <body>
-
 <header class="bar">
-  <h1>Faculty Hub · Builder</h1>
-  <span class="sp"></span>
+  <h1>Faculty Hub Visual Builder</h1>
+  <span class="grow"></span>
   <span class="status" id="status"></span>
-  <button class="btn ghost" id="btnCopy">Copy</button>
-  <button class="btn ghost" id="btnDownload">Download</button>
-  <button class="btn solid" id="btnPublish">Publish to GitHub</button>
+  <button class="btn dark" id="copyBtn">Copy</button>
+  <button class="btn dark" id="downloadBtn">Download</button>
+  <button class="btn primary" id="publishBtn">Publish Site</button>
 </header>
 
-<div class="wrap">
-  <div class="editor-col">
+<main class="layout">
+  <section class="stage">
+    <div class="toolbar">
+      <p class="hint">Click anything on the page to edit it. Drag menu buttons, sections, or cards to reorder them.</p>
+      <div class="actions">
+        <button class="btn soft" id="addSectionBtn">Add Section</button>
+        <button class="btn soft" id="addCardBtn">Add Card</button>
+      </div>
+    </div>
+    <div class="site" id="canvas"></div>
+  </section>
 
-    <details class="panel" id="ghPanel" open>
-      <summary>Publish settings (GitHub)</summary>
-      <p class="note">One-time setup. Your token stays in this browser tab only and is never saved.</p>
+  <aside class="inspector">
+    <section class="panel">
+      <h2 id="editorTitle">Page Builder</h2>
+      <div id="editor"></div>
+    </section>
+
+    <details class="panel" open>
+      <summary>GitHub Publishing</summary>
+      <p class="subtle">These settings let the builder save <code>config.js</code> and uploaded images into your GitHub site. The token is only kept in this browser tab.</p>
       <div class="row">
-        <label class="f"><span>Owner (user or org)</span><input type="text" id="gh_owner" placeholder="e.g. lisd-killough"></label>
-        <label class="f"><span>Repository</span><input type="text" id="gh_repo" placeholder="e.g. faculty-hub"></label>
+        <label class="field"><span>Owner</span><input id="gh_owner" type="text" placeholder="GitHub user/org"></label>
+        <label class="field"><span>Repository</span><input id="gh_repo" type="text" placeholder="repo name"></label>
       </div>
       <div class="row">
-        <label class="f"><span>Branch</span><input type="text" id="gh_branch" placeholder="main"></label>
-        <label class="f"><span>File path</span><input type="text" id="gh_path" placeholder="config.js"></label>
+        <label class="field"><span>Branch</span><input id="gh_branch" type="text" placeholder="main"></label>
+        <label class="field"><span>Config Path</span><input id="gh_path" type="text" placeholder="config.js"></label>
       </div>
-      <label class="f"><span>Personal access token (fine-grained · Contents: Read &amp; write)</span><input type="password" id="gh_token" placeholder="github_pat_..."></label>
-      <label class="f"><span>Commit message</span><input type="text" id="gh_msg" placeholder="Update site content"></label>
-      <p class="note">Make a token at GitHub ▸ Settings ▸ Developer settings ▸ Fine-grained tokens, scoped to this one repo with <code>Contents: Read and write</code>.</p>
+      <label class="field"><span>Token</span><input id="gh_token" type="password" placeholder="github_pat_..."></label>
+      <label class="field"><span>Commit Message</span><input id="gh_msg" type="text" placeholder="Update faculty hub"></label>
+      <p class="subtle">Use a fine-grained GitHub token for this repo with Contents: Read and write.</p>
     </details>
-
-    <div class="panel">
-      <h2><span class="star">★</span> Site settings</h2>
-      <label class="f"><span>Campus label</span><input type="text" data-site="site.campus"></label>
-      <label class="f"><span>Landing page headline</span><input type="text" data-site="site.hero.title" placeholder="Lewisville High School"></label>
-      <label class="f"><span>Landing page subtitle</span><input type="text" data-site="site.hero.subtitle" placeholder="Killough Campus · Faculty Hub"></label>
-      <label class="f"><span>Welcome note</span><textarea rows="2" data-site="site.hero.note" placeholder="Short message for staff, families, or students"></textarea></label>
-      <div class="row">
-        <label class="f"><span>Hero image URL — optional</span><input type="text" data-site="site.hero.image" placeholder="https://..."></label>
-        <label class="f"><span>Hero image alt text</span><input type="text" data-site="site.hero.imageAlt" placeholder="Lewisville High School Killough Campus"></label>
-      </div>
-      <label class="f"><span>Forms page — embed link</span><input type="text" data-site="site.formsEmbed" placeholder="published Drive folder / Form embed"></label>
-      <div class="row">
-        <label class="f"><span>Data ▸ Teacher title</span><input type="text" data-site="site.data.teacher.title"></label>
-        <label class="f"><span>Teacher report — embed</span><input type="text" data-site="site.data.teacher.embed"></label>
-      </div>
-      <div class="row">
-        <label class="f"><span>Data ▸ Admin title</span><input type="text" data-site="site.data.admin.title"></label>
-        <label class="f"><span>Admin report — embed</span><input type="text" data-site="site.data.admin.embed"></label>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2><span class="star">★</span> Top menu buttons</h2>
-      <p class="note" style="margin-top:-6px">Rename or hide the buttons in the top bar. Home and Search always stay.</p>
-      <label class="f"><span>Resources menu label</span><input type="text" data-site="site.nav.resources.label" placeholder="Resources"></label>
-      <div class="row">
-        <label class="f"><span>Forms button label</span><input type="text" data-site="site.nav.forms.label" placeholder="Forms"></label>
-        <label class="chk" style="align-self:end;padding-bottom:14px"><input type="checkbox" data-site="site.nav.forms.show"> Show Forms</label>
-      </div>
-      <div class="row">
-        <label class="f"><span>Data button label</span><input type="text" data-site="site.nav.data.label" placeholder="Data"></label>
-        <label class="chk" style="align-self:end;padding-bottom:14px"><input type="checkbox" data-site="site.nav.data.show"> Show Data</label>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2><span class="star">★</span> Tiles &amp; pages</h2>
-      <p class="helptip">Each tile is a <b>Link</b> (opens a website), a <b>Page</b> (its own screen — add an embed, text, buttons, and more tiles inside it), or the <b>Handbook</b>. Make a Page and add tiles inside it to nest as deep as you want.</p>
-      <div id="items"></div>
-      <button class="addbtn" id="addItem">+ Add tile</button>
-    </div>
-
-  </div>
-
-  <div class="preview-col">
-    <div class="pv">
-      <div class="pvhead"><b id="pvCampus">Killough Campus · Faculty Hub</b></div>
-      <div class="pvbody" id="preview"></div>
-    </div>
-    <p class="note">Live preview — approximate. The real site styles it fully.</p>
-  </div>
-</div>
-
-<div class="modal" id="iconModal">
-  <div class="box">
-    <h3>Choose an icon</h3>
-    <input type="text" id="iconSearch" placeholder="Filter icons…" autocomplete="off">
-    <div class="igrid" id="iconGrid"></div>
-  </div>
-</div>
+  </aside>
+</main>
 
 <script>
-const ICONS = {
-  book:`<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>`,
-  monitor:`<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
-  clipboard:`<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>`,
-  grad:`<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>`,
-  layers:`<path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>`,
-  compass:`<circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.4-6.3 2.1 2.1-6.4Z"/>`,
-  star:`<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 18l-6.2 3.2L7 14.2l-5-4.9 6.9-1Z"/>`,
-  map:`<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/>`,
-  bell:`<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>`,
-  calendar:`<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>`,
-  megaphone:`<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>`,
-  clock:`<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
-  navigate:`<path d="M3 11 22 2l-9 19-2-8-8-2z"/>`,
-  printer:`<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/>`,
-  key:`<circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3"/>`,
-  refresh:`<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>`,
-  users:`<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>`,
-  phone:`<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>`,
-  utensils:`<path d="M3 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7"/>`,
-  heart:`<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5C2 10.8 3.5 12.5 5 14l7 7Z"/>`,
-  shield:`<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>`,
-  mail:`<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a2 2 0 0 1-2.06 0L2 7"/>`,
-  bars:`<path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/>`,
-  lock:`<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>`,
-  ext:`<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>`,
-  folder:`<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
-  news:`<path d="M4 22a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3"/><path d="M18 22H6a2 2 0 0 1-2-2V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v16a2 2 0 0 0 2 2 2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1h-3"/><path d="M8 7h6M8 11h6M8 15h4"/>`,
-  support:`<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M14.9 9.1 19 5M4.9 19.1l4.2-4.2"/>`
+const ICONS={
+  star:'<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 18l-6.2 3.2L7 14.2l-5-4.9 6.9-1Z"/>',
+  book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  monitor:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>',
+  grad:'<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  layers:'<path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/>',
+  compass:'<circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.4-6.3 2.1 2.1-6.4Z"/>',
+  calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  megaphone:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>',
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>',
+  heart:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5C2 10.8 3.5 12.5 5 14l7 7Z"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
+  support:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.2 4.2M14.9 14.9l4.2 4.2M14.9 9.1l4.2-4.2M4.9 19.1l4.2-4.2"/>',
+  folder:'<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>'
 };
-const ICON_NAMES = Object.keys(ICONS);
-const svg = n => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]||ICONS.star}</svg>`;
-const esc = s => (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const slug = s => (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40);
+const iconNames=Object.keys(ICONS);
+const cfg=JSON.parse(JSON.stringify(window.SITE_CONFIG||{}));
+cfg.site=cfg.site||{};
+cfg.site.hero=cfg.site.hero||{title:"Lewisville High School",subtitle:"Killough Campus · Faculty Hub",note:""};
+cfg.site.footer=cfg.site.footer||{
+  title:"Lewisville High School",
+  subtitle:"Killough Campus · Fighting Farmers",
+  right:"Est. 1897 · Faculty Hub",
+  links:[],
+  social:[]
+};
+cfg.site.data=cfg.site.data||{teacher:{title:"Teacher Reports",embed:"",desc:""},admin:{title:"Admin Reports",embed:"",desc:"",locked:true}};
+cfg.site.menu=Array.isArray(cfg.site.menu)&&cfg.site.menu.length?cfg.site.menu:[
+  {label:"Home",type:"home"},{label:"Resources",type:"resources",dropdownSections:true},{label:"Forms",type:"forms"},{label:"Data",type:"data"}
+];
+cfg.sectionOrder=Array.isArray(cfg.sectionOrder)?cfg.sectionOrder:[];
+cfg.pages=Array.isArray(cfg.pages)?cfg.pages:[];
+let selected={type:"site"};
+let drag=null;
 
-/* ---------- state ---------- */
-const FALLBACK = { site:{campus:"Killough Campus",formsEmbed:"",data:{teacher:{title:"Teacher Reports",embed:"",desc:"Class rosters & grade summaries"},admin:{title:"Admin Reports",embed:"",desc:"Campus-wide reports",locked:true}},nav:{resources:{},forms:{},data:{}}},
-  pages:[{id:"example",label:"Example Tile",desc:"A sample tile",icon:"star",kind:"link",url:"https://example.com",home:true}] };
-const cfg = JSON.parse(JSON.stringify(window.SITE_CONFIG || FALLBACK));
-cfg.site = cfg.site || FALLBACK.site;
-cfg.site.data = cfg.site.data || FALLBACK.site.data;
-cfg.site.nav = cfg.site.nav || {resources:{},forms:{},data:{}};
-cfg.pages = cfg.pages || [];
+const $=s=>document.querySelector(s);
+const esc=s=>(s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const slug=s=>(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,52)||"new-page";
+const svg=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]||ICONS.star}</svg>`;
+function setStatus(msg,kind){const s=$("#status");s.textContent=msg||"";s.className="status "+(kind||"");}
+function uid(){return Math.random().toString(36).slice(2,8);}
+function storeGet(k){try{return localStorage.getItem(k)||"";}catch(e){return "";}}
+function storeSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+function pathForGit(p){return p.split("/").filter(Boolean).map(encodeURIComponent).join("/");}
 
-let _uid = 0;
-function normalize(list){ (list||[]).forEach(n=>{ n._uid = ++_uid; n.kind = n.kind||"link"; if(!n.id){ n.id = slug(n.label); n._autoId = true; } if(n.kind==="page"){ n.buttons = n.buttons||[]; n.children = n.children||[]; } if(n.children) normalize(n.children); }); }
-normalize(cfg.pages);
-
-const UMAP = new Map();
-function reindex(){ UMAP.clear(); (function w(arr){ arr.forEach((n,i)=>{ UMAP.set(n._uid,{node:n,arr,i}); if(n.children) w(n.children); }); })(cfg.pages); }
-function newNode(){ return { _uid:++_uid, id:"", _autoId:true, label:"New Tile", desc:"", section:"", icon:"star", kind:"link", url:"", home:false }; }
-
-/* ---------- safe localStorage ---------- */
-const store = { get(k){ try{return localStorage.getItem(k);}catch(e){return null;} }, set(k,v){ try{localStorage.setItem(k,v);}catch(e){} } };
-
-/* ---------- site fields ---------- */
-function fillSite(){
-  document.querySelectorAll("[data-site]").forEach(inp=>{
-    const path = inp.dataset.site.split("."); let o=cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
-    const v = o[path[path.length-1]];
-    if(inp.type==="checkbox") inp.checked = (v!==false); else inp.value = v ?? "";
-  });
+function walk(list,fn,parent=null){(list||[]).forEach((p,i)=>{fn(p,i,list,parent);if(p.children)walk(p.children,fn,p);});}
+function findPage(id){let hit=null;walk(cfg.pages,p=>{if(p.id===id)hit=p;});return hit;}
+function pageSection(page){return page.section||"Unsectioned";}
+function allSections(){
+  const seen=[];
+  cfg.sectionOrder.forEach(s=>{if(s&&!seen.includes(s))seen.push(s);});
+  walk(cfg.pages,p=>{const s=pageSection(p);if(!seen.includes(s))seen.push(s);});
+  return seen;
 }
-document.addEventListener("input", e=>{
-  const inp = e.target.closest("[data-site]"); if(!inp) return;
-  const path = inp.dataset.site.split("."); let o=cfg; for(let i=0;i<path.length-1;i++) o=o[path[i]]=o[path[i]]||{};
-  o[path[path.length-1]] = inp.type==="checkbox" ? inp.checked : inp.value; renderPreview();
-});
-
-/* ---------- tile tree editor ---------- */
-function field(label, uid, key, val, ph){
-  return `<label class="f"><span>${label}</span><input type="text" data-uid="${uid}" data-key="${key}" value="${esc(val||"")}" placeholder="${esc(ph||"")}"></label>`;
-}
-function typeSel(n){
-  return `<select data-uid="${n._uid}" data-key="kind">
-    <option value="link" ${n.kind==="link"?"selected":""}>Link \u2014 opens a website</option>
-    <option value="page" ${n.kind==="page"?"selected":""}>Page \u2014 embed / text / buttons / tiles</option>
-    <option value="reader" ${n.kind==="reader"?"selected":""}>Handbook reader</option>
-  </select>`;
-}
-function fieldsFor(n){
-  if(n.kind==="link") return field("Website URL (opens in a new tab)", n._uid, "url", n.url, "https://...");
-  if(n.kind==="reader") return `<div class="row">${field("Handbook file (src)", n._uid,"src",n.src,"handbook.json")}${field("Open-in-Docs link", n._uid,"url",n.url,"https://docs.google.com/...")}</div>`;
-  let h = field("Embed link \u2014 optional (Sheet / Slides / PDF / Calendar / Form)", n._uid,"embed", n.embed, "published embed link");
-  h += `<div class="row">${field("Image URL \u2014 optional", n._uid,"image",n.image,"https://...")}${field("Image caption / alt text", n._uid,"imageAlt",n.imageAlt,"Describe the image")}</div>`;
-  h += `<label class="f"><span>Text content \u2014 optional</span><textarea rows="2" data-uid="${n._uid}" data-key="body" placeholder="A note shown at the top of this page">${esc(n.body||"")}</textarea></label>`;
-  h += `<div class="sub"><span class="subttl">Buttons</span>`;
-  (n.buttons||[]).forEach((b,bi)=>{
-    h += `<div class="btnedit">
-      <input type="text" data-uid="${n._uid}" data-key="btn:${bi}:label" value="${esc(b.label||"")}" placeholder="Button name">
-      <input type="text" data-uid="${n._uid}" data-key="btn:${bi}:href" value="${esc(b.href||"")}" placeholder="https://\u2026  or  #/p/other-tile-id">
-      <button class="btn sm danger" data-act="delbtn" data-uid="${n._uid}" data-bi="${bi}" title="Remove">\u2715</button>
-    </div>`;
-  });
-  h += `<button class="addbtn tiny-add" data-act="addbtn" data-uid="${n._uid}">+ Add button</button></div>`;
-  return h;
-}
-function nodeCard(n, depth){
-  const isPage = n.kind==="page";
-  const indent = depth ? `margin-left:${Math.min(depth,5)*14}px;border-left:3px solid var(--gold)` : "";
-  let h = `<div class="item" data-uid="${n._uid}" style="${indent}">
-    <div class="ihead">
-      <button type="button" class="iconpick mini" data-act="pick" data-uid="${n._uid}" title="Icon"><span class="swatch sm">${svg(n.icon)}</span></button>
-      <input class="lbl" type="text" data-uid="${n._uid}" data-key="label" value="${esc(n.label)}" placeholder="Tile name">
-      ${n.home?'<span class="badge">home</span>':""}
-      <button class="btn sm" data-act="up" data-uid="${n._uid}" title="Up">\u2191</button>
-      <button class="btn sm" data-act="down" data-uid="${n._uid}" title="Down">\u2193</button>
-      <button class="btn sm danger" data-act="del" data-uid="${n._uid}" title="Delete">\u2715</button>
-    </div>
-    <div class="row">
-      <label class="f"><span>Type</span>${typeSel(n)}</label>
-      <label class="f"><span>Short description</span><input type="text" data-uid="${n._uid}" data-key="desc" value="${esc(n.desc||"")}" placeholder="One line under the title"></label>
-    </div>
-    <label class="f"><span>Section (heading on Home, optional)</span><input type="text" list="sectionList" data-uid="${n._uid}" data-key="section" value="${esc(n.section||"")}" placeholder="e.g. Teaching & Learning"></label>
-    ${fieldsFor(n)}
-    <label class="chk"><input type="checkbox" data-uid="${n._uid}" data-key="home" ${n.home?"checked":""}> Show on Home</label>
-    <p class="tiny">id: <code data-idfor="${n._uid}">${esc(n.id||slug(n.label))}</code></p>`;
-  if(isPage){
-    h += `<div class="children"><span class="childttl">Tiles inside this page</span>`;
-    (n.children||[]).forEach(c=> h += nodeCard(c, (depth||0)+1));
-    h += `<button class="addbtn" data-act="addchild" data-uid="${n._uid}">+ Add tile inside \u201c${esc(n.label||"this page")}\u201d</button></div>`;
-  }
-  return h + `</div>`;
-}
-function allSections(){ const s=[]; (function w(a){ a.forEach(n=>{ if(n.section && s.indexOf(n.section)<0) s.push(n.section); if(n.children) w(n.children); }); })(cfg.pages); return s; }
-function renderItems(){ document.getElementById("items").innerHTML = cfg.pages.map(n=>nodeCard(n,0)).join("") + `<datalist id="sectionList">${allSections().map(s=>`<option value="${esc(s)}">`).join("")}</datalist>`; }
-
-const itemsEl = document.getElementById("items");
-itemsEl.addEventListener("input", e=>{
-  const el = e.target.closest("[data-uid]"); if(!el) return;
-  const rec = UMAP.get(+el.dataset.uid); if(!rec) return; const n = rec.node; const key = el.dataset.key;
-  if(key==="kind"){ n.kind = el.value; if(n.kind==="page"){ n.buttons=n.buttons||[]; n.children=n.children||[]; } redrawAll(); return; }
-  if(key==="home"){ n.home = el.checked; redrawAll(); return; }
-  if(key && key.indexOf("btn:")===0){ const p=key.split(":"); n.buttons[+p[1]][p[2]] = el.value; renderPreview(); return; }
-  n[key] = el.value;
-  if(key==="label" && (!n.id || n._autoId)){ n.id = slug(el.value); n._autoId = true; const idEl = document.querySelector('[data-idfor="'+n._uid+'"]'); if(idEl) idEl.textContent = n.id; }
-  renderPreview();
-});
-itemsEl.addEventListener("click", e=>{
-  const b = e.target.closest("[data-act]"); if(!b) return;
-  const act = b.dataset.act; const uid = b.dataset.uid ? +b.dataset.uid : null;
-  if(act==="pick"){ openIconPicker(uid); return; }
-  const rec = uid!=null ? UMAP.get(uid) : null; if(!rec) return; const node=rec.node, arr=rec.arr, i=rec.i;
-  if(act==="up" && i>0){ [arr[i-1],arr[i]]=[arr[i],arr[i-1]]; redrawAll(); }
-  else if(act==="down" && i<arr.length-1){ [arr[i+1],arr[i]]=[arr[i],arr[i+1]]; redrawAll(); }
-  else if(act==="del"){ const extra=(node.children&&node.children.length)?" and everything inside it":""; if(confirm('Delete "'+(node.label||"tile")+'"'+extra+"?")){ arr.splice(i,1); redrawAll(); } }
-  else if(act==="addchild"){ node.children=node.children||[]; node.children.push(newNode()); redrawAll(); }
-  else if(act==="addbtn"){ node.buttons=node.buttons||[]; node.buttons.push({label:"",href:""}); redrawAll(); }
-  else if(act==="delbtn"){ node.buttons.splice(+b.dataset.bi,1); redrawAll(); }
-});
-document.getElementById("addItem").addEventListener("click", ()=>{ cfg.pages.push(newNode()); redrawAll(); const items=document.getElementById("items"); if(items.lastElementChild) items.lastElementChild.scrollIntoView({behavior:"smooth",block:"center"}); });
-
-/* ---------- icon picker ---------- */
-let iconTarget = null;
-const iconModal = document.getElementById("iconModal");
-function curIcon(){ const r=UMAP.get(iconTarget); return r?r.node.icon:""; }
-function renderIconGrid(filter){
-  const f=(filter||"").toLowerCase(); const cur=curIcon();
-  document.getElementById("iconGrid").innerHTML = ICON_NAMES.filter(n=>n.includes(f))
-    .map(n=>`<button type="button" class="iopt ${n===cur?"cur":""}" data-icon="${n}"><span class="sw">${svg(n)}</span><span>${n}</span></button>`).join("")
-    || `<p class="note">No icons match "${esc(filter)}".</p>`;
-}
-function openIconPicker(uid){ iconTarget=uid; document.getElementById("iconSearch").value=""; renderIconGrid(""); iconModal.classList.add("open"); setTimeout(()=>document.getElementById("iconSearch").focus(),30); }
-function closeIconPicker(){ iconModal.classList.remove("open"); iconTarget=null; }
-document.getElementById("iconSearch").addEventListener("input", e=>renderIconGrid(e.target.value));
-document.getElementById("iconGrid").addEventListener("click", e=>{ const opt=e.target.closest("[data-icon]"); if(!opt||iconTarget==null) return; const r=UMAP.get(iconTarget); if(r) r.node.icon=opt.dataset.icon; closeIconPicker(); redrawAll(); });
-iconModal.addEventListener("click", e=>{ if(e.target===iconModal) closeIconPicker(); });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape" && iconModal.classList.contains("open")) closeIconPicker(); });
-
-/* ---------- live preview ---------- */
-function tilePV(n){
-  const isPage=n.kind==="page";
-  const ext = n.kind==="link" && n.url ? `<span class="ext">${svg("ext")}</span>` : "";
-  const chev = isPage ? `<span class="fchev">\u203a</span>` : "";
-  return `<div class="tile${isPage?" folder":""}"><div class="ic">${svg(n.icon)}</div><h4>${esc(n.label)}</h4><p>${esc(n.desc||"")}</p>${ext}${chev}</div>`;
-}
-function pvSectioned(tiles){
-  const noSec=tiles.filter(t=>!t.section);
-  const order=[]; tiles.forEach(t=>{ const s=t.section||""; if(s&&order.indexOf(s)<0)order.push(s); });
-  let h = noSec.length ? `<div class="grid">${noSec.map(tilePV).join("")}</div>` : "";
-  order.forEach(s=>{ const ts=tiles.filter(t=>(t.section||"")===s); h+=`<h3 class="sec"><span class="star">\u2605</span> ${esc(s)}</h3><div class="grid">${ts.map(tilePV).join("")}</div>`; });
-  return h;
-}
-function collectHome(){ const out=[]; (function w(a){ a.forEach(n=>{ if(n.home) out.push(n); if(n.children) w(n.children); }); })(cfg.pages); return out; }
-function renderPreview(){
-  document.getElementById("pvCampus").textContent = "Home \u00b7 " + (cfg.site.campus||"");
-  const pinned = collectHome();
-  let html = `<div class="pvtab">Home page</div>`;
-  html += pinned.length ? pvSectioned(pinned) : `<p class="note">No tiles pinned to Home yet \u2014 check \u201cShow on Home\u201d.</p>`;
-  const sorted = cfg.pages.slice().sort((a,b)=>(a.label||"").localeCompare(b.label||""));
-  html += `<div class="pvtab">All Resources (A\u2013Z)</div><div class="grid">${sorted.map(tilePV).join("")}</div>`;
-  document.getElementById("preview").innerHTML = html;
-}
-
-/* ---------- export ---------- */
-function prune(list){
-  return list.map(n=>{
-    const o = { id: n.id||slug(n.label), label: n.label, desc: n.desc||"", icon: n.icon||"star", kind: n.kind, home: !!n.home };
-    if(n.section) o.section = n.section;
-    if(n.kind==="link"){ o.url = n.url||""; }
-    else if(n.kind==="reader"){ o.src = n.src||""; o.url = n.url||""; }
-    else if(n.kind==="page"){
-      if(n.embed) o.embed = n.embed;
-      if(n.image) o.image = n.image;
-      if(n.imageAlt) o.imageAlt = n.imageAlt;
-      if(n.body) o.body = n.body;
-      const btns = (n.buttons||[]).filter(b=>(b.label||b.href)).map(b=>({label:b.label||"",href:b.href||""}));
-      if(btns.length) o.buttons = btns;
-      if(n.children && n.children.length) o.children = prune(n.children);
+function pagesInSection(section){const out=[];walk(cfg.pages,p=>{if(pageSection(p)===section&&p.home!==false)out.push(p);});return out;}
+function normalizePages(){
+  walk(cfg.pages,p=>{
+    p.label=p.label||"Untitled";
+    p.id=p.id||slug(p.label)+"-"+uid();
+    p.kind=p.kind||"link";
+    p.icon=p.icon||"star";
+    if(p.kind==="page"){p.buttons=p.buttons||[];p.children=p.children||[];}
+    if(p.kind==="page"&&!p.blocks&&p.buttons&&p.buttons.length){
+      p.blocks=p.buttons.map(b=>({type:"button",label:b.label||"Button",href:b.href||"",style:"primary"}));
     }
-    return o;
   });
+  allSections().forEach(s=>{if(s!=="Unsectioned"&&!cfg.sectionOrder.includes(s))cfg.sectionOrder.push(s);});
+}
+
+function menuHref(m){
+  if(m.type==="home")return "#/";
+  if(m.type==="resources")return "#/resources";
+  if(m.type==="forms")return "#/forms";
+  if(m.type==="data")return "#/data";
+  if(m.type==="section")return "#/s/"+slug(m.section||m.label);
+  if(m.type==="page")return "#/p/"+(m.pageId||"");
+  return m.href||"#/";
+}
+function heroNoteHTML(note){
+  const parts=(note||"Fighting Farmers · Est. 1897").split("·").map(x=>x.trim()).filter(Boolean);
+  if(!parts.length)return "";
+  return `<div class="est"><span class="dot"></span>${parts.map(p=>`<span>${esc(p)}</span>`).join('<span class="dot"></span>')}<span class="dot"></span></div>`;
+}
+function renderCanvas(){
+  normalizePages();
+  const hero=cfg.site.hero||{};
+  const heroImg=hero.image?`<div class="hero-img"><img src="${esc(hero.image)}" alt="${esc(hero.imageAlt||"")}"></div>`:"";
+  const sections=allSections();
+  $("#canvas").innerHTML=`
+    <div class="site-top">
+      <div class="brand">${esc(cfg.site.campus||"Killough Campus")}</div>
+      <nav class="menu">${cfg.site.menu.map((m,i)=>`<button class="menu-item ${selected.type==="menu"&&selected.index===i?"selected":""}" draggable="true" data-type="menu" data-index="${i}">${esc(m.label||"Menu")}</button>`).join("")}</nav>
+    </div>
+    <section class="hero ${selected.type==="hero"?"selected":""}" data-type="hero">
+      <div class="hero-inner"><span class="hero-seal"><img src="assets/lhs-seal.png" alt=""></span><h2>${esc(hero.title||"Lewisville High School")}</h2><p>${esc(hero.subtitle||"Killough Campus · Faculty Hub")}</p>${heroNoteHTML(hero.note)}${heroImg}</div>
+    </section>
+    <div class="sections">
+      ${sections.map((s,i)=>sectionHTML(s,i)).join("")}
+    </div>
+    ${footerHTML()}`;
+}
+function footerHTML(){
+  const f=cfg.site.footer||{};
+  const links=(f.links||[]).map(l=>`<a href="${esc(l.href||"#")}">${esc(l.label||"Link")}</a>`).join("");
+  const socials=(f.social||[]).map(s=>`<a href="${esc(s.href||"#")}" title="${esc(s.label||s.type||"Social")}">${esc((s.type||s.label||"social").slice(0,2))}</a>`).join("");
+  return `<footer class="site-footer ${selected.type==="footer"?"selected":""}" data-type="footer">
+    <span class="mark">${svg("star")}</span>
+    <div class="fb"><b>${esc(f.title||"Lewisville High School")}</b><span>${esc(f.subtitle||"Killough Campus · Fighting Farmers")}</span></div>
+    <div class="footer-links">${links}</div>
+    <div class="social">${socials}</div>
+    <div class="right">${esc(f.right||"Est. 1897 · Faculty Hub")}</div>
+  </footer>`;
+}
+function sectionHTML(section,index){
+  const cards=pagesInSection(section);
+  return `<section class="section ${selected.type==="section"&&selected.name===section?"selected":""}" draggable="true" data-type="section" data-section="${esc(section)}" data-index="${index}">
+    <div class="section-head"><span class="handle">↕</span><h3>${esc(section)}</h3></div>
+    <div class="cards" data-section-cards="${esc(section)}">
+      ${cards.length?cards.map(cardHTML).join(""):`<div class="empty">Drop cards here or add a new card.</div>`}
+    </div>
+  </section>`;
+}
+function cardHTML(p){
+  const img=p.image?`<img src="${esc(p.image)}" alt="${esc(p.imageAlt||p.label)}">`:"";
+  const badge=p.kind==="link"?"Link":p.kind==="reader"?"Handbook":"Page";
+  return `<article class="card ${selected.type==="page"&&selected.id===p.id?"selected":""}" draggable="true" data-type="page" data-id="${esc(p.id)}">
+    <span class="badge">${badge}</span>${img}<div class="icon">${svg(p.icon)}</div><h4>${esc(p.label)}</h4><p>${esc(p.desc||"")}</p>
+  </article>`;
+}
+
+function textField(label,key,value,placeholder=""){return `<label class="field"><span>${label}</span><input type="text" data-key="${key}" value="${esc(value||"")}" placeholder="${esc(placeholder)}"></label>`;}
+function areaField(label,key,value){return `<label class="field"><span>${label}</span><textarea data-key="${key}">${esc(value||"")}</textarea></label>`;}
+function selectField(label,key,value,opts){return `<label class="field"><span>${label}</span><select data-key="${key}">${opts.map(o=>`<option value="${esc(o.value)}" ${o.value===value?"selected":""}>${esc(o.label)}</option>`).join("")}</select></label>`;}
+function renderEditor(){
+  const title=$("#editorTitle"), ed=$("#editor");
+  if(selected.type==="hero"){title.textContent="Hero Section";ed.innerHTML=heroEditor();return;}
+  if(selected.type==="footer"){title.textContent="Footer";ed.innerHTML=footerEditor();return;}
+  if(selected.type==="menu"){title.textContent="Top Menu Button";ed.innerHTML=menuEditor(selected.index);return;}
+  if(selected.type==="section"){title.textContent="Section";ed.innerHTML=sectionEditor(selected.name);return;}
+  if(selected.type==="page"){title.textContent="Card / Page";ed.innerHTML=pageEditor(findPage(selected.id));return;}
+  title.textContent="Page Builder";ed.innerHTML=siteEditor();
+}
+function siteEditor(){
+  return `
+    ${textField("Campus Label","site.campus",cfg.site.campus,"Killough Campus")}
+    <div class="actions">
+      <button class="btn soft" data-action="selectHero">Edit Hero</button>
+      <button class="btn soft" data-action="selectFooter">Edit Footer</button>
+      <button class="btn soft" data-action="addMenu">Add Menu Button</button>
+      <button class="btn soft" data-action="addSection">Add Section</button>
+      <button class="btn soft" data-action="addPage">Add Card</button>
+    </div>
+    <p class="subtle">Tip: the live page is the editor. Click a menu button, section heading, or card to open its controls here.</p>`;
+}
+function heroEditor(){
+  const h=cfg.site.hero;
+  return `${textField("Headline","hero.title",h.title)}${textField("Subtitle","hero.subtitle",h.subtitle)}${areaField("Welcome Note","hero.note",h.note)}
+    ${textField("Hero Image URL","hero.image",h.image,"https://... or assets/photo.jpg")}${textField("Image Alt Text","hero.imageAlt",h.imageAlt)}
+    ${imageUploader("hero")}`;
+}
+function footerEditor(){
+  const f=cfg.site.footer=cfg.site.footer||{};
+  f.links=f.links||[]; f.social=f.social||[];
+  return `${textField("Footer Title","footer.title",f.title)}
+    ${textField("Footer Subtitle","footer.subtitle",f.subtitle)}
+    ${textField("Right Side Text","footer.right",f.right)}
+    <h2>Footer Links</h2><div class="list">${f.links.map((l,i)=>footerLinkRow(l,i)).join("")}</div>
+    <div class="actions"><button class="btn soft" data-action="addFooterLink">Add Footer Link</button></div>
+    <h2>Social Media</h2><div class="list">${f.social.map((s,i)=>socialRow(s,i)).join("")}</div>
+    <div class="actions"><button class="btn soft" data-action="addSocial">Add Social Icon</button></div>`;
+}
+function footerLinkRow(l,i){return `<div class="pillrow"><input data-key="footerLink.${i}.label" value="${esc(l.label||"")}" placeholder="Link label"><input data-key="footerLink.${i}.href" value="${esc(l.href||"")}" placeholder="https://..."><button class="btn small danger" data-action="deleteFooterLink" data-index="${i}">Delete</button></div>`;}
+function socialRow(s,i){
+  const opts=["instagram","facebook","x","youtube","linkedin","website","email"];
+  return `<div class="pillrow"><select data-key="social.${i}.type">${opts.map(o=>`<option value="${o}" ${o===(s.type||"website")?"selected":""}>${o}</option>`).join("")}</select><input data-key="social.${i}.label" value="${esc(s.label||"")}" placeholder="Label"><input data-key="social.${i}.href" value="${esc(s.href||"")}" placeholder="https://..."><button class="btn small danger" data-action="deleteSocial" data-index="${i}">Delete</button></div>`;
+}
+function menuEditor(i){
+  const m=cfg.site.menu[i]; if(!m)return siteEditor();
+  const typeOpts=[["home","Home"],["resources","Resources Index"],["forms","Forms Page"],["data","Data Page"],["section","A Section"],["page","A Card/Page"],["url","Outside Link"],["search","Search"]];
+  return `${textField("Button Label","menu.label",m.label)}
+    ${selectField("Button Opens","menu.type",m.type||"url",typeOpts.map(([value,label])=>({value,label})))}
+    ${(m.type==="section")?textField("Section Name","menu.section",m.section||""):""}
+    ${(m.type==="page")?selectField("Page/Card","menu.pageId",m.pageId||"",flatPages().map(p=>({value:p.id,label:p.label}))):""}
+    ${(m.type==="url")?textField("URL","menu.href",m.href||"","https://..."):""}
+    <label class="check"><input type="checkbox" data-key="menu.dropdownSections" ${m.dropdownSections?"checked":""}> Show sections as a dropdown under this button</label>
+    <h2>Dropdown Links</h2><div class="list">${(m.links||[]).map((l,li)=>dropdownRow(l,li)).join("")}</div>
+    <div class="actions"><button class="btn soft" data-action="addDrop">Add Dropdown Link</button><button class="btn danger" data-action="deleteMenu">Delete Button</button></div>
+    <p class="subtle">Drag buttons on the page to change their order.</p>`;
+}
+function dropdownRow(l,i){return `<div class="pillrow"><input data-key="drop.${i}.label" value="${esc(l.label||"")}" placeholder="Link label"><input data-key="drop.${i}.href" value="${esc(l.href||"")}" placeholder="URL or #/p/page-id"><button class="btn small danger" data-action="deleteDrop" data-index="${i}">Delete</button></div>`;}
+function sectionEditor(name){
+  return `${textField("Section Name","section.name",name)}
+    <div class="actions"><button class="btn soft" data-action="addPageHere">Add Card Here</button><button class="btn danger" data-action="deleteSection">Delete Section</button></div>
+    <p class="subtle">Drag sections up or down on the page. Renaming a section moves all its cards with it.</p>`;
+}
+function pageEditor(p){
+  if(!p)return siteEditor();
+  const kindOpts=[{value:"link",label:"Link opens a website"},{value:"page",label:"Page with text/buttons/embed"},{value:"reader",label:"Faculty Handbook reader"}];
+  const sectionOpts=allSections().map(s=>({value:s,label:s})).concat([{value:"",label:"No section"}]);
+  const iconOpts=iconNames.map(n=>({value:n,label:n}));
+  return `${textField("Title","page.label",p.label)}${textField("Short Description","page.desc",p.desc)}
+    <div class="row">${selectField("Type","page.kind",p.kind,kindOpts)}${selectField("Icon","page.icon",p.icon,iconOpts)}</div>
+    ${selectField("Section","page.section",pageSection(p),sectionOpts)}
+    <label class="check"><input type="checkbox" data-key="page.home" ${p.home!==false?"checked":""}> Show on landing page</label>
+    ${p.kind==="link"?textField("Website URL","page.url",p.url,"https://..."):""}
+    ${p.kind==="reader"?textField("Handbook File","page.src",p.src||"handbook.json"):pageExtraEditor(p)}
+    ${textField("Image URL","page.image",p.image,"https://... or assets/photo.jpg")}${textField("Image Alt Text","page.imageAlt",p.imageAlt)}
+    ${imageUploader("page")}
+    <div class="actions"><button class="btn soft" data-action="duplicatePage">Duplicate</button><button class="btn danger" data-action="deletePage">Delete Card</button></div>
+    <p class="subtle">Drag cards on the page to reorder them or move them into another section.</p>`;
+}
+function pageExtraEditor(p){
+  p.blocks=p.blocks||[];
+  return `${textField("Embed URL","page.embed",p.embed,"Google form, sheet, PDF, calendar, etc.")}${areaField("Page Text","page.body",p.body)}
+    <h2>Page Content Blocks</h2><div class="list">${p.blocks.map((b,i)=>blockRow(b,i)).join("")}</div>
+    <div class="actions"><button class="btn soft" data-action="addBlock" data-kind="button">Add Button</button><button class="btn soft" data-action="addBlock" data-kind="text">Add Text</button><button class="btn soft" data-action="addBlock" data-kind="image">Add Image</button><button class="btn soft" data-action="addBlock" data-kind="card">Add Card Block</button></div>`;
+}
+function blockRow(b,i){
+  const type=b.type||"button";
+  const types=["button","link","text","image","card"];
+  let fields=`<div class="blockhead"><select data-key="block.${i}.type">${types.map(t=>`<option value="${t}" ${type===t?"selected":""}>${t}</option>`).join("")}</select><button class="btn small" data-action="moveBlockUp" data-index="${i}">Up</button><button class="btn small" data-action="moveBlockDown" data-index="${i}">Down</button><button class="btn small danger" data-action="deleteBlock" data-index="${i}">Delete</button></div>`;
+  if(type==="text") fields+=areaField("Text","block."+i+".text",b.text);
+  else if(type==="image") fields+=`${textField("Image URL","block."+i+".image",b.image,"https://... or assets/photo.jpg")}${textField("Caption / Alt Text","block."+i+".caption",b.caption)}${imageUploader("block:"+i)}`;
+  else if(type==="card") fields+=`${textField("Card Title","block."+i+".label",b.label)}${textField("Description","block."+i+".text",b.text)}${textField("Image URL","block."+i+".image",b.image)}${textField("Button Link","block."+i+".href",b.href)}${imageUploader("block:"+i)}`;
+  else fields+=`${textField(type==="link"?"Link Text":"Button Text","block."+i+".label",b.label)}${textField("URL","block."+i+".href",b.href,"https://...")}`;
+  return `<div class="blockrow">${fields}</div>`;
+}
+function imageUploader(target){
+  return `<div class="dropzone">
+    <label><input type="file" accept="image/*" data-upload="${target}"><span class="btn soft">Upload Image to GitHub</span></label>
+    <p class="subtle">Choose an image and the builder will save it under <code>assets/</code>, then fill in the image URL here.</p>
+  </div>`;
+}
+function flatPages(){const a=[];walk(cfg.pages,p=>a.push(p));return a;}
+
+function applyEdit(key,value,checked,refreshEditor=false){
+  if(key==="site.campus")cfg.site.campus=value;
+  if(key.startsWith("hero."))cfg.site.hero[key.slice(5)]=value;
+  if(key.startsWith("footer.")){cfg.site.footer=cfg.site.footer||{};cfg.site.footer[key.slice(7)]=value;}
+  if(key.startsWith("footerLink.")){const [,i,k]=key.split(".");cfg.site.footer.links=cfg.site.footer.links||[];cfg.site.footer.links[+i][k]=value;}
+  if(key.startsWith("social.")){const [,i,k]=key.split(".");cfg.site.footer.social=cfg.site.footer.social||[];cfg.site.footer.social[+i][k]=value;}
+  if(key.startsWith("menu.")){const m=cfg.site.menu[selected.index];const k=key.slice(5);m[k]=k==="dropdownSections"?checked:value;}
+  if(key.startsWith("drop.")){const m=cfg.site.menu[selected.index];m.links=m.links||[];const [,i,k]=key.split(".");m.links[+i][k]=value;}
+  if(key==="section.name")renameSection(selected.name,value);
+  if(key.startsWith("page.")){const p=findPage(selected.id);if(!p)return;const k=key.slice(5);p[k]=k==="home"?checked:value;if(k==="label"&&!p.id)p.id=slug(value);}
+  if(key.startsWith("button.")){const p=findPage(selected.id);const [,i,k]=key.split(".");p.buttons=p.buttons||[];p.buttons[+i][k]=value;}
+  if(key.startsWith("block.")){const p=findPage(selected.id);if(!p)return;p.blocks=p.blocks||[];const [,i,k]=key.split(".");p.blocks[+i][k]=value;}
+  renderCanvas();
+  if(refreshEditor)renderEditor();
+}
+function renameSection(oldName,newName){
+  newName=(newName||"").trim()||"Unsectioned";
+  walk(cfg.pages,p=>{if(pageSection(p)===oldName)p.section=newName==="Unsectioned"?"":newName;});
+  cfg.sectionOrder=cfg.sectionOrder.map(s=>s===oldName?newName:s).filter((s,i,a)=>s&&a.indexOf(s)===i&&s!=="Unsectioned");
+  selected={type:"section",name:newName};
+}
+function newPage(section=""){
+  return {id:"new-card-"+uid(),label:"New Card",desc:"",icon:"star",kind:"link",home:true,section:section==="Unsectioned"?"":section,url:""};
+}
+function newBlock(type){
+  if(type==="text")return {type:"text",text:""};
+  if(type==="image")return {type:"image",image:"",caption:""};
+  if(type==="card")return {type:"card",label:"New Card",text:"",href:"",image:""};
+  if(type==="link")return {type:"link",label:"New Link",href:""};
+  return {type:"button",label:"New Button",href:"",style:"primary"};
+}
+function addSection(name){
+  const s=name||"New Section";
+  if(!cfg.sectionOrder.includes(s))cfg.sectionOrder.push(s);
+  selected={type:"section",name:s};
+}
+function move(arr,from,to){const item=arr.splice(from,1)[0];arr.splice(to,0,item);}
+function findRecord(id){
+  let hit=null;
+  walk(cfg.pages,(p,i,arr)=>{if(!hit&&p.id===id)hit={page:p,index:i,arr};});
+  return hit;
+}
+function movePageBefore(id,targetId){
+  if(id===targetId)return;
+  const from=findRecord(id), to=findRecord(targetId);
+  if(!from||!to)return;
+  const item=from.arr.splice(from.index,1)[0];
+  let insertAt=to.index;
+  if(from.arr===to.arr&&from.index<to.index)insertAt--;
+  to.arr.splice(insertAt,0,item);
+}
+function removePage(id){
+  let done=false;
+  walk(cfg.pages,(p,i,arr)=>{if(!done&&p.id===id){arr.splice(i,1);done=true;}});
+}
+function clonePage(p){return JSON.parse(JSON.stringify(p));}
+
+$("#canvas").addEventListener("click",e=>{
+  const el=e.target.closest("[data-type]"); if(!el)return;
+  const type=el.dataset.type;
+  if(type==="hero")selected={type:"hero"};
+  if(type==="footer")selected={type:"footer"};
+  if(type==="menu")selected={type:"menu",index:+el.dataset.index};
+  if(type==="section")selected={type:"section",name:el.dataset.section};
+  if(type==="page")selected={type:"page",id:el.dataset.id};
+  rebuild();
+});
+$("#canvas").addEventListener("dragstart",e=>{
+  const el=e.target.closest("[draggable='true']"); if(!el)return;
+  drag={type:el.dataset.type,index:+el.dataset.index,section:el.dataset.section,id:el.dataset.id};
+  el.classList.add("dragging");
+});
+$("#canvas").addEventListener("dragend",()=>{drag=null;document.querySelectorAll(".dragging").forEach(el=>el.classList.remove("dragging"));});
+$("#canvas").addEventListener("dragover",e=>{if(drag)e.preventDefault();});
+$("#canvas").addEventListener("drop",e=>{
+  if(!drag)return;
+  e.preventDefault();
+  const menu=e.target.closest("[data-type='menu']");
+  const section=e.target.closest("[data-type='section']");
+  const page=e.target.closest("[data-type='page']");
+  if(drag.type==="menu"&&menu){move(cfg.site.menu,drag.index,+menu.dataset.index);selected={type:"menu",index:+menu.dataset.index};}
+  if(drag.type==="section"&&section){
+    [drag.section,section.dataset.section].forEach(s=>{if(s&&s!=="Unsectioned"&&!cfg.sectionOrder.includes(s))cfg.sectionOrder.push(s);});
+    const from=cfg.sectionOrder.indexOf(drag.section), to=cfg.sectionOrder.indexOf(section.dataset.section);
+    if(from>-1&&to>-1)move(cfg.sectionOrder,from,to);
+    selected={type:"section",name:drag.section};
+  }
+  if(drag.type==="page"){
+    const p=findPage(drag.id); if(!p)return;
+    if(page){const target=findPage(page.dataset.id);p.section=target?target.section:p.section;movePageBefore(p.id,page.dataset.id);}
+    else if(section){p.section=section.dataset.section==="Unsectioned"?"":section.dataset.section;}
+    selected={type:"page",id:p.id};
+  }
+  rebuild();
+});
+$("#editor").addEventListener("input",e=>{
+  const el=e.target.closest("[data-key]");if(!el)return;
+  applyEdit(el.dataset.key,el.value,el.checked,false);
+});
+$("#editor").addEventListener("change",e=>{
+  const el=e.target.closest("[data-key]");if(el)applyEdit(el.dataset.key,el.value,el.checked,true);
+  const up=e.target.closest("[data-upload]");if(up&&up.files&&up.files[0])uploadImage(up.files[0],up.dataset.upload);
+});
+$("#editor").addEventListener("click",e=>{
+  const b=e.target.closest("[data-action]");if(!b)return;
+  const action=b.dataset.action;
+  if(action==="selectHero")selected={type:"hero"};
+  if(action==="selectFooter")selected={type:"footer"};
+  if(action==="addMenu"){cfg.site.menu.push({label:"New Button",type:"url",href:""});selected={type:"menu",index:cfg.site.menu.length-1};}
+  if(action==="deleteMenu"){cfg.site.menu.splice(selected.index,1);selected={type:"site"};}
+  if(action==="addDrop"){const m=cfg.site.menu[selected.index];m.links=m.links||[];m.links.push({label:"New Link",href:""});}
+  if(action==="deleteDrop"){cfg.site.menu[selected.index].links.splice(+b.dataset.index,1);}
+  if(action==="addFooterLink"){cfg.site.footer.links=cfg.site.footer.links||[];cfg.site.footer.links.push({label:"New Link",href:""});}
+  if(action==="deleteFooterLink"){cfg.site.footer.links.splice(+b.dataset.index,1);}
+  if(action==="addSocial"){cfg.site.footer.social=cfg.site.footer.social||[];cfg.site.footer.social.push({label:"Social",type:"website",href:""});}
+  if(action==="deleteSocial"){cfg.site.footer.social.splice(+b.dataset.index,1);}
+  if(action==="addSection")addSection();
+  if(action==="deleteSection"){const s=selected.name;if(confirm("Delete this section heading? Cards will move to no section.")){walk(cfg.pages,p=>{if(pageSection(p)===s)p.section="";});cfg.sectionOrder=cfg.sectionOrder.filter(x=>x!==s);selected={type:"site"};}}
+  if(action==="addPage"||action==="addPageHere"){const s=selected.type==="section"?selected.name:"";const p=newPage(s);cfg.pages.push(p);selected={type:"page",id:p.id};}
+  if(action==="deletePage"){if(confirm("Delete this card?")){removePage(selected.id);selected={type:"site"};}}
+  if(action==="duplicatePage"){const p=findPage(selected.id);const c=clonePage(p);c.id=slug(c.label)+"-"+uid();c.label=(c.label||"Card")+" Copy";cfg.pages.push(c);selected={type:"page",id:c.id};}
+  if(action==="addButton"){const p=findPage(selected.id);p.buttons=p.buttons||[];p.buttons.push({label:"New Button",href:""});}
+  if(action==="deleteButton"){const p=findPage(selected.id);p.buttons.splice(+b.dataset.index,1);}
+  if(action==="addBlock"){const p=findPage(selected.id);p.blocks=p.blocks||[];p.blocks.push(newBlock(b.dataset.kind));}
+  if(action==="deleteBlock"){const p=findPage(selected.id);p.blocks.splice(+b.dataset.index,1);}
+  if(action==="moveBlockUp"){const p=findPage(selected.id), i=+b.dataset.index;if(i>0)move(p.blocks,i,i-1);}
+  if(action==="moveBlockDown"){const p=findPage(selected.id), i=+b.dataset.index;if(i<p.blocks.length-1)move(p.blocks,i,i+1);}
+  rebuild();
+});
+$("#addSectionBtn").addEventListener("click",()=>{addSection();rebuild();});
+$("#addCardBtn").addEventListener("click",()=>{const s=allSections()[0]||"";const p=newPage(s);cfg.pages.push(p);selected={type:"page",id:p.id};rebuild();});
+
+async function uploadImage(file,target){
+  const owner=$("#gh_owner").value.trim(),repo=$("#gh_repo").value.trim(),branch=$("#gh_branch").value.trim()||"main",token=$("#gh_token").value.trim();
+  if(!owner||!repo||!token){setStatus("Fill in GitHub owner, repo, and token before uploading an image.","err");return;}
+  const safe=file.name.toLowerCase().replace(/[^a-z0-9._-]+/g,"-").replace(/^-+|-+$/g,"")||"image";
+  const path="assets/"+Date.now()+"-"+safe;
+  const api=`https://api.github.com/repos/${owner}/${repo}/contents/${pathForGit(path)}`;
+  setStatus("Uploading image...","");
+  try{
+    const content=await fileToBase64(file);
+    const body={message:"Upload image for faculty hub",content,branch};
+    const r=await fetch(api,{method:"PUT",headers:ghHeaders(token),body:JSON.stringify(body)});
+    if(!r.ok){const e=await r.json();throw new Error(e.message||r.status);}
+    if(target==="hero")cfg.site.hero.image=path;
+    if(target==="page"){const p=findPage(selected.id);if(p)p.image=path;}
+    if(target&&target.indexOf("block:")===0){const p=findPage(selected.id), i=+target.split(":")[1];if(p&&p.blocks&&p.blocks[i])p.blocks[i].image=path;}
+    setStatus("Image uploaded and added to the page.","ok");
+    rebuild();
+  }catch(err){setStatus("Image upload failed: "+err.message,"err");}
+}
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=rej;r.readAsDataURL(file);});}
+function ghHeaders(token){return {"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","Content-Type":"application/json"};}
+function b64utf8(str){return btoa(unescape(encodeURIComponent(str)));}
+
+function prunePage(p){
+  const o={id:p.id||slug(p.label),label:p.label||"Untitled",desc:p.desc||"",icon:p.icon||"star",kind:p.kind||"link",home:p.home!==false};
+  if(p.section)o.section=p.section;
+  if(p.image)o.image=p.image;
+  if(p.imageAlt)o.imageAlt=p.imageAlt;
+  if(o.kind==="link")o.url=p.url||"";
+  if(o.kind==="reader"){o.src=p.src||"handbook.json";if(p.url)o.url=p.url;}
+  if(o.kind==="page"){
+    if(p.embed)o.embed=p.embed;
+    if(p.body)o.body=p.body;
+    const blocks=(p.blocks||[]).filter(b=>b.type||b.label||b.href||b.text||b.image).map(b=>{
+      const out={type:b.type||"button"};
+      ["label","href","text","image","caption","style"].forEach(k=>{if(b[k])out[k]=b[k];});
+      return out;
+    });
+    if(blocks.length)o.blocks=blocks;
+    const buttons=(p.buttons||[]).filter(b=>b.label||b.href).map(b=>({label:b.label||"",href:b.href||""}));
+    if(buttons.length&&!blocks.length)o.buttons=buttons;
+    if(p.children&&p.children.length)o.children=p.children.map(prunePage);
+  }
+  return o;
 }
 function buildConfigText(){
-  const secOrder = []; cfg.pages.forEach(n=>{ if(n.section && secOrder.indexOf(n.section)<0) secOrder.push(n.section); });
-  const clean = { site: cfg.site, sectionOrder: secOrder, pages: prune(cfg.pages) };
-  const header = "/* LHS Killough \u2014 Faculty Hub content. Page-tree model. Generated by builder.html. */\n";
-  return header + "window.SITE_CONFIG = " + JSON.stringify(clean, null, 2) + ";\n";
+  const used=allSections().filter(s=>s!=="Unsectioned");
+  const clean={site:cfg.site,sectionOrder:used,pages:cfg.pages.map(prunePage)};
+  return "/* LHS Killough - Faculty Hub content. Generated by visual builder. */\nwindow.SITE_CONFIG = "+JSON.stringify(clean,null,2)+";\n";
 }
-function b64utf8(str){ return btoa(unescape(encodeURIComponent(str))); }
-function setStatus(msg, cls){ const s=document.getElementById("status"); s.textContent=msg; s.className="status "+(cls||""); }
-document.getElementById("btnCopy").addEventListener("click", async ()=>{ try{ await navigator.clipboard.writeText(buildConfigText()); setStatus("Copied config.js to clipboard","ok"); }catch(e){ setStatus("Copy failed \u2014 use Download","err"); } });
-document.getElementById("btnDownload").addEventListener("click", ()=>{ const blob=new Blob([buildConfigText()],{type:"text/javascript"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="config.js"; a.click(); setStatus("Downloaded config.js \u2014 upload it to your repo","ok"); });
-
-/* ---------- publish to GitHub ---------- */
-async function publish(){
-  const owner=val("gh_owner").trim(), repo=val("gh_repo").trim(), branch=(val("gh_branch").trim()||"main"),
-        path=(val("gh_path").trim()||"config.js"), token=val("gh_token").trim(), msg=(val("gh_msg").trim()||"Update site content via builder");
-  if(!owner||!repo||!token){ document.getElementById("ghPanel").open=true; setStatus("Fill in owner, repo and token first","err"); return; }
-  store.set("gh_owner",owner); store.set("gh_repo",repo); store.set("gh_branch",branch); store.set("gh_path",path);
-  setStatus("Publishing\u2026","");
-  const api = `https://api.github.com/repos/${owner}/${repo}/contents/${path.split("/").map(encodeURIComponent).join("/")}`;
-  const h = { "Authorization":"Bearer "+token, "Accept":"application/vnd.github+json" };
-  let sha=null;
-  try{ const r=await fetch(api+"?ref="+encodeURIComponent(branch),{headers:h}); if(r.ok){ sha=(await r.json()).sha; } else if(r.status!==404){ const e=await r.json(); throw new Error(e.message||("HTTP "+r.status)); } }
-  catch(e){ setStatus("Couldn't reach repo: "+e.message,"err"); return; }
-  const body = { message: msg, content: b64utf8(buildConfigText()), branch }; if(sha) body.sha=sha;
-  try{ const put=await fetch(api,{method:"PUT",headers:{...h,"Content-Type":"application/json"},body:JSON.stringify(body)}); if(put.ok){ setStatus("Published. Site updates in ~1 min.","ok"); } else { const e=await put.json(); setStatus("Publish failed: "+(e.message||put.status),"err"); } }
-  catch(e){ setStatus("Publish failed: "+e.message,"err"); }
+async function publishConfig(){
+  const owner=$("#gh_owner").value.trim(),repo=$("#gh_repo").value.trim(),branch=$("#gh_branch").value.trim()||"main",path=$("#gh_path").value.trim()||"config.js",token=$("#gh_token").value.trim(),msg=$("#gh_msg").value.trim()||"Update faculty hub";
+  if(!owner||!repo||!token){setStatus("Fill in GitHub owner, repo, and token first.","err");return;}
+  ["gh_owner","gh_repo","gh_branch","gh_path"].forEach(id=>storeSet(id,$("#"+id).value));
+  const api=`https://api.github.com/repos/${owner}/${repo}/contents/${pathForGit(path)}`;
+  setStatus("Publishing site changes...","");
+  try{
+    let sha=null;
+    const get=await fetch(api+"?ref="+encodeURIComponent(branch),{headers:ghHeaders(token)});
+    if(get.ok)sha=(await get.json()).sha;
+    else if(get.status!==404){const e=await get.json();throw new Error(e.message||get.status);}
+    const body={message:msg,content:b64utf8(buildConfigText()),branch};
+    if(sha)body.sha=sha;
+    const put=await fetch(api,{method:"PUT",headers:ghHeaders(token),body:JSON.stringify(body)});
+    if(!put.ok){const e=await put.json();throw new Error(e.message||put.status);}
+    setStatus("Published. GitHub will update the website shortly.","ok");
+  }catch(err){setStatus("Publish failed: "+err.message,"err");}
 }
-function val(id){ return document.getElementById(id).value; }
-document.getElementById("btnPublish").addEventListener("click", publish);
+$("#publishBtn").addEventListener("click",publishConfig);
+$("#copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(buildConfigText());setStatus("Copied config.js.","ok");}catch(e){setStatus("Copy did not work. Use Download.","err");}});
+$("#downloadBtn").addEventListener("click",()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([buildConfigText()],{type:"text/javascript"}));a.download="config.js";a.click();setStatus("Downloaded config.js.","ok");});
 
-/* ---------- boot ---------- */
-function redrawAll(){ reindex(); renderItems(); renderPreview(); }
-["gh_owner","gh_repo","gh_branch","gh_path"].forEach(id=>{ const v=store.get(id); if(v) document.getElementById(id).value=v; });
-if(!document.getElementById("gh_branch").value) document.getElementById("gh_branch").value="main";
-if(!document.getElementById("gh_path").value) document.getElementById("gh_path").value="config.js";
-fillSite(); redrawAll();
-
+function rebuild(){renderCanvas();renderEditor();}
+["gh_owner","gh_repo","gh_branch","gh_path"].forEach(id=>{$("#"+id).value=storeGet(id);});
+if(!$("#gh_branch").value)$("#gh_branch").value="main";
+if(!$("#gh_path").value)$("#gh_path").value="config.js";
+normalizePages();
+rebuild();
 </script>
 </body>
 </html>
