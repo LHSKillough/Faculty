@@ -157,6 +157,13 @@ textarea:focus{border-color:var(--maroon);outline:none}
     <div class="panel">
       <h2><span class="star">★</span> Site settings</h2>
       <label class="f"><span>Campus label</span><input type="text" data-site="site.campus"></label>
+      <label class="f"><span>Landing page headline</span><input type="text" data-site="site.hero.title" placeholder="Lewisville High School"></label>
+      <label class="f"><span>Landing page subtitle</span><input type="text" data-site="site.hero.subtitle" placeholder="Killough Campus · Faculty Hub"></label>
+      <label class="f"><span>Welcome note</span><textarea rows="2" data-site="site.hero.note" placeholder="Short message for staff, families, or students"></textarea></label>
+      <div class="row">
+        <label class="f"><span>Hero image URL — optional</span><input type="text" data-site="site.hero.image" placeholder="https://..."></label>
+        <label class="f"><span>Hero image alt text</span><input type="text" data-site="site.hero.imageAlt" placeholder="Lewisville High School Killough Campus"></label>
+      </div>
       <label class="f"><span>Forms page — embed link</span><input type="text" data-site="site.formsEmbed" placeholder="published Drive folder / Form embed"></label>
       <div class="row">
         <label class="f"><span>Data ▸ Teacher title</span><input type="text" data-site="site.data.teacher.title"></label>
@@ -293,6 +300,7 @@ function fieldsFor(n){
   if(n.kind==="link") return field("Website URL (opens in a new tab)", n._uid, "url", n.url, "https://...");
   if(n.kind==="reader") return `<div class="row">${field("Handbook file (src)", n._uid,"src",n.src,"handbook.json")}${field("Open-in-Docs link", n._uid,"url",n.url,"https://docs.google.com/...")}</div>`;
   let h = field("Embed link \u2014 optional (Sheet / Slides / PDF / Calendar / Form)", n._uid,"embed", n.embed, "published embed link");
+  h += `<div class="row">${field("Image URL \u2014 optional", n._uid,"image",n.image,"https://...")}${field("Image caption / alt text", n._uid,"imageAlt",n.imageAlt,"Describe the image")}</div>`;
   h += `<label class="f"><span>Text content \u2014 optional</span><textarea rows="2" data-uid="${n._uid}" data-key="body" placeholder="A note shown at the top of this page">${esc(n.body||"")}</textarea></label>`;
   h += `<div class="sub"><span class="subttl">Buttons</span>`;
   (n.buttons||[]).forEach((b,bi)=>{
@@ -411,6 +419,8 @@ function prune(list){
     else if(n.kind==="reader"){ o.src = n.src||""; o.url = n.url||""; }
     else if(n.kind==="page"){
       if(n.embed) o.embed = n.embed;
+      if(n.image) o.image = n.image;
+      if(n.imageAlt) o.imageAlt = n.imageAlt;
       if(n.body) o.body = n.body;
       const btns = (n.buttons||[]).filter(b=>(b.label||b.href)).map(b=>({label:b.label||"",href:b.href||""}));
       if(btns.length) o.buttons = btns;

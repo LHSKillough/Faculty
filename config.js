@@ -2,24 +2,29 @@
 window.SITE_CONFIG = {
   "site": {
     "campus": "Killough Campus",
+    "hero": {
+      "title": "Lewisville High School",
+      "subtitle": "Killough Campus · Faculty Hub",
+      "note": "A practical landing page for the systems, forms, calendars, and campus information staff use most."
+    },
     "formsEmbed": "",
     "data": {
       "teacher": {
         "title": "Teacher Reports",
         "embed": "",
-        "desc": "Class rosters & grade summaries"
+        "desc": "Class rosters, grade summaries, and teacher-facing data."
       },
       "admin": {
         "title": "Admin Reports",
         "embed": "",
-        "desc": "Campus-wide reports",
+        "desc": "Campus-wide reports and protected administrative data.",
         "locked": true
       }
     },
     "nav": {
-      "resources": {},
-      "forms": {},
-      "data": {}
+      "resources": { "label": "Resources" },
+      "forms": { "label": "Forms", "show": true },
+      "data": { "label": "Data", "show": true }
     }
   },
   "sectionOrder": [
@@ -31,54 +36,6 @@ window.SITE_CONFIG = {
   ],
   "pages": [
     {
-      "id": "gradebook",
-      "label": "Gradebook",
-      "desc": "Enter grades & attendance",
-      "icon": "book",
-      "kind": "link",
-      "home": true,
-      "section": "Teaching & Learning",
-      "url": "https://skyward-lisdprod.iscorp.com/scripts/wsisa.dll/WService=wsedulewisvilletx/skyportlogin"
-    },
-    {
-      "id": "canvas",
-      "label": "Canvas",
-      "desc": "LISD learning management system",
-      "icon": "monitor",
-      "kind": "link",
-      "home": true,
-      "section": "Teaching & Learning",
-      "url": "https://lisd.instructure.com"
-    },
-    {
-      "id": "eduphoria",
-      "label": "Eduphoria / Strive",
-      "desc": "PD, LEAD & Assessment",
-      "icon": "clipboard",
-      "kind": "page",
-      "home": true,
-      "section": "Teaching & Learning",
-      "buttons": [
-        {
-          "label": "Eduphoria / Strive",
-          "href": "https://pdas.lisd.net/authdistrict/login"
-        },
-        {
-          "label": "PD Information",
-          "href": "https://www.lisd.net/professional-learning/professional-learning/home"
-        }
-      ]
-    },
-    {
-      "id": "field-trips",
-      "label": "Field Trips",
-      "desc": "Request & approval forms",
-      "icon": "map",
-      "kind": "page",
-      "home": false,
-      "section": "Teaching & Learning"
-    },
-    {
       "id": "learning-hub",
       "label": "Learning Hub",
       "desc": "Access LISD learning applications.",
@@ -89,121 +46,121 @@ window.SITE_CONFIG = {
       "url": "https://myapps.classlink.com/home"
     },
     {
-      "id": "bell",
-      "label": "Bell Schedule & Lunches",
-      "desc": "Daily schedules & lunch periods",
-      "icon": "bell",
-      "kind": "page",
+      "id": "skyward",
+      "label": "Skyward",
+      "desc": "Gradebook, attendance, and reporting.",
+      "icon": "book",
+      "kind": "link",
       "home": true,
-      "section": "Daily Operations"
+      "section": "Teaching & Learning",
+      "url": "https://skyward.iscorp.com/LewisvilleISDTXStuSTS/SSOAuthentication/CreateSAMLLoginRequest?area=Home&controller=Home&action=Index&authenticationmethodid=4"
     },
     {
-      "id": "calendar",
-      "label": "School Calendar",
-      "desc": "Campus & district dates",
-      "icon": "calendar",
-      "kind": "page",
+      "id": "canvas",
+      "label": "Canvas",
+      "desc": "LISD learning management system.",
+      "icon": "monitor",
+      "kind": "link",
       "home": true,
-      "section": "Daily Operations"
+      "section": "Teaching & Learning",
+      "url": "https://lisdtx.instructure.com/login/saml"
     },
     {
-      "id": "announce",
-      "label": "Announcements",
-      "desc": "View & submit announcements",
-      "icon": "megaphone",
-      "kind": "page",
+      "id": "advisory",
+      "label": "Advisory",
+      "desc": "Advisory course and instructional materials.",
+      "icon": "grad",
+      "kind": "link",
       "home": true,
-      "section": "Daily Operations"
+      "section": "Teaching & Learning",
+      "url": "https://lisdtx.instructure.com/courses/32527?authentication_provider=saml"
     },
     {
-      "id": "smore",
-      "label": "Weekly Smore",
-      "desc": "This week's campus newsletter",
-      "icon": "news",
+      "id": "eduphoria",
+      "label": "Eduphoria / Strive",
+      "desc": "Professional learning, LEAD, and assessment tools.",
+      "icon": "clipboard",
       "kind": "page",
       "home": true,
-      "section": "Daily Operations"
+      "section": "Teaching & Learning",
+      "body": "Use this page for evaluation, professional learning, and assessment-related links.",
+      "buttons": [
+        { "label": "Eduphoria / Strive", "href": "https://pdas.lisd.net/authdistrict/login" },
+        { "label": "PD Information", "href": "https://www.lisd.net/professional-learning/professional-learning/home" }
+      ]
     },
     {
-      "id": "frontline",
+      "id": "absences-sub",
       "label": "Absences / Sub",
-      "desc": "Report absences & request a sub",
+      "desc": "Report absences and request a substitute.",
       "icon": "clock",
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
+      "body": "Start here for planned absences, Frontline, and substitute-related steps.",
       "buttons": [
-        {
-          "label": "Frontline",
-          "href": "https://login.frontlineeducation.com/sso/lewisvilleisd_tx"
-        },
-        {
-          "label": "Planned Absence Form",
-          "href": "https://docunavweb.lisd.net/Forms/PlannedAbsence"
-        }
+        { "label": "Frontline", "href": "https://login.frontlineeducation.com/sso/lewisvilleisd_tx" },
+        { "label": "Planned Absence Form", "href": "https://docunavweb.lisd.net/Forms/PlannedAbsence" }
       ]
     },
     {
-      "id": "student-links",
-      "label": "Student Links",
-      "desc": "Frequently used student sites",
-      "icon": "navigate",
+      "id": "calendar",
+      "label": "Calendars",
+      "desc": "District, staff, and campus dates.",
+      "icon": "calendar",
       "kind": "page",
       "home": true,
-      "section": "Daily Operations"
-    },
-    {
-      "id": "drive",
-      "label": "Google Drive",
-      "desc": "Shared campus files",
-      "icon": "folder",
-      "kind": "link",
-      "home": true,
       "section": "Daily Operations",
-      "url": "https://drive.google.com"
+      "body": "Keep the district staff calendar here, then add your campus-specific calendar or embed later.",
+      "buttons": [
+        { "label": "LISD Staff Calendar PDF", "href": "https://resources.finalsite.net/images/v1768319438/lisdnet/lisdnet/cqdfxa0vi1iym5gmy6y4/2627Calendar_STAFFFINAL.pdf" },
+        { "label": "Killough Campus Calendar", "href": "https://lhskillough.lisd.net/calendar" },
+        { "label": "LISD District Calendar", "href": "https://www.lisd.net/calendar" }
+      ]
     },
     {
-      "id": "outlook",
-      "label": "Outlook",
-      "desc": "District email",
-      "icon": "mail",
-      "kind": "link",
-      "home": true,
-      "section": "Daily Operations",
-      "url": "https://outlook.office.com/mail/"
-    },
-    {
-      "id": "copiers",
-      "label": "Copiers",
-      "desc": "Codes & support",
-      "icon": "printer",
-      "kind": "page",
-      "home": false,
-      "section": "Daily Operations"
-    },
-    {
-      "id": "tech",
+      "id": "technology-help",
       "label": "Technology Help",
-      "desc": "Receive password help, device support and more.",
+      "desc": "Tickets, passwords, and device support.",
       "icon": "support",
       "kind": "page",
       "home": true,
       "section": "Daily Operations",
+      "body": "Use this page for staff and student technology help. Add campus-specific device procedures as needed.",
       "buttons": [
-        {
-          "label": "Create a Support Ticket",
-          "href": "https://www.lisd.net/fs/pages/54648"
-        },
-        {
-          "label": "Password Help",
-          "href": "https://www.lisd.net/fs/pages/54645"
-        }
+        { "label": "Create a Support Ticket", "href": "https://www.lisd.net/fs/pages/54648" },
+        { "label": "Password Help", "href": "https://www.lisd.net/fs/pages/54645" },
+        { "label": "LISD Technology", "href": "https://www.lisd.net/technology" }
       ]
     },
     {
-      "id": "handbook",
+      "id": "announcements",
+      "label": "Announcements",
+      "desc": "Campus updates and announcement submissions.",
+      "icon": "megaphone",
+      "kind": "page",
+      "home": true,
+      "section": "Daily Operations",
+      "body": "Add your announcement submission form, weekly update, or embedded Smore newsletter here.",
+      "buttons": [
+        { "label": "Add Announcement Form", "href": "#/forms" }
+      ]
+    },
+    {
+      "id": "teacher-bundle",
+      "label": "Teacher Bundle",
+      "desc": "Forms and recurring teacher tasks.",
+      "icon": "layers",
+      "kind": "page",
+      "home": true,
+      "section": "Daily Operations",
+      "body": "Add the Teacher Bundle form link here when it is ready.",
+      "buttons": []
+    },
+    {
+      "id": "faculty-handbook",
       "label": "Faculty Handbook",
-      "desc": "Campus policies & procedures",
+      "desc": "Searchable campus policies and procedures.",
       "icon": "book",
       "kind": "reader",
       "home": true,
@@ -212,45 +169,29 @@ window.SITE_CONFIG = {
       "url": "https://docs.google.com/document/d/1fnKuPxT181zkM4QeFy8t6fukkDZt9fzx/edit?usp=sharing&ouid=117506782495422317132&rtpof=true&sd=true"
     },
     {
-      "id": "duty-sched",
-      "label": "Duty Schedule",
-      "desc": "Staff & admin duty assignments",
-      "icon": "clipboard",
-      "kind": "page",
-      "home": true,
-      "section": "Staff & Directory"
-    },
-    {
-      "id": "directory",
+      "id": "staff-directory",
       "label": "Staff Directory / Phone List",
-      "desc": "Find a colleague & extensions",
+      "desc": "Find colleagues, extensions, and contact details.",
       "icon": "users",
       "kind": "page",
       "home": true,
-      "section": "Staff & Directory"
+      "section": "Staff & Directory",
+      "body": "Add a staff directory embed, phone list, or contact document here."
     },
     {
-      "id": "admin-info",
+      "id": "admin-contact",
       "label": "Admin Contact Info",
-      "desc": "Who to contact for what",
-      "icon": "users",
+      "desc": "Who to contact for what.",
+      "icon": "phone",
       "kind": "page",
       "home": true,
-      "section": "Staff & Directory"
-    },
-    {
-      "id": "committees",
-      "label": "Campus Committees",
-      "desc": "Committee rosters & sign-ups",
-      "icon": "users",
-      "kind": "page",
-      "home": true,
-      "section": "Staff & Directory"
+      "section": "Staff & Directory",
+      "body": "Use this page for administrator alpha splits, departments, duties, and escalation paths."
     },
     {
       "id": "intranet",
       "label": "Intranet",
-      "desc": "Access the employee intranet",
+      "desc": "Access the employee intranet.",
       "icon": "monitor",
       "kind": "link",
       "home": true,
@@ -260,84 +201,72 @@ window.SITE_CONFIG = {
     {
       "id": "benefits",
       "label": "Benefits",
-      "desc": "View LISD employee benefits.",
-      "icon": "shield",
+      "desc": "LISD employee benefits.",
+      "icon": "heart",
       "kind": "link",
-      "home": true,
+      "home": false,
       "section": "Staff & Directory",
       "url": "https://benefits.lisd.net/"
     },
     {
-      "id": "mtss",
-      "label": "MTSS",
-      "desc": "Multi-tiered support process",
-      "icon": "layers",
+      "id": "student-support",
+      "label": "Student Support",
+      "desc": "Counseling, nurse, attendance, and student services.",
+      "icon": "shield",
       "kind": "page",
       "home": true,
-      "section": "Student Support"
+      "section": "Student Support",
+      "body": "A one-stop page for student-facing support links.",
+      "buttons": [
+        { "label": "Counseling", "href": "https://lhskillough.lisd.net/our-school/counseling" },
+        { "label": "Attendance", "href": "https://lhskillough.lisd.net/our-school/attendance" },
+        { "label": "Nurse", "href": "https://lhskillough.lisd.net/our-school/nurse" },
+        { "label": "Tip Line", "href": "https://lhskillough.lisd.net/tip-line" }
+      ]
     },
     {
-      "id": "cis",
-      "label": "CIS",
-      "desc": "Communities In Schools",
-      "icon": "compass",
+      "id": "families-students",
+      "label": "Families & Students",
+      "desc": "Frequently used links for campus families.",
+      "icon": "navigate",
       "kind": "page",
-      "home": true,
-      "section": "Student Support"
-    },
-    {
-      "id": "nurse",
-      "label": "Health Clinic",
-      "desc": "Clinic appointments & forms",
-      "icon": "heart",
-      "kind": "page",
-      "home": true,
-      "section": "Student Support"
-    },
-    {
-      "id": "lunch-app",
-      "label": "Free & Reduced Lunch",
-      "desc": "Meal application form",
-      "icon": "utensils",
-      "kind": "page",
-      "home": true,
-      "section": "Student Support"
+      "home": false,
+      "section": "Student Support",
+      "body": "Use this page for links that staff frequently share with students and families.",
+      "buttons": [
+        { "label": "Bus Routes", "href": "https://www.infofinderi.com/ifi/?cid=LISD2U5AT3X4" },
+        { "label": "Lunch Menus", "href": "https://lisd.nutrislice.com/" },
+        { "label": "Payments", "href": "https://lewisville.revtrak.net/" },
+        { "label": "Enroll", "href": "https://www.lisd.net/enroll" }
+      ]
     },
     {
       "id": "ptsa",
       "label": "PTSA",
-      "desc": "Parent-Teacher-Student Assoc.",
-      "icon": "heart",
+      "desc": "PTSA membership and instructions.",
+      "icon": "users",
       "kind": "page",
       "home": true,
-      "section": "Community"
+      "section": "Community",
+      "body": "Add the PTSA instruction image in the Image URL field, then keep the join link below.",
+      "buttons": [
+        { "label": "Join PTSA", "href": "https://txpta.my.salesforce-sites.com/JoinPTA?_gl=1*sm66y4*_ga*OTI0MDM3MjA0LjE3ODM2OTU5ODk.*_ga_KF2J8CWMTX*czE3ODM2OTU5ODgkbzEkZzAkdDE3ODM2OTU5OTAkajU4JGwwJGgw" }
+      ]
     },
     {
-      "id": "booster",
-      "label": "Booster Club",
-      "desc": "Athletic & activity boosters",
+      "id": "social-media",
+      "label": "Social Media",
+      "desc": "Submit photos and find campus accounts.",
       "icon": "star",
       "kind": "page",
       "home": true,
-      "section": "Community"
-    },
-    {
-      "id": "favorites",
-      "label": "Farmer Favorites",
-      "desc": "Staff Favorites",
-      "icon": "star",
-      "kind": "page",
-      "home": true,
-      "section": "Community"
-    },
-    {
-      "id": "history",
-      "label": "LHS History & More",
-      "desc": "Our story since 1897",
-      "icon": "book",
-      "kind": "page",
-      "home": true,
-      "section": "Community"
+      "section": "Community",
+      "body": "Add your photo submission form here, then include official campus social links.",
+      "buttons": [
+        { "label": "Killough Website", "href": "https://lhskillough.lisd.net" },
+        { "label": "Instagram", "href": "https://www.instagram.com/lewisvilleisd/" },
+        { "label": "Facebook", "href": "https://www.facebook.com/LewisvilleISD" }
+      ]
     }
   ]
 };
