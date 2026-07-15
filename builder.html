@@ -217,7 +217,7 @@ function normalizePages(){
     p.icon=p.icon||"star";
     if(p.kind==="page"){p.buttons=p.buttons||[];p.children=p.children||[];}
     if(p.kind==="page"&&!p.blocks&&p.buttons&&p.buttons.length){
-      p.blocks=p.buttons.map(b=>({type:"button",label:b.label||"Button",href:b.href||"",style:"primary"}));
+      p.blocks=p.buttons.map(b=>({type:"button",label:b.label||"Button",href:b.href||"",pageId:b.pageId||"",style:"primary"}));
     }
   });
   allSections().forEach(s=>{if(s!=="Unsectioned"&&!cfg.sectionOrder.includes(s))cfg.sectionOrder.push(s);});
@@ -374,12 +374,18 @@ function pageExtraEditor(p){
 function blockRow(b,i){
   const type=b.type||"button";
   const types=["button","link","text","image","card"];
-  let fields=`<div class="blockhead"><select data-key="block.${i}.type">${types.map(t=>`<option value="${t}" ${type===t?"selected":""}>${t}</option>`).join("")}</select><button class="btn small" data-action="moveBlockUp" data-index="${i}">Up</button><button class="btn small" data-action="moveBlockDown" data-index="${i}">Down</button><button class="btn small danger" data-action="deleteBlock" data-index="${i}">Delete</button></div>`;
+  let fields=`<div class="blockhead"><select data-key="block.${i}.type">${types.map(t=>`<option value="${t}" ${type===t?"selected":""}>${t}</option>`).join("")}</select><button class="btn small" data-action="moveBlockUp" data-index="${i}">Up</button><button class="btn small" data-action="moveBlockDown" data-index="${i}">Down</button><button class="btn small" data-action="duplicateBlock" data-index="${i}">Duplicate</button><button class="btn small danger" data-action="deleteBlock" data-index="${i}">Delete</button></div>`;
   if(type==="text") fields+=areaField("Text","block."+i+".text",b.text);
   else if(type==="image") fields+=`${textField("Image URL","block."+i+".image",b.image,"https://... or assets/photo.jpg")}${textField("Caption / Alt Text","block."+i+".caption",b.caption)}${imageUploader("block:"+i)}`;
-  else if(type==="card") fields+=`${textField("Card Title","block."+i+".label",b.label)}${textField("Description","block."+i+".text",b.text)}${textField("Image URL","block."+i+".image",b.image)}${textField("Button Link","block."+i+".href",b.href)}${imageUploader("block:"+i)}`;
-  else fields+=`${textField(type==="link"?"Link Text":"Button Text","block."+i+".label",b.label)}${textField("URL","block."+i+".href",b.href,"https://...")}`;
+  else if(type==="card") fields+=`${textField("Card Title","block."+i+".label",b.label)}${textField("Description","block."+i+".text",b.text)}${textField("Image URL","block."+i+".image",b.image)}${targetFields(b,i,"Card Button")}${imageUploader("block:"+i)}`;
+  else fields+=`${textField(type==="link"?"Link Text":"Button Text","block."+i+".label",b.label)}${targetFields(b,i,type==="link"?"Link":"Button")}`;
   return `<div class="blockrow">${fields}</div>`;
+}
+function targetFields(b,i,label){
+  const mode=b.pageId?"page":"url";
+  const pages=flatPages().filter(p=>p.id!==selected.id);
+  const picker=[{value:"",label:"Choose a page"}].concat(pages.map(p=>({value:p.id,label:p.label||p.id})));
+  return `<div class="row">${selectField(label+" Opens","block."+i+".targetMode",mode,[{value:"url",label:"Outside link / anchor"},{value:"page",label:"Existing page"}])}${mode==="page"?selectField("Choose Page","block."+i+".pageId",b.pageId||"",picker):textField("URL","block."+i+".href",b.href,"https://... or #/p/page-id")}</div><div class="actions"><button class="btn small soft" data-action="createBlockPage" data-index="${i}">Create New Page From This ${label}</button></div>`;
 }
 function imageUploader(target){
   return `<div class="dropzone">
@@ -400,7 +406,7 @@ function applyEdit(key,value,checked,refreshEditor=false){
   if(key==="section.name")renameSection(selected.name,value);
   if(key.startsWith("page.")){const p=findPage(selected.id);if(!p)return;const k=key.slice(5);p[k]=k==="home"?checked:value;if(k==="label"&&!p.id)p.id=slug(value);}
   if(key.startsWith("button.")){const p=findPage(selected.id);const [,i,k]=key.split(".");p.buttons=p.buttons||[];p.buttons[+i][k]=value;}
-  if(key.startsWith("block.")){const p=findPage(selected.id);if(!p)return;p.blocks=p.blocks||[];const [,i,k]=key.split(".");p.blocks[+i][k]=value;}
+  if(key.startsWith("block.")){const p=findPage(selected.id);if(!p)return;p.blocks=p.blocks||[];const [,i,k]=key.split(".");const block=p.blocks[+i];if(!block)return;if(k==="targetMode"){if(value==="url")delete block.pageId;else block.pageId=block.pageId||"";}else{block[k]=value;if(k==="pageId"&&value)delete block.href;if(k==="href"&&value)delete block.pageId;}}
   renderCanvas();
   if(refreshEditor)renderEditor();
 }
@@ -412,6 +418,12 @@ function renameSection(oldName,newName){
 }
 function newPage(section=""){
   return {id:"new-card-"+uid(),label:"New Card",desc:"",icon:"star",kind:"link",home:true,section:section==="Unsectioned"?"":section,url:""};
+}
+function newChildPage(parent,label="New Page"){
+  const child={id:slug(label)+"-"+uid(),label,desc:"",icon:"folder",kind:"page",home:false,section:parent.section||"",body:"",blocks:[],buttons:[],children:[]};
+  parent.children=parent.children||[];
+  parent.children.push(child);
+  return child;
 }
 function newBlock(type){
   if(type==="text")return {type:"text",text:""};
@@ -514,6 +526,8 @@ $("#editor").addEventListener("click",e=>{
   if(action==="deleteButton"){const p=findPage(selected.id);p.buttons.splice(+b.dataset.index,1);}
   if(action==="addBlock"){const p=findPage(selected.id);p.blocks=p.blocks||[];p.blocks.push(newBlock(b.dataset.kind));}
   if(action==="deleteBlock"){const p=findPage(selected.id);p.blocks.splice(+b.dataset.index,1);}
+  if(action==="duplicateBlock"){const p=findPage(selected.id), i=+b.dataset.index;if(p&&p.blocks&&p.blocks[i])p.blocks.splice(i+1,0,JSON.parse(JSON.stringify(p.blocks[i])));}
+  if(action==="createBlockPage"){const p=findPage(selected.id), i=+b.dataset.index;if(p&&p.blocks&&p.blocks[i]){const block=p.blocks[i];const child=newChildPage(p,block.label||"New Page");block.pageId=child.id;delete block.href;selected={type:"page",id:child.id};}}
   if(action==="moveBlockUp"){const p=findPage(selected.id), i=+b.dataset.index;if(i>0)move(p.blocks,i,i-1);}
   if(action==="moveBlockDown"){const p=findPage(selected.id), i=+b.dataset.index;if(i<p.blocks.length-1)move(p.blocks,i,i+1);}
   rebuild();
@@ -556,11 +570,11 @@ function prunePage(p){
     if(p.body)o.body=p.body;
     const blocks=(p.blocks||[]).filter(b=>b.type||b.label||b.href||b.text||b.image).map(b=>{
       const out={type:b.type||"button"};
-      ["label","href","text","image","caption","style"].forEach(k=>{if(b[k])out[k]=b[k];});
+      ["label","href","pageId","text","image","caption","style"].forEach(k=>{if(b[k])out[k]=b[k];});
       return out;
     });
     if(blocks.length)o.blocks=blocks;
-    const buttons=(p.buttons||[]).filter(b=>b.label||b.href).map(b=>({label:b.label||"",href:b.href||""}));
+    const buttons=(p.buttons||[]).filter(b=>b.label||b.href||b.pageId).map(b=>({label:b.label||"",href:b.href||"",pageId:b.pageId||""}));
     if(buttons.length&&!blocks.length)o.buttons=buttons;
     if(p.children&&p.children.length)o.children=p.children.map(prunePage);
   }

@@ -456,6 +456,10 @@ const socialIcon = name => I(SOCIAL_ICONS[name] || SOCIAL_ICONS.website);
 const app = document.getElementById("app");
 const byId = id => nodeById(id);
 const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function targetHref(item){
+  if(item && item.pageId) return "#/p/" + item.pageId;
+  return (item && item.href) || "#";
+}
 function heroNoteHTML(note){
   const parts = (note || "Fighting Farmers · Est. 1897").split("·").map(x=>x.trim()).filter(Boolean);
   if(!parts.length) return "";
@@ -583,8 +587,9 @@ function renderSectionPage(sid){
 }
 function buttonsHTML(btns){
   return `<div class="btnrow">${btns.map(b=>{
-    const ext = /^https?:/i.test(b.href||"");
-    const a = ext ? `href="${esc(b.href)}" target="_blank" rel="noopener"` : `href="${esc(b.href||"#")}"`;
+    const href = targetHref(b);
+    const ext = /^https?:/i.test(href);
+    const a = ext ? `href="${esc(href)}" target="_blank" rel="noopener"` : `href="${esc(href)}"`;
     return `<a class="pbtn" ${a} data-anim>${esc(b.label||"Open")}${ext?` <span class="ext">${icon("ext")}</span>`:""}</a>`;
   }).join("")}</div>`;
 }
@@ -595,16 +600,18 @@ function blocksHTML(blocks){
     if(type==="text") return `<div class="content-text">${b.text||""}</div>`;
     if(type==="image") return `<figure class="content-image"><img src="${esc(b.image||"")}" alt="${esc(b.caption||"")}" loading="lazy">${b.caption?`<figcaption>${esc(b.caption)}</figcaption>`:""}</figure>`;
     if(type==="card"){
-      const ext=/^https?:/i.test(b.href||"");
+      const href=targetHref(b);
+      const ext=/^https?:/i.test(href);
       const img=b.image?`<img src="${esc(b.image)}" alt="${esc(b.caption||b.label||"")}" loading="lazy">`:"";
-      const link=b.href?`<p><a class="content-link" href="${esc(b.href)}" ${ext?'target="_blank" rel="noopener"':""}>${esc(b.label||"Open")}${ext?` ${icon("ext")}`:""}</a></p>`:"";
+      const link=href&&href!=="#"?`<p><a class="content-link" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':""}>${esc(b.label||"Open")}${ext?` ${icon("ext")}`:""}</a></p>`:"";
       return `<div class="content-card">${img}<h3>${esc(b.label||"")}</h3>${b.text?`<p>${esc(b.text)}</p>`:""}${link}</div>`;
     }
     if(type==="link"){
-      const ext=/^https?:/i.test(b.href||"");
-      return `<a class="content-link" href="${esc(b.href||"#")}" ${ext?'target="_blank" rel="noopener"':""}>${esc(b.label||"Open")}${ext?` ${icon("ext")}`:""}</a>`;
+      const href=targetHref(b);
+      const ext=/^https?:/i.test(href);
+      return `<a class="content-link" href="${esc(href)}" ${ext?'target="_blank" rel="noopener"':""}>${esc(b.label||"Open")}${ext?` ${icon("ext")}`:""}</a>`;
     }
-    return buttonsHTML([{label:b.label||"Open",href:b.href||"#"}]);
+    return buttonsHTML([b]);
   }).join("")}</div>`;
 }
 function renderPage(id){

@@ -47,6 +47,7 @@ window.SITE_CONFIG = {
     ]
   },
   "sectionOrder": [
+    "Popular Resources",
     "Teaching & Learning",
     "Daily Operations",
     "Staff & Directory",
@@ -159,7 +160,7 @@ window.SITE_CONFIG = {
       "icon": "megaphone",
       "kind": "page",
       "home": true,
-      "section": "Daily Operations",
+      "section": "Popular Resources",
       "body": "Campus updates, weekly information, and announcement resources.",
       "buttons": [
         { "label": "Announcement Form", "href": "#/forms" }
@@ -172,8 +173,98 @@ window.SITE_CONFIG = {
       "icon": "layers",
       "kind": "page",
       "home": true,
-      "section": "Daily Operations",
+      "section": "Popular Resources",
       "body": "Recurring teacher forms and campus tasks.",
+      "buttons": []
+    },
+    {
+      "id": "smore",
+      "label": "SMORE",
+      "desc": "Staff and campus newsletters.",
+      "icon": "news",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "body": "Campus newsletter links and updates.",
+      "blocks": [
+        { "type": "button", "label": "GORE Smore (Staff Newsletter)", "pageId": "gore-smore-staff-newsletter" },
+        { "type": "button", "label": "Keeping up with Killough (Campus Newsletter)", "pageId": "keeping-up-with-killough-campus-newsletter" }
+      ],
+      "children": [
+        {
+          "id": "gore-smore-staff-newsletter",
+          "label": "GORE Smore (Staff Newsletter)",
+          "desc": "Staff newsletter resources.",
+          "icon": "news",
+          "kind": "page",
+          "home": false,
+          "section": "Popular Resources",
+          "body": "Staff newsletter links, archives, and notes."
+        },
+        {
+          "id": "keeping-up-with-killough-campus-newsletter",
+          "label": "Keeping up with Killough (Campus Newsletter)",
+          "desc": "Campus newsletter resources.",
+          "icon": "news",
+          "kind": "page",
+          "home": false,
+          "section": "Popular Resources",
+          "body": "Campus newsletter links, archives, and notes."
+        }
+      ]
+    },
+    {
+      "id": "discipline",
+      "label": "Discipline",
+      "desc": "Teacher referral access.",
+      "icon": "shield",
+      "kind": "link",
+      "home": true,
+      "section": "Popular Resources",
+      "url": "https://skyward.iscorp.com/LewisvilleISDTXStuSTS/SSOAuthentication/CreateSAMLLoginRequest?area=Discipline&controller=TeacherReferral&action=TeacherReferrals&authenticationmethodid=4"
+    },
+    {
+      "id": "staff-favorites",
+      "label": "Staff Favorites",
+      "desc": "Frequently used staff links.",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "body": "Frequently used staff resources and shortcuts.",
+      "buttons": []
+    },
+    {
+      "id": "flex-day",
+      "label": "Flex Day",
+      "desc": "Mandatory meeting dates and resources.",
+      "icon": "calendar",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "body": "Flex Day meeting information, required resources, and follow-up items.",
+      "buttons": []
+    },
+    {
+      "id": "faculty-meetings",
+      "label": "Faculty Meetings",
+      "desc": "Meeting agendas, links, and notes.",
+      "icon": "users",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "body": "Faculty meeting agendas, presentation links, and shared notes.",
+      "buttons": []
+    },
+    {
+      "id": "committees",
+      "label": "Committees",
+      "desc": "Committee information and resources.",
+      "icon": "layers",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "body": "Committee rosters, meeting notes, and campus workgroup resources.",
       "buttons": []
     },
     {
@@ -260,6 +351,61 @@ window.SITE_CONFIG = {
       ]
     },
     {
+      "id": "student-resources",
+      "label": "Student Resources",
+      "desc": "Student-facing links and campus supports.",
+      "icon": "folder",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support",
+      "body": "Student-facing links, campus supports, and commonly requested resources.",
+      "buttons": []
+    },
+    {
+      "id": "mtss",
+      "label": "MTSS",
+      "desc": "Intervention resources and student support plans.",
+      "icon": "layers",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support",
+      "body": "MTSS resources, intervention notes, and student support planning materials.",
+      "buttons": []
+    },
+    {
+      "id": "cis",
+      "label": "CIS",
+      "desc": "Communities In Schools resources.",
+      "icon": "heart",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support",
+      "body": "Communities In Schools information, referral resources, and campus support notes.",
+      "buttons": []
+    },
+    {
+      "id": "tutoring",
+      "label": "Tutoring",
+      "desc": "Tutoring schedules and support options.",
+      "icon": "grad",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support",
+      "body": "Tutoring schedules, teacher support times, and student help options.",
+      "buttons": []
+    },
+    {
+      "id": "tardy-form",
+      "label": "Tardy Form",
+      "desc": "Tardy documentation and follow-up.",
+      "icon": "clock",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support",
+      "body": "Tardy documentation, follow-up notes, and related campus procedures.",
+      "buttons": []
+    },
+    {
       "id": "ptsa",
       "label": "PTSA",
       "desc": "PTSA membership and instructions.",
@@ -279,7 +425,7 @@ window.SITE_CONFIG = {
       "icon": "star",
       "kind": "page",
       "home": true,
-      "section": "Community",
+      "section": "Popular Resources",
       "body": "Campus social media and photo sharing resources.",
       "buttons": [
         { "label": "Killough Website", "href": "https://lhskillough.lisd.net" },
