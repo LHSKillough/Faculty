@@ -345,7 +345,7 @@ window.SITE_CONFIG = {
     {
       "id": "staff-favorites",
       "label": "Staff Favorites",
-      "desc": "Frequently used staff links.",
+      "desc": "Searchable list of staff favorites",
       "icon": "star",
       "kind": "page",
       "home": true,
