@@ -378,6 +378,13 @@ footer .social svg{width:17px;height:17px}
 const CFG = window.SITE_CONFIG || {};
 const SITE = CFG.site || { campus:"Killough Campus", formsEmbed:"", data:{ teacher:{title:"Teacher Reports",embed:"",desc:""}, admin:{title:"Admin Reports",embed:"",desc:"",locked:true} } };
 const PAGES = CFG.pages || [];
+function applyTheme(){
+  const t=SITE.theme||{};
+  const map={maroon:"--maroon",maroonDeep:"--maroon-deep",maroonLift:"--maroon-lift",gold:"--gold",background:"--bg",line:"--line",card:"--card",ink:"--ink"};
+  Object.keys(map).forEach(k=>{ if(t[k]) document.documentElement.style.setProperty(map[k],t[k]); });
+  if(t.cardRadius) document.documentElement.style.setProperty("--card-radius",t.cardRadius);
+}
+applyTheme();
 /* ---- page-tree helpers ---- */
 function walkNodes(list, fn, parent){ (list||[]).forEach(n=>{ fn(n, parent); if(n.children) walkNodes(n.children, fn, n); }); }
 function nodeById(id){ let hit=null; walkNodes(PAGES, n=>{ if(n.id===id) hit=n; }); return hit; }
@@ -599,6 +606,7 @@ function blocksHTML(blocks){
     const type=b.type||"button";
     if(type==="text") return `<div class="content-text">${b.text||""}</div>`;
     if(type==="image") return `<figure class="content-image"><img src="${esc(b.image||"")}" alt="${esc(b.caption||"")}" loading="lazy">${b.caption?`<figcaption>${esc(b.caption)}</figcaption>`:""}</figure>`;
+    if(type==="embed") return `<div class="frame page-frame"><iframe src="${esc(b.href||b.embed||"")}" allowfullscreen loading="lazy"></iframe></div>`;
     if(type==="card"){
       const href=targetHref(b);
       const ext=/^https?:/i.test(href);
@@ -627,7 +635,7 @@ function renderPage(id){
   if(n.embed)  inner += `<div class="frame page-frame"><iframe src="${esc(n.embed)}" allowfullscreen loading="lazy"></iframe></div>`;
   if(n.blocks&&n.blocks.length) inner += blocksHTML(n.blocks);
   else if(n.buttons&&n.buttons.length) inner += buttonsHTML(n.buttons);
-  if(n.children&&n.children.length) inner += sectionedHTML(n.children);
+  if(n.children&&n.children.length && !inner) inner += sectionedHTML(n.children);
   if(!inner) inner = `<div class="setup"><span class="ico">${icon("layers")}</span><h3>${esc(n.label)}</h3></div>`;
   app.innerHTML = `${crumbs([{label:"Home",href:"#/"},{label:"Resources",href:"#/resources"},{label:n.label}])}
     <div class="section">${head(n.label)}${inner}</div>`;

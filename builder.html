@@ -99,6 +99,22 @@ input:focus,textarea:focus,select:focus{border-color:var(--maroon)}
 .blockrow{display:grid;gap:8px;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fbfaf9}
 .blockhead{display:flex;gap:8px;align-items:center}
 .blockhead select,.blockhead input{flex:1}
+.editable{outline:1px dashed transparent;border-radius:6px}
+.editable:hover,.editable:focus{outline-color:rgba(47,95,144,.55);background:rgba(255,255,255,.18)}
+.card .editable:hover,.card .editable:focus{background:#fff8e8}
+.canvas-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px}
+.page-preview{padding:24px 30px 36px}
+.page-preview .page-title{font-family:"Oswald";font-size:28px;text-transform:uppercase;letter-spacing:.06em;color:var(--maroon);margin:0 0 6px}
+.page-preview .page-desc{color:var(--muted);margin:0 0 14px}
+.page-body{line-height:1.55;border:1px dashed transparent;border-radius:8px;padding:8px 0;margin:8px 0 14px}
+.preview-blocks{display:grid;gap:12px;margin-top:14px}
+.preview-block{border:1px solid var(--line);border-radius:8px;background:#fff;padding:12px;position:relative}
+.preview-block .inline-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.preview-card img,.preview-image img{display:block;width:100%;max-height:240px;object-fit:cover;border-radius:6px;background:#eee}
+.preview-embed{aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f4efed}
+.preview-embed iframe{width:100%;height:100%;border:0}
+.library-section{background:#fbfaf9;border-top:1px solid var(--line)}
+.library-section .section-head h3{color:#3b2c2c}
 .hidden{display:none!important}
 details summary{font-family:"Oswald";color:var(--maroon);text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
 code{background:#f4efed;border:1px solid var(--line);border-radius:4px;padding:1px 4px}
@@ -173,6 +189,7 @@ const iconNames=Object.keys(ICONS);
 const cfg=JSON.parse(JSON.stringify(window.SITE_CONFIG||{}));
 cfg.site=cfg.site||{};
 cfg.site.hero=cfg.site.hero||{title:"Lewisville High School",subtitle:"Killough Campus · Faculty Hub",note:""};
+cfg.site.theme=cfg.site.theme||{};
 cfg.site.footer=cfg.site.footer||{
   title:"Lewisville High School",
   subtitle:"Killough Campus · Fighting Farmers",
@@ -198,6 +215,11 @@ function uid(){return Math.random().toString(36).slice(2,8);}
 function storeGet(k){try{return localStorage.getItem(k)||"";}catch(e){return "";}}
 function storeSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 function pathForGit(p){return p.split("/").filter(Boolean).map(encodeURIComponent).join("/");}
+function applyTheme(){
+  const t=cfg.site.theme||{};
+  const map={maroon:"--maroon",maroon2:"--maroon2",gold:"--gold",background:"--bg",line:"--line",paper:"--paper",ink:"--ink",muted:"--muted"};
+  Object.keys(map).forEach(k=>{ if(t[k]) document.documentElement.style.setProperty(map[k],t[k]); });
+}
 
 function walk(list,fn,parent=null){(list||[]).forEach((p,i)=>{fn(p,i,list,parent);if(p.children)walk(p.children,fn,p);});}
 function findPage(id){let hit=null;walk(cfg.pages,p=>{if(p.id===id)hit=p;});return hit;}
@@ -239,21 +261,30 @@ function heroNoteHTML(note){
 }
 function renderCanvas(){
   normalizePages();
+  applyTheme();
   const hero=cfg.site.hero||{};
   const heroImg=hero.image?`<div class="hero-img"><img src="${esc(hero.image)}" alt="${esc(hero.imageAlt||"")}"></div>`:"";
   const sections=allSections();
+  const selectedPage=selected.type==="page"?findPage(selected.id):null;
   $("#canvas").innerHTML=`
     <div class="site-top">
-      <div class="brand">${esc(cfg.site.campus||"Killough Campus")}</div>
+      <div class="brand editable" contenteditable="true" data-edit="site.campus">${esc(cfg.site.campus||"Killough Campus")}</div>
       <nav class="menu">${cfg.site.menu.map((m,i)=>`<button class="menu-item ${selected.type==="menu"&&selected.index===i?"selected":""}" draggable="true" data-type="menu" data-index="${i}">${esc(m.label||"Menu")}</button>`).join("")}</nav>
     </div>
-    <section class="hero ${selected.type==="hero"?"selected":""}" data-type="hero">
-      <div class="hero-inner"><span class="hero-seal"><img src="assets/lhs-seal.png" alt=""></span><h2>${esc(hero.title||"Lewisville High School")}</h2><p>${esc(hero.subtitle||"Killough Campus · Faculty Hub")}</p>${heroNoteHTML(hero.note)}${heroImg}</div>
-    </section>
-    <div class="sections">
-      ${sections.map((s,i)=>sectionHTML(s,i)).join("")}
-    </div>
+    ${selectedPage?pageCanvasHTML(selectedPage):`
+      <section class="hero ${selected.type==="hero"?"selected":""}" data-type="hero">
+        <div class="hero-inner"><span class="hero-seal"><img src="assets/lhs-seal.png" alt=""></span><h2 class="editable" contenteditable="true" data-edit="hero.title">${esc(hero.title||"Lewisville High School")}</h2><p class="editable" contenteditable="true" data-edit="hero.subtitle">${esc(hero.subtitle||"Killough Campus · Faculty Hub")}</p>${heroNoteHTML(hero.note)}${heroImg}</div>
+      </section>
+      <div class="sections">
+        ${sections.map((s,i)=>sectionHTML(s,i)).join("")}
+        ${libraryHTML()}
+      </div>`}
     ${footerHTML()}`;
+}
+function libraryHTML(){
+  const hidden=flatPages().filter(p=>p.home===false);
+  if(!hidden.length)return "";
+  return `<section class="section library-section" data-type="site"><div class="section-head"><span class="handle">↧</span><h3>All Resources / Hidden Pages</h3></div><div class="cards">${hidden.map(cardHTML).join("")}</div></section>`;
 }
 function footerHTML(){
   const f=cfg.site.footer||{};
@@ -261,16 +292,16 @@ function footerHTML(){
   const socials=(f.social||[]).map(s=>`<a href="${esc(s.href||"#")}" title="${esc(s.label||s.type||"Social")}">${esc((s.type||s.label||"social").slice(0,2))}</a>`).join("");
   return `<footer class="site-footer ${selected.type==="footer"?"selected":""}" data-type="footer">
     <span class="mark">${svg("star")}</span>
-    <div class="fb"><b>${esc(f.title||"Lewisville High School")}</b><span>${esc(f.subtitle||"Killough Campus · Fighting Farmers")}</span></div>
+    <div class="fb"><b class="editable" contenteditable="true" data-edit="footer.title">${esc(f.title||"Lewisville High School")}</b><span class="editable" contenteditable="true" data-edit="footer.subtitle">${esc(f.subtitle||"Killough Campus · Fighting Farmers")}</span></div>
     <div class="footer-links">${links}</div>
     <div class="social">${socials}</div>
-    <div class="right">${esc(f.right||"Est. 1897 · Faculty Hub")}</div>
+    <div class="right editable" contenteditable="true" data-edit="footer.right">${esc(f.right||"Est. 1897 · Faculty Hub")}</div>
   </footer>`;
 }
 function sectionHTML(section,index){
   const cards=pagesInSection(section);
   return `<section class="section ${selected.type==="section"&&selected.name===section?"selected":""}" draggable="true" data-type="section" data-section="${esc(section)}" data-index="${index}">
-    <div class="section-head"><span class="handle">↕</span><h3>${esc(section)}</h3></div>
+    <div class="section-head"><span class="handle">↕</span><h3 class="editable" contenteditable="true" data-edit="section.name" data-section-name="${esc(section)}">${esc(section)}</h3></div>
     <div class="cards" data-section-cards="${esc(section)}">
       ${cards.length?cards.map(cardHTML).join(""):`<div class="empty">Drop cards here or add a new card.</div>`}
     </div>
@@ -280,8 +311,29 @@ function cardHTML(p){
   const img=p.image?`<img src="${esc(p.image)}" alt="${esc(p.imageAlt||p.label)}">`:"";
   const badge=p.kind==="link"?"Link":p.kind==="reader"?"Handbook":"Page";
   return `<article class="card ${selected.type==="page"&&selected.id===p.id?"selected":""}" draggable="true" data-type="page" data-id="${esc(p.id)}">
-    <span class="badge">${badge}</span>${img}<div class="icon">${svg(p.icon)}</div><h4>${esc(p.label)}</h4><p>${esc(p.desc||"")}</p>
+    <span class="badge">${badge}</span>${img}<div class="icon">${svg(p.icon)}</div><h4 class="editable" contenteditable="true" data-edit="page.label" data-page-id="${esc(p.id)}">${esc(p.label)}</h4><p class="editable" contenteditable="true" data-edit="page.desc" data-page-id="${esc(p.id)}">${esc(p.desc||"")}</p>
   </article>`;
+}
+function pageCanvasHTML(p){
+  const blocks=p.blocks||[];
+  return `<div class="page-preview" data-type="page" data-id="${esc(p.id)}">
+    <div class="canvas-tools"><button class="btn soft" data-action="backHome">Home Canvas</button><button class="btn soft" data-action="addBlock" data-kind="button">Add Button</button><button class="btn soft" data-action="addBlock" data-kind="text">Add Text</button><button class="btn soft" data-action="addBlock" data-kind="image">Add Image</button><button class="btn soft" data-action="addBlock" data-kind="embed">Add Embed</button><button class="btn soft" data-action="addBlock" data-kind="card">Add Card</button></div>
+    <h1 class="page-title editable" contenteditable="true" data-edit="page.label" data-page-id="${esc(p.id)}">${esc(p.label||"Untitled")}</h1>
+    <p class="page-desc editable" contenteditable="true" data-edit="page.desc" data-page-id="${esc(p.id)}">${esc(p.desc||"")}</p>
+    ${p.image?`<figure class="preview-image"><img src="${esc(p.image)}" alt="${esc(p.imageAlt||p.label)}"></figure>`:""}
+    <div class="page-body editable" contenteditable="true" data-edit="page.body" data-page-id="${esc(p.id)}">${p.body||""}</div>
+    ${p.embed?`<div class="preview-embed"><iframe src="${esc(p.embed)}"></iframe></div>`:""}
+    <div class="preview-blocks">${blocks.length?blocks.map((b,i)=>blockPreviewHTML(b,i)).join(""):`<div class="empty">Add buttons, text, images, embeds, or cards to this page.</div>`}</div>
+  </div>`;
+}
+function blockPreviewHTML(b,i){
+  const type=b.type||"button";
+  const actions=`<div class="inline-actions"><button class="btn small" data-action="moveBlockUp" data-index="${i}">Up</button><button class="btn small" data-action="moveBlockDown" data-index="${i}">Down</button><button class="btn small" data-action="duplicateBlock" data-index="${i}">Duplicate</button><button class="btn small soft" data-action="createBlockPage" data-index="${i}">Make Page</button><button class="btn small danger" data-action="deleteBlock" data-index="${i}">Delete</button></div>`;
+  if(type==="text")return `<div class="preview-block"><div class="editable" contenteditable="true" data-edit="block.${i}.text">${b.text||""}</div>${actions}</div>`;
+  if(type==="image")return `<div class="preview-block preview-image">${b.image?`<img src="${esc(b.image)}" alt="${esc(b.caption||"")}">`:""}<p class="editable" contenteditable="true" data-edit="block.${i}.caption">${esc(b.caption||"Image caption")}</p>${actions}</div>`;
+  if(type==="embed")return `<div class="preview-block">${b.href||b.embed?`<div class="preview-embed"><iframe src="${esc(b.href||b.embed)}"></iframe></div>`:`<div class="empty">Paste an embed URL in the controls.</div>`}${actions}</div>`;
+  if(type==="card")return `<div class="preview-block preview-card">${b.image?`<img src="${esc(b.image)}" alt="${esc(b.caption||b.label||"")}">`:""}<h3 class="editable" contenteditable="true" data-edit="block.${i}.label">${esc(b.label||"Card title")}</h3><p class="editable" contenteditable="true" data-edit="block.${i}.text">${esc(b.text||"")}</p>${actions}</div>`;
+  return `<div class="preview-block"><a class="btn primary editable" contenteditable="true" data-edit="block.${i}.label">${esc(b.label||"Button")}</a>${actions}</div>`;
 }
 
 function textField(label,key,value,placeholder=""){return `<label class="field"><span>${label}</span><input type="text" data-key="${key}" value="${esc(value||"")}" placeholder="${esc(placeholder)}"></label>`;}
@@ -299,6 +351,10 @@ function renderEditor(){
 function siteEditor(){
   return `
     ${textField("Campus Label","site.campus",cfg.site.campus,"Killough Campus")}
+    <h2>Site Style</h2>
+    <div class="row">${textField("Maroon","theme.maroon",cfg.site.theme.maroon||"#500000")}${textField("Gold","theme.gold",cfg.site.theme.gold||"#e3b23c")}</div>
+    <div class="row">${textField("Background","theme.background",cfg.site.theme.background||"#f6f3f1")}${textField("Line Color","theme.line",cfg.site.theme.line||"#e4dedb")}</div>
+    <div class="row">${textField("Text Color","theme.ink",cfg.site.theme.ink||"#231b1b")}${textField("Muted Text","theme.muted",cfg.site.theme.muted||"#6f6765")}</div>
     <div class="actions">
       <button class="btn soft" data-action="selectHero">Edit Hero</button>
       <button class="btn soft" data-action="selectFooter">Edit Footer</button>
@@ -369,14 +425,15 @@ function pageExtraEditor(p){
   p.blocks=p.blocks||[];
   return `${textField("Embed URL","page.embed",p.embed,"Google form, sheet, PDF, calendar, etc.")}${areaField("Page Text","page.body",p.body)}
     <h2>Page Content Blocks</h2><div class="list">${p.blocks.map((b,i)=>blockRow(b,i)).join("")}</div>
-    <div class="actions"><button class="btn soft" data-action="addBlock" data-kind="button">Add Button</button><button class="btn soft" data-action="addBlock" data-kind="text">Add Text</button><button class="btn soft" data-action="addBlock" data-kind="image">Add Image</button><button class="btn soft" data-action="addBlock" data-kind="card">Add Card Block</button></div>`;
+    <div class="actions"><button class="btn soft" data-action="addBlock" data-kind="button">Add Button</button><button class="btn soft" data-action="addBlock" data-kind="text">Add Text</button><button class="btn soft" data-action="addBlock" data-kind="image">Add Image</button><button class="btn soft" data-action="addBlock" data-kind="embed">Add Embed</button><button class="btn soft" data-action="addBlock" data-kind="card">Add Card Block</button></div>`;
 }
 function blockRow(b,i){
   const type=b.type||"button";
-  const types=["button","link","text","image","card"];
+  const types=["button","link","text","image","embed","card"];
   let fields=`<div class="blockhead"><select data-key="block.${i}.type">${types.map(t=>`<option value="${t}" ${type===t?"selected":""}>${t}</option>`).join("")}</select><button class="btn small" data-action="moveBlockUp" data-index="${i}">Up</button><button class="btn small" data-action="moveBlockDown" data-index="${i}">Down</button><button class="btn small" data-action="duplicateBlock" data-index="${i}">Duplicate</button><button class="btn small danger" data-action="deleteBlock" data-index="${i}">Delete</button></div>`;
   if(type==="text") fields+=areaField("Text","block."+i+".text",b.text);
   else if(type==="image") fields+=`${textField("Image URL","block."+i+".image",b.image,"https://... or assets/photo.jpg")}${textField("Caption / Alt Text","block."+i+".caption",b.caption)}${imageUploader("block:"+i)}`;
+  else if(type==="embed") fields+=`${textField("Embed URL","block."+i+".href",b.href||b.embed,"Google form, sheet, PDF, calendar, etc.")}${textField("Embed Label","block."+i+".label",b.label)}`;
   else if(type==="card") fields+=`${textField("Card Title","block."+i+".label",b.label)}${textField("Description","block."+i+".text",b.text)}${textField("Image URL","block."+i+".image",b.image)}${targetFields(b,i,"Card Button")}${imageUploader("block:"+i)}`;
   else fields+=`${textField(type==="link"?"Link Text":"Button Text","block."+i+".label",b.label)}${targetFields(b,i,type==="link"?"Link":"Button")}`;
   return `<div class="blockrow">${fields}</div>`;
@@ -398,6 +455,7 @@ function flatPages(){const a=[];walk(cfg.pages,p=>a.push(p));return a;}
 function applyEdit(key,value,checked,refreshEditor=false){
   if(key==="site.campus")cfg.site.campus=value;
   if(key.startsWith("hero."))cfg.site.hero[key.slice(5)]=value;
+  if(key.startsWith("theme.")){cfg.site.theme=cfg.site.theme||{};cfg.site.theme[key.slice(6)]=value;}
   if(key.startsWith("footer.")){cfg.site.footer=cfg.site.footer||{};cfg.site.footer[key.slice(7)]=value;}
   if(key.startsWith("footerLink.")){const [,i,k]=key.split(".");cfg.site.footer.links=cfg.site.footer.links||[];cfg.site.footer.links[+i][k]=value;}
   if(key.startsWith("social.")){const [,i,k]=key.split(".");cfg.site.footer.social=cfg.site.footer.social||[];cfg.site.footer.social[+i][k]=value;}
@@ -409,6 +467,29 @@ function applyEdit(key,value,checked,refreshEditor=false){
   if(key.startsWith("block.")){const p=findPage(selected.id);if(!p)return;p.blocks=p.blocks||[];const [,i,k]=key.split(".");const block=p.blocks[+i];if(!block)return;if(k==="targetMode"){if(value==="url")delete block.pageId;else block.pageId=block.pageId||"";}else{block[k]=value;if(k==="pageId"&&value)delete block.href;if(k==="href"&&value)delete block.pageId;}}
   renderCanvas();
   if(refreshEditor)renderEditor();
+}
+function applyInlineEdit(el){
+  const key=el.dataset.edit;
+  if(!key)return;
+  const value=el.innerHTML.trim();
+  if(key==="site.campus")cfg.site.campus=el.textContent.trim();
+  else if(key==="section.name"){
+    const oldName=el.dataset.sectionName||selected.name;
+    renameSection(oldName,el.textContent.trim());
+  }
+  else if(key.startsWith("hero."))cfg.site.hero[key.slice(5)]=el.textContent.trim();
+  else if(key.startsWith("footer.")){cfg.site.footer=cfg.site.footer||{};cfg.site.footer[key.slice(7)]=el.textContent.trim();}
+  else if(key.startsWith("page.")){
+    const p=findPage(el.dataset.pageId||selected.id); if(!p)return;
+    const k=key.slice(5); p[k]=k==="body"?value:el.textContent.trim();
+  }
+  else if(key.startsWith("block.")){
+    const p=findPage(selected.id); if(!p)return;
+    const [,i,k]=key.split("."); if(!p.blocks||!p.blocks[+i])return;
+    p.blocks[+i][k]=k==="text"?value:el.textContent.trim();
+  }
+  renderCanvas();
+  renderEditor();
 }
 function renameSection(oldName,newName){
   newName=(newName||"").trim()||"Unsectioned";
@@ -428,6 +509,7 @@ function newChildPage(parent,label="New Page"){
 function newBlock(type){
   if(type==="text")return {type:"text",text:""};
   if(type==="image")return {type:"image",image:"",caption:""};
+  if(type==="embed")return {type:"embed",label:"New Embed",href:""};
   if(type==="card")return {type:"card",label:"New Card",text:"",href:"",image:""};
   if(type==="link")return {type:"link",label:"New Link",href:""};
   return {type:"button",label:"New Button",href:"",style:"primary"};
@@ -458,7 +540,21 @@ function removePage(id){
 }
 function clonePage(p){return JSON.parse(JSON.stringify(p));}
 
+$("#canvas").addEventListener("blur",e=>{
+  const el=e.target.closest("[data-edit]");
+  if(el)applyInlineEdit(el);
+},true);
+$("#canvas").addEventListener("keydown",e=>{
+  const el=e.target.closest("[data-edit]");
+  if(el && e.key==="Enter" && !e.shiftKey && el.dataset.edit!=="page.body" && !el.dataset.edit.endsWith(".text")){
+    e.preventDefault();
+    el.blur();
+  }
+});
 $("#canvas").addEventListener("click",e=>{
+  const actionButton=e.target.closest("[data-action]");
+  if(actionButton){runAction(actionButton);return;}
+  if(e.target.closest("[data-edit]"))return;
   const el=e.target.closest("[data-type]"); if(!el)return;
   const type=el.dataset.type;
   if(type==="hero")selected={type:"hero"};
@@ -506,7 +602,11 @@ $("#editor").addEventListener("change",e=>{
 });
 $("#editor").addEventListener("click",e=>{
   const b=e.target.closest("[data-action]");if(!b)return;
+  runAction(b);
+});
+function runAction(b){
   const action=b.dataset.action;
+  if(action==="backHome")selected={type:"site"};
   if(action==="selectHero")selected={type:"hero"};
   if(action==="selectFooter")selected={type:"footer"};
   if(action==="addMenu"){cfg.site.menu.push({label:"New Button",type:"url",href:""});selected={type:"menu",index:cfg.site.menu.length-1};}
@@ -531,7 +631,7 @@ $("#editor").addEventListener("click",e=>{
   if(action==="moveBlockUp"){const p=findPage(selected.id), i=+b.dataset.index;if(i>0)move(p.blocks,i,i-1);}
   if(action==="moveBlockDown"){const p=findPage(selected.id), i=+b.dataset.index;if(i<p.blocks.length-1)move(p.blocks,i,i+1);}
   rebuild();
-});
+}
 $("#addSectionBtn").addEventListener("click",()=>{addSection();rebuild();});
 $("#addCardBtn").addEventListener("click",()=>{const s=allSections()[0]||"";const p=newPage(s);cfg.pages.push(p);selected={type:"page",id:p.id};rebuild();});
 
