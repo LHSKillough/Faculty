@@ -79,7 +79,8 @@ window.SITE_CONFIG = {
         "label": "Data",
         "type": "data"
       }
-    ]
+    ],
+    "theme": {}
   },
   "sectionOrder": [
     "Popular Resources",
@@ -301,7 +302,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "GORE Smore (Staff Newsletter)",
-          "pageId": "gore-smore-staff-newsletter"
+          "pageId": "gore-smore-staff-newsletter-9fyiq9"
         },
         {
           "type": "button",
@@ -329,6 +330,22 @@ window.SITE_CONFIG = {
           "home": false,
           "section": "Popular Resources",
           "body": "Campus newsletter links, archives, and notes."
+        },
+        {
+          "id": "gore-smore-staff-newsletter-9fyiq9",
+          "label": "GORE Smore (Staff Newsletter)",
+          "desc": "",
+          "icon": "folder",
+          "kind": "page",
+          "home": false,
+          "section": "Popular Resources",
+          "blocks": [
+            {
+              "type": "embed",
+              "label": "New Embed",
+              "href": "https://app.smore.com/n/cm53z"
+            }
+          ]
         }
       ]
     },
