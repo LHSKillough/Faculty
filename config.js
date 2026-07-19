@@ -624,6 +624,16 @@ window.SITE_CONFIG = {
           "style": "primary"
         }
       ]
+    },
+    {
+      "id": "new-card-zcb9bl",
+      "label": "Recognize SomeONE",
+      "desc": "Recognize a staff member by sending a card to them.",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Popular Resources",
+      "url": "https://www.lisd.net/resources/staff/thank-you"
     }
   ]
 };
