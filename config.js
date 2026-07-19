@@ -72,12 +72,13 @@ window.SITE_CONFIG = {
         "dropdownSections": true
       },
       {
-        "label": "Forms",
-        "type": "page"
-      },
-      {
         "label": "Data",
         "type": "data"
+      },
+      {
+        "label": "FAQ",
+        "type": "page",
+        "pageId": "new-card-xa82bw"
       }
     ],
     "theme": {}
