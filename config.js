@@ -72,8 +72,8 @@ window.SITE_CONFIG = {
         "dropdownSections": true
       },
       {
-        "label": "FAQ",
-        "type": "forms"
+        "label": "Forms",
+        "type": "page"
       },
       {
         "label": "Data",
@@ -634,6 +634,15 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Popular Resources",
       "url": "https://www.lisd.net/resources/staff/thank-you"
+    },
+    {
+      "id": "new-card-xa82bw",
+      "label": "Frequently Asked Questions",
+      "desc": "Answers to common questions",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Other Resources"
     }
   ]
 };
