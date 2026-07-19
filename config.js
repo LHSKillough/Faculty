@@ -570,12 +570,12 @@ window.SITE_CONFIG = {
     {
       "id": "tardy-form",
       "label": "Tardy Form",
-      "desc": "Tardy documentation and follow-up.",
+      "desc": "Tardy form for student",
       "icon": "clock",
-      "kind": "page",
+      "kind": "link",
       "home": true,
       "section": "Student Support",
-      "body": "Tardy documentation, follow-up notes, and related campus procedures."
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLScdOvakdPzGXG9ZMaNoF-d8QjnEqLwowKdhdJqmcGhVtCxGyg/viewform"
     },
     {
       "id": "ptsa",
