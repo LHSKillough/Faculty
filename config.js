@@ -308,6 +308,11 @@ window.SITE_CONFIG = {
           "type": "button",
           "label": "Keeping up with Killough (Campus Newsletter)",
           "pageId": "keeping-up-with-killough-campus-newsletter"
+        },
+        {
+          "type": "embed",
+          "label": "New Embed",
+          "href": "https://app.smore.com/n/019nk"
         }
       ],
       "children": [
