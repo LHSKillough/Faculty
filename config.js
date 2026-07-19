@@ -72,7 +72,7 @@ window.SITE_CONFIG = {
         "dropdownSections": true
       },
       {
-        "label": "Forms",
+        "label": "FAQ",
         "type": "forms"
       },
       {
