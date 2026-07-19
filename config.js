@@ -307,12 +307,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "Keeping up with Killough (Campus Newsletter)",
-          "pageId": "keeping-up-with-killough-campus-newsletter"
-        },
-        {
-          "type": "embed",
-          "label": "New Embed",
-          "href": "https://app.smore.com/n/019nk"
+          "pageId": "keeping-up-with-killough-campus-newsletter-91vsms"
         }
       ],
       "children": [
@@ -349,6 +344,22 @@ window.SITE_CONFIG = {
               "type": "embed",
               "label": "New Embed",
               "href": "https://app.smore.com/n/cm53z"
+            }
+          ]
+        },
+        {
+          "id": "keeping-up-with-killough-campus-newsletter-91vsms",
+          "label": "Keeping up with Killough (Campus Newsletter)",
+          "desc": "",
+          "icon": "folder",
+          "kind": "page",
+          "home": false,
+          "section": "Popular Resources",
+          "embed": "https://app.smore.com/n/019nk",
+          "blocks": [
+            {
+              "type": "embed",
+              "label": "New Embed"
             }
           ]
         }
