@@ -1,6 +1,6 @@
 {
   "title": "Faculty Handbook",
-  "fetched": "2026-07-20T15:41:15.917Z",
+  "fetched": "2026-07-20T17:11:52.446Z",
   "sections": [
     {
       "level": 0,
@@ -87,7 +87,11 @@
       "blocks": [
         {
           "type": "p",
-          "html": "Stephanie Gore, Principal"
+          "html": "Stephanie Gore, Principall"
+        },
+        {
+          "type": "p",
+          "html": "Stephanie Hall, Assistant Principal"
         },
         {
           "type": "p",
@@ -95,11 +99,11 @@
         },
         {
           "type": "p",
-          "html": "Ashlyn Straw, Assistant Principal"
+          "html": "Clinton Marion, Assistant Principal"
         },
         {
           "type": "p",
-          "html": "Clinton Marion, Assistant Principal"
+          "html": "Ashlyn Straw, Assistant Principal"
         }
       ]
     },
@@ -333,8 +337,8 @@
             ],
             [
               "Testing",
-              "Stephanie CastroCarolyn Woelke",
-              "4519/4569",
+              "Stephanie Castro",
+              "4519",
               "Office"
             ],
             [
@@ -446,7 +450,7 @@
             ],
             [
               "ATTENDANCE| Kelly Casarez…………………….",
-              "LIBRARIAN | ??????????………………3315"
+              "LIBRARIAN | Kristen Davis………………3315"
             ],
             [
               "BASE | Alejandro Sanchez…………………………….....3241",
@@ -457,7 +461,7 @@
               "PARKING | Megan Livingston"
             ],
             [
-              "CAFETERIA MANAGER | Sergio Mackeprangzaragoza..3195",
+              "CAFETERIA MANAGER | Sergio Mackeprangzaragoza………………3195",
               "REGISTRAR | Cristina Jiminez ......................3107"
             ],
             [
@@ -507,7 +511,7 @@
       "blocks": [
         {
           "type": "p",
-          "html": "BUILDING PASSES:        No student is to be in the hall without his/her current teacher’s pass, or without an ID. Students should adhere to the 15/15 Rule which implies that no students should be leaving the classroom for any reason for the first and last 15 minutes of the period.  No more than one student at a time should be leaving the classroom.  The Accelerated Block has caused us to reemphasize the importance of instructional time.  Remember that students are better served when they spend time in the classroom receiving instruction.  Please minimize the amount of time students are out of class."
+          "html": "BUILDING PASSES: No student is to be in the hall without his/her current teacher’s pass, or without an ID. Students should adhere to the 15/15 Rule which implies that no students should be leaving the classroom for any reason for the first and last 15 minutes of the period.  No more than one student at a time should be leaving the classroom.  The Accelerated Block has caused us to reemphasize the importance of instructional time.  Remember that students are better served when they spend time in the classroom receiving instruction.  Please minimize the amount of time students are out of class."
         }
       ]
     },
@@ -518,7 +522,7 @@
       "blocks": [
         {
           "type": "p",
-          "html": "Instructions, information and various other memos will be forwarded to teachers through memorandums from the administration and various faculty members.  Please check your mailbox and e-mail frequently. SIGN UP FOR REMIND AND FOLLOW LHSK ON INSTAGRAM, FACEBOOK AND OUR SCHOOL WEB PAGE."
+          "html": "Instructions, information and various other memos will be forwarded to teachers through memorandums from the administration and various faculty members.  Please check your mailbox and e-mail frequently. SIGN UP FOR REMIND AND FOLLOW LHSK ON INSTAGRAM (LHSKillough), FACEBOOK(  AND OUR SCHOOL WEB PAGE."
         }
       ]
     },
