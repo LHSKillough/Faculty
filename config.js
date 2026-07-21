@@ -427,16 +427,6 @@ window.SITE_CONFIG = {
       "body": "Staff directory, phone list, and campus contact information."
     },
     {
-      "id": "admin-contact",
-      "label": "Admin Contact Info",
-      "desc": "Who to contact for what.",
-      "icon": "phone",
-      "kind": "page",
-      "home": true,
-      "section": "Staff & Directory",
-      "body": "Administrator contacts, departments, duties, and support paths."
-    },
-    {
       "id": "intranet",
       "label": "Intranet",
       "desc": "Access the employee intranet.",
