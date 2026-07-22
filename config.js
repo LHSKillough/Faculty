@@ -25,12 +25,12 @@ window.SITE_CONFIG = {
         {
           "label": "Instagram",
           "type": "instagram",
-          "href": "https://www.instagram.com/lewisvilleisd/"
+          "href": "https://www.instagram.com/lhskillough/"
         },
         {
           "label": "Facebook",
           "type": "facebook",
-          "href": "https://www.facebook.com/LewisvilleISD"
+          "href": "https://www.facebook.com/lhskillough/"
         }
       ]
     },
@@ -383,7 +383,9 @@ window.SITE_CONFIG = {
       "icon": "star",
       "kind": "page",
       "home": true,
-      "section": "Popular Resources"
+      "section": "Popular Resources",
+      "body": "<p style=\"margin:0 0 14px\">Staff favorites for treats, gifts, and birthdays. If the list doesn't load below, use the button to open it in its own tab.</p><a href=\"https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;background:#500000;color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;text-decoration:none\">Open Staff Favorites \u2197</a>",
+      "embed": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec"
     },
     {
       "id": "faculty-meetings",
@@ -605,13 +607,13 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "Instagram",
-          "href": "https://www.instagram.com/lewisvilleisd/",
+          "href": "https://www.instagram.com/lhskillough/",
           "style": "primary"
         },
         {
           "type": "button",
           "label": "Facebook",
-          "href": "https://www.facebook.com/LewisvilleISD",
+          "href": "https://www.facebook.com/lhskillough/",
           "style": "primary"
         }
       ]
