@@ -398,16 +398,6 @@ window.SITE_CONFIG = {
       "body": "Faculty meeting agendas, presentation links, and shared notes."
     },
     {
-      "id": "committees",
-      "label": "Committees",
-      "desc": "Committee information and resources.",
-      "icon": "layers",
-      "kind": "page",
-      "home": false,
-      "section": "Popular Resources",
-      "body": "Committee rosters, meeting notes, and campus workgroup resources."
-    },
-    {
       "id": "faculty-handbook",
       "label": "Faculty Handbook",
       "desc": "Searchable campus policies and procedures.",
@@ -449,42 +439,6 @@ window.SITE_CONFIG = {
       "url": "https://benefits.lisd.net/"
     },
     {
-      "id": "student-support",
-      "label": "Student Support",
-      "desc": "Counseling, nurse, attendance, and student services.",
-      "icon": "shield",
-      "kind": "page",
-      "home": true,
-      "section": "Student Support",
-      "body": "Counseling, nurse, attendance, and student services.",
-      "blocks": [
-        {
-          "type": "button",
-          "label": "Counseling",
-          "href": "https://lhskillough.lisd.net/our-school/counseling",
-          "style": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Attendance",
-          "href": "https://lhskillough.lisd.net/our-school/attendance",
-          "style": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Nurse",
-          "href": "https://lhskillough.lisd.net/our-school/nurse",
-          "style": "primary"
-        },
-        {
-          "type": "button",
-          "label": "Tip Line",
-          "href": "https://lhskillough.lisd.net/tip-line",
-          "style": "primary"
-        }
-      ]
-    },
-    {
       "id": "families-students",
       "label": "Families & Students",
       "desc": "Frequently used links for campus families.",
@@ -519,16 +473,6 @@ window.SITE_CONFIG = {
           "style": "primary"
         }
       ]
-    },
-    {
-      "id": "student-resources",
-      "label": "Student Resources",
-      "desc": "Student-facing links and campus supports.",
-      "icon": "folder",
-      "kind": "page",
-      "home": true,
-      "section": "Student Support",
-      "body": "Student-facing links, campus supports, and commonly requested resources."
     },
     {
       "id": "mtss",
@@ -632,6 +576,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Popular Resources",
       "url": "https://www.lisd.net/resources/staff/thank-you"
+    },
+    {
+      "id": "committees",
+      "label": "Committees",
+      "desc": "Committee information and resources.",
+      "icon": "layers",
+      "kind": "page",
+      "home": false,
+      "section": "Other Resources",
+      "body": "Committee rosters, meeting notes, and campus workgroup resources."
     },
     {
       "id": "new-card-xa82bw",
