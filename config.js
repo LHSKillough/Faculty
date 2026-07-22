@@ -374,7 +374,7 @@ window.SITE_CONFIG = {
       "kind": "link",
       "home": true,
       "section": "Student Support",
-      "url": "https://skyward.iscorp.com/LewisvilleISDTXStu/Discipline/TeacherReferral/TeacherReferrals"
+      "url": "https://skyward.iscorp.com/LewisvilleISDTXStuSTS/SSOAuthentication/CreateSAMLLoginRequest?area=Discipline&controller=TeacherReferral&action=TeacherReferrals&authenticationmethodid=4"
     },
     {
       "id": "staff-favorites",
@@ -598,6 +598,11 @@ window.SITE_CONFIG = {
       "section": "Popular Resources",
       "body": "Campus social media and photo sharing resources.",
       "blocks": [
+        {
+          "type": "button",
+          "label": "Create a post",
+          "style": "primary"
+        },
         {
           "type": "button",
           "label": "Killough Website",
