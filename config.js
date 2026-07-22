@@ -374,7 +374,7 @@ window.SITE_CONFIG = {
       "kind": "link",
       "home": true,
       "section": "Student Support",
-      "url": "https://skyward.iscorp.com/LewisvilleISDTXStuSTS/SSOAuthentication/CreateSAMLLoginRequest?area=Discipline&controller=TeacherReferral&action=TeacherReferrals&authenticationmethodid=4"
+      "url": "https://skyward.iscorp.com/LewisvilleISDTXStu/Discipline/TeacherReferral/TeacherReferrals"
     },
     {
       "id": "staff-favorites",
@@ -384,8 +384,8 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Popular Resources",
-      "body": "<p style=\"margin:0 0 14px\">Staff favorites for treats, gifts, and birthdays. If the list doesn't load below, use the button to open it in its own tab.</p><a href=\"https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;background:#500000;color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;text-decoration:none\">Open Staff Favorites \u2197</a>",
-      "embed": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec"
+      "embed": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec",
+      "body": "<p style=\"margin:0 0 14px\">Staff favorites for treats, gifts, and birthdays. If the list doesn't load below, use the button to open it in its own tab.</p><a href=\"https://script.google.com/a/macros/staff.lisd.net/s/AKfycbyynULa6MZO_I4baNfEiPRUSX7YOyeqde6XPK9PD4Y_9M8Cu9FF1gpu9Yagx0qX1qbchg/exec\" target=\"_blank\" rel=\"noopener\" style=\"display:inline-block;background:#500000;color:#fff;padding:10px 18px;border-radius:10px;font-weight:600;text-decoration:none\">Open Staff Favorites ↗</a>"
     },
     {
       "id": "faculty-meetings",
