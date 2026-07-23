@@ -595,6 +595,16 @@ window.SITE_CONFIG = {
       "kind": "page",
       "home": true,
       "section": "Other Resources"
+    },
+    {
+      "id": "new-card-md5bat",
+      "label": "Field Trips",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Other Resources",
+      "url": ""
     }
   ]
 };
