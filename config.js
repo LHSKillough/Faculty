@@ -601,10 +601,29 @@ window.SITE_CONFIG = {
       "label": "Field Trips",
       "desc": "",
       "icon": "star",
-      "kind": "link",
+      "kind": "page",
       "home": true,
       "section": "Other Resources",
-      "url": ""
+      "blocks": [
+        {
+          "type": "button",
+          "label": "Bus Request Form",
+          "href": "https://lhskillough.github.io/Faculty/assets/Bus%20Request%20Form.pdf",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Field Trip Information",
+          "href": "https://lhskillough.github.io/Faculty/assets/Field%20Trip%20Information%20-%20New.pdf",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "LHS Killough Only Trip Form",
+          "href": "https://lhskillough.github.io/Faculty/assets/LHS%20Killough%20Only%20Trip%20Form%20-%20New.pdf",
+          "style": "primary"
+        }
+      ]
     }
   ]
 };
