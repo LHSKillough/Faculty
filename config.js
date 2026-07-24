@@ -599,7 +599,7 @@ window.SITE_CONFIG = {
     {
       "id": "new-card-md5bat",
       "label": "Field Trips",
-      "desc": "",
+      "desc": "Information and required forms for field trips",
       "icon": "star",
       "kind": "page",
       "home": true,
