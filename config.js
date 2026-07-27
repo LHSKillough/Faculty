@@ -234,7 +234,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "LISD Staff Calendar PDF",
-          "href": "https://resources.finalsite.net/images/v1768319438/lisdnet/lisdnet/cqdfxa0vi1iym5gmy6y4/2627Calendar_STAFFFINAL.pdf",
+          "href": "https://lhskillough.github.io/Faculty/assets/Reminders_Calendar.pdf",
           "style": "primary"
         },
         {
