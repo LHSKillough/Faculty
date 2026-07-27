@@ -234,7 +234,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "LISD Staff Calendar PDF",
-          "href": "https://lhskillough.github.io/Faculty/assets/Reminders_Calendar.pdf",
+          "href": "https://resources.finalsite.net/images/v1768319438/lisdnet/lisdnet/cqdfxa0vi1iym5gmy6y4/2627Calendar_STAFFFINAL.pdf",
           "style": "primary"
         },
         {
@@ -261,6 +261,12 @@ window.SITE_CONFIG = {
       "section": "Popular Resources",
       "body": "Campus updates, weekly information, and announcement resources.",
       "blocks": [
+        {
+          "type": "button",
+          "label": "Daily Announcements Doc",
+          "href": "https://docs.google.com/document/d/13Jb_05XJpHW9GXD0izW3L7-V698s_n0btF9-Y7Qblm8/edit?usp=drive_link",
+          "style": "primary"
+        },
         {
           "type": "button",
           "label": "Announcement Form",
