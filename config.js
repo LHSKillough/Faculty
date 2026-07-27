@@ -512,7 +512,7 @@ window.SITE_CONFIG = {
       "kind": "link",
       "home": true,
       "section": "Student Support",
-      "url": "https://docs.google.com/forms/d/e/1FAIpQLScdOvakdPzGXG9ZMaNoF-d8QjnEqLwowKdhdJqmcGhVtCxGyg/viewform"
+      "url": "https://forms.gle/XW3WM9FFRrydYkDU7"
     },
     {
       "id": "ptsa",
