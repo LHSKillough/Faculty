@@ -377,10 +377,22 @@ window.SITE_CONFIG = {
       "label": "Discipline",
       "desc": "Teacher referral access.",
       "icon": "shield",
-      "kind": "link",
+      "kind": "page",
       "home": true,
       "section": "Student Support",
-      "url": "https://skyward.iscorp.com/LewisvilleISDTXStuSTS/SSOAuthentication/CreateSAMLLoginRequest?area=Discipline&controller=TeacherReferral&action=TeacherReferrals&authenticationmethodid=4"
+      "blocks": [
+        {
+          "type": "button",
+          "label": "Discipline Guide",
+          "href": "https://docs.google.com/document/d/1JRA0rBGZkeoQpAdves6D5976S1ixXu-XougILrQAi9Q/edit?usp=drive_link",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "How to put in a Referral",
+          "style": "primary"
+        }
+      ]
     },
     {
       "id": "staff-favorites",
