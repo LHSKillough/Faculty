@@ -658,6 +658,28 @@ window.SITE_CONFIG = {
           "text": "<p>The non-school sponsored club permission form and the monitor verification form are linked inside the training slides.</p>"
         }
       ]
+    },
+    {
+      "id": "new-card-lni9iq",
+      "label": "Duties",
+      "desc": "Staff duties & other related content",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Staff & Directory",
+      "blocks": [
+        {
+          "type": "button",
+          "label": "Admin Duties",
+          "href": "https://docs.google.com/document/d/1pIoTpeLgOmC1odC6Sb1zk4hZT7CFWRcR0JC47c0yQyw/edit?usp=sharing",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Duty Schedule",
+          "style": "primary"
+        }
+      ]
     }
   ]
 };
