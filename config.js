@@ -640,7 +640,35 @@ window.SITE_CONFIG = {
           "label": "LHS Killough Only Trip Form",
           "href": "https://lhskillough.github.io/Faculty/assets/LHS%20Killough%20Only%20Trip%20Form%20-%20New.pdf",
           "style": "primary"
-        }
+        },
+        {
+  "id": "clubs",
+  "label": "Clubs",
+  "desc": "SB 12 permission forms and club monitor training.",
+  "icon": "users",
+  "kind": "page",
+  "home": true,
+  "section": "Student Support",
+  "body": "Senate Bill 12 requires written parent or guardian permission before a student may participate in any club at school, including school sponsored and non-school sponsored clubs.",
+  "blocks": [
+    {
+      "type": "button",
+      "label": "26/27 School Sponsored Club Permission Form",
+      "href": "https://docs.google.com/document/d/1LFRHaj9VicpZrfA9vFph30nzvQnPVNCMPLkZ2N1UycY/edit",
+      "style": "primary"
+    },
+    {
+      "type": "button",
+      "label": "Non-School Sponsored Club Monitor Training",
+      "href": "https://docs.google.com/presentation/d/1PnQiYmGqH4d9SbxJ5ZQd1cUzSm1OlE7K7p2h5SIMzk8/edit",
+      "style": "primary"
+    },
+    {
+      "type": "text",
+      "text": "<p>The non-school sponsored club permission form and the monitor verification form are linked inside the training slides.</p>"
+    }
+  ]
+}
       ]
     }
   ]
