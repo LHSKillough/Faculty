@@ -625,20 +625,8 @@ window.SITE_CONFIG = {
       "blocks": [
         {
           "type": "button",
-          "label": "Bus Request Form",
-          "href": "https://lhskillough.github.io/Faculty/assets/Bus%20Request%20Form.pdf",
-          "style": "primary"
-        },
-        {
-          "type": "button",
           "label": "Field Trip Information",
-          "href": "https://lhskillough.github.io/Faculty/assets/Field%20Trip%20Information%20-%20New.pdf",
-          "style": "primary"
-        },
-        {
-          "type": "button",
-          "label": "LHS Killough Only Trip Form",
-          "href": "https://lhskillough.github.io/Faculty/assets/LHS%20Killough%20Only%20Trip%20Form%20-%20New.pdf",
+          "href": "https://drive.google.com/drive/folders/1t-ByOFkpdYYLflhfhWEnuTY5v1ws1S7J?usp=drive_link",
           "style": "primary"
         }
       ]
@@ -646,7 +634,7 @@ window.SITE_CONFIG = {
     {
       "id": "clubs",
       "label": "Clubs",
-      "desc": "Permission forms and club monitor training.",
+      "desc": "SB 12 permission forms and club monitor training.",
       "icon": "users",
       "kind": "page",
       "home": true,
@@ -656,7 +644,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "26/27 School Sponsored Club Permission Form",
-          "href": "https://docs.google.com/document/d/11tEbg4RSc9nBmRRSYrMPyavzfzoflOMmOjuWhYClXHA/copy",
+          "href": "https://docs.google.com/document/d/1LFRHaj9VicpZrfA9vFph30nzvQnPVNCMPLkZ2N1UycY/edit",
           "style": "primary"
         },
         {
