@@ -646,7 +646,7 @@ window.SITE_CONFIG = {
     {
       "id": "clubs",
       "label": "Clubs",
-      "desc": "SB 12 permission forms and club monitor training.",
+      "desc": "Permission forms and club monitor training.",
       "icon": "users",
       "kind": "page",
       "home": true,
@@ -656,7 +656,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "26/27 School Sponsored Club Permission Form",
-          "href": "https://docs.google.com/document/d/1LFRHaj9VicpZrfA9vFph30nzvQnPVNCMPLkZ2N1UycY/edit",
+          "href": "https://docs.google.com/document/d/11tEbg4RSc9nBmRRSYrMPyavzfzoflOMmOjuWhYClXHA/copy",
           "style": "primary"
         },
         {
