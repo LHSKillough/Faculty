@@ -280,10 +280,10 @@ window.SITE_CONFIG = {
       "label": "Teacher Bundle",
       "desc": "Forms and recurring teacher tasks.",
       "icon": "layers",
-      "kind": "page",
+      "kind": "link",
       "home": true,
       "section": "Teaching & Learning",
-      "body": "Recurring teacher forms and campus tasks."
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSf8vNErsvA6NQ1_IRGusvy-yC-2K2YlPRm0opol7o8-nBtDYA/viewform"
     },
     {
       "id": "faculty-handbook-bzewqt",
