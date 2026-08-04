@@ -666,7 +666,15 @@ window.SITE_CONFIG = {
       "icon": "star",
       "kind": "page",
       "home": true,
-      "section": "Teaching & Learning"
+      "section": "Teaching & Learning",
+      "blocks": [
+        {
+          "type": "button",
+          "label": "August PD 2026-2027",
+          "href": "https://docs.google.com/document/d/1tGJLn9ukJKkC5ybQ9dmb60W4tqkRwtPerPQ0Z94ehoE/edit?tab=t.0",
+          "style": "primary"
+        }
+      ]
     }
   ]
 };
