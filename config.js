@@ -383,6 +383,12 @@ window.SITE_CONFIG = {
       "blocks": [
         {
           "type": "button",
+          "label": "Discipline Chart",
+          "href": "https://docs.google.com/document/d/1HvpYqiWvHvGfxtHltS1gXr3BC-vfuOCPm3dUAmGambc/edit?tab=t.0",
+          "style": "primary"
+        },
+        {
+          "type": "button",
           "label": "Discipline Guide",
           "href": "https://docs.google.com/document/d/1JRA0rBGZkeoQpAdves6D5976S1ixXu-XougILrQAi9Q/edit?usp=drive_link",
           "style": "primary"
