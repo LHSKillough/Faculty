@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Staff Calendar · LHS Killough</title>
+<meta name="description" content="Professional learning, grading deadlines, UIL eligibility, and campus dates for LHS Killough staff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#500000; --maroon-deep:#3a0000; --maroon-lift:#6b1414;
+  --gold:#E3B23C; --ink:#241b1b; --gray-d:#555; --gray-m:#8b8785;
+  --line:#e7e3e1; --bg:#f6f4f2; --card:#fff;
+  --shadow:0 1px 2px rgba(36,16,16,.05), 0 8px 24px -16px rgba(36,16,16,.25);
+  --shadow-h:0 4px 10px rgba(36,16,16,.08), 0 18px 40px -20px rgba(36,16,16,.45);
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Helvetica Neue",Helvetica,system-ui,sans-serif;
+  color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------------------------------------------------------- header */
+header.bar{position:sticky;top:0;z-index:60;background:var(--maroon);color:#fff;
+  border-bottom:3px solid var(--gold);display:flex;align-items:center;gap:14px;
+  padding:0 20px;height:64px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(227,178,60,.45);display:grid;place-items:center;flex:none}
+.brand b{font-family:"Oswald";display:block;font-weight:600;font-size:17px;letter-spacing:.04em;
+  text-transform:uppercase;line-height:1.1;white-space:nowrap}
+.brand i{font-family:"Oswald";display:block;font-size:10px;color:#e2c9c9;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:300;font-style:normal}
+.bar .back{margin-left:auto;font-family:"Oswald";font-size:13px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.09em;color:#f3e7e7;text-decoration:none;
+  padding:9px 14px;border-radius:7px;display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(255,255,255,.16)}
+.bar .back:hover{background:rgba(255,255,255,.09)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+/* ---------------------------------------------------------- tabs */
+.tabbar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:64px;z-index:55}
+.tabs{display:flex;gap:2px;max-width:1160px;margin:0 auto;padding:0 20px}
+.tab{border:0;background:none;font-family:"Oswald";font-size:14px;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--gray-d);padding:15px 18px 12px;
+  border-bottom:3px solid transparent;display:inline-flex;align-items:center;gap:8px}
+.tab:hover{color:var(--maroon);background:#faf7f5}
+.tab[aria-selected="true"]{color:var(--maroon);border-bottom-color:var(--maroon);font-weight:600}
+.tab .pipcount{font-family:var(--mono);font-size:11px;font-weight:400;background:var(--gold);
+  color:var(--maroon-deep);border-radius:20px;padding:1px 7px;letter-spacing:0}
+
+/* ---------------------------------------------------------- search + filters */
+.tools{padding:20px 0 0}
+.search{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;padding:0 12px;height:46px;box-shadow:var(--shadow);max-width:520px}
+.search:focus-within{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(80,0,0,.09)}
+.search input{border:0;outline:0;flex:1;font-size:15px;background:none;min-width:0;color:var(--ink)}
+.search .clr{border:0;background:none;color:var(--gray-m);font-size:20px;line-height:1;padding:4px}
+
+.filters{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;margin:14px 0 0}
+.frow{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}
+.frow:first-child{border-top:0;padding-top:0}
+.frow>.flabel{font-family:"Oswald";font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gray-m);width:98px;flex:none;padding-top:8px;font-weight:500}
+.fchips{display:flex;gap:7px;flex-wrap:wrap;flex:1}
+.chip{border:1px solid var(--line);background:#fbf9f8;border-radius:20px;padding:5px 12px 5px 9px;
+  font-size:13px;font-weight:600;color:var(--gray-d);display:inline-flex;align-items:center;gap:7px;
+  transition:background .12s,color .12s,border-color .12s}
+.chip:hover{border-color:var(--gray-m)}
+.chip .ic{display:inline-flex;color:currentColor;opacity:.8}
+.chip .ct{font-family:var(--mono);font-size:10.5px;font-weight:400;opacity:.62}
+.chip[aria-pressed="true"]{color:#fff;border-color:transparent}
+.chip[aria-pressed="true"] .ct{opacity:.75}
+.chip.reset{border-style:dashed;font-weight:500;color:var(--gray-m)}
+.frow .allnone{font-size:11.5px;color:var(--gray-m);background:none;border:0;
+  text-decoration:underline;padding:7px 0 0;flex:none}
+
+/* ---------------------------------------------------------- today */
+.today-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;padding:22px 0 60px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.panel>h2{font-family:"Oswald";font-size:13px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;margin:0;color:#fff;background:var(--maroon);padding:12px 16px;
+  display:flex;align-items:center;gap:9px}
+.panel>h2 .n{margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:400;
+  letter-spacing:0;background:rgba(255,255,255,.16);border-radius:20px;padding:2px 9px}
+.panel .pbody{padding:16px}
+.todayhead{padding:16px 16px 4px}
+.todayhead .big{font-family:"Oswald";font-size:34px;font-weight:600;line-height:1;
+  text-transform:uppercase;letter-spacing:.02em;color:var(--maroon)}
+.todayhead .sm{font-family:var(--mono);font-size:12px;color:var(--gray-m);margin-top:5px}
+
+.slot{display:grid;grid-template-columns:82px 1fr;gap:13px;padding:12px 0;border-top:1px solid var(--line)}
+.slot:first-child{border-top:0}
+.slot .tm{font-family:var(--mono);font-size:12px;color:var(--gray-d);line-height:1.35;padding-top:2px}
+.slot .tm .allday{font-family:"Oswald";font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--gray-m)}
+.slot .ttl{font-size:14.5px;font-weight:700;line-height:1.32;margin:0 0 5px}
+.slot .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.slot .note{font-size:12.5px;color:var(--gray-d);margin:6px 0 0;white-space:pre-line}
+
+.task{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}
+.task:first-child{border-top:0}
+.task input[type=checkbox]{width:19px;height:19px;margin:2px 0 0;accent-color:var(--maroon);flex:none;cursor:pointer}
+.task .body{min-width:0;flex:1}
+.task .what{font-size:13.5px;font-weight:600;line-height:1.35}
+.task .sub{font-size:11.5px;color:var(--gray-m);margin-top:3px;display:flex;gap:7px;
+  flex-wrap:wrap;align-items:center}
+.task.done .what{text-decoration:line-through;color:var(--gray-m);font-weight:500}
+.task .due{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:20px;
+  background:#f1eeec;color:var(--gray-d)}
+.task .due[data-soon="1"]{background:var(--gold);color:var(--maroon-deep);font-weight:700}
+.task .due[data-soon="2"]{background:var(--maroon);color:#fff;font-weight:700}
+.donehead{font-family:"Oswald";font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gray-m);margin:16px 0 0;padding-top:11px;border-top:2px solid var(--line);
+  display:flex;align-items:center;gap:9px}
+.donehead button{margin-left:auto;border:0;background:none;font-size:11px;color:var(--maroon);
+  text-decoration:underline;font-family:Arial}
+
+/* ---------------------------------------------------------- month grid */
+.board{padding:22px 0 60px;min-height:46vh}
+.grid-nav{display:flex;align-items:center;gap:10px;margin:0 0 14px;flex-wrap:wrap}
+.grid-nav button.nav{border:1px solid var(--line);background:var(--card);border-radius:8px;
+  width:38px;height:38px;display:grid;place-items:center;color:var(--maroon)}
+.grid-nav button.nav:disabled{opacity:.3;cursor:not-allowed}
+.grid-nav h3{font-family:"Oswald";font-size:21px;font-weight:600;letter-spacing:.05em;
+  text-transform:uppercase;margin:0;color:var(--maroon);min-width:196px}
+.grid-nav .jump{margin-left:auto;border:1px solid var(--line);background:var(--card);
+  border-radius:8px;padding:8px 13px;font-family:"Oswald";font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--maroon)}
+.cal{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow)}
+.cal .dows{display:grid;grid-template-columns:repeat(7,1fr);background:var(--maroon)}
+.cal .dows div{font-family:"Oswald";font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:#e9cfcf;text-align:center;padding:9px 0;font-weight:400}
+.cal .days{display:grid;grid-template-columns:repeat(7,1fr)}
+.cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:118px;
+  padding:6px;display:flex;flex-direction:column;gap:3px}
+.cell:nth-child(7n){border-right:0}
+.cell.out{background:#faf8f7}
+.cell .dn{font-family:var(--mono);font-size:11.5px;color:var(--gray-m);align-self:flex-end;line-height:1.4}
+.cell.out .dn{opacity:.38}
+.cell.today{background:#fffdf4;box-shadow:inset 0 0 0 2px var(--gold)}
+.cell.today .dn{background:var(--maroon);color:#fff;border-radius:50%;width:21px;height:21px;
+  display:grid;place-items:center;font-weight:700}
+.pill{border:0;text-align:left;font-size:10.5px;line-height:1.25;padding:3px 5px;border-radius:4px;
+  font-weight:600;display:flex;gap:4px;align-items:flex-start;width:100%}
+.pill .ic{flex:none;margin-top:1px;opacity:.9}
+.pill .lb{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cell .more{font-family:var(--mono);font-size:10px;color:var(--gray-m);background:none;border:0;
+  text-align:left;padding:1px 5px}
+
+/* ---------------------------------------------------------- year table */
+.ytable{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow)}
+table.yr{width:100%;border-collapse:collapse}
+table.yr th{background:var(--maroon);color:#e9cfcf;font-family:"Oswald";font-size:10.5px;
+  font-weight:400;letter-spacing:.12em;text-transform:uppercase;padding:11px 10px;text-align:center}
+table.yr th:first-child{text-align:left;padding-left:16px}
+table.yr th .ic{display:block;margin:0 auto 4px;color:var(--gold)}
+table.yr td{border-bottom:1px solid var(--line);padding:0;text-align:center;vertical-align:middle}
+table.yr tr:last-child td{border-bottom:0}
+table.yr tr.now{background:#fffdf4}
+table.yr tr:hover{background:#faf7f5}
+.ycell{width:100%;border:0;background:none;padding:13px 8px;font-family:var(--mono);font-size:15px;
+  font-weight:600;line-height:1;display:block}
+.ycell[data-zero="1"]{color:#dcd7d4;font-weight:400}
+.ymonth{text-align:left;padding:13px 16px;display:flex;align-items:baseline;gap:9px;
+  border:0;background:none;width:100%}
+.ymonth .mn{font-family:"Oswald";font-size:16px;font-weight:600;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--maroon)}
+.ymonth .yy{font-family:var(--mono);font-size:11px;color:var(--gray-m)}
+.ymonth .tag{margin-left:auto;font-family:"Oswald";font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--gold);color:var(--maroon-deep);padding:2px 8px;border-radius:20px}
+.ykey{text-align:left;font-size:12px;color:var(--gray-d);padding:13px 16px;line-height:1.4}
+.ytot{font-family:var(--mono);font-size:13px;color:var(--gray-m)}
+
+/* ---------------------------------------------------------- shared bits */
+.tag{font-family:"Oswald";font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:2px 8px;border-radius:20px;line-height:1.6;display:inline-flex;align-items:center;gap:5px}
+.ev{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+  border-left:4px solid var(--gray-m);border-radius:10px;padding:12px 14px;margin:0 0 8px;
+  display:grid;grid-template-columns:74px 1fr auto;gap:14px;align-items:start;box-shadow:var(--shadow)}
+.ev:hover{box-shadow:var(--shadow-h)}
+.ev[data-past="1"]{opacity:.5}
+.ev .date{text-align:center}
+.ev .date .dow{font-family:"Oswald";font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gray-m);line-height:1.3}
+.ev .date .dd{font-family:"Oswald";font-size:25px;font-weight:600;line-height:1}
+.ev .date .span{font-family:var(--mono);font-size:10px;color:var(--gray-m);display:block;margin-top:3px}
+.ev .ttl{font-size:15px;font-weight:700;line-height:1.32;margin:0 0 5px}
+.ev .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:11.5px;color:var(--gray-m)}
+.ev .chev{color:var(--gray-m);align-self:center;transition:transform .16s}
+.ev[aria-expanded="true"] .chev{transform:rotate(90deg)}
+.time{font-family:var(--mono);font-size:11.5px;color:var(--gray-d);display:inline-flex;
+  align-items:center;gap:4px}
+.detail{background:#fffdfc;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;
+  margin:-9px 0 10px;padding:14px 16px 14px 92px;font-size:13.5px;color:var(--gray-d)}
+.detail p{margin:0 0 9px;white-space:pre-line}
+.detail .kv{font-family:var(--mono);font-size:11px;color:var(--gray-m);border-top:1px dashed var(--line);
+  padding-top:9px;margin-top:11px}
+.detail .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.detail .acts a,.detail .acts button{font-family:"Oswald";font-size:11px;font-weight:500;
+  letter-spacing:.09em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);
+  background:var(--card);color:var(--maroon);padding:7px 13px;border-radius:7px;
+  display:inline-flex;align-items:center;gap:6px}
+.detail .acts a:hover,.detail .acts button:hover{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.mgroup{margin:0 0 28px}
+.mhead{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-family:"Oswald";text-transform:uppercase}
+.mhead .m{font-size:19px;font-weight:600;letter-spacing:.06em;color:var(--maroon)}
+.mhead .rule{flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.mhead .n{font-family:var(--mono);font-size:11px;color:var(--gray-m);text-transform:none}
+.empty{text-align:center;padding:50px 20px;color:var(--gray-m)}
+.empty b{display:block;font-family:"Oswald";font-size:19px;color:var(--ink);text-transform:uppercase;
+  letter-spacing:.05em;margin:12px 0 5px}
+footer.foot{background:var(--maroon);color:#e9cfcf;padding:24px 0;border-top:3px solid var(--gold);font-size:12.5px}
+footer.foot .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+footer.foot b{font-family:"Oswald";color:#fff;letter-spacing:.05em;text-transform:uppercase;font-size:14px}
+
+@media (max-width:900px){
+  .today-grid{grid-template-columns:1fr}
+  .frow{flex-direction:column;gap:6px}
+  .frow>.flabel{width:auto;padding-top:0}
+  table.yr th.catcol,table.yr td.catcol{display:none}
+  .ykey{display:none}
+}
+@media (max-width:620px){
+  .tabs{overflow-x:auto}
+  .tab{padding:14px 12px 11px;font-size:13px}
+  .ev{grid-template-columns:54px 1fr;gap:11px}
+  .ev .chev{display:none}
+  .detail{padding-left:16px}
+  .cell{min-height:76px}
+  .pill .lb{-webkit-line-clamp:1}
+  .pill .ic{display:none}
+  .grid-nav h3{font-size:17px;min-width:0}
+}
+@media print{
+  header.bar,.tabbar,.tools,footer.foot,.chev,.grid-nav .jump{display:none!important}
+  .ev,.slot,.task{break-inside:avoid;box-shadow:none;opacity:1!important}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="./index.html">
+    <span class="mark" aria-hidden="true">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#E3B23C" stroke-width="1.8" stroke-linecap="round">
+        <rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+    </span>
+    <span><b>Killough</b><i>Faculty Hub</i></span>
+  </a>
+  <a class="back" href="./index.html">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    Back to Hub
+  </a>
+</header>
+
+<div class="tabbar">
+  <div class="tabs" role="tablist" aria-label="Calendar views">
+    <button class="tab" id="t-today" role="tab" aria-selected="true" aria-controls="board"></button>
+    <button class="tab" id="t-month" role="tab" aria-selected="false" aria-controls="board"></button>
+    <button class="tab" id="t-year"  role="tab" aria-selected="false" aria-controls="board"></button>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="tools">
+    <label class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8b8785" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+      <span class="sr">Search the calendar</span>
+      <input id="q" type="search" placeholder="Search any date, term, or task&hellip;" autocomplete="off">
+      <button class="clr" id="qclear" type="button" hidden aria-label="Clear search">&times;</button>
+    </label>
+    <div class="filters" id="filters"></div>
+  </div>
+
+  <section class="board" id="board" aria-live="polite"></section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><b>Lewisville High School</b> &middot; Killough Campus</div>
+    <div id="foot-note">Fighting Farmers &middot; Est. 1897</div>
+  </div>
+</footer>
+
+<script>
+/* ===================================================================
+   DATA SOURCE
+   Empty = use the dates built into this file.
+   To go live, paste either a Google Sheet published as CSV
+   (File > Share > Publish to web > Events > .csv) or an Apps Script
+   /exec URL that returns JSON. The page detects which it got.
+   =================================================================== */
+const DATA_URL = "";
+</script>
+<script id="seed" type="application/json">[{"id":"PD-001","cat":"PD & Staff Days","sub":"Work Day","t":"August Trade Day (Teachers) / Work Day (Support Staff)","s":"2026-08-03","e":"2026-08-03","ad":1,"aud":"All Staff","d":"Teachers: August Trade Day. Support Staff: Work Day.\nSupport Staff Welcome Back.\n\nTrade Day learning is employee-chosen, must relate to your content, and must occur outside contract days/hours with documentation.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-002","cat":"PD & Staff Days","sub":"Professional Learning","t":"Breakfast Provided (Bagel Bar)","s":"2026-08-04","e":"2026-08-04","ad":0,"st":"8:00 AM","et":"8:45 AM","aud":"All Staff","d":"Breakfast starting at 8:00. End time assumed - confirm with campus.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-003","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff PD Day - Dress: Jeans","s":"2026-08-04","e":"2026-08-04","ad":1,"aud":"All Staff","d":"Staff Dress Code: Jeans.\nBreakfast provided starting at 8:00 (Bagel Bar).","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-004","cat":"PD & Staff Days","sub":"Professional Learning","t":"Pep Rally @ LHS","s":"2026-08-05","e":"2026-08-05","ad":0,"st":"8:30 AM","et":"9:30 AM","aud":"All Staff","loc":"LHS Main Campus","d":"All staff pep rally at the LHS main campus.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-005","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff PD Day - Dress: Jeans + new Killough shirt","s":"2026-08-05","e":"2026-08-05","ad":1,"aud":"All Staff","d":"Staff Dress Code: Jeans and new Killough shirt.\nPep Rally @ LHS 8:30-9:30.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-006","cat":"PD & Staff Days","sub":"Professional Learning","t":"Athletics: meet with LHS coaches","s":"2026-08-06","e":"2026-08-06","ad":0,"st":"10:00 AM","et":"12:00 PM","aud":"All Staff","d":"Athletics staff only.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-007","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff PD Day - Dress: Jeans","s":"2026-08-06","e":"2026-08-06","ad":1,"aud":"All Staff","d":"Staff Dress Code: Jeans.\nAthletics will meet with the LHS coaches from 10:00-12:00.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-008","cat":"PD & Staff Days","sub":"Professional Learning","t":"Lead4ward @ Harmon - Dress: Jeans","s":"2026-08-07","e":"2026-08-07","ad":1,"aud":"All Staff","loc":"LHS Harmon","d":"Staff Dress Code: Jeans.\nLead4ward session held at LHS Harmon.\nTimes not listed on the agenda - confirm with campus.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-009","cat":"PD & Staff Days","sub":"Work Day","t":"Staff Work Day - Dress: work wear (shorts approved)","s":"2026-08-10","e":"2026-08-10","ad":1,"aud":"All Staff","d":"Staff Dress Code: Appropriate work wear (shorts are approved).\nStudent Orientation 6:00 pm.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-010","cat":"PD & Staff Days","sub":"Campus Event","t":"Student Orientation","s":"2026-08-10","e":"2026-08-10","ad":0,"st":"6:00 PM","et":"7:30 PM","aud":"All Staff","d":"Orientation begins 6:00 pm. End time assumed - confirm with campus.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-011","cat":"PD & Staff Days","sub":"Professional Learning","t":"Breakfast Provided - Kelly Carney (Appreciation Financial)","s":"2026-08-11","e":"2026-08-11","ad":0,"st":"8:00 AM","et":"8:45 AM","aud":"All Staff","d":"Breakfast starting at 8:00. End time assumed - confirm with campus.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"PD-012","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff Day - Dress: work wear (shorts approved)","s":"2026-08-11","e":"2026-08-11","ad":1,"aud":"All Staff","d":"Staff Dress Code: Appropriate work wear (shorts are approved).\nBreakfast provided starting at 8:00 - Kelly Carney, Appreciation Financial.","src":"Killough - August Professional Development Agenda 26-27 (Google Doc)"},{"id":"AC-001","cat":"Academic Calendar","sub":"School Day","t":"First Day of School","s":"2026-08-12","e":"2026-08-12","ad":1,"aud":"All Staff","d":"HS 26-27 times: staff 8:00 AM, student arrival 8:10 AM, school 8:50 AM - 4:15 PM, staff out 4:30 PM.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-001","cat":"Grades","sub":"Grading Window","t":"1P1 window - 1ST 9WK - PROG RPT 1","s":"2026-08-12","e":"2026-08-28","ad":1,"aud":"HS Teachers","term":"1P1","d":"Grading window Aug 12 to Aug 28.\nGradebook closes Monday, Aug 31.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-002","cat":"Grades","sub":"Grading Window","t":"FALL 18 WEEK (HF/FT) - attendance term","s":"2026-08-12","e":"2026-12-18","ad":1,"aud":"HS Teachers","d":"HS attendance term: Aug 12, 2026 to Dec 18, 2026.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-003","cat":"Grades","sub":"Grading Window","t":"1P2 window - 1ST 9WK - PROG RPT 2","s":"2026-08-31","e":"2026-09-18","ad":1,"aud":"HS Teachers","term":"1P2","d":"Grading window Aug 31 to Sep 18.\nGradebook closes Monday, Sep 21.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-004","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 1P1 gradebook closes 11:45 pm","s":"2026-08-31","e":"2026-08-31","ad":1,"aud":"HS Teachers","term":"1P1","d":"Last day to post grades for 1ST 9WK - PROG RPT 1 (1P1).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 1P1 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-005","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 1P1","s":"2026-08-31","e":"2026-08-31","ad":1,"aud":"Teachers & Coaches","term":"1P1","d":"Mark grades complete in Skyward by 4:00 pm for 1P1.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 1P1 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-006","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 1P1","s":"2026-09-01","e":"2026-09-01","ad":1,"aud":"Teachers & Coaches","term":"1P1","d":"Distribute 1P1 progress reports or report cards to students.","act":"Distribute 1P1 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-002","cat":"Academic Calendar","sub":"Holiday","t":"Holiday - Labor Day","s":"2026-09-07","e":"2026-09-07","ad":1,"aud":"All Staff","d":"District closed.","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-001","cat":"Appreciation","sub":"Recognition","t":"Payroll Appreciation Week","s":"2026-09-07","e":"2026-09-11","ad":1,"aud":"Communications","d":"Payroll Appreciation Week","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-002","cat":"Appreciation","sub":"Recognition","t":"National IT Professional Day","s":"2026-09-15","e":"2026-09-15","ad":1,"aud":"Communications","d":"National IT Professional Day","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-007","cat":"Grades","sub":"Grading Window","t":"19T window - 1ST 9 WEEK REPORT CARD","s":"2026-09-21","e":"2026-10-08","ad":1,"aud":"HS Teachers","term":"19T","d":"Grading window Sep 21 to Oct 8.\nGradebook closes Monday, Oct 12.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-008","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 1P2 gradebook closes 11:45 pm","s":"2026-09-21","e":"2026-09-21","ad":1,"aud":"HS Teachers","term":"1P2","d":"Last day to post grades for 1ST 9WK - PROG RPT 2 (1P2).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 1P2 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-009","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 1P2","s":"2026-09-21","e":"2026-09-21","ad":1,"aud":"Teachers & Coaches","term":"1P2","d":"Mark grades complete in Skyward by 4:00 pm for 1P2.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 1P2 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-010","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 1P2","s":"2026-09-22","e":"2026-09-22","ad":1,"aud":"Teachers & Coaches","term":"1P2","d":"Distribute 1P2 progress reports or report cards to students.","act":"Distribute 1P2 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-011","cat":"Grades","sub":"UIL","t":"Gain or Lose - 1st 6 Weeks - effective on or after this date (1P2)","s":"2026-09-25","e":"2026-09-25","ad":1,"aud":"Teachers & Coaches","term":"1P2","d":"Gain or Lose - 1st 6 Weeks for 1P2.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-003","cat":"Appreciation","sub":"Recognition","t":"HR Professional Appreciation Day","s":"2026-09-26","e":"2026-09-26","ad":1,"aud":"Communications","d":"HR Professional Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-004","cat":"Appreciation","sub":"Recognition","t":"National Principal Month begins","s":"2026-10-01","e":"2026-10-01","ad":1,"aud":"Communications","d":"National Principal Month begins","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-005","cat":"Appreciation","sub":"Recognition","t":"School Custodian Appreciation Day","s":"2026-10-02","e":"2026-10-02","ad":1,"aud":"Communications","d":"School Custodian Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-006","cat":"Appreciation","sub":"Recognition","t":"Coach Appreciation Day","s":"2026-10-06","e":"2026-10-06","ad":1,"aud":"Communications","d":"Coach Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AC-003","cat":"Academic Calendar","sub":"Holiday","t":"Holiday","s":"2026-10-09","e":"2026-10-09","ad":1,"aud":"All Staff","d":"District closed.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-012","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 19T gradebook closes 11:45 pm","s":"2026-10-12","e":"2026-10-12","ad":1,"aud":"HS Teachers","term":"19T","d":"Last day to post grades for 1ST 9 WEEK REPORT CARD (19T).\nCloses at 11:45 pm.\nNote: Monday.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 19T grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-013","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 19T","s":"2026-10-12","e":"2026-10-12","ad":1,"aud":"Teachers & Coaches","term":"19T","d":"Mark grades complete in Skyward by 4:00 pm for 19T.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 19T grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-014","cat":"Grades","sub":"Grading Window","t":"2P1 window - 2ND 9WK - PROG RPT 1","s":"2026-10-13","e":"2026-10-30","ad":1,"aud":"HS Teachers","term":"2P1","d":"Grading window Oct 13 to Oct 30.\nGradebook closes Monday, Nov 2.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-015","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 19T","s":"2026-10-13","e":"2026-10-13","ad":1,"aud":"Teachers & Coaches","term":"19T","d":"Distribute 19T progress reports or report cards to students.","act":"Distribute 19T progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-016","cat":"Grades","sub":"UIL","t":"Gain or Lose - effective on or after this date (19T)","s":"2026-10-15","e":"2026-10-15","ad":1,"aud":"Teachers & Coaches","term":"19T","d":"Gain or Lose for 19T.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-007","cat":"Appreciation","sub":"Recognition","t":"Boss's Day","s":"2026-10-16","e":"2026-10-16","ad":1,"aud":"Communications","d":"Boss's Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-008","cat":"Appreciation","sub":"Recognition","t":"World Occupational Therapy Day","s":"2026-10-27","e":"2026-10-27","ad":1,"aud":"Communications","d":"World Occupational Therapy Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-009","cat":"Appreciation","sub":"Recognition","t":"National School Psychology Week","s":"2026-11-02","e":"2026-11-06","ad":1,"aud":"Communications","d":"National School Psychology Week","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-017","cat":"Grades","sub":"Grading Window","t":"2P2 window - 2ND 9WK - PROG RPT 2","s":"2026-11-02","e":"2026-11-20","ad":1,"aud":"HS Teachers","term":"2P2","d":"Grading window Nov 2 to Nov 20.\nGradebook closes Monday, Nov 30.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-018","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 2P1 gradebook closes 11:45 pm","s":"2026-11-02","e":"2026-11-02","ad":1,"aud":"HS Teachers","term":"2P1","d":"Last day to post grades for 2ND 9WK - PROG RPT 1 (2P1).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 2P1 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-019","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 2P1","s":"2026-11-02","e":"2026-11-02","ad":1,"aud":"Teachers & Coaches","term":"2P1","d":"Mark grades complete in Skyward by 4:00 pm for 2P1.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 2P1 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"PD-013","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff Day - Students Off (PL / PLC / Work Day)","s":"2026-11-03","e":"2026-11-03","ad":1,"aud":"All Staff","d":"Students off, staff report. Campus administration communicates whether the day is professional learning, PLC time, or work time.","src":"LISD Staff Professional Learning Calendar (lisd.net)"},{"id":"GR-020","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 2P1","s":"2026-11-04","e":"2026-11-04","ad":1,"aud":"Teachers & Coaches","term":"2P1","d":"Distribute 2P1 progress reports or report cards to students.","act":"Distribute 2P1 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-021","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (2P1)","s":"2026-11-06","e":"2026-11-06","ad":1,"aud":"Teachers & Coaches","term":"2P1","d":"Gain Only for 2P1.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-010","cat":"Appreciation","sub":"Recognition","t":"Education Support Professionals Day","s":"2026-11-18","e":"2026-11-18","ad":1,"aud":"Communications","d":"Education Support Professionals Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-011","cat":"Appreciation","sub":"Recognition","t":"Substitute Educators Day","s":"2026-11-20","e":"2026-11-20","ad":1,"aud":"Communications","d":"Substitute Educators Day","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-022","cat":"Grades","sub":"UIL","t":"All students eligible after school Nov 20 through Nov 28","s":"2026-11-20","e":"2026-11-20","ad":1,"aud":"Teachers & Coaches","d":"2P2 window: after school on Nov 20, all students are eligible through Nov 28.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-004","cat":"Academic Calendar","sub":"Holiday","t":"Holiday - Thanksgiving Break","s":"2026-11-23","e":"2026-11-27","ad":1,"aud":"All Staff","d":"District closed Nov 23 to Nov 27.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-023","cat":"Grades","sub":"Grading Window","t":"29T window - 2ND 9 WEEK REPORT CARD","s":"2026-11-30","e":"2026-12-18","ad":1,"aud":"HS Teachers","term":"29T","d":"Grading window Nov 30 to Dec 18.\nGradebook closes Monday, Jan 4.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-024","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 2P2 gradebook closes 11:45 pm","s":"2026-11-30","e":"2026-11-30","ad":1,"aud":"HS Teachers","term":"2P2","d":"Last day to post grades for 2ND 9WK - PROG RPT 2 (2P2).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 2P2 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-025","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 2P2","s":"2026-11-30","e":"2026-11-30","ad":1,"aud":"Teachers & Coaches","term":"2P2","d":"Mark grades complete in Skyward by 4:00 pm for 2P2.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 2P2 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-026","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 2P2","s":"2026-12-01","e":"2026-12-01","ad":1,"aud":"Teachers & Coaches","term":"2P2","d":"Distribute 2P2 progress reports or report cards to students.","act":"Distribute 2P2 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-027","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (2P2)","s":"2026-12-07","e":"2026-12-07","ad":1,"aud":"Teachers & Coaches","term":"2P2","d":"Gain Only for 2P2.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-005","cat":"Academic Calendar","sub":"School Day","t":"Student & Staff Early Release","s":"2026-12-18","e":"2026-12-18","ad":1,"aud":"All Staff","d":"Last day before winter break. Also the 29T grading window end.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-028","cat":"Grades","sub":"UIL","t":"All students eligible after school Dec 18 through Jan 4","s":"2026-12-18","e":"2026-12-18","ad":1,"aud":"Teachers & Coaches","d":"29T window: after school on Dec 18, all students are eligible through Jan 4.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-006","cat":"Academic Calendar","sub":"Holiday","t":"Holiday - Winter Break","s":"2026-12-21","e":"2027-01-01","ad":1,"aud":"All Staff","d":"District closed Dec 21 through Jan 1.","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-012","cat":"Appreciation","sub":"Recognition","t":"School Board Appreciation Month begins","s":"2027-01-01","e":"2027-01-01","ad":1,"aud":"Communications","d":"School Board Appreciation Month begins","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-029","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 29T gradebook closes 11:45 pm","s":"2027-01-04","e":"2027-01-04","ad":1,"aud":"HS Teachers","term":"29T","d":"Last day to post grades for 2ND 9 WEEK REPORT CARD (29T).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 29T grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-030","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 29T","s":"2027-01-04","e":"2027-01-04","ad":1,"aud":"Teachers & Coaches","term":"29T","d":"Mark grades complete in Skyward by 4:00 pm for 29T.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 29T grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"PD-014","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff Day - Students Off (PL / PLC / Work Day)","s":"2027-01-04","e":"2027-01-04","ad":1,"aud":"All Staff","d":"Students off, staff report. Day before students return from winter break.","src":"LISD Staff Professional Learning Calendar (lisd.net)"},{"id":"AC-007","cat":"Academic Calendar","sub":"School Day","t":"Students Return","s":"2027-01-05","e":"2027-01-05","ad":1,"aud":"All Staff","d":"Spring semester begins. Start of 3rd 9 weeks.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-031","cat":"Grades","sub":"Grading Window","t":"3P1 window - 3RD 9WK - PROG RPT 1","s":"2027-01-05","e":"2027-01-25","ad":1,"aud":"HS Teachers","term":"3P1","d":"Grading window Jan 5 to Jan 25.\nGradebook closes Tuesday, Jan 26.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-032","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 29T","s":"2027-01-05","e":"2027-01-05","ad":1,"aud":"Teachers & Coaches","term":"29T","d":"Distribute 29T progress reports or report cards to students.","act":"Distribute 29T progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-033","cat":"Grades","sub":"Grading Window","t":"SPRING 18 WEEK (HS/ST) - attendance term","s":"2027-01-05","e":"2027-05-21","ad":1,"aud":"HS Teachers","d":"HS attendance term: Jan 5, 2027 to May 21, 2027.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-034","cat":"Grades","sub":"UIL","t":"Gain or Lose - effective on or after this date (29T)","s":"2027-01-12","e":"2027-01-12","ad":1,"aud":"Teachers & Coaches","term":"29T","d":"Gain or Lose for 29T.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-008","cat":"Academic Calendar","sub":"Holiday","t":"Holiday","s":"2027-01-18","e":"2027-01-18","ad":1,"aud":"All Staff","d":"District closed.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-035","cat":"Grades","sub":"Grading Window","t":"3P2 window - 3RD 9WK - PROG RPT 2","s":"2027-01-26","e":"2027-02-12","ad":1,"aud":"HS Teachers","term":"3P2","d":"Grading window Jan 26 to Feb 12.\nGradebook closes Monday, Feb 15.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-036","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 3P1 gradebook closes 11:45 pm","s":"2027-01-26","e":"2027-01-26","ad":1,"aud":"HS Teachers","term":"3P1","d":"Last day to post grades for 3RD 9WK - PROG RPT 1 (3P1).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 3P1 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-037","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 3P1","s":"2027-01-26","e":"2027-01-26","ad":1,"aud":"Teachers & Coaches","term":"3P1","d":"Mark grades complete in Skyward by 4:00 pm for 3P1.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 3P1 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-038","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 3P1","s":"2027-01-27","e":"2027-01-27","ad":1,"aud":"Teachers & Coaches","term":"3P1","d":"Distribute 3P1 progress reports or report cards to students.","act":"Distribute 3P1 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-013","cat":"Appreciation","sub":"Recognition","t":"National School Counseling Week","s":"2027-02-01","e":"2027-02-05","ad":1,"aud":"Communications","d":"National School Counseling Week","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-039","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (3P1)","s":"2027-02-01","e":"2027-02-01","ad":1,"aud":"Teachers & Coaches","term":"3P1","d":"Gain Only for 3P1.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-014","cat":"Appreciation","sub":"Recognition","t":"SRO Appreciation Day","s":"2027-02-15","e":"2027-02-15","ad":1,"aud":"Communications","d":"SRO Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-040","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 3P2 gradebook closes 11:45 pm","s":"2027-02-15","e":"2027-02-15","ad":1,"aud":"HS Teachers","term":"3P2","d":"Last day to post grades for 3RD 9WK - PROG RPT 2 (3P2).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 3P2 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-041","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 3P2","s":"2027-02-15","e":"2027-02-15","ad":1,"aud":"Teachers & Coaches","term":"3P2","d":"Mark grades complete in Skyward by 4:00 pm for 3P2.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 3P2 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"PD-015","cat":"PD & Staff Days","sub":"Professional Learning","t":"Staff Day - Students Off (PL / PLC / Work Day)","s":"2027-02-15","e":"2027-02-15","ad":1,"aud":"All Staff","d":"Students off, staff report.","src":"LISD Staff Professional Learning Calendar (lisd.net)"},{"id":"GR-042","cat":"Grades","sub":"Grading Window","t":"39T window - 3RD 9 WEEK REPORT CARD","s":"2027-02-16","e":"2027-03-12","ad":1,"aud":"HS Teachers","term":"39T","d":"Grading window Feb 16 to Mar 12.\nGradebook closes Sunday, Mar 21.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-043","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 3P2","s":"2027-02-16","e":"2027-02-16","ad":1,"aud":"Teachers & Coaches","term":"3P2","d":"Distribute 3P2 progress reports or report cards to students.","act":"Distribute 3P2 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-044","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (3P2)","s":"2027-02-19","e":"2027-02-19","ad":1,"aud":"Teachers & Coaches","term":"3P2","d":"Gain Only for 3P2.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-015","cat":"Appreciation","sub":"Recognition","t":"Maintenance Worker Appreciation Day","s":"2027-03-04","e":"2027-03-04","ad":1,"aud":"Communications","d":"Maintenance Worker Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-016","cat":"Appreciation","sub":"Recognition","t":"Educational Diagnosticians' Week","s":"2027-03-08","e":"2027-03-12","ad":1,"aud":"Communications","d":"Educational Diagnosticians' Week","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-017","cat":"Appreciation","sub":"Recognition","t":"School Social Worker Week","s":"2027-03-08","e":"2027-03-12","ad":1,"aud":"Communications","d":"School Social Worker Week","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-045","cat":"Grades","sub":"UIL","t":"All students eligible after school Mar 12 through Mar 21","s":"2027-03-12","e":"2027-03-12","ad":1,"aud":"Teachers & Coaches","d":"39T window: after school on Mar 12, all students are eligible through Mar 21.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-009","cat":"Academic Calendar","sub":"Holiday","t":"Holiday - Spring Break","s":"2027-03-15","e":"2027-03-19","ad":1,"aud":"All Staff","d":"District closed Mar 15 to Mar 19.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-046","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 39T gradebook closes 11:45 pm","s":"2027-03-21","e":"2027-03-21","ad":1,"aud":"HS Teachers","term":"39T","d":"Last day to post grades for 3RD 9 WEEK REPORT CARD (39T).\nCloses at 11:45 pm.\nNote: Sunday.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 39T grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-047","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 39T","s":"2027-03-21","e":"2027-03-21","ad":1,"aud":"Teachers & Coaches","term":"39T","d":"Mark grades complete in Skyward by 4:00 pm for 39T.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 39T grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-048","cat":"Grades","sub":"Grading Window","t":"4P1 window - 4TH 9WK - PROG RPT 1","s":"2027-03-22","e":"2027-04-12","ad":1,"aud":"HS Teachers","term":"4P1","d":"Grading window Mar 22 to Apr 12.\nGradebook closes Tuesday, Apr 13.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-049","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 39T","s":"2027-03-22","e":"2027-03-22","ad":1,"aud":"Teachers & Coaches","term":"39T","d":"Distribute 39T progress reports or report cards to students.","act":"Distribute 39T progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-010","cat":"Academic Calendar","sub":"Holiday","t":"Holiday","s":"2027-03-26","e":"2027-03-26","ad":1,"aud":"All Staff","d":"District closed.","src":"LISD Academic Calendar (events.ics)"},{"id":"AC-011","cat":"Academic Calendar","sub":"School Day","t":"Bad Weather Day","s":"2027-03-29","e":"2027-03-29","ad":1,"aud":"All Staff","d":"Held in reserve as a make-up day.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-050","cat":"Grades","sub":"UIL","t":"Gain or Lose - effective on or after this date (39T)","s":"2027-03-29","e":"2027-03-29","ad":1,"aud":"Teachers & Coaches","term":"39T","d":"Gain or Lose for 39T.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-018","cat":"Appreciation","sub":"Recognition","t":"School Librarian Appreciation Day","s":"2027-04-04","e":"2027-04-04","ad":1,"aud":"Communications","d":"School Librarian Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-019","cat":"Appreciation","sub":"Recognition","t":"National Assistant Principal Week","s":"2027-04-05","e":"2027-04-09","ad":1,"aud":"Communications","d":"National Assistant Principal Week","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-020","cat":"Appreciation","sub":"Recognition","t":"Paraprofessional Appreciation Day","s":"2027-04-07","e":"2027-04-07","ad":1,"aud":"Communications","d":"Paraprofessional Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-051","cat":"Grades","sub":"Grading Window","t":"4P2 window - 4TH 9WK - PROG RPT 2","s":"2027-04-13","e":"2027-04-30","ad":1,"aud":"HS Teachers","term":"4P2","d":"Grading window Apr 13 to Apr 30.\nGradebook closes Monday, May 3.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-052","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 4P1 gradebook closes 11:45 pm","s":"2027-04-13","e":"2027-04-13","ad":1,"aud":"HS Teachers","term":"4P1","d":"Last day to post grades for 4TH 9WK - PROG RPT 1 (4P1).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 4P1 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-053","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 4P1","s":"2027-04-13","e":"2027-04-13","ad":1,"aud":"Teachers & Coaches","term":"4P1","d":"Mark grades complete in Skyward by 4:00 pm for 4P1.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 4P1 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-054","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 4P1","s":"2027-04-14","e":"2027-04-14","ad":1,"aud":"Teachers & Coaches","term":"4P1","d":"Distribute 4P1 progress reports or report cards to students.","act":"Distribute 4P1 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-021","cat":"Appreciation","sub":"Recognition","t":"Afterschool Professionals Appreciation Week","s":"2027-04-19","e":"2027-04-23","ad":1,"aud":"Communications","d":"Afterschool Professionals Appreciation Week","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-022","cat":"Appreciation","sub":"Recognition","t":"Public School Volunteer Week","s":"2027-04-19","e":"2027-04-23","ad":1,"aud":"Communications","d":"Public School Volunteer Week","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-055","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (4P1)","s":"2027-04-19","e":"2027-04-19","ad":1,"aud":"Teachers & Coaches","term":"4P1","d":"Gain Only for 4P1.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-023","cat":"Appreciation","sub":"Recognition","t":"National Administrative Professionals Day","s":"2027-04-21","e":"2027-04-21","ad":1,"aud":"Communications","d":"National Administrative Professionals Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-024","cat":"Appreciation","sub":"Recognition","t":"School Bus Driver Appreciation Day","s":"2027-04-27","e":"2027-04-27","ad":1,"aud":"Communications","d":"School Bus Driver Appreciation Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-025","cat":"Appreciation","sub":"Recognition","t":"Teacher Appreciation Week","s":"2027-05-03","e":"2027-05-07","ad":1,"aud":"Communications","d":"Teacher Appreciation Week","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-056","cat":"Grades","sub":"Grading Window","t":"49T window - 4TH 9 WEEK REPORT CARD","s":"2027-05-03","e":"2027-05-21","ad":1,"aud":"HS Teachers","term":"49T","d":"Grading window May 3 to May 21.\nGradebook closes Friday, May 21.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-057","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 4P2 gradebook closes 11:45 pm","s":"2027-05-03","e":"2027-05-03","ad":1,"aud":"HS Teachers","term":"4P2","d":"Last day to post grades for 4TH 9WK - PROG RPT 2 (4P2).\nCloses at 11:45 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 4P2 grades in Skyward by 11:45 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-058","cat":"Grades","sub":"UIL","t":"Mark grades complete by 4:00 pm - 4P2","s":"2027-05-03","e":"2027-05-03","ad":1,"aud":"Teachers & Coaches","term":"4P2","d":"Mark grades complete in Skyward by 4:00 pm for 4P2.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 4P2 grades complete in Skyward by 4:00 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"GR-059","cat":"Grades","sub":"UIL","t":"Distribute progress reports / report cards - 4P2","s":"2027-05-04","e":"2027-05-04","ad":1,"aud":"Teachers & Coaches","term":"4P2","d":"Distribute 4P2 progress reports or report cards to students.","act":"Distribute 4P2 progress reports / report cards","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-026","cat":"Appreciation","sub":"Recognition","t":"School Lunch Hero Day","s":"2027-05-07","e":"2027-05-07","ad":1,"aud":"Communications","d":"School Lunch Hero Day","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-060","cat":"Grades","sub":"UIL","t":"Gain Only - effective on or after this date (4P2)","s":"2027-05-07","e":"2027-05-07","ad":1,"aud":"Teachers & Coaches","term":"4P2","d":"Gain Only for 4P2.\nStudents gain or lose eligibility on or after this date.\nTo regain, a student must be passing ALL classes at the next grading period, not only the class they were failing.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AP-027","cat":"Appreciation","sub":"Recognition","t":"School Nurse Day","s":"2027-05-12","e":"2027-05-12","ad":1,"aud":"Communications","d":"School Nurse Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-028","cat":"Appreciation","sub":"Recognition","t":"School Communicators Day","s":"2027-05-14","e":"2027-05-14","ad":1,"aud":"Communications","d":"School Communicators Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AP-029","cat":"Appreciation","sub":"Recognition","t":"Speech Language Pathologist Day","s":"2027-05-18","e":"2027-05-18","ad":1,"aud":"Communications","d":"Speech Language Pathologist Day","src":"LISD Academic Calendar (events.ics)"},{"id":"AC-012","cat":"Academic Calendar","sub":"School Day","t":"Last Day of School - Student Early Release","s":"2027-05-21","e":"2027-05-21","ad":1,"aud":"All Staff","d":"Last day. 49T grades due 3:30 pm.","src":"LISD Academic Calendar (events.ics)"},{"id":"GR-061","cat":"Grades","sub":"Grade Deadline","t":"DEADLINE - 49T gradebook closes 3:30 pm (district-required close, summer school enrollment)","s":"2027-05-21","e":"2027-05-21","ad":1,"aud":"HS Teachers","term":"49T","d":"Last day to post grades for 4TH 9 WEEK REPORT CARD (49T).\nCloses at 3:30 pm (district-required close, summer school enrollment).\nNote: district-required close, 3:30 pm.\n\nGradebook closes at 11:45 pm on the posting end date.\nUIL grade input end time is 4:00 pm.\nAfter the close date, a grade change request is required to update grades for that term.","act":"Post 49T grades in Skyward by 3:30 pm","src":"26-27 Grade Posting Windows workbook"},{"id":"GR-062","cat":"Grades","sub":"UIL","t":"Mark grades complete by 3:30 pm - 49T","s":"2027-05-21","e":"2027-05-21","ad":1,"aud":"Teachers & Coaches","term":"49T","d":"Mark grades complete in Skyward by 3:30 pm for 49T.\nNote: this is earlier than the 11:45 pm gradebook close on the same date.\n\nOnly 9-week grades determine eligibility, except the 1st 6 weeks of the year. Eligibility may be lost after the 1st 6 weeks and every 9-week period after. Exam and semester grades do not determine eligibility. Students can regain eligibility at every 3-week progress report.","act":"Mark 49T grades complete in Skyward by 3:30 pm","src":"UIL Eligibility Submit Dates 2026-2027 (Grade Posting Windows workbook)"},{"id":"AC-013","cat":"Academic Calendar","sub":"Holiday","t":"Holiday - Memorial Day","s":"2027-05-31","e":"2027-05-31","ad":1,"aud":"All Staff","d":"District closed.","src":"LISD Academic Calendar (events.ics)"}]</script>
+<script>
+(function () {
+"use strict";
+
+/* ================================================================ taxonomy */
+var CATS = [
+  { k: "PD & Staff Days",   n: "PD & Staff Days", c: "#500000", bg: "#f2e8e8", ic: "pd" },
+  { k: "Grades",            n: "Grades",          c: "#8a6100", bg: "#f8f0dc", ic: "gr" },
+  { k: "Academic Calendar", n: "Academic",        c: "#34506b", bg: "#e7edf3", ic: "ac" },
+  { k: "Appreciation",      n: "Appreciation",    c: "#7d3c6b", bg: "#f4e9f1", ic: "ap" }
+];
+/* subcategories carry their own icon; UIL gets its own colour so it stays
+   readable inside the Grades family instead of blending into the gold */
+var SUBS = [
+  { k: "Professional Learning", n: "Professional Learning", p: "PD & Staff Days", ic: "easel" },
+  { k: "Work Day",              n: "Work Day",              p: "PD & Staff Days", ic: "case" },
+  { k: "Campus Event",          n: "Campus Event",          p: "PD & Staff Days", ic: "mega" },
+  { k: "Grading Window",        n: "Grading Window",        p: "Grades", ic: "window" },
+  { k: "Grade Deadline",        n: "Grade Deadline",        p: "Grades", ic: "gr" },
+  { k: "UIL",                   n: "UIL",                   p: "Grades", ic: "trophy", c: "#2e5e4e", bg: "#e5efeb" },
+  { k: "Holiday",               n: "Holiday",               p: "Academic Calendar", ic: "sun" },
+  { k: "School Day",            n: "School Day",            p: "Academic Calendar", ic: "school" },
+  { k: "Recognition",           n: "Recognition",           p: "Appreciation", ic: "ap" }
+];
+var AUDS = [
+  { k: "All Staff",          n: "All Staff",       ic: "users" },
+  { k: "HS Teachers",        n: "Teachers",        ic: "school" },
+  { k: "Teachers & Coaches", n: "Teachers & Coaches", ic: "trophy" },
+  { k: "Communications",     n: "Communications",  ic: "mega" }
+];
+var CMAP = {}, SMAP = {};
+CATS.forEach(function (c) { CMAP[c.k] = c; });
+SUBS.forEach(function (s) { SMAP[s.k] = s; });
+
+/* colour an event by its subcategory when that sub overrides, else by category */
+function look(ev) {
+  var s = SMAP[ev.sub], c = CMAP[ev.cat] || CATS[0];
+  return { c: (s && s.c) || c.c, bg: (s && s.bg) || c.bg, ic: (s && s.ic) || c.ic, name: c.n };
+}
+
+/* ================================================================ icons */
+var ICONS = {
+  pd:     '<path d="M3 4.5h18v11H3z"/><path d="M12 15.5v4M8 21h8M12 4.5V2.5"/>',
+  easel:  '<path d="M3 4.5h18v11H3z"/><path d="M12 15.5v4M8 21h8M12 4.5V2.5"/>',
+  gr:     '<path d="M8 3.5h8a1 1 0 011 1v1H7v-1a1 1 0 011-1z"/><path d="M17 5.5h2v15H5v-15h2"/><path d="M9 12.5l2 2 4-4"/>',
+  window: '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h8"/>',
+  trophy: '<path d="M7 4.5h10v4a5 5 0 01-10 0z"/><path d="M17 5.5h3v2a3 3 0 01-3 3M7 5.5H4v2a3 3 0 003 3"/><path d="M12 13.5v4M8.5 21h7"/>',
+  ac:     '<rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>',
+  sun:    '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12H5M19 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/>',
+  school: '<path d="M3 9.5l9-5 9 5-9 5z"/><path d="M6.5 11.5v5c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5v-5M20 10.5v5"/>',
+  ap:     '<path d="M12 20.5S3.5 15 3.5 9.2A4.7 4.7 0 0112 6.6a4.7 4.7 0 018.5 2.6c0 5.8-8.5 11.3-8.5 11.3z"/>',
+  case:   '<rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8.5 7V5a1.5 1.5 0 011.5-1.5h4A1.5 1.5 0 0115.5 5v2M2.5 12.5h19"/>',
+  mega:   '<path d="M3 10v4a1 1 0 001 1h3l7 4V5L7 9H4a1 1 0 00-1 1z"/><path d="M18 9.5a4 4 0 010 5"/>',
+  users:  '<circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 5.4a3.2 3.2 0 010 5.2M17.5 20a6.4 6.4 0 00-3-4.4"/>',
+  clock:  '<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>',
+  pin:    '<path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  link:   '<path d="M10 13a5 5 0 007.5.5l2-2a5 5 0 00-7-7l-1 1"/><path d="M14 11a5 5 0 00-7.5-.5l-2 2a5 5 0 007 7l1-1"/>',
+  dl:     '<path d="M12 3.5v11M7.5 10L12 14.5 16.5 10"/><path d="M4 17v2.5h16V17"/>',
+  chev:   '<path d="M9 6l6 6-6 6"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>',
+  check:  '<path d="M4 12.5l5 5L20 6.5"/>',
+  grid:   '<rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M3 10h18M9 10v11M15 10v11"/>',
+  yr:     '<path d="M3 20V9M9 20V4M15 20v-8M21 20v-5"/>'
+};
+function svg(n, sz, sw) {
+  return '<svg class="ic" width="' + (sz || 15) + '" height="' + (sz || 15) + '" viewBox="0 0 24 24" ' +
+    'fill="none" stroke="currentColor" stroke-width="' + (sw || 1.9) + '" stroke-linecap="round" ' +
+    'stroke-linejoin="round" aria-hidden="true">' + (ICONS[n] || "") + "</svg>";
+}
+
+var MONTHS = ["January","February","March","April","May","June","July","August",
+              "September","October","November","December"];
+var MSHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var DOWS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var DOWFULL = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+/* ================================================================ helpers */
+function pd(s) { var p = String(s).trim().split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+function key(d) {
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" +
+         String(d.getDate()).padStart(2, "0");
+}
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (m) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m];
+  });
+}
+var TODAY = (function () { var t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); })();
+function dbetween(a, b) { return Math.round((b - a) / 86400000); }
+function relative(d) {
+  var n = dbetween(TODAY, d);
+  if (n === 0) return "today";
+  if (n === 1) return "tomorrow";
+  if (n < 0) return Math.abs(n) + "d ago";
+  if (n < 21) return "in " + n + "d";
+  return "in " + Math.round(n / 7) + "w";
+}
+function mkey(d) { return d.getFullYear() * 12 + d.getMonth(); }
+
+/* --------- checklist storage: survives reloads, degrades to memory ------- */
+var STORE_KEY = "lhsk-cal-done-v1";
+var mem = {};
+var canStore = (function () {
+  try { window.localStorage.setItem("__t", "1"); window.localStorage.removeItem("__t"); return true; }
+  catch (e) { return false; }
+})();
+function getDone() {
+  if (!canStore) return mem;
+  try { return JSON.parse(window.localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { return {}; }
+}
+function setDone(o) {
+  mem = o;
+  if (!canStore) return;
+  try { window.localStorage.setItem(STORE_KEY, JSON.stringify(o)); } catch (e) {}
+}
+
+/* ================================================================ data */
+function normDate(x) {
+  if (!x) return "";
+  x = String(x).trim();
+  var m = x.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return m[1] + "-" + String(+m[2]).padStart(2, "0") + "-" + String(+m[3]).padStart(2, "0");
+  m = x.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m) return m[3] + "-" + String(+m[1]).padStart(2, "0") + "-" + String(+m[2]).padStart(2, "0");
+  var d = new Date(x);
+  return isNaN(d) ? "" : key(d);
+}
+function parseCSV(text) {
+  var rows = [], row = [], cur = "", q = false;
+  text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    if (q) { if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { row.push(cur); cur = ""; }
+    else if (ch === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+    else cur += ch;
+  }
+  if (cur !== "" || row.length) { row.push(cur); rows.push(row); }
+  if (!rows.length) return [];
+  var head = rows.shift().map(function (h) { return h.trim().toLowerCase(); });
+  function col() {
+    for (var a = 0; a < arguments.length; a++) { var i = head.indexOf(arguments[a]); if (i > -1) return i; }
+    return -1;
+  }
+  var IX = { id: col("id"), cat: col("category"), sub: col("subcategory"), t: col("title"),
+    s: col("start date", "start"), e: col("end date", "end"), ad: col("all day", "allday"),
+    st: col("start time"), et: col("end time"), aud: col("audience"), term: col("term"),
+    loc: col("location"), d: col("details"), act: col("action"), link: col("link"),
+    src: col("source"), pub: col("publish") };
+  var out = [];
+  rows.forEach(function (r) {
+    if (!r || IX.s < 0 || !String(r[IX.s] || "").trim()) return;
+    if (IX.pub > -1 && /^(false|no|0|hide)$/i.test(String(r[IX.pub]).trim())) return;
+    function v(k) { return IX[k] > -1 && r[IX[k]] != null ? String(r[IX[k]]).trim() : ""; }
+    var s = normDate(v("s")); if (!s) return;
+    out.push({ id: v("id") || s + "|" + v("t"), cat: v("cat") || "Academic Calendar", sub: v("sub"),
+      t: v("t"), s: s, e: normDate(v("e")) || s,
+      ad: /^(false|no|0)$/i.test(v("ad")) ? 0 : 1, st: v("st"), et: v("et"), aud: v("aud"),
+      term: v("term"), loc: v("loc"), d: v("d"), act: v("act"), link: v("link"), src: v("src") });
+  });
+  return out;
+}
+function fromJSON(j) {
+  var arr = Array.isArray(j) ? j : (j.events || j.rows || j.data);
+  if (!arr) return null;
+  return arr.map(function (o) {
+    var s = normDate(o.s || o["Start Date"]);
+    return { id: o.id || o.ID, cat: o.cat || o.Category, sub: o.sub || o.Subcategory,
+      t: o.t || o.Title, s: s, e: normDate(o.e || o["End Date"]) || s,
+      ad: /^(false|no|0)$/i.test(String(o.ad != null ? o.ad : o["All Day"])) ? 0 : 1,
+      st: o.st || o["Start Time"] || "", et: o.et || o["End Time"] || "",
+      aud: o.aud || o.Audience || "", term: o.term || o.Term || "", loc: o.loc || o.Location || "",
+      d: o.d || o.Details || "", act: o.act || o.Action || "", link: o.link || o.Link || "",
+      src: o.src || o.Source || "" };
+  }).filter(function (o) { return o.s; });
+}
+
+var EVENTS = [];
+
+/* ================================================================ state */
+var S = { q: "", cats: {}, subs: {}, auds: {}, view: "today", month: null, open: {} };
+CATS.forEach(function (c) { S.cats[c.k] = true; });
+SUBS.forEach(function (s) { S.subs[s.k] = true; });
+AUDS.forEach(function (a) { S.auds[a.k] = true; });
+
+function isPast(ev) { return pd(ev.e) < TODAY; }
+function spansToday(ev) { return pd(ev.s) <= TODAY && pd(ev.e) >= TODAY; }
+
+function passes(ev) {
+  if (!S.cats[ev.cat]) return false;
+  if (ev.sub && SMAP[ev.sub] && !S.subs[ev.sub]) return false;
+  if (ev.aud && S.auds[ev.aud] === false) return false;
+  var q = S.q.toLowerCase().trim();
+  if (q) {
+    var hay = (ev.t + " " + (ev.d || "") + " " + (ev.act || "") + " " + (ev.term || "") + " " +
+               (ev.sub || "") + " " + (ev.aud || "") + " " + (ev.loc || "")).toLowerCase();
+    if (hay.indexOf(q) < 0) return false;
+  }
+  return true;
+}
+function visible() {
+  return EVENTS.filter(passes).sort(function (a, b) { return pd(a.s) - pd(b.s) || a.t.localeCompare(b.t); });
+}
+
+/* ================================================================ filters */
+function drawFilters() {
+  var cc = {}, sc = {}, ac = {};
+  EVENTS.forEach(function (ev) {
+    cc[ev.cat] = (cc[ev.cat] || 0) + 1;
+    if (ev.sub) sc[ev.sub] = (sc[ev.sub] || 0) + 1;
+    if (ev.aud) ac[ev.aud] = (ac[ev.aud] || 0) + 1;
+  });
+
+  function chip(kind, k, label, ic, colour, n, on) {
+    var style = on ? ' style="background:' + colour + '"' : ' style="color:' + colour + '"';
+    return '<button class="chip" data-kind="' + kind + '" data-k="' + esc(k) + '" ' +
+      'aria-pressed="' + (on ? "true" : "false") + '"' + style + ">" +
+      svg(ic, 14, 2) + esc(label) + '<span class="ct">' + n + "</span></button>";
+  }
+
+  var h = "";
+
+  h += '<div class="frow"><span class="flabel">Category</span><div class="fchips">' +
+    CATS.map(function (c) {
+      return chip("cat", c.k, c.n, c.ic, c.c, cc[c.k] || 0, S.cats[c.k]);
+    }).join("") + "</div>" +
+    '<button class="allnone" data-all="cat">All</button></div>';
+
+  var liveSubs = SUBS.filter(function (s) { return S.cats[s.p] && sc[s.k]; });
+  if (liveSubs.length) {
+    h += '<div class="frow"><span class="flabel">Type</span><div class="fchips">' +
+      liveSubs.map(function (s) {
+        var parent = CMAP[s.p];
+        return chip("sub", s.k, s.n, s.ic, s.c || parent.c, sc[s.k] || 0, S.subs[s.k]);
+      }).join("") + "</div>" +
+      '<button class="allnone" data-all="sub">All</button></div>';
+  }
+
+  h += '<div class="frow"><span class="flabel">Who it&rsquo;s for</span><div class="fchips">' +
+    AUDS.map(function (a) {
+      return chip("aud", a.k, a.n, a.ic, "#500000", ac[a.k] || 0, S.auds[a.k]);
+    }).join("") + "</div>" +
+    '<button class="allnone" data-all="aud">All</button></div>';
+
+  document.getElementById("filters").innerHTML = h;
+
+  Array.prototype.forEach.call(document.querySelectorAll(".chip[data-kind]"), function (b) {
+    b.addEventListener("click", function () {
+      var kind = b.dataset.kind, k = b.dataset.k;
+      var bag = kind === "cat" ? S.cats : kind === "sub" ? S.subs : S.auds;
+      var list = kind === "cat" ? CATS : kind === "sub" ? SUBS : AUDS;
+      var keys = list.map(function (x) { return x.k; });
+      var soloed = keys.every(function (x) { return x === k ? bag[x] : !bag[x]; });
+      var allOn = keys.every(function (x) { return bag[x]; });
+      if (soloed) keys.forEach(function (x) { bag[x] = true; });
+      else if (allOn) keys.forEach(function (x) { bag[x] = (x === k); });
+      else bag[k] = !bag[k];
+      if (kind === "cat") {          // turning a category off hides its types too
+        SUBS.forEach(function (s) { if (!S.cats[s.p]) S.subs[s.k] = true; });
+      }
+      render();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".allnone"), function (b) {
+    b.addEventListener("click", function () {
+      var kind = b.dataset.all;
+      (kind === "cat" ? CATS : kind === "sub" ? SUBS : AUDS).forEach(function (x) {
+        (kind === "cat" ? S.cats : kind === "sub" ? S.subs : S.auds)[x.k] = true;
+      });
+      render();
+    });
+  });
+}
+
+/* ================================================================ tabs */
+function drawTabs() {
+  var open = openTasks().length;
+  document.getElementById("t-today").innerHTML = svg("check", 15, 2.2) + "Today" +
+    (open ? '<span class="pipcount">' + open + "</span>" : "");
+  document.getElementById("t-month").innerHTML = svg("grid", 15, 2) + "Month";
+  document.getElementById("t-year").innerHTML  = svg("yr", 15, 2.2) + "Year at a glance";
+  ["today", "month", "year"].forEach(function (v) {
+    document.getElementById("t-" + v).setAttribute("aria-selected", S.view === v ? "true" : "false");
+  });
+}
+
+/* ================================================================ today */
+function openTasks() {
+  var done = getDone();
+  return EVENTS.filter(function (ev) {
+    if (!ev.act) return false;
+    var d = pd(ev.s);
+    return d >= TODAY && dbetween(TODAY, d) <= 45 && !done[ev.id];
+  }).sort(function (a, b) { return pd(a.s) - pd(b.s); });
+}
+
+function tagFor(ev) {
+  var L = look(ev);
+  return '<span class="tag" style="background:' + L.bg + ";color:" + L.c + '">' +
+    svg(L.ic, 11, 2.1) + esc(ev.sub || L.name) + "</span>";
+}
+
+function drawToday() {
+  var list = visible();
+  var todays = list.filter(spansToday);
+  var timed = todays.filter(function (e) { return !e.ad && e.st; });
+  var allday = todays.filter(function (e) { return e.ad || !e.st; });
+  function mins(s) {
+    var m = String(s).match(/(\d{1,2}):(\d{2})\s*([AP])/i);
+    if (!m) return 0;
+    var h = +m[1] % 12 + (/p/i.test(m[3]) ? 12 : 0);
+    return h * 60 + +m[2];
+  }
+  timed.sort(function (a, b) { return mins(a.st) - mins(b.st); });
+
+  var body = "";
+  if (!todays.length) {
+    var next = list.filter(function (e) { return pd(e.s) > TODAY; })[0];
+    body = '<div class="empty" style="padding:26px 8px"><span style="color:#d6d0cd">' +
+      svg("sun", 34, 1.5) + "</span><b>Nothing on the calendar today</b>" +
+      (next ? "Next up is " + esc(next.t) + " on " + DOWFULL[pd(next.s).getDay()] + ", " +
+        MONTHS[pd(next.s).getMonth()] + " " + pd(next.s).getDate() + "." : "") + "</div>";
+  } else {
+    body = allday.concat(timed).map(function (ev) {
+      var L = look(ev);
+      return '<div class="slot"><div class="tm">' +
+        (ev.ad || !ev.st ? '<span class="allday">All day</span>'
+          : esc(ev.st) + (ev.et ? "<br>&ndash; " + esc(ev.et) : "")) +
+        '</div><div><div class="ttl">' + esc(ev.t) + '</div><div class="row">' + tagFor(ev) +
+        (ev.loc ? '<span class="time">' + svg("pin", 12, 2) + " " + esc(ev.loc) + "</span>" : "") +
+        (ev.aud ? '<span class="time">' + esc(ev.aud) + "</span>" : "") + "</div>" +
+        (ev.d ? '<p class="note">' + esc(ev.d) + "</p>" : "") + "</div></div>";
+    }).join("");
+  }
+
+  /* ---- action items ---- */
+  var done = getDone();
+  var acts = EVENTS.filter(function (ev) {
+    if (!ev.act || !passes(ev)) return false;
+    var d = pd(ev.s);
+    return d >= TODAY && dbetween(TODAY, d) <= 45;
+  }).sort(function (a, b) { return pd(a.s) - pd(b.s); });
+  var pending = acts.filter(function (e) { return !done[e.id]; });
+  var finished = EVENTS.filter(function (e) { return e.act && done[e.id]; })
+    .sort(function (a, b) { return pd(b.s) - pd(a.s); });
+
+  function taskRow(ev, isDone) {
+    var d = pd(ev.s), n = dbetween(TODAY, d);
+    var soon = n <= 2 ? 2 : n <= 7 ? 1 : 0;
+    return '<label class="task' + (isDone ? " done" : "") + '">' +
+      '<input type="checkbox" data-task="' + esc(ev.id) + '"' + (isDone ? " checked" : "") + ">" +
+      '<span class="body"><span class="what">' + esc(ev.act) + "</span>" +
+      '<span class="sub">' + tagFor(ev) +
+      '<span class="due" data-soon="' + soon + '">' + MSHORT[d.getMonth()] + " " + d.getDate() +
+      " &middot; " + relative(d) + "</span></span></span></label>";
+  }
+
+  var tasksHTML = pending.length
+    ? pending.map(function (e) { return taskRow(e, false); }).join("")
+    : '<div class="empty" style="padding:22px 8px"><span style="color:#d6d0cd">' +
+      svg("check", 30, 1.8) + "</span><b>All clear</b>Nothing due in the next six weeks.</div>";
+
+  if (finished.length) {
+    tasksHTML += '<div class="donehead">' + svg("check", 12, 2.4) + "Done (" + finished.length + ")" +
+      '<button id="clrdone">Clear all</button></div>' +
+      finished.slice(0, 12).map(function (e) { return taskRow(e, true); }).join("");
+  }
+
+  var storeNote = canStore
+    ? "Checkmarks stay on this device until you clear your browser data."
+    : "This browser is blocking storage, so checkmarks reset when you reload.";
+
+  document.getElementById("board").innerHTML =
+    '<div class="today-grid">' +
+      '<section class="panel"><div class="todayhead">' +
+        '<div class="big">' + DOWFULL[TODAY.getDay()] + "</div>" +
+        '<div class="sm">' + MONTHS[TODAY.getMonth()] + " " + TODAY.getDate() + ", " +
+        TODAY.getFullYear() + "</div></div><div class=\"pbody\">" + body + "</div></section>" +
+      '<section class="panel"><h2>' + svg("check", 14, 2.4) + "Action items" +
+        '<span class="n">' + pending.length + " open</span></h2>" +
+        '<div class="pbody">' + tasksHTML +
+        '<p style="font-size:11px;color:#8b8785;margin:14px 0 0;line-height:1.45">' +
+        esc(storeNote) + "</p></div></section>" +
+    "</div>";
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-task]"), function (cb) {
+    cb.addEventListener("change", function () {
+      var o = getDone();
+      if (cb.checked) o[cb.dataset.task] = 1; else delete o[cb.dataset.task];
+      setDone(o);
+      render();
+    });
+  });
+  var cd = document.getElementById("clrdone");
+  if (cd) cd.addEventListener("click", function () { setDone({}); render(); });
+}
+
+/* ================================================================ month */
+function monthKeys() {
+  var m = {};
+  EVENTS.forEach(function (ev) { m[mkey(pd(ev.s))] = 1; });
+  return Object.keys(m).map(Number).sort(function (a, b) { return a - b; });
+}
+function drawMonth() {
+  var list = visible(), keys = monthKeys();
+  if (!keys.length) { document.getElementById("board").innerHTML = empty(); return; }
+  if (S.month === null || keys.indexOf(S.month) < 0) {
+    S.month = keys.indexOf(mkey(TODAY)) > -1 ? mkey(TODAY) : keys[0];
+  }
+  var y = Math.floor(S.month / 12), m = S.month % 12, idx = keys.indexOf(S.month);
+
+  var byDay = {};
+  list.forEach(function (ev) {
+    var a = pd(ev.s), b = pd(ev.e), g = 0;
+    for (var d = new Date(a); d <= b && g < 400; d.setDate(d.getDate() + 1), g++) {
+      (byDay[key(d)] = byDay[key(d)] || []).push(ev);
+    }
+  });
+
+  var first = new Date(y, m, 1), start = new Date(y, m, 1 - first.getDay());
+  var inMonth = new Date(y, m + 1, 0).getDate();
+  var total = Math.ceil((first.getDay() + inMonth) / 7) * 7;
+  var cells = "";
+  for (var i = 0; i < total; i++) {
+    var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+    var out = d.getMonth() !== m, isT = +d === +TODAY, items = byDay[key(d)] || [];
+    var pills = items.slice(0, 3).map(function (ev) {
+      var L = look(ev);
+      return '<button class="pill" data-open="' + esc(ev.id) + '" style="background:' + L.bg +
+        ";color:" + L.c + '" title="' + esc(ev.t) + '">' + svg(L.ic, 11, 2.2) +
+        '<span class="lb">' + esc(ev.t) + "</span></button>";
+    }).join("");
+    if (items.length > 3) pills += '<button class="more" data-day="' + key(d) + '">+' +
+      (items.length - 3) + " more</button>";
+    cells += '<div class="cell' + (out ? " out" : "") + (isT ? " today" : "") + '">' +
+      '<span class="dn">' + d.getDate() + "</span>" + pills + "</div>";
+  }
+
+  document.getElementById("board").innerHTML =
+    '<div class="grid-nav">' +
+      '<button class="nav" id="pm"' + (idx <= 0 ? " disabled" : "") + ' aria-label="Previous month">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>' +
+      '<button class="nav" id="nm"' + (idx >= keys.length - 1 ? " disabled" : "") + ' aria-label="Next month">' +
+      '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>' +
+      "<h3>" + MONTHS[m] + " " + y + "</h3>" +
+      (S.month !== mkey(TODAY) && keys.indexOf(mkey(TODAY)) > -1
+        ? '<button class="jump" id="jt">Jump to today</button>' : "") +
+    "</div>" +
+    '<div class="cal"><div class="dows">' + DOWS.map(function (x) { return "<div>" + x + "</div>"; }).join("") +
+    '</div><div class="days">' + cells + "</div></div>";
+
+  var pm = document.getElementById("pm"), nm = document.getElementById("nm"),
+      jt = document.getElementById("jt");
+  if (pm) pm.addEventListener("click", function () { step(-1); });
+  if (nm) nm.addEventListener("click", function () { step(1); });
+  if (jt) jt.addEventListener("click", function () { S.month = mkey(TODAY); render(); });
+}
+function step(dir) {
+  var keys = monthKeys(), i = keys.indexOf(S.month);
+  if (i > -1 && keys[i + dir] !== undefined) { S.month = keys[i + dir]; render(); }
+}
+
+/* ================================================================ year */
+function drawYear() {
+  var keys = monthKeys();
+  var by = {};
+  EVENTS.filter(passes).forEach(function (ev) {
+    var k = mkey(pd(ev.s));
+    (by[k] = by[k] || { tot: 0, cat: {}, key: [] });
+    by[k].tot++;
+    by[k].cat[ev.cat] = (by[k].cat[ev.cat] || 0) + 1;
+    if (ev.sub === "Grade Deadline" || ev.sub === "Holiday" || ev.sub === "Campus Event") {
+      by[k].key.push(ev);
+    }
+  });
+
+  var head = '<tr><th>Month</th>' +
+    CATS.map(function (c) {
+      return '<th class="catcol"><span style="color:' + "#E3B23C" + '">' + svg(c.ic, 15, 2) +
+        "</span>" + esc(c.n) + "</th>";
+    }).join("") +
+    "<th>Total</th><th class=\"catcol\">Worth knowing</th></tr>";
+
+  var rows = keys.map(function (k) {
+    var b = by[k] || { tot: 0, cat: {}, key: [] };
+    var y = Math.floor(k / 12), m = k % 12, now = k === mkey(TODAY);
+    var keyTxt = b.key.slice(0, 2).map(function (e) {
+      var t = e.t.replace(/^DEADLINE\s*[-–—]\s*/i, "").replace(/^Holiday\s*[-–—]\s*/i, "");
+      return '<span style="white-space:nowrap"><b style="font-family:var(--mono);font-weight:400;' +
+        'color:#8b8785">' + MSHORT[pd(e.s).getMonth()] + " " + pd(e.s).getDate() + "</b>&nbsp; " +
+        esc(t) + "</span>";
+    }).join("<br>");
+    return '<tr class="' + (now ? "now" : "") + '">' +
+      '<td><button class="ymonth" data-m="' + k + '"><span class="mn">' + MONTHS[m] +
+        '</span><span class="yy">' + y + "</span>" +
+        (now ? '<span class="tag">This month</span>' : "") + "</button></td>" +
+      CATS.map(function (c) {
+        var n = b.cat[c.k] || 0;
+        return '<td class="catcol"><button class="ycell" data-m="' + k + '" data-cat="' + esc(c.k) +
+          '" data-zero="' + (n ? 0 : 1) + '" style="color:' + (n ? c.c : "") + '">' +
+          (n || "&middot;") + "</button></td>";
+      }).join("") +
+      '<td><span class="ycell ytot">' + b.tot + "</span></td>" +
+      '<td class="ykey catcol">' + (keyTxt || '<span style="color:#c9c4c1">&mdash;</span>') + "</td></tr>";
+  }).join("");
+
+  document.getElementById("board").innerHTML =
+    '<p style="margin:0 0 14px;color:#555;font-size:14px;max-width:70ch">' +
+    "Every month of the school year, and how many dates fall in each. " +
+    "Select a number to open that month with only that category showing.</p>" +
+    '<div class="ytable"><table class="yr"><thead>' + head + "</thead><tbody>" + rows + "</tbody></table></div>";
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-m]"), function (b) {
+    b.addEventListener("click", function () {
+      S.month = +b.dataset.m;
+      if (b.dataset.cat) {
+        CATS.forEach(function (c) { S.cats[c.k] = (c.k === b.dataset.cat); });
+        SUBS.forEach(function (s) { S.subs[s.k] = true; });
+      }
+      S.view = "month";
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
+
+/* ================================================================ search results */
+function drawResults() {
+  var list = visible();
+  if (!list.length) { document.getElementById("board").innerHTML = empty(); return; }
+  var groups = [], cur = null;
+  list.forEach(function (ev) {
+    var k = mkey(pd(ev.s));
+    if (!cur || cur.k !== k) { cur = { k: k, items: [] }; groups.push(cur); }
+    cur.items.push(ev);
+  });
+  document.getElementById("board").innerHTML =
+    '<p style="margin:0 0 16px;color:#555;font-size:14px">' + list.length +
+    (list.length === 1 ? " date matches " : " dates match ") + "&ldquo;" + esc(S.q) + "&rdquo;</p>" +
+    groups.map(function (g) {
+      var y = Math.floor(g.k / 12), m = g.k % 12;
+      return '<div class="mgroup"><div class="mhead"><span class="m">' + MONTHS[m] + " " + y +
+        '</span><span class="rule"></span><span class="n">' + g.items.length + " dates</span></div>" +
+        g.items.map(evRow).join("") + "</div>";
+    }).join("");
+  wireRows();
+}
+
+function evRow(ev) {
+  var L = look(ev), s = pd(ev.s), e = pd(ev.e), multi = +e > +s, open = !!S.open[ev.id];
+  var h = '<button class="ev" data-id="' + esc(ev.id) + '" data-past="' + (isPast(ev) ? 1 : 0) +
+    '" aria-expanded="' + (open ? "true" : "false") + '" style="border-left-color:' + L.c + '">' +
+    '<span class="date"><span class="dow">' + DOWS[s.getDay()] + '</span><span class="dd">' +
+    s.getDate() + "</span>" +
+    (multi ? '<span class="span">thru ' + MSHORT[e.getMonth()] + " " + e.getDate() + "</span>" : "") +
+    '</span><span><span class="ttl">' + esc(ev.t) + '</span><span class="meta">' + tagFor(ev) +
+    (!ev.ad && ev.st ? '<span class="time">' + svg("clock", 12, 2) + " " + esc(ev.st) + "</span>" : "") +
+    (ev.loc ? '<span class="time">' + svg("pin", 12, 2) + " " + esc(ev.loc) + "</span>" : "") +
+    (spansToday(ev) ? '<span class="tag" style="background:#E3B23C;color:#3a0000">Today</span>' : "") +
+    '</span></span><span class="chev">' + svg("chev", 17, 2.4) + "</span></button>";
+  if (open) {
+    h += '<div class="detail">' + (ev.act ? '<p><b>To do:</b> ' + esc(ev.act) + "</p>" : "") +
+      (ev.d ? "<p>" + esc(ev.d) + "</p>" : "") +
+      '<div class="acts">' +
+      (ev.link ? '<a href="' + esc(ev.link) + '" target="_blank" rel="noopener">' + svg("link", 12, 2) + " Open link</a>" : "") +
+      '<button type="button" data-ics="' + esc(ev.id) + '">' + svg("dl", 12, 2) + " Add to my calendar</button></div>" +
+      (ev.aud || ev.src ? '<div class="kv">' + (ev.aud ? "For: " + esc(ev.aud) : "") +
+        (ev.aud && ev.src ? "  &middot;  " : "") + (ev.src ? "Source: " + esc(ev.src) : "") + "</div>" : "") +
+      "</div>";
+  }
+  return h;
+}
+function wireRows() {
+  var b = document.getElementById("board");
+  Array.prototype.forEach.call(b.querySelectorAll(".ev"), function (el) {
+    el.addEventListener("click", function () {
+      S.open[el.dataset.id] = !S.open[el.dataset.id];
+      render();
+      var again = document.querySelector('[data-id="' + cssEsc(el.dataset.id) + '"]');
+      if (again) again.focus();
+    });
+  });
+  Array.prototype.forEach.call(b.querySelectorAll("[data-ics]"), function (el) {
+    el.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var ev = EVENTS.filter(function (x) { return x.id === el.dataset.ics; })[0];
+      if (ev) downloadICS(ev);
+    });
+  });
+}
+function cssEsc(s) {
+  return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/[^\w-]/g, "\\$&");
+}
+function empty() {
+  return '<div class="empty"><span style="color:#c9c4c1">' + svg("search", 40, 1.5) + "</span>" +
+    "<b>Nothing matches</b>Clear the search box or switch a filter back on.</div>";
+}
+
+/* ================================================================ ics */
+function downloadICS(ev) {
+  function f(d) { return key(d).replace(/-/g, ""); }
+  var s = pd(ev.s), e = pd(ev.e); e.setDate(e.getDate() + 1);
+  var body = (ev.act ? "To do: " + ev.act + "\n\n" : "") + (ev.d || "");
+  var L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//LHS Killough//Staff Calendar//EN",
+    "BEGIN:VEVENT", "UID:" + ev.id + "@lhskillough", "DTSTAMP:" + f(TODAY) + "T000000Z",
+    "DTSTART;VALUE=DATE:" + f(s), "DTEND;VALUE=DATE:" + f(e),
+    "SUMMARY:" + String(ev.t).replace(/[,;]/g, "\\$&"),
+    "DESCRIPTION:" + body.replace(/\n/g, "\\n").replace(/[,;]/g, "\\$&"),
+    "END:VEVENT", "END:VCALENDAR"];
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([L.join("\r\n")], { type: "text/calendar" }));
+  a.download = ev.id + ".ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+}
+
+/* ================================================================ render */
+function render() {
+  drawTabs();
+  drawFilters();
+  document.getElementById("qclear").hidden = !S.q;
+  if (S.q) drawResults();
+  else if (S.view === "month") drawMonth();
+  else if (S.view === "year") drawYear();
+  else drawToday();
+
+  var b = document.getElementById("board");
+  Array.prototype.forEach.call(b.querySelectorAll("[data-open]"), function (el) {
+    el.addEventListener("click", function () {
+      var ev = EVENTS.filter(function (x) { return x.id === el.dataset.open; })[0];
+      if (!ev) return;
+      S.q = ev.t; document.getElementById("q").value = ev.t;
+      S.open[ev.id] = true; render();
+    });
+  });
+  Array.prototype.forEach.call(b.querySelectorAll("[data-day]"), function (el) {
+    el.addEventListener("click", function () {
+      var d = pd(el.dataset.day);
+      S.q = ""; S.view = "month"; S.month = mkey(d); render();
+    });
+  });
+}
+
+/* ================================================================ boot */
+function boot() {
+  try { EVENTS = JSON.parse(document.getElementById("seed").textContent); } catch (e) { EVENTS = []; }
+  render();
+  if (typeof DATA_URL === "string" && DATA_URL) {
+    fetch(DATA_URL, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+      .then(function (txt) {
+        var live;
+        try { live = fromJSON(JSON.parse(txt)); } catch (e) { live = parseCSV(txt); }
+        if (live && live.length) {
+          EVENTS = live;
+          document.getElementById("foot-note").textContent = "Updated from the staff calendar sheet";
+          render();
+        }
+      })
+      .catch(function () {});
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var q = document.getElementById("q"), t;
+  q.addEventListener("input", function () {
+    clearTimeout(t);
+    t = setTimeout(function () { S.q = q.value; render(); }, 130);
+  });
+  document.getElementById("qclear").addEventListener("click", function () {
+    q.value = ""; S.q = ""; q.focus(); render();
+  });
+  ["today", "month", "year"].forEach(function (v) {
+    document.getElementById("t-" + v).addEventListener("click", function () {
+      S.view = v; S.q = ""; q.value = ""; render();
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === "Escape" && document.activeElement === q) { q.value = ""; S.q = ""; render(); }
+  });
+  boot();
+});
+})();
+
+</script>
+</body>
+</html>
