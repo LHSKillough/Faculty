@@ -395,6 +395,12 @@ window.SITE_CONFIG = {
         },
         {
           "type": "button",
+          "label": "6.0 Connection Toolkit",
+          "href": "https://drive.google.com/file/d/1vNWcJpKkEzoF7Zdpnz9v1N3ksLwRgHcM/view?usp=sharing",
+          "style": "primary"
+        },
+        {
+          "type": "button",
           "label": "How to put in a Referral",
           "style": "primary"
         }
