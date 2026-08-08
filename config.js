@@ -239,8 +239,8 @@ window.SITE_CONFIG = {
         },
         {
           "type": "button",
-          "label": "Bell Schedule",
-          "href": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing",
+          "label": "Killough Campus Calendar",
+          "href": "https://lhskillough.lisd.net/calendar",
           "style": "primary"
         },
         {
@@ -689,6 +689,16 @@ window.SITE_CONFIG = {
           "type": "button",
           "label": "August PD 2026-2027",
           "href": "https://docs.google.com/document/d/1tGJLn9ukJKkC5ybQ9dmb60W4tqkRwtPerPQ0Z94ehoE/edit?tab=t.0",
+          "style": "primary"
+        },
+        {
+          "type": "text",
+          "text": "<b>Individual Resources</b>"
+        },
+        {
+          "type": "button",
+          "label": "26-27 Bell schedules",
+          "href": "https://drive.google.com/drive/folders/1UCxuZZt9LtOX8f-8Yp5cDEFy40Ug_oDv",
           "style": "primary"
         }
       ]
