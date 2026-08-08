@@ -248,6 +248,11 @@ window.SITE_CONFIG = {
           "label": "LISD District Calendar",
           "href": "https://www.lisd.net/calendar",
           "style": "primary"
+        },
+        {
+          "type": "embed",
+          "label": "New Embed",
+          "href": "https://lhskillough.github.io/Faculty/calendar"
         }
       ]
     },
