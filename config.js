@@ -239,8 +239,8 @@ window.SITE_CONFIG = {
         },
         {
           "type": "button",
-          "label": "Killough Campus Calendar",
-          "href": "https://lhskillough.lisd.net/calendar",
+          "label": "Bell Schedule",
+          "href": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing",
           "style": "primary"
         },
         {
