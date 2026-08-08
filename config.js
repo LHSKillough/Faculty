@@ -250,6 +250,12 @@ window.SITE_CONFIG = {
           "style": "primary"
         },
         {
+          "type": "button",
+          "label": "Duty Schedule",
+          "href": "https://docs.google.com/spreadsheets/d/1hm7a2uxj6Ng0pfImSIPTKYVhRhnYnHV0c54kr7S2tyM/edit?gid=185194039#gid=185194039",
+          "style": "primary"
+        },
+        {
           "type": "embed",
           "label": "New Embed",
           "href": "https://lhskillough.github.io/Faculty/calendar"
