@@ -454,10 +454,10 @@ window.SITE_CONFIG = {
       "label": "Staff Directory / Phone List",
       "desc": "Find colleagues, extensions, and contact details.",
       "icon": "users",
-      "kind": "page",
+      "kind": "link",
       "home": true,
       "section": "Staff & Directory",
-      "body": "Staff directory, phone list, and campus contact information."
+      "url": "https://docs.google.com/spreadsheets/d/1_VE5D-kY0gMbseRs_tD2gJvFo43UHXbE/edit?usp=sharing&ouid=117506782495422317132&rtpof=true&sd=true"
     },
     {
       "id": "intranet",
