@@ -711,8 +711,8 @@ window.SITE_CONFIG = {
     },
     {
       "id": "new-card-c6llat",
-      "label": "Bell Schedule",
-      "desc": "",
+      "label": "Bell Schedules",
+      "desc": "2026-2027 Bell Schedules and Shuttle Times",
       "icon": "star",
       "kind": "page",
       "home": true,
