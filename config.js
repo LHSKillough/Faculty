@@ -720,11 +720,13 @@ window.SITE_CONFIG = {
       "blocks": [
         {
           "type": "image",
-          "caption": "Bell Schedule"
+          "caption": "Bell Schedule",
+          "href": "https://lhskillough.github.io/Faculty/assets/Bell Schedule.png"
         },
         {
           "type": "image",
-          "caption": "Bell Schedule with Shuttles"
+          "caption": "Bell Schedule with Shuttles",
+          "href": "https://lhskillough.github.io/Faculty/assets/Bell Schedule with Shuttles.png"
         }
       ]
     }
