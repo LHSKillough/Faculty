@@ -709,26 +709,15 @@ window.SITE_CONFIG = {
         }
       ]
     },
-{
-  "id": "new-card-c6llat",
-  "label": "Bell Schedules",
-  "desc": "2026-2027 Bell Schedules and Shuttle Times",
-  "icon": "star",
-  "kind": "page",
-  "home": true,
-  "section": "Popular Resources",
-  "blocks": [
     {
-      "type": "image",
-      "caption": "Bell Schedule",
-      "image": "assets/Bell%20Schedule.png"
-    },
-    {
-      "type": "image",
-      "caption": "Bell Schedule with Shuttles",
-      "image": "assets/Bell%20Schedule%20with%20Shuttles.png"
+      "id": "new-card-c6llat",
+      "label": "Bell Schedules",
+      "desc": "2026-2027 Bell Schedules and Shuttle Times",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Popular Resources",
+      "url": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing"
     }
-  ]
-}
   ]
 };
