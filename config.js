@@ -708,6 +708,25 @@ window.SITE_CONFIG = {
           "style": "primary"
         }
       ]
+    },
+    {
+      "id": "new-card-c6llat",
+      "label": "Bell Schedule",
+      "desc": "",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Popular Resources",
+      "blocks": [
+        {
+          "type": "image",
+          "caption": "Bell Schedule"
+        },
+        {
+          "type": "image",
+          "caption": "Bell Schedule with Shuttles"
+        }
+      ]
     }
   ]
 };
