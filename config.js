@@ -714,10 +714,23 @@ window.SITE_CONFIG = {
       "label": "Bell Schedules",
       "desc": "2026-2027 Bell Schedules and Shuttle Times",
       "icon": "star",
-      "kind": "link",
+      "kind": "page",
       "home": true,
       "section": "Popular Resources",
-      "url": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing"
+      "blocks": [
+        {
+          "type": "button",
+          "label": "Bell Schedule",
+          "href": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "15-15 Schedule",
+          "href": "https://drive.google.com/file/d/1rWP-bC4I9wxA8AArnxkkUbHA1xGN1hwy/view?usp=sharing",
+          "style": "primary"
+        }
+      ]
     },
     {
       "id": "new-card-t4lw33",
