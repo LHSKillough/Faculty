@@ -718,6 +718,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Popular Resources",
       "url": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing"
+    },
+    {
+      "id": "new-card-t4lw33",
+      "label": "Bus",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://infofinderi.com/ifi/?cid=LI3VBOFR0JM"
     }
   ]
 };
