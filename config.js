@@ -712,7 +712,7 @@ window.SITE_CONFIG = {
     {
       "id": "new-card-c6llat",
       "label": "Bell Schedules",
-      "desc": "2026-2027 Bell Schedules and Shuttle Times",
+      "desc": "2026-2027 Bell Schedules (Regular, Shuttles, Pep Rally)",
       "icon": "star",
       "kind": "page",
       "home": true,
@@ -720,8 +720,8 @@ window.SITE_CONFIG = {
       "blocks": [
         {
           "type": "button",
-          "label": "Bell Schedule",
-          "href": "https://drive.google.com/file/d/1TRQhM7W0nC4m6HvFne8a_gqxsj1QBGks/view?usp=sharing",
+          "label": "Bell Schedules",
+          "href": "https://drive.google.com/file/d/1L107Kx1MGExSSctMFnbZhDf5ETOQ5AYU/view?usp=sharing",
           "style": "primary"
         },
         {
