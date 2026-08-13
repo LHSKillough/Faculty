@@ -741,6 +741,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://infofinderi.com/ifi/?cid=LI3VBOFR0JM"
+    },
+    {
+      "id": "new-card-gj5xj3",
+      "label": "Translation Help",
+      "desc": "Form for Spanish translated parent phone call",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSe2NvIIjIXXo5CO_h5-ics4L0SMAJfDhzLPle0i-wbi7v2XYg/viewform"
     }
   ]
 };
