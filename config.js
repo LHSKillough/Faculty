@@ -751,6 +751,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSe2NvIIjIXXo5CO_h5-ics4L0SMAJfDhzLPle0i-wbi7v2XYg/viewform"
+    },
+    {
+      "id": "new-card-qqrx36",
+      "label": "Students of Concern Submission",
+      "desc": "Students of Concern Form Submission",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSeRixZa5E-BkB1-4wKwW-kyt3cEphIz8ef9dpfkPWs5s5Priw/viewform"
     }
   ]
 };
