@@ -771,6 +771,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Teaching & Learning",
       "url": "https://docs.google.com/document/d/1VurlnkaSiMmaP6-ZS4GA4q7l84nIu5cQ-22LqPbF9Do/edit?usp=sharing"
+    },
+    {
+      "id": "new-card-yfz44u",
+      "label": "ESL Canvas Course",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://lisdtx.instructure.com/enroll/9NNR3G"
     }
   ]
 };
