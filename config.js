@@ -781,6 +781,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://lisdtx.instructure.com/enroll/9NNR3G"
+    },
+    {
+      "id": "new-card-7bqye2",
+      "label": "K-Help",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://drive.google.com/drive/folders/1RFahKHmY7uL0oBXr7B6UyS1nKPnnJ2ep?usp=sharing"
     }
   ]
 };
