@@ -791,6 +791,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://drive.google.com/drive/folders/1RFahKHmY7uL0oBXr7B6UyS1nKPnnJ2ep?usp=sharing"
+    },
+    {
+      "id": "new-card-jr17l4",
+      "label": "Bathroom Pass Order Form",
+      "desc": "Please fill out this form if you need a new Bathroom Pass made",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Other Resources",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSccPy7hkmW7g0GRKhvpdxCmjqStneaUwwxqaQm8TbXb5KJAnw/viewform"
     }
   ]
 };
