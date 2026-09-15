@@ -154,6 +154,12 @@ window.SITE_CONFIG = {
           "label": "PD Information",
           "href": "https://www.lisd.net/professional-learning/professional-learning/home",
           "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "AWARE Information",
+          "href": "https://drive.google.com/drive/folders/1gPDr9naJIpZVhmF8xT7ZOsvM8KRu-ERK?usp=drive_link",
+          "style": "primary"
         }
       ]
     },
