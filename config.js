@@ -807,6 +807,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Other Resources",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSccPy7hkmW7g0GRKhvpdxCmjqStneaUwwxqaQm8TbXb5KJAnw/viewform"
+    },
+    {
+      "id": "new-card-a95b5k",
+      "label": "Positive Referral Link",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSez9hoPmccVQNBRrYE5WoIksrhRjWsHCuyoEsKTNsFA2Lzw3Q/viewform"
     }
   ]
 };
