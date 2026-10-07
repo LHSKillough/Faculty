@@ -817,6 +817,29 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://docs.google.com/forms/d/e/1FAIpQLSez9hoPmccVQNBRrYE5WoIksrhRjWsHCuyoEsKTNsFA2Lzw3Q/viewform"
+    },
+    {
+      "id": "new-card-fzpos3",
+      "label": "Gradebook Resources",
+      "desc": "",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Teaching & Learning",
+      "blocks": [
+        {
+          "type": "button",
+          "label": "Grade Conversion Chart",
+          "href": "https://drive.google.com/file/d/1f9vGwRDWL5Gs6f2zmNynF8y861WEF50e/view?usp=drive_link",
+          "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "Exam Calculator",
+          "href": "https://script.google.com/a/macros/staff.lisd.net/s/AKfycbzoZ9dtkKkRdPDIJxP8Qb3rPLd7e3Rj-w_tjkOxUJv77t_YxBcKgBkmsskDy8dmp619gg/exec",
+          "style": "primary"
+        }
+      ]
     }
   ]
 };
