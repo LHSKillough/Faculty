@@ -840,6 +840,16 @@ window.SITE_CONFIG = {
           "style": "primary"
         }
       ]
+    },
+    {
+      "id": "new-card-p1676j",
+      "label": "Important Dates",
+      "desc": "Upcoming Field Trips and Events",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Popular Resources",
+      "url": "https://docs.google.com/document/d/1p6LTwjTtyVyq8Ciwa6AmNZmehQp4wDFv-J_zguzQ3aI/edit?usp=sharing"
     }
   ]
 };
