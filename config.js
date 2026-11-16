@@ -287,7 +287,7 @@ window.SITE_CONFIG = {
         {
           "type": "button",
           "label": "Announcement Form",
-          "href": "#/forms",
+          "href": "https://docs.google.com/forms/d/e/1FAIpQLSdrCW84sPHPiQkUxFnDYYD8uu_jlZzPaCWK3ZtTP0kYkiOI0g/viewform?usp=sharing&ouid=117506782495422317132",
           "style": "primary"
         }
       ]
