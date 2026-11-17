@@ -873,7 +873,8 @@ window.SITE_CONFIG = {
       "icon": "star",
       "kind": "page",
       "home": true,
-      "section": "Student Support"
+      "section": "Student Support",
+      "embed": "https://lhskillough.github.io/Faculty/15-15-timer.html"
     }
   ]
 };
