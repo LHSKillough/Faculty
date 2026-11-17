@@ -735,6 +735,11 @@ window.SITE_CONFIG = {
           "label": "15-15 Schedule",
           "href": "https://drive.google.com/file/d/1rWP-bC4I9wxA8AArnxkkUbHA1xGN1hwy/view?usp=sharing",
           "style": "primary"
+        },
+        {
+          "type": "button",
+          "label": "peri berman's awesome 15-15 timer",
+          "style": "primary"
         }
       ]
     },
@@ -860,6 +865,15 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Student Support",
       "url": "https://docs.google.com/document/d/1_cKiM_wSbTQKHnBx5kl9m1IT1km1J4m_/edit"
+    },
+    {
+      "id": "new-card-vvdlvm",
+      "label": "15-15 Timer",
+      "desc": "Peri Berman's Awesome 15-15 Timer",
+      "icon": "star",
+      "kind": "page",
+      "home": true,
+      "section": "Student Support"
     }
   ]
 };
