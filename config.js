@@ -543,13 +543,13 @@ window.SITE_CONFIG = {
     },
     {
       "id": "tutoring",
-      "label": "Tutoring",
+      "label": "Tutoring Schedule",
       "desc": "Tutoring schedules and support options.",
       "icon": "grad",
-      "kind": "page",
+      "kind": "link",
       "home": true,
       "section": "Student Support",
-      "body": "Tutoring schedules, teacher support times, and student help options."
+      "url": "https://sites.google.com/staff.lisd.net/lhs-killough-tutoring-finder/tutoring-finder"
     },
     {
       "id": "tardy-form",
