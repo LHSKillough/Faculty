@@ -850,6 +850,16 @@ window.SITE_CONFIG = {
       "home": true,
       "section": "Popular Resources",
       "url": "https://docs.google.com/document/d/1p6LTwjTtyVyq8Ciwa6AmNZmehQp4wDFv-J_zguzQ3aI/edit?usp=sharing"
+    },
+    {
+      "id": "new-card-vbbe62",
+      "label": "Tutoring Bus Pass",
+      "desc": "",
+      "icon": "star",
+      "kind": "link",
+      "home": true,
+      "section": "Student Support",
+      "url": "https://docs.google.com/document/d/1_cKiM_wSbTQKHnBx5kl9m1IT1km1J4m_/edit"
     }
   ]
 };
